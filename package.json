@@ -6,16 +6,17 @@
   "type": "module",
   "scripts": {
     "photos": "node scripts/prepare-photos.mjs",
-    "predev": "npm run photos && npm run scene",
+    "predev": "npm run photos && npm run scene && npm run hand-assets",
     "dev": "vite --host 0.0.0.0",
-    "prebuild": "npm run photos && npm run scene",
+    "prebuild": "npm run photos && npm run scene && npm run hand-assets",
     "build": "tsc -b && vite build && node scripts/finalize-build.mjs",
-    "test": "node --test tests/*.test.mjs",
+    "test": "node --test tests/*.test.mjs src/hand-tracking/*.test.mjs",
     "lint": "eslint .",
     "preview": "vite preview --host 0.0.0.0",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "scene": "node scripts/prepare-scene.mjs"
+    "scene": "node scripts/prepare-scene.mjs",
+    "hand-assets": "node scripts/prepare-hand-tracking.mjs"
   },
   "dependencies": {
     "@react-three/fiber": "^8.18.0",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.14.0",
+    "@mediapipe/tasks-vision": "1.2.2",
     "@types/node": "^22.9.0",
     "@types/qrcode": "^1.5.6",
     "@types/react": "^18.3.12",

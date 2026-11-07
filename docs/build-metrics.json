@@ -15,34 +15,49 @@
   ],
   "after": [
     {
-      "name": "PhotoGallery-hfxdRrDd.js",
-      "bytes": 3875,
-      "gzipBytes": 1705
+      "name": "HandMagicMode-DxJkroEK.js",
+      "bytes": 18541,
+      "gzipBytes": 7559
     },
     {
-      "name": "ShareGift-Dp7pgVRG.js",
+      "name": "HandMagicMode-TjuieOol.css",
+      "bytes": 6683,
+      "gzipBytes": 2186
+    },
+    {
+      "name": "PhotoGallery-Dq9MgtYn.js",
+      "bytes": 4325,
+      "gzipBytes": 1915
+    },
+    {
+      "name": "ShareGift-jSSKST0V.js",
       "bytes": 26660,
-      "gzipBytes": 10682
+      "gzipBytes": 10683
     },
     {
-      "name": "TreeScene-CNY1GTFk.js",
-      "bytes": 900189,
-      "gzipBytes": 243860
+      "name": "TreeScene-CoyAVk70.js",
+      "bytes": 907245,
+      "gzipBytes": 246146
     },
     {
-      "name": "index-BrnYtXpX.js",
-      "bytes": 156480,
-      "gzipBytes": 51264
+      "name": "index-BDgpjFhy.js",
+      "bytes": 160943,
+      "gzipBytes": 52765
     },
     {
-      "name": "index-D3Kq0Hqz.css",
-      "bytes": 7089,
-      "gzipBytes": 2369
+      "name": "index-BZ3kugXf.css",
+      "bytes": 7599,
+      "gzipBytes": 2495
+    },
+    {
+      "name": "session-HbvATeqt.js",
+      "bytes": 8733,
+      "gzipBytes": 3740
     }
   ],
   "initialTreeJavaScript": {
-    "bytes": 1056669,
-    "gzipBytes": 295124
+    "bytes": 1068188,
+    "gzipBytes": 298911
   },
   "photos": {
     "count": 32,
@@ -54,11 +69,12 @@
   },
   "visualValidation": {
     "webgl": "Browser reports GL_VENDOR=Disabled; final browser composition and target-device frame rate remain unverified",
-    "shaderCompiler": "18 full Three r169 programs compiled/linked in Mesa GLES 3.2 llvmpipe; no compiler or linker logs; see shader-validation.json",
+    "shaderCompiler": "20 full Three r169 programs / 40 stages compiled and linked in Mesa GLES 3.2 llvmpipe; no compiler or linker logs; includes HandMagic in compositor and direct output paths",
     "geometry": "Actual tree, paper/card/clip geometry and attachment, stem burial, camera framing and 120 snow camera cases tested",
     "offlineReference": "Current fairytale-castle composition and rounded star inspected with source geometry and photos in Blender Cycles CPU; approximate lighting, not a browser screenshot. Portrait background crop checked separately.",
-    "tests": 53,
-    "topStar": "One CPU check: closed rounded shell and mounting stem, finite values, outward faces, smooth unit normals, fixed local pose and assembly scale"
+    "tests": 143,
+    "topStar": "One CPU check: closed rounded shell and mounting stem, finite values, outward faces, smooth unit normals, fixed local pose and assembly scale",
+    "handTracking": "37 deterministic gesture tests, 25 runtime/worker/network/model tests, 28 scene/picking tests; physical webcam inference and target-device FPS not yet verified"
   },
   "background": {
     "source": "public/backgrounds/fairytale-castle-winter.webp",
@@ -84,5 +100,58 @@
     "topStarTriangles": 3864,
     "topStarVertices": 11592,
     "topStarDrawBatches": 1
+  },
+  "handTracking": {
+    "sdkVersion": "1.2.2",
+    "modelBytes": 8373440,
+    "modelSha256": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482",
+    "optionalGeneratedBytes": 23487114,
+    "loadedOnInitialVisit": false,
+    "desktopMaxInferenceFps": 15,
+    "mobileMaxInferenceFps": 10,
+    "framesInFlight": 1,
+    "magicPoints": 96,
+    "assets": [
+      {
+        "path": "generated/hand-tracking/LICENSE-MediaPipe.txt",
+        "bytes": 12331,
+        "sha256": "8707eef0533987efc5b155d64761eeb6e20793f50b9bd1a68dad1cf4719d0ed8"
+      },
+      {
+        "path": "generated/hand-tracking/NOTICE.txt",
+        "bytes": 1834,
+        "sha256": "646086132276b573256213bcb6be4f128b21cad6540dfc25e29dec6638162c71"
+      },
+      {
+        "path": "generated/hand-tracking/gesture-recognizer-float16-v1-97952348cf6a6a4915c2.task",
+        "bytes": 8373440,
+        "sha256": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482"
+      },
+      {
+        "path": "generated/hand-tracking/manifest.json",
+        "bytes": 411,
+        "sha256": "ebc8e84d58e22f2b0a0a10173732be9cfc43e223f490a2fd09bcc10b61e3e279"
+      },
+      {
+        "path": "generated/hand-tracking/sdk-1.2.2/vision_bundle.js",
+        "bytes": 156088,
+        "sha256": "a8c95ebecb9efca4ef79ce32f7b77fa5cb61b809e7e21a2f3d792d181ca0b822"
+      },
+      {
+        "path": "generated/hand-tracking/sdk-1.2.2/wasm/vision_wasm_internal.js",
+        "bytes": 334128,
+        "sha256": "f2b9c17131ea79716ec6bf07b117a087b2749a6f8a1e2f1f2e77a9382092db5b"
+      },
+      {
+        "path": "generated/hand-tracking/sdk-1.2.2/wasm/vision_wasm_internal.wasm",
+        "bytes": 14603354,
+        "sha256": "f5bd25147ac89d506074293ce2675969b10e827180db95a0d9689c2ed80764ab"
+      },
+      {
+        "path": "generated/hand-tracking/worker-3b5cf016f4f69b4f852e.js",
+        "bytes": 5528,
+        "sha256": "3b5cf016f4f69b4f852e219a9163ff26f1337f938c2f8bf47e7ce9cbacca67c4"
+      }
+    ]
   }
 }

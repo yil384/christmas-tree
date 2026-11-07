@@ -4,7 +4,13 @@ import { Icon } from './Icon';
 
 const PAGE_SIZE = 18;
 
-type PhotoGalleryProps = { photos: Photo[]; initialIndex: number };
+type PhotoGalleryProps = {
+  photos: Photo[];
+  initialIndex: number;
+  handNavigation?: { sequence: number; direction: -1 | 1 };
+  handMode?: boolean;
+  onCloseHandMode?: () => void;
+};
 
 function startIndex(index: number, count: number) {
   return Number.isFinite(index) ? Math.max(0, Math.min(Math.trunc(index), count - 1)) : 0;
@@ -60,13 +66,20 @@ function Thumbnail({ photo }: { photo: Photo }) {
   );
 }
 
-export default function PhotoGallery({ photos, initialIndex }: PhotoGalleryProps) {
+export default function PhotoGallery({ photos, initialIndex, handNavigation, handMode, onCloseHandMode }: PhotoGalleryProps) {
   const [index, setIndex] = useState(() => startIndex(initialIndex, photos.length));
   const touch = useRef<{ x: number; y: number; time: number } | null>(null);
+  const previousNavigation = useRef(handNavigation?.sequence ?? 0);
   const count = photos.length;
   const currentIndex = count ? ((index % count) + count) % count : 0;
 
   useEffect(() => { setIndex(startIndex(initialIndex, count)); }, [initialIndex, count]);
+
+  useEffect(() => {
+    if (!handNavigation || previousNavigation.current === handNavigation.sequence) return;
+    previousNavigation.current = handNavigation.sequence;
+    if (count > 1) setIndex(value => (value + handNavigation.direction + count) % count);
+  }, [handNavigation, count]);
 
   useEffect(() => {
     if (count < 2) return;
@@ -104,6 +117,8 @@ export default function PhotoGallery({ photos, initialIndex }: PhotoGalleryProps
           {String(currentIndex + 1).padStart(2, '0')} <i>/ {String(count).padStart(2, '0')}</i>
         </span>
       </div>
+
+      {handMode && <div className="gallery-hand-bar"><span><span className="camera-dot" /> 摄像头已开启 · 左右挥掌翻页，握拳返回</span><button type="button" onClick={onCloseHandMode}>关闭摄像头</button></div>}
 
       <div
         className="gallery-photo"

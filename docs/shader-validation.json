@@ -159,6 +159,23 @@
       "link_log": ""
     },
     {
+      "name": "hand-magic-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
       "name": "evergreen-trunk-and-branches-aces-srgb-direct",
       "shaders": [
         {
@@ -310,7 +327,23 @@
       ],
       "linked": true,
       "link_log": ""
+    },
+    {
+      "name": "hand-magic-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
     }
-  ],
-  "method": "Actual Three r169 WebGLPrograms/WebGLProgram source generation, then EGL GLES compile and link; not a browser frame or FPS test."
+  ]
 }

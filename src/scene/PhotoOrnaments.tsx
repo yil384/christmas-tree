@@ -1,9 +1,12 @@
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import type { MutableRefObject } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import type { ThreeEvent } from '@react-three/fiber';
 import * as THREE from 'three';
 import { assetUrl } from '../lib/content';
 import type { Photo } from '../lib/content';
+import type { HandSceneInput } from '../lib/hand-types';
+import { consumeHandPhotoSelection, createHandPhotoPicker, HAND_POINTER_MAX_AGE_MS } from './hand-scene';
 import { createPhotoPlacements } from './photo-layout';
 import { createPrintGeometry, createPrintMaterial } from './photo-material';
 
@@ -13,6 +16,9 @@ interface PhotoOrnamentsProps {
   count: number;
   reducedMotion?: boolean;
   onPhotoPress: (index: number) => void;
+  handInput?: MutableRefObject<HandSceneInput>;
+  handActive?: boolean;
+  onHandPhotoSelect?: (index: number | null) => void;
 }
 
 // At most 16 MiB of uncompressed atlas pixels, even for an enormous album.
@@ -53,11 +59,14 @@ function createAtlas(slotCount: number) {
 }
 
 /** Actual 3D prints, wooden clips and strings together in one instanced draw. */
-export default function PhotoOrnaments({ state, photos, count, reducedMotion = false, onPhotoPress }: PhotoOrnamentsProps) {
+export default function PhotoOrnaments({ state, photos, count, reducedMotion = false, onPhotoPress, handInput, handActive = false, onHandPhotoSelect }: PhotoOrnamentsProps) {
   const visibleCount = photos.length && Number.isFinite(count) ? Math.max(0, Math.floor(count)) : 0;
   const slotCount = Math.min(photos.length, visibleCount, MAX_ATLAS_PHOTOS);
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const isMoving = useRef(false);
+  const handPicker = useMemo(() => handInput && handActive ? createHandPhotoPicker() : null, [handInput, handActive]);
+  const handHover = useRef({ at: -Infinity, x: NaN, y: NaN });
+  const handOccluders = useRef<THREE.Object3D[]>([]);
   const gl = useThree(root => root.gl);
   const invalidate = useThree(root => root.invalidate);
   const placements = useMemo(() => createPhotoPlacements(visibleCount), [visibleCount]);
@@ -94,6 +103,23 @@ export default function PhotoOrnaments({ state, photos, count, reducedMotion = f
     return plane;
   }, [atlas, placements, slotCount, visibleCount]);
   const material = useMemo(() => createPrintMaterial(atlas.texture), [atlas]);
+
+  useEffect(() => {
+    handHover.current = { at: -Infinity, x: NaN, y: NaN };
+    const input = handInput?.current;
+    if (input) {
+      input.hoveredPhoto = null;
+      input.hoveredAt = 0;
+      if (!handActive) input.selectionRequest = null;
+    }
+    return () => {
+      if (input) {
+        input.hoveredPhoto = null;
+        input.hoveredAt = 0;
+        input.selectionRequest = null;
+      }
+    };
+  }, [handInput, handActive, photoIndexes]);
 
   useLayoutEffect(() => {
     const mesh = meshRef.current;
@@ -197,36 +223,90 @@ export default function PhotoOrnaments({ state, photos, count, reducedMotion = f
   useEffect(() => () => { atlas.texture.dispose(); }, [atlas]);
   useEffect(() => () => { gl.domElement.style.cursor = ''; }, [gl]);
 
-  useFrame((_root, rawDelta) => {
+  useFrame(({ camera }, rawDelta) => {
     const mesh = meshRef.current;
-    if (!mesh) return;
-    if (!isMoving.current) return;
-    const delta = Math.min(rawDelta, 0.05);
-    const formed = state === 'FORMED';
-    let settled = true;
-    for (let index = 0; index < placements.length; index++) {
-      const placement = placements[index];
-      const targetPosition = formed ? placement.formedPosition : placement.scatteredPosition;
-      const targetRotation = formed ? placement.formedRotation : placement.scatteredRotation;
-      const damping = -Math.expm1(-delta * (formed ? 1.8 * placement.weight : 1.5));
-      placement.position.lerp(targetPosition, damping);
-      placement.rotation.slerp(targetRotation, damping);
-      if (placement.position.distanceToSquared(targetPosition) < 0.0001 && placement.rotation.angleTo(targetRotation) < 0.002) {
-        placement.position.copy(targetPosition);
-        placement.rotation.copy(targetRotation);
-      } else {
-        settled = false;
+    if (!mesh) {
+      if (handInput) {
+        const selected = consumeHandPhotoSelection(handInput.current, handActive, performance.now(), () => null);
+        if (selected !== undefined) onHandPhotoSelect?.(selected);
       }
-      matrixHelper.position.copy(placement.position);
-      matrixHelper.quaternion.copy(placement.rotation);
-      matrixHelper.scale.setScalar(placement.scale);
-      matrixHelper.updateMatrix();
-      mesh.setMatrixAt(index, matrixHelper.matrix);
+      return;
     }
-    mesh.instanceMatrix.needsUpdate = true;
-    // Parent rotation continues on the GPU; settled cards need no per-frame CPU transforms.
-    isMoving.current = !settled;
-    if (!settled) invalidate();
+    const formed = state === 'FORMED';
+    if (isMoving.current) {
+      const delta = Math.min(rawDelta, 0.05);
+      let settled = true;
+      for (let index = 0; index < placements.length; index++) {
+        const placement = placements[index];
+        const targetPosition = formed ? placement.formedPosition : placement.scatteredPosition;
+        const targetRotation = formed ? placement.formedRotation : placement.scatteredRotation;
+        const damping = -Math.expm1(-delta * (formed ? 1.8 * placement.weight : 1.5));
+        placement.position.lerp(targetPosition, damping);
+        placement.rotation.slerp(targetRotation, damping);
+        if (placement.position.distanceToSquared(targetPosition) < 0.0001 && placement.rotation.angleTo(targetRotation) < 0.002) {
+          placement.position.copy(targetPosition);
+          placement.rotation.copy(targetRotation);
+        } else {
+          settled = false;
+        }
+        matrixHelper.position.copy(placement.position);
+        matrixHelper.quaternion.copy(placement.rotation);
+        matrixHelper.scale.setScalar(placement.scale);
+        matrixHelper.updateMatrix();
+        mesh.setMatrixAt(index, matrixHelper.matrix);
+      }
+      mesh.instanceMatrix.needsUpdate = true;
+      // Parent rotation continues on the GPU; settled cards need no CPU transforms.
+      isMoving.current = !settled;
+      if (!settled) invalidate();
+    }
+
+    const input = handInput?.current;
+    if (!handPicker || !input) return;
+    const now = performance.now();
+    if (!input.enabled || !handActive) {
+      input.selectionRequest = null;
+      input.hoveredPhoto = null;
+      input.hoveredAt = 0;
+      handHover.current.at = -Infinity;
+      return;
+    }
+    const request = input.selectionRequest;
+    const cursor = request?.cursor ?? input.cursor;
+    if (!request && (!cursor || input.lastInputAt <= 0 || now - input.lastInputAt > HAND_POINTER_MAX_AGE_MS)) {
+      input.hoveredPhoto = null;
+      input.hoveredAt = 0;
+      handHover.current.at = -Infinity;
+      return;
+    }
+    const previous = handHover.current;
+    const cursorChanged = cursor && (previous.x !== cursor.x || previous.y !== cursor.y);
+    if (!request && !cursorChanged && now - previous.at < 1000 / 15) return;
+    const occluders = handOccluders.current;
+    occluders.length = 0;
+    if (formed && !isMoving.current) {
+      // Tree deformation is GPU-only while assembling. Its static CPU surfaces
+      // become accurate occluders once the prints and tree have settled.
+      for (const name of ['evergreen-solid-boughs', 'evergreen-trunk-and-branches']) {
+        const object = mesh.parent?.getObjectByName(name);
+        if (object) occluders.push(object);
+      }
+    }
+    if (request) {
+      const selected = consumeHandPhotoSelection(input, handActive, now,
+        anchored => handPicker(mesh, camera, anchored, photoIndexes, occluders));
+      previous.at = now;
+      previous.x = request.cursor.x;
+      previous.y = request.cursor.y;
+      if (selected !== undefined) onHandPhotoSelect?.(selected);
+      return;
+    }
+    if (!cursor) return;
+    previous.at = now;
+    previous.x = cursor.x;
+    previous.y = cursor.y;
+    input.hoveredPhoto = handPicker(mesh, camera, cursor, photoIndexes, occluders);
+    input.hoveredAt = now;
   });
 
   if (!visibleCount) return null;

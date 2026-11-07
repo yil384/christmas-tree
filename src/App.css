@@ -3,6 +3,9 @@
 .tree-stage canvas { display: block; outline: none; }
 .night-backdrop { position: absolute; inset: 0; pointer-events: none; background-color: #030b16; background-size: cover; background-repeat: no-repeat; }
 .christmas-greeting { position: absolute; left: max(30px, env(safe-area-inset-left)); bottom: max(28px, env(safe-area-inset-bottom)); z-index: 3; margin: 0; max-width: calc(100% - 60px); pointer-events: none; color: #eee3cb; font-family: "Songti SC", "Noto Serif CJK SC", "STSong", serif; font-size: 18px; font-weight: 400; line-height: 1.75; letter-spacing: .08em; text-shadow: 0 2px 12px #000b; }
+.greeting-gate { appearance: none; border: 0; padding: 0 0 4px; background: none; text-align: left; pointer-events: auto; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; cursor: default; }
+.greeting-hold-line { position: absolute; left: 0; bottom: 0; width: 100%; height: 1px; background: #f1d79f; transform: scaleX(0); transform-origin: left; opacity: 0; }
+.greeting-gate.is-holding .greeting-hold-line { opacity: .7; transform: scaleX(1); transition: transform 1s linear; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; white-space: nowrap; clip-path: inset(50%); border: 0; }
 .tree-stage { user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; cursor: grab; }
 .tree-stage:active { cursor: grabbing; }

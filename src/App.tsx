@@ -1,14 +1,17 @@
-import { Component, Suspense, lazy, useCallback, useEffect, useState } from 'react';
+import { Component, Suspense, lazy, useCallback, useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { Dialog } from './components/Dialog';
 import { assetUrl, readPhotos, type Photo } from './lib/content';
 import { defaultScene, readSceneConfig } from './lib/scene-config';
 import { useSecretInteractions } from './hooks/useSecretInteractions';
+import GreetingGate from './components/GreetingGate';
+import { createHandSceneInput, type HandCommand } from './lib/hand-types';
 import './App.css';
 
 const TreeScene = lazy(() => import('./scene/TreeScene'));
 const PhotoGallery = lazy(() => import('./components/PhotoGallery'));
 const ShareGift = lazy(() => import('./components/ShareGift'));
+const HandMagicMode = lazy(() => import('./components/HandMagicMode'));
 
 class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false };
@@ -19,6 +22,17 @@ class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean
       <p>这个浏览器暂时无法显示 3D 圣诞树。</p>
       <span>请在支持 WebGL 的系统浏览器中打开。</span>
     </div>;
+  }
+}
+
+class HandModeBoundary extends Component<{ children: ReactNode; onClose: () => void }, { failed: boolean }> {
+  state = { failed: false };
+  static getDerivedStateFromError() { return { failed: true }; }
+  render() {
+    if (!this.state.failed) return this.props.children;
+    return <Dialog title="手势魔法暂时没打开" onClose={this.props.onClose} className="share-dialog">
+      <div className="panel-state" role="alert"><h2>手势魔法暂时没打开</h2><p>可以关闭后继续欣赏圣诞树，<br />或重新加载页面再试一次。</p><button type="button" className="primary-button" onClick={() => window.location.reload()}>重新加载页面</button></div>
+    </Dialog>;
   }
 }
 
@@ -33,14 +47,73 @@ export default function App() {
   const [panel, setPanel] = useState<'photos' | 'share' | null>(null);
   const [selectedPhoto, setSelectedPhoto] = useState(0);
   const [notice, setNotice] = useState('');
+  const [handOpen, setHandOpen] = useState(false);
+  const [handRunning, setHandRunning] = useState(false);
+  const [galleryNavigation, setGalleryNavigation] = useState<{ sequence: number; direction: -1 | 1 }>({ sequence: 0, direction: 1 });
+  const handInput = useRef(createHandSceneInput());
+  const handActive = handRunning && visible && panel === null;
+  handInput.current.enabled = handActive;
+  const closeHandMode = useCallback(() => {
+    handInput.current.enabled = false;
+    handInput.current.cursor = null;
+    handInput.current.hoveredPhoto = null;
+    handInput.current.selectionRequest = null;
+    setHandRunning(false);
+    setHandOpen(false);
+  }, []);
+  const openHandMode = useCallback(() => { setPanel(null); setHandOpen(true); }, []);
   const closePanel = useCallback(() => setPanel(null), []);
   const onTap = useCallback(() => setPaused(value => !value), []);
   const onDoubleTap = useCallback(() => setState(value => value === 'FORMED' ? 'CHAOS' : 'FORMED'), []);
   const onLongPress = useCallback((photo: number | null) => {
     if (photo !== null) { setSelectedPhoto(photo); setPanel('photos'); }
-    else setPanel('share');
-  }, []);
-  const interaction = useSecretInteractions({ onTap, onDoubleTap, onLongPress, enabled: visible && panel === null });
+    else { closeHandMode(); setPanel('share'); }
+  }, [closeHandMode]);
+  const interaction = useSecretInteractions({ onTap, onDoubleTap, onLongPress, enabled: visible && panel === null && (!handOpen || handRunning) });
+
+  const onHandPhotoSelect = useCallback((index: number | null) => {
+    if (!handRunning || !visible || panel !== null) return;
+    if (index !== null && photos[index]) {
+      setSelectedPhoto(index);
+      setPanel('photos');
+      handInput.current.cursor = null;
+      handInput.current.hoveredPhoto = null;
+    } else setNotice('先用食指瞄准照片，出现提示后再轻轻捏合。');
+  }, [handRunning, panel, photos, visible]);
+
+  const onHandCommand = useCallback((command: HandCommand) => {
+    if (!handRunning || !visible || panel === 'share') return;
+    const input = handInput.current;
+    if (panel === 'photos') {
+      if (command.type === 'gallery-step') setGalleryNavigation(value => ({ sequence: value.sequence + 1, direction: command.direction }));
+      if (command.type === 'close-gallery') setPanel(null);
+      return;
+    }
+    switch (command.type) {
+      case 'orbit': input.orbitX += command.dx; input.orbitY += command.dy; break;
+      case 'zoom': if (Number.isFinite(command.factor) && command.factor > 0) input.zoomLog += Math.log(command.factor); break;
+      case 'scatter': setState('CHAOS'); setNotice('让回忆，散成一片星空。'); break;
+      case 'gather': setState('FORMED'); setNotice('把心意，重新聚在一起。'); break;
+      case 'toggle-rotation': setPaused(!paused); setNotice(paused ? '继续轻轻转动。' : '已暂停自动旋转。'); break;
+      case 'select-photo': {
+        if (input.cursor) input.selectionRequest = { cursor: { ...input.cursor }, requestedAt: performance.now() };
+        break;
+      }
+      case 'magic': input.magic++; setNotice('愿每一份心意，都有星光回应。'); break;
+    }
+  }, [handRunning, panel, paused, visible]);
+
+  useEffect(() => {
+    const key = (event: KeyboardEvent) => {
+      if (event.repeat || event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.key.toLowerCase() !== 'h') return;
+      const target = event.target;
+      if (target instanceof HTMLElement && target.closest('input, textarea, select, [contenteditable="true"]')) return;
+      event.preventDefault();
+      if (handOpen) closeHandMode(); else openHandMode();
+    };
+    document.addEventListener('keydown', key);
+    return () => document.removeEventListener('keydown', key);
+  }, [closeHandMode, handOpen, openHandMode]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -77,24 +150,27 @@ export default function App() {
       filter: `brightness(${Math.pow(scene.background.brightness, 1 / 2.2)})`,
     }} />
     <div className="tree-stage" {...interaction.bind}
-      aria-label="照片圣诞树。单击或空格暂停与继续旋转，双击或回车散开与聚合，长按照片放大。"
+      aria-label="照片圣诞树。单击或空格暂停与继续旋转，双击或回车散开与聚合，长按照片放大。按 H 开启手势魔法。"
       data-tree-state={state.toLowerCase()} data-rotation={paused ? 'paused' : 'playing'}
       aria-busy={photoStatus === 'loading'}>
       <SceneBoundary>
         <Suspense fallback={<div className="scene-message" role="status"><span className="loading-star" aria-hidden="true">★</span><span className="visually-hidden">正在加载圣诞树</span></div>}>
-          <TreeScene photos={photos} state={state} paused={paused || panel !== null} reducedMotion={reducedMotion}
-            active={visible && panel === null} onPhotoPress={interaction.onPhotoPress}
-            background={scene.background} snow={scene.snow} />
+          <TreeScene photos={photos} state={state} paused={paused || panel !== null || (handOpen && !handRunning)} reducedMotion={reducedMotion}
+            active={visible && panel === null && (!handOpen || handRunning)} onPhotoPress={interaction.onPhotoPress}
+            background={scene.background} snow={scene.snow} handInput={handInput} handActive={handActive} onHandPhotoSelect={onHandPhotoSelect} />
         </Suspense>
       </SceneBoundary>
     </div>
-    <p className="christmas-greeting">{scene.greeting}</p>
+    <GreetingGate greeting={scene.greeting} onOpen={openHandMode} />
     {photoStatus === 'error' && <span className="visually-hidden" role="status">照片暂时加载失败，刷新页面可重试。</span>}
     {notice && <div className="toast" role="status">{notice}</div>}
     {panel && <Dialog title={panel === 'photos' ? '相册' : '分享圣诞树'} onClose={closePanel} className={panel === 'photos' ? 'photo-dialog' : 'share-dialog'}>
       <Suspense fallback={<div className="panel-state" role="status">加载中…</div>}>
-        {panel === 'photos' ? <PhotoGallery photos={photos} initialIndex={selectedPhoto} /> : <ShareGift notify={setNotice} />}
+        {panel === 'photos' ? <PhotoGallery photos={photos} initialIndex={selectedPhoto} handNavigation={galleryNavigation} handMode={handRunning} onCloseHandMode={closeHandMode} /> : <ShareGift notify={setNotice} />}
       </Suspense>
     </Dialog>}
+    {handOpen && <HandModeBoundary onClose={closeHandMode}><Suspense fallback={<Dialog title="手势魔法" onClose={closeHandMode}><div className="panel-state" role="status">正在打开手势图鉴…</div></Dialog>}>
+      <HandMagicMode input={handInput} view={panel === 'photos' ? 'gallery' : panel ? 'blocked' : 'scene'} onCommand={onHandCommand} onRunningChange={setHandRunning} onClose={closeHandMode} />
+    </Suspense></HandModeBoundary>}
   </main>;
 }
