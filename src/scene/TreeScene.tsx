@@ -125,9 +125,25 @@ function Bloom({ compact }: { compact: boolean }) {
   const { gl, scene, camera, size } = useThree();
   const pipeline = useMemo(() => {
     const composer = new EffectComposer(gl);
+    // Canvas MSAA does not cover the offscreen scene used by the composer.
+    // Only request sample counts supported by both its HDR colour and depth
+    // attachments, so fine star edges remain smooth on compatible devices.
+    const context = gl.getContext() as WebGL2RenderingContext;
+    const supportedSamples = (format: number) => Array.from(
+      (context.getInternalformatParameter(context.RENDERBUFFER, format, context.SAMPLES) as Int32Array | null) ?? [],
+    );
+    const depthSamples = supportedSamples(context.DEPTH_COMPONENT24);
+    const sampleLimit = Math.min(compact ? 2 : 4, gl.capabilities.maxSamples);
+    const samples = Math.max(0, ...supportedSamples(context.RGBA16F)
+      .filter(count => count <= sampleLimit && depthSamples.includes(count)));
+    composer.renderTarget1.samples = samples;
+    composer.renderTarget2.samples = samples;
     const scenePass = new RenderPass(scene, camera);
     // HDR lights glow; ordinary photo whites stay sharp below the threshold.
-    const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), compact ? 0.42 : 0.58, 0.32, 1.35);
+    const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), compact ? 0.38 : 0.50, 0.42, 1.35);
+    // A soft knee prevents small moving highlights from abruptly switching
+    // bloom on and off as they cross the luminance threshold.
+    (bloom.highPassUniforms as { smoothWidth: { value: number } }).smoothWidth.value = 0.16;
     const output = new OutputPass();
     composer.addPass(scenePass);
     composer.addPass(bloom);
@@ -160,11 +176,11 @@ function SceneContents({ photos, state, paused, reducedMotion, onPhotoPress, bac
   });
   return <>
     <NightBackground background={background} />
-    <hemisphereLight args={['#b9cce8', '#243545', 0.82]} />
-    <directionalLight position={[-22, 32, 18]} intensity={2.05} color="#c9dcf8" />
-    <directionalLight position={[14, 10, 24]} intensity={1.28} color="#ffddab" />
-    <directionalLight position={[8, 16, -25]} intensity={1.15} color="#adc9ee" />
-    <pointLight position={[0, -13, 3]} intensity={85} distance={24} decay={2} color="#ffbd6b" />
+    <hemisphereLight args={['#cbc9ef', '#342a42', 0.90]} />
+    <directionalLight position={[-22, 32, 18]} intensity={1.65} color="#c8d1ff" />
+    <directionalLight position={[14, 10, 24]} intensity={1.65} color="#ffe0b0" />
+    <directionalLight position={[8, 16, -25]} intensity={1.10} color="#c2a8ed" />
+    <pointLight position={[0, -13, 3]} intensity={105} distance={24} decay={2} color="#ffcb8c" />
     <SnowGround state={state} reducedMotion={reducedMotion} />
     <TreeAtmosphere compact={compact} reducedMotion={reducedMotion} snow={snow} stars={!background.src} />
     <group ref={tree} position={[0, TREE_OFFSET_Y, 0]}>

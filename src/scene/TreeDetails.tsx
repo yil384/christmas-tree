@@ -14,7 +14,7 @@ interface TreeDetailsProps {
 const TREE_HEIGHT = 22;
 const TREE_RADIUS = 9;
 const GIFT_COLORS = ['#853c46', '#c7a76b', '#4d6981', '#365f4b'];
-const LIGHT_COLORS = ['#ffe4a7', '#ffdfa1', '#fff2ce', '#fff1d1', '#ffdba0', '#ffeac2', '#e36b61', '#84b39b', '#87a6cb', '#dbbc75'];
+const LIGHT_COLORS = ['#ffe5b2', '#ffe8c0', '#ffdda0', '#fff0cf', '#f8d78e', '#fff1d9', '#ffe4ad', '#f3dbad', '#fff8ed', '#d9ccf1'];
 
 /** Stable positions keep the original tree arrangement consistent on rerenders. */
 function randomSource(seed: number) {
@@ -121,8 +121,9 @@ const lightsVertex = /* glsl */ `
   void main() {
     vec3 finalPos = mix(position, aTargetPos, uProgress);
     vec4 viewPos = modelViewMatrix * vec4(finalPos, 1.0);
-    float blink = (sin(uTime * aTiming.x * 0.35 + aTiming.y) + 1.0) * 0.5;
-    vColor = aColor * mix(0.3, 1.75 + blink * 0.65, uProgress);
+    float brightness = 1.8 + 0.3 * fract(aTiming.y * 0.17);
+    float shimmer = 1.0 + 0.025 * sin(uTime * aTiming.x * 0.2 + aTiming.y);
+    vColor = aColor * mix(0.3, brightness * shimmer, uProgress);
     gl_PointSize = clamp(190.0 / max(1.0, -viewPos.z), 1.2, 12.0) * uPixelRatio;
     gl_Position = projectionMatrix * viewPos;
   }
@@ -251,31 +252,84 @@ function createDecorations(compact: boolean): DecorationBatch[] {
 }
 
 function createTopStar() {
-  const shape = new THREE.Shape();
+  const corners: THREE.Vector2[] = [];
   for (let i = 0; i < 10; i += 1) {
-    const radius = i % 2 === 0 ? 1.3 : 0.7;
+    const radius = i % 2 === 0 ? 1.3 : 0.54;
     const angle = (i / 10) * Math.PI * 2 + Math.PI / 2;
-    const x = radius * Math.cos(angle);
-    const y = radius * Math.sin(angle);
-    if (i === 0) shape.moveTo(x, y);
-    else shape.lineTo(x, y);
+    corners.push(new THREE.Vector2(radius * Math.cos(angle), radius * Math.sin(angle)));
   }
-  shape.closePath();
-  const starShape = new THREE.ExtrudeGeometry(shape, {
-    depth: 0.4,
-    bevelEnabled: true,
-    bevelThickness: 0.1,
-    bevelSize: 0.1,
-    bevelSegments: 3,
-    curveSegments: 1,
+
+  // Real quadratic corners soften both the slender tips and the inner valleys.
+  const rounded = corners.map((corner, i) => {
+    const inset = i % 2 === 0 ? 0.075 : 0.055;
+    const previous = corners[(i + corners.length - 1) % corners.length];
+    const next = corners[(i + 1) % corners.length];
+    return {
+      corner,
+      entry: corner.clone().add(previous.clone().sub(corner).normalize().multiplyScalar(inset)),
+      exit: corner.clone().add(next.clone().sub(corner).normalize().multiplyScalar(inset)),
+    };
   });
-  starShape.translate(0, 0, -0.2);
-  // A narrow physical mounting stem reaches into the leader shoot even during
-  // the star's small sway. Merge it into the same mesh/material/draw batch.
-  const cylinder = new THREE.CylinderGeometry(0.045, 0.07, 1.8, 8);
+  const outline: THREE.Vector2[] = [];
+  for (let i = 0; i < rounded.length; i += 1) {
+    const { entry, corner, exit } = rounded[i];
+    const curve = new THREE.QuadraticBezierCurve(entry, corner, exit);
+    for (let step = 0; step < 6; step += 1) outline.push(curve.getPoint(step / 6));
+    const nextEntry = rounded[(i + 1) % rounded.length].entry;
+    for (let step = 0; step < 4; step += 1) outline.push(exit.clone().lerp(nextEntry, step / 4));
+  }
+
+  // Shared latitude rings form a gently inflated, closed shell. The equator is
+  // shared by both faces, so its normals blend around the edge without a seam.
+  const segments = 20;
+  const halfDepth = 0.25;
+  const ringSize = outline.length;
+  const positions: number[] = [0, 0, halfDepth];
+  const uvs: number[] = [0.5, 0.5];
+  const indices: number[] = [];
+  for (let ring = 1; ring < segments; ring += 1) {
+    const latitude = (ring / segments) * Math.PI;
+    const radius = Math.sin(latitude);
+    const depth = halfDepth * Math.cos(latitude);
+    for (const point of outline) {
+      const x = point.x * radius;
+      const y = point.y * radius;
+      positions.push(x, y, depth);
+      uvs.push(0.5 + x / 2.6, 0.5 + y / 2.6);
+    }
+  }
+  for (let i = 0; i < ringSize; i += 1) {
+    indices.push(0, 1 + i, 1 + (i + 1) % ringSize);
+  }
+  for (let ring = 0; ring < segments - 2; ring += 1) {
+    const start = 1 + ring * ringSize;
+    const next = start + ringSize;
+    for (let i = 0; i < ringSize; i += 1) {
+      const j = (i + 1) % ringSize;
+      indices.push(start + i, next + i, start + j, start + j, next + i, next + j);
+    }
+  }
+  const back = positions.length / 3;
+  positions.push(0, 0, -halfDepth);
+  uvs.push(0.5, 0.5);
+  const lastRing = back - ringSize;
+  for (let i = 0; i < ringSize; i += 1) {
+    indices.push(back, lastRing + (i + 1) % ringSize, lastRing + i);
+  }
+  const shell = new THREE.BufferGeometry();
+  shell.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  shell.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+  shell.setIndex(indices);
+  shell.computeVertexNormals();
+  const starShape = shell.toNonIndexed();
+  shell.dispose();
+
+  // The capped mounting stem overlaps the lower valley and the leader shoot.
+  // Preserve each surface's smooth normals while merging into one draw batch.
+  const cylinder = new THREE.CylinderGeometry(0.04, 0.06, 2, 16);
   const mounting = cylinder.toNonIndexed();
   cylinder.dispose();
-  mounting.translate(0, -1.45, 0);
+  mounting.translate(0, -1.35, 0);
   const geometry = new THREE.BufferGeometry();
   for (const name of ['position', 'normal', 'uv']) {
     const starAttribute = starShape.getAttribute(name);
@@ -287,12 +341,14 @@ function createTopStar() {
   }
   starShape.dispose();
   mounting.dispose();
+  geometry.computeBoundingBox();
+  geometry.computeBoundingSphere();
   const material = new THREE.MeshStandardMaterial({
-    color: '#FFD700',
-    emissive: '#FFD700',
-    emissiveIntensity: 1.5,
-    roughness: 0.1,
-    metalness: 1,
+    color: '#e8c98e',
+    emissive: '#e8c98e',
+    emissiveIntensity: 0.18,
+    roughness: 0.47,
+    metalness: 0.65,
   });
   const star = new THREE.Mesh(geometry, material);
   star.position.y = TREE_HEIGHT / 2 + 1.8;
@@ -375,8 +431,8 @@ function syncDetails(details: Details, motion: Motion, pixelRatio: number) {
 
   details.star.scale.setScalar(motion.star);
   details.star.visible = motion.star > 0.001;
-  details.star.position.y = TREE_HEIGHT / 2 + 1.8 + Math.sin(motion.time * 1.2) * 0.12;
-  details.star.rotation.set(Math.sin(motion.time * 0.8) * 0.06, motion.time * 0.5, 0);
+  details.star.position.set(0, TREE_HEIGHT / 2 + 1.8, 0);
+  details.star.rotation.set(0, 0, 0);
 }
 
 function disposeDetails(details: Details) {

@@ -15,34 +15,34 @@
   ],
   "after": [
     {
-      "name": "PhotoGallery-Ck2G5fze.js",
+      "name": "PhotoGallery-hfxdRrDd.js",
       "bytes": 3875,
       "gzipBytes": 1705
     },
     {
-      "name": "ShareGift-_UBAH-Yz.js",
+      "name": "ShareGift-Dp7pgVRG.js",
       "bytes": 26660,
-      "gzipBytes": 10683
+      "gzipBytes": 10682
     },
     {
-      "name": "TreeScene-BJCgpzgw.js",
-      "bytes": 898866,
-      "gzipBytes": 243316
+      "name": "TreeScene-CNY1GTFk.js",
+      "bytes": 900189,
+      "gzipBytes": 243860
+    },
+    {
+      "name": "index-BrnYtXpX.js",
+      "bytes": 156480,
+      "gzipBytes": 51264
     },
     {
       "name": "index-D3Kq0Hqz.css",
       "bytes": 7089,
       "gzipBytes": 2369
-    },
-    {
-      "name": "index-DkSEo4dw.js",
-      "bytes": 156480,
-      "gzipBytes": 51265
     }
   ],
   "initialTreeJavaScript": {
-    "bytes": 1055346,
-    "gzipBytes": 294581
+    "bytes": 1056669,
+    "gzipBytes": 295124
   },
   "photos": {
     "count": 32,
@@ -56,14 +56,15 @@
     "webgl": "Browser reports GL_VENDOR=Disabled; final browser composition and target-device frame rate remain unverified",
     "shaderCompiler": "18 full Three r169 programs compiled/linked in Mesa GLES 3.2 llvmpipe; no compiler or linker logs; see shader-validation.json",
     "geometry": "Actual tree, paper/card/clip geometry and attachment, stem burial, camera framing and 120 snow camera cases tested",
-    "offlineReference": "Actual geometry and photos in Blender Cycles CPU for structural inspection; approximate lighting, not a browser screenshot",
-    "tests": 53
+    "offlineReference": "Current fairytale-castle composition and rounded star inspected with source geometry and photos in Blender Cycles CPU; approximate lighting, not a browser screenshot. Portrait background crop checked separately.",
+    "tests": 53,
+    "topStar": "One CPU check: closed rounded shell and mounting stem, finite values, outward faces, smooth unit normals, fixed local pose and assembly scale"
   },
   "background": {
-    "source": "public/backgrounds/winter-night-photo.webp",
-    "runtimeAsset": "generated/background/night-cc7b7b2c1e6fb8539004.webp",
-    "bytes": 73484,
-    "provenance": "AI-generated photographic-style winter-night forest"
+    "source": "public/backgrounds/fairytale-castle-winter.webp",
+    "runtimeAsset": "generated/background/night-c320cca44ca81f2cb835.webp",
+    "bytes": 154710,
+    "provenance": "AI-generated fairytale winter castle with blue-lavender twilight and warm golden windows"
   },
   "structure": {
     "photoCardsDesktop": 128,
@@ -79,6 +80,9 @@
     "solidBodyBufferBytesApprox": 12900000,
     "photoSharedGeometryVertices": 342,
     "photoSharedGeometryTriangles": 424,
-    "foliagePointsVisibleWhenFormed": 0
+    "foliagePointsVisibleWhenFormed": 0,
+    "topStarTriangles": 3864,
+    "topStarVertices": 11592,
+    "topStarDrawBatches": 1
   }
 }

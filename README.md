@@ -1,6 +1,6 @@
 # 照片圣诞树
 
-一棵有棕色主干、绿色松枝和照片挂卡的 3D 圣诞树。保留旋转、散开和聚合、彩灯、金色顶星与飘雪，并支持更换夜景背景图片。
+一棵有棕色主干、绿色松枝和照片挂卡的 3D 圣诞树，置于蓝紫暮色、暖金灯窗和雪庭组成的童话城堡夜景中。保留旋转、散开和聚合、彩灯、柔金顶星与飘雪，并支持更换夜景背景图片。
 
 首页只显示场景和左下角祝福：
 
@@ -90,7 +90,7 @@ public/photos/
 }
 ```
 
-将对应图片放到 `public/backgrounds/night.jpg`。支持 JPG、JPEG、PNG、WebP、AVIF、SVG。默认使用摄影质感的冬夜林地背景 `winter-night-photo.webp`（AI 生成）；可以直接换成自己的实景夜景照片。生成说明见 `public/backgrounds/README.md`。
+将对应图片放到 `public/backgrounds/night.jpg`。支持 JPG、JPEG、PNG、WebP、AVIF、SVG。默认使用童话城堡冬夜背景 `fairytale-castle-winter.webp`（AI 生成），搭配香槟金灯串、蓝紫环境光和柔和泛光；可以直接换成自己的实景夜景照片。生成说明见 `public/backgrounds/README.md`。
 
 - `image`：位于 `public/backgrounds/` 内的本地文件，设为 `null` 使用纯深色夜空。
 - `brightness`：背景亮度，0.12～1；较暗的背景更衬托照片。

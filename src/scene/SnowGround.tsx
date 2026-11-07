@@ -36,7 +36,7 @@ export default function SnowGround({ state, reducedMotion }: Props) {
     bump.generateMipmaps = true;
     bump.needsUpdate = true;
     const material = new THREE.MeshStandardMaterial({
-      color: '#a2b4c9', roughness: 0.94, metalness: 0,
+      color: '#b3b2cf', roughness: 0.94, metalness: 0,
       bumpMap: bump, bumpScale: 0.022,
       transparent: true, depthWrite: true,
     });
