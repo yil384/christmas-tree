@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "sdkVersion": "1.2.2",
+  "worker": "worker-3b5cf016f4f69b4f852e.js",
+  "runtime": "sdk-1.2.2/vision_bundle.js",
+  "wasmBase": "sdk-1.2.2/wasm",
+  "model": "gesture-recognizer-float16-v1-97952348cf6a6a4915c2.task",
+  "modelSha256": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482",
+  "modelBytes": 8373440,
+  "notices": [
+    "LICENSE-MediaPipe.txt",
+    "NOTICE.txt"
+  ]
+}

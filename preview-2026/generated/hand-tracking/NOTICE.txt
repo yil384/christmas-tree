@@ -1,0 +1,30 @@
+Local hand-tracking third-party notice
+
+MediaPipe Tasks Vision JavaScript/WASM SDK
+Package: @mediapipe/tasks-vision, exact version 1.2.2
+Author: The MediaPipe Authors / Google
+License: Apache-2.0, as declared in the published npm package.
+The upstream license text is included in LICENSE-MediaPipe.txt.
+Source: https://github.com/google-ai-edge/mediapipe
+
+Google MediaPipe Gesture Recognizer model bundle
+Variant: gesture_recognizer / gesture_recognizer / float16 / version 1
+Source: https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/1/gesture_recognizer.task
+SHA-256: 97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482
+Size: 8,373,440 bytes
+The model is distributed byte-for-byte without modification.
+
+The hand detector/landmark model card explicitly names Apache License 2.0:
+https://storage.googleapis.com/mediapipe-assets/Model%20Card%20Hand%20Tracking%20%28Lite_Full%29%20with%20Fairness%20Oct%202021.pdf
+The separate gesture-classification model card describes intended uses and
+limitations but does not state a standalone license grant for the entire bundle:
+https://storage.googleapis.com/mediapipe-assets/gesture_recognizer/model_card_hand_gesture_classification_with_faireness_2022.pdf
+The SDK license is not asserted here as a blanket license for every model component.
+This application uses the model for optional local entertainment gestures only.
+
+Privacy implementation
+The SDK is not modified. The application's classic worker limits fetch,
+XMLHttpRequest and importScripts to its own same-origin asset directory.
+Only GET asset reads are permitted, without query strings. Fetch omits credentials.
+The SDK's built-in metrics POST requests are blocked before network dispatch.
+Camera frames and recognition results are neither uploaded nor logged by this app.
