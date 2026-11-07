@@ -2,11 +2,11 @@
   "version": 1,
   "greeting": "祝集美小喵【zkl】圣诞节快乐",
   "background": {
-    "src": "generated/background/night-ed40e2b94fc43c223d0b.webp",
-    "brightness": 0.52,
+    "src": "generated/background/night-cc7b7b2c1e6fb8539004.webp",
+    "brightness": 0.78,
     "focus": [
       0.5,
-      0.42
+      0.55
     ]
   },
   "snow": true
