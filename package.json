@@ -6,15 +6,16 @@
   "type": "module",
   "scripts": {
     "photos": "node scripts/prepare-photos.mjs",
-    "predev": "npm run photos",
+    "predev": "npm run photos && npm run scene",
     "dev": "vite --host 0.0.0.0",
-    "prebuild": "npm run photos",
+    "prebuild": "npm run photos && npm run scene",
     "build": "tsc -b && vite build && node scripts/finalize-build.mjs",
     "test": "node --test tests/*.test.mjs",
     "lint": "eslint .",
     "preview": "vite preview --host 0.0.0.0",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "scene": "node scripts/prepare-scene.mjs"
   },
   "dependencies": {
     "@react-three/fiber": "^8.18.0",

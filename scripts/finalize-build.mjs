@@ -36,13 +36,15 @@ export async function finalizeBuild({ root = projectRoot } = {}) {
   const removedPhotos = await exists(originals);
   const removedStarterIcon = await exists(starterIcon);
   await rm(originals, { recursive: true, force: true });
+  await rm(join(dist, 'backgrounds'), { recursive: true, force: true });
+  await rm(join(dist, 'scene.json'), { force: true });
   await rm(starterIcon, { force: true });
   return { removedPhotos, removedStarterIcon };
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   finalizeBuild().then(() => {
-    console.log('Build finalized: original photos excluded from dist; generated WebP images retained.');
+    console.log('Build finalized: source photos/backgrounds excluded; generated WebP images retained.');
   }).catch(error => {
     console.error(`Build finalization failed: ${error.message}`);
     process.exitCode = 1;

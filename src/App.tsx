@@ -1,8 +1,9 @@
 import { Component, Suspense, lazy, useCallback, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { Dialog } from './components/Dialog';
-import { Icon } from './components/Icon';
 import { assetUrl, readPhotos, type Photo } from './lib/content';
+import { defaultScene, readSceneConfig } from './lib/scene-config';
+import { useSecretInteractions } from './hooks/useSecretInteractions';
 import './App.css';
 
 const TreeScene = lazy(() => import('./scene/TreeScene'));
@@ -16,8 +17,7 @@ class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean
     if (!this.state.failed) return this.props.children;
     return <div className="scene-message" role="status">
       <p>这个浏览器暂时无法显示 3D 圣诞树。</p>
-      <span>可以用系统浏览器打开，或先查看下方相册。</span>
-      <button className="small-button" onClick={() => window.location.reload()}>重新加载</button>
+      <span>请在支持 WebGL 的系统浏览器中打开。</span>
     </div>;
   }
 }
@@ -25,7 +25,7 @@ class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean
 export default function App() {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [photoStatus, setPhotoStatus] = useState<'loading' | 'ready' | 'error'>('loading');
-  const [photoAttempt, setPhotoAttempt] = useState(0);
+  const [scene, setScene] = useState(defaultScene);
   const [state, setState] = useState<'CHAOS' | 'FORMED'>('FORMED');
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -34,17 +34,26 @@ export default function App() {
   const [selectedPhoto, setSelectedPhoto] = useState(0);
   const [notice, setNotice] = useState('');
   const closePanel = useCallback(() => setPanel(null), []);
-  const openPhoto = useCallback((index: number) => { setSelectedPhoto(index); setPanel('photos'); }, []);
+  const onTap = useCallback(() => setPaused(value => !value), []);
+  const onDoubleTap = useCallback(() => setState(value => value === 'FORMED' ? 'CHAOS' : 'FORMED'), []);
+  const onLongPress = useCallback((photo: number | null) => {
+    if (photo !== null) { setSelectedPhoto(photo); setPanel('photos'); }
+    else setPanel('share');
+  }, []);
+  const interaction = useSecretInteractions({ onTap, onDoubleTap, onLongPress, enabled: visible && panel === null });
 
   useEffect(() => {
     const controller = new AbortController();
-    setPhotoStatus('loading');
     fetch(assetUrl('generated/photo-manifest.json'), { signal: controller.signal, cache: 'no-cache' })
       .then(response => { if (!response.ok) throw new Error('Photo manifest unavailable'); return response.json(); })
       .then(data => { setPhotos(readPhotos(data)); setPhotoStatus('ready'); })
       .catch(error => { if (error.name !== 'AbortError') setPhotoStatus('error'); });
+    fetch(assetUrl('generated/scene.json'), { signal: controller.signal, cache: 'no-cache' })
+      .then(response => { if (!response.ok) throw new Error('Scene settings unavailable'); return response.json(); })
+      .then(data => setScene(readSceneConfig(data)))
+      .catch(() => { /* The default greeting, dark sky and snow remain usable. */ });
     return () => controller.abort();
-  }, [photoAttempt]);
+  }, []);
 
   useEffect(() => {
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -62,24 +71,25 @@ export default function App() {
   }, [notice]);
 
   return <main className="tree-app">
-    <div className="tree-stage" aria-label="可旋转的 3D 照片圣诞树">
+    <div className="night-backdrop" aria-hidden="true" style={{
+      backgroundImage: scene.background.src ? `url("${assetUrl(scene.background.src)}")` : undefined,
+      backgroundPosition: `${scene.background.focus[0] * 100}% ${scene.background.focus[1] * 100}%`,
+      filter: `brightness(${Math.pow(scene.background.brightness, 1 / 2.2)})`,
+    }} />
+    <div className="tree-stage" {...interaction.bind}
+      aria-label="照片圣诞树。单击或空格暂停与继续旋转，双击或回车散开与聚合，长按照片放大。"
+      data-tree-state={state.toLowerCase()} data-rotation={paused ? 'paused' : 'playing'}
+      aria-busy={photoStatus === 'loading'}>
       <SceneBoundary>
-        <Suspense fallback={<div className="scene-message" role="status"><span className="loading-star">★</span><p>正在加载圣诞树…</p></div>}>
-          <TreeScene photos={photos} state={state} paused={paused || panel !== null} reducedMotion={reducedMotion} active={visible && panel === null} onPhotoSelect={openPhoto} />
+        <Suspense fallback={<div className="scene-message" role="status"><span className="loading-star" aria-hidden="true">★</span><span className="visually-hidden">正在加载圣诞树</span></div>}>
+          <TreeScene photos={photos} state={state} paused={paused || panel !== null} reducedMotion={reducedMotion}
+            active={visible && panel === null} onPhotoPress={interaction.onPhotoPress}
+            background={scene.background} snow={scene.snow} />
         </Suspense>
       </SceneBoundary>
     </div>
-    <footer className="tree-controls">
-      <div className="tree-hint"><span className="hint-desktop">拖动旋转 · 滚轮缩放</span><span className="hint-mobile">滑动旋转 · 双指缩放</span>{photos.length > 0 && <span>点照片放大</span>}</div>
-      <nav className="toolbar" aria-label="圣诞树操作">
-        <button type="button" className="tree-toggle" onClick={() => setState(value => value === 'FORMED' ? 'CHAOS' : 'FORMED')} aria-label={state === 'FORMED' ? '散开圣诞树' : '聚合圣诞树'}><Icon name="sparkle" /><span>{state === 'FORMED' ? '散开' : '聚合'}</span></button>
-        <button type="button" onClick={() => setPaused(value => !value)} aria-label={paused || reducedMotion ? '开始旋转' : '暂停旋转'} aria-pressed={paused || reducedMotion} disabled={reducedMotion} title={reducedMotion ? '已按系统设置减少动态效果' : undefined}><Icon name={paused || reducedMotion ? 'play' : 'pause'} /><span>{paused || reducedMotion ? '旋转' : '暂停'}</span></button>
-        <span className="toolbar-divider" aria-hidden="true" />
-        <button type="button" onClick={() => openPhoto(0)}><Icon name="photos" /><span>相册</span></button>
-        <button type="button" onClick={() => setPanel('share')}><Icon name="share" /><span>分享</span></button>
-      </nav>
-    </footer>
-    {photoStatus === 'error' && <div className="photo-load-notice" role="status">照片暂时加载失败 <button onClick={() => setPhotoAttempt(value => value + 1)}>重试</button></div>}
+    <p className="christmas-greeting">{scene.greeting}</p>
+    {photoStatus === 'error' && <span className="visually-hidden" role="status">照片暂时加载失败，刷新页面可重试。</span>}
     {notice && <div className="toast" role="status">{notice}</div>}
     {panel && <Dialog title={panel === 'photos' ? '相册' : '分享圣诞树'} onClose={closePanel} className={panel === 'photos' ? 'photo-dialog' : 'share-dialog'}>
       <Suspense fallback={<div className="panel-state" role="status">加载中…</div>}>

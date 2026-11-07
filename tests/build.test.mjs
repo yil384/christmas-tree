@@ -17,6 +17,12 @@ test('finalizing excludes deployed originals while preserving source photos, gen
     'dist/index.html': '<html>gift</html>',
     'dist/photos/original.jpg': 'large-original',
     'dist/vite.svg': 'starter',
+    'dist/backgrounds/night.jpg': 'large-night-original',
+    'dist/scene.json': 'source-config',
+    'dist/generated/background/night.webp': 'small-night-image',
+    'dist/generated/scene.json': 'prepared-scene',
+    'public/backgrounds/night.jpg': 'source-night-original',
+    'public/scene.json': 'source-scene',
     'dist/generated/photos/compressed.webp': 'small-display-image',
     'dist/generated/photo-manifest.json': '{"version":1,"photos":[]}',
     'dist/CNAME': 'www.weiyirao.com',
@@ -29,10 +35,10 @@ test('finalizing excludes deployed originals while preserving source photos, gen
     await writeFile(absolute, content);
   }
   assert.deepEqual(await finalizeBuild({ root }), { removedPhotos: true, removedStarterIcon: true });
-  for (const path of ['dist/photos/original.jpg', 'dist/vite.svg']) {
+  for (const path of ['dist/photos/original.jpg', 'dist/vite.svg', 'dist/backgrounds/night.jpg', 'dist/scene.json']) {
     await assert.rejects(readFile(join(root, path)), { code: 'ENOENT' });
   }
-  for (const path of Object.keys(fixtures).filter(path => !['dist/photos/original.jpg', 'dist/vite.svg'].includes(path))) {
+  for (const path of Object.keys(fixtures).filter(path => !['dist/photos/original.jpg', 'dist/vite.svg', 'dist/backgrounds/night.jpg', 'dist/scene.json'].includes(path))) {
     assert.equal(await readFile(join(root, path), 'utf8'), fixtures[path]);
   }
   assert.deepEqual(await finalizeBuild({ root }), { removedPhotos: false, removedStarterIcon: false });

@@ -11,7 +11,7 @@ interface PhotoOrnamentsProps {
   photos: Photo[];
   count: number;
   reducedMotion?: boolean;
-  onPhotoSelect: (index: number) => void;
+  onPhotoPress: (index: number) => void;
 }
 
 // At most 16 MiB of uncompressed atlas pixels, even for an enormous album.
@@ -24,14 +24,25 @@ const MAX_PARALLEL_IMAGES = 3;
 const vertexShader = /* glsl */ `
   attribute vec4 aPhotoRect;
   attribute vec3 aFrameColor;
+  attribute vec3 aHangerEnd;
+  attribute float aPart;
   varying vec2 vCardUv;
   varying vec4 vPhotoRect;
   varying vec3 vFrameColor;
+  varying float vPart;
   void main() {
     vCardUv = uv;
     vPhotoRect = aPhotoRect;
     vFrameColor = aFrameColor;
-    gl_Position = projectionMatrix * modelViewMatrix * instanceMatrix * vec4(position, 1.0);
+    vPart = aPart;
+    vec3 localPosition = position;
+    if (aPart > 1.5) {
+      // One thin ribbon joins the clip to a branch; all of its vertices share
+      // the print's instance matrix, so it follows the card while scattered.
+      localPosition = mix(vec3(0.0, 0.65, -0.012), aHangerEnd, uv.y);
+      localPosition.x += (uv.x - 0.5) * 0.026;
+    }
+    gl_Position = projectionMatrix * modelViewMatrix * instanceMatrix * vec4(localPosition, 1.0);
   }
 `;
 
@@ -40,6 +51,7 @@ const fragmentShader = /* glsl */ `
   varying vec2 vCardUv;
   varying vec4 vPhotoRect;
   varying vec3 vFrameColor;
+  varying float vPart;
   void main() {
     // The back of a real two-sided print is readable, rather than mirrored.
     vec2 cardUv = vCardUv;
@@ -50,7 +62,15 @@ const fragmentShader = /* glsl */ `
                   * step(0.0, photoUv.y) * step(photoUv.y, 1.0);
     vec2 atlasUv = vPhotoRect.xy + clamp(photoUv, 0.0, 1.0) * vPhotoRect.zw;
     vec3 photograph = texture2D(uAtlas, atlasUv).rgb;
-    gl_FragColor = vec4(mix(vFrameColor, photograph, inPhoto), 1.0);
+    vec3 color = mix(vFrameColor, photograph, inPhoto);
+    if (vPart > 1.5) {
+      color = vec3(0.38, 0.25, 0.105);
+    } else if (vPart > 0.5) {
+      // A small wooden clip with its central notch, not another photo border.
+      float notch = step(0.4, vCardUv.y) * step(vCardUv.y, 0.48);
+      color = mix(vec3(0.48, 0.31, 0.13), vec3(0.2, 0.12, 0.045), notch);
+    }
+    gl_FragColor = vec4(color, 1.0);
     #include <colorspace_fragment>
   }
 `;
@@ -85,8 +105,8 @@ function createAtlas(slotCount: number) {
   return { canvas, context, texture, columns, size };
 }
 
-/** 300 actual 3D Polaroids, rendered in one draw call instead of 1,200 meshes. */
-export default function PhotoOrnaments({ state, photos, count, reducedMotion = false, onPhotoSelect }: PhotoOrnamentsProps) {
+/** Actual 3D prints, wooden clips and strings together in one instanced draw. */
+export default function PhotoOrnaments({ state, photos, count, reducedMotion = false, onPhotoPress }: PhotoOrnamentsProps) {
   const visibleCount = photos.length && Number.isFinite(count) ? Math.max(0, Math.floor(count)) : 0;
   const slotCount = Math.min(photos.length, visibleCount, MAX_ATLAS_PHOTOS);
   const meshRef = useRef<THREE.InstancedMesh>(null);
@@ -102,10 +122,26 @@ export default function PhotoOrnaments({ state, photos, count, reducedMotion = f
     [slotCount, photos.length],
   );
   const geometry = useMemo(() => {
-    const plane = new THREE.PlaneGeometry(1.2, 1.5);
-    plane.translate(0, -0.15, 0);
+    const plane = new THREE.BufferGeometry();
+    // The first quad retains the original photo UVs and deeper lower margin.
+    // The second is its small clip. The third is a procedural ribbon from UVs,
+    // positioned by aHangerEnd in the shader without adding another draw call.
+    // Its CPU triangles are degenerate so they cannot steal photo raycasts.
+    plane.setAttribute('position', new THREE.Float32BufferAttribute([
+      -0.6, 0.6, 0, 0.6, 0.6, 0, -0.6, -0.9, 0, 0.6, -0.9, 0,
+      -0.065, 0.73, 0.018, 0.065, 0.73, 0.018, -0.065, 0.51, 0.018, 0.065, 0.51, 0.018,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    ], 3));
+    plane.setAttribute('uv', new THREE.Float32BufferAttribute([
+      0, 1, 1, 1, 0, 0, 1, 0,
+      0, 1, 1, 1, 0, 0, 1, 0,
+      0, 1, 1, 1, 0, 0, 1, 0,
+    ], 2));
+    plane.setAttribute('aPart', new THREE.Float32BufferAttribute([0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2], 1));
+    plane.setIndex([0, 2, 1, 2, 3, 1, 4, 6, 5, 6, 7, 5, 8, 10, 9, 10, 11, 9]);
     const rects = new Float32Array(visibleCount * 4);
     const colors = new Float32Array(visibleCount * 3);
+    const anchors = new Float32Array(visibleCount * 3);
     const innerSize = TILE_SIZE - GUTTER * 2;
     for (let index = 0; index < visibleCount; index++) {
       const slot = index % slotCount;
@@ -119,9 +155,11 @@ export default function PhotoOrnaments({ state, photos, count, reducedMotion = f
         (innerSize - 1) / atlas.size,
       ], index * 4);
       placements[index].frameColor.toArray(colors, index * 3);
+      placements[index].hangerEnd.toArray(anchors, index * 3);
     }
     plane.setAttribute('aPhotoRect', new THREE.InstancedBufferAttribute(rects, 4));
     plane.setAttribute('aFrameColor', new THREE.InstancedBufferAttribute(colors, 3));
+    plane.setAttribute('aHangerEnd', new THREE.InstancedBufferAttribute(anchors, 3));
     return plane;
   }, [atlas, placements, slotCount, visibleCount]);
   const material = useMemo(() => new THREE.ShaderMaterial({
@@ -267,11 +305,13 @@ export default function PhotoOrnaments({ state, photos, count, reducedMotion = f
   });
 
   if (!visibleCount) return null;
-  const selectPhoto = (event: ThreeEvent<MouseEvent>) => {
-    // Orbit/drag gestures must not accidentally open a photograph on release.
-    if (event.delta > 5 || event.instanceId === undefined) return;
+  const pressPhoto = (event: ThreeEvent<PointerEvent>) => {
+    if (event.instanceId === undefined || !event.face) return;
+    // The string's positions are generated in the shader; it is not a second
+    // picking surface. Only the actual print records a long-press candidate.
+    if (geometry.getAttribute('aPart').getX(event.face.a) !== 0) return;
     event.stopPropagation();
-    onPhotoSelect(photoIndexes[event.instanceId % slotCount]);
+    onPhotoPress(photoIndexes[event.instanceId % slotCount]);
   };
 
   return (
@@ -279,7 +319,7 @@ export default function PhotoOrnaments({ state, photos, count, reducedMotion = f
       ref={meshRef}
       args={[geometry, material, visibleCount]}
       frustumCulled={false}
-      onClick={selectPhoto}
+      onPointerDown={pressPhoto}
       onPointerOver={event => {
         event.stopPropagation();
         gl.domElement.style.cursor = 'pointer';

@@ -62,7 +62,7 @@ const foliageFragment = /* glsl */ `
 `;
 
 function createFoliage(compact: boolean) {
-  const count = compact ? 9000 : 15000;
+  const count = compact ? 4000 : 6800;
   const random = randomSource(0xdec025);
   const positions = new Float32Array(count * 3);
   const targets = new Float32Array(count * 3);
@@ -80,7 +80,7 @@ function createFoliage(compact: boolean) {
 
     const height = random();
     const treeAngle = random() * Math.PI * 2;
-    const treeRadius = TREE_RADIUS * (1 - height) * random();
+    const treeRadius = TREE_RADIUS * (1 - height) * (0.72 + Math.sqrt(random()) * 0.28);
     targets[offset] = treeRadius * Math.cos(treeAngle);
     targets[offset + 1] = height * TREE_HEIGHT - TREE_HEIGHT / 2;
     targets[offset + 2] = treeRadius * Math.sin(treeAngle);
@@ -287,29 +287,41 @@ const snowVertex = /* glsl */ `
   uniform float uPixelRatio;
   attribute float aRandom;
   varying float vAlpha;
+  varying float vAngle;
+  varying float vCrystalline;
   void main() {
     vec3 finalPos = position;
-    finalPos.y = mod(position.y + 25.0 - uTime * (0.25 + aRandom * 0.4), 50.0) - 25.0;
-    finalPos.x += sin(uTime * 0.2 + aRandom * 30.0) * 0.5;
+    finalPos.y = mod(position.y + 25.0 - uTime * (0.42 + aRandom * 0.85), 50.0) - 25.0;
+    finalPos.x += sin(uTime * 0.32 + aRandom * 30.0) * (0.35 + aRandom * 0.65);
     vec4 viewPos = modelViewMatrix * vec4(finalPos, 1.0);
-    gl_PointSize = clamp(170.0 * (0.6 + aRandom * 0.8) / max(1.0, -viewPos.z), 1.0, 7.0) * uPixelRatio;
+    float size = clamp(220.0 * (0.5 + aRandom * 1.25) / max(1.0, -viewPos.z), 1.1, 11.0);
+    gl_PointSize = size * uPixelRatio;
     gl_Position = projectionMatrix * viewPos;
-    vAlpha = 0.16 + aRandom * 0.2;
+    vAlpha = 0.24 + aRandom * 0.32;
+    vAngle = aRandom * 6.28318 + uTime * (aRandom - 0.5) * 0.35;
+    vCrystalline = smoothstep(4.5, 8.0, size);
   }
 `;
 
 const snowFragment = /* glsl */ `
   varying float vAlpha;
+  varying float vAngle;
+  varying float vCrystalline;
   void main() {
-    float radius = distance(gl_PointCoord, vec2(0.5));
+    vec2 point = gl_PointCoord - vec2(0.5);
+    float radius = length(point);
     if (radius > 0.5) discard;
-    float alpha = (1.0 - smoothstep(0.0, 0.5, radius)) * vAlpha;
+    float angle = atan(point.y, point.x) + vAngle;
+    float arm = 1.0 - smoothstep(0.012, 0.05, abs(sin(angle * 3.0)) * radius);
+    float crystal = max(arm * (1.0 - smoothstep(0.34, 0.48, radius)), 1.0 - smoothstep(0.02, 0.13, radius));
+    float distant = 1.0 - smoothstep(0.02, 0.48, radius);
+    float alpha = mix(distant, crystal, vCrystalline) * vAlpha;
     gl_FragColor = vec4(vec3(0.92, 0.94, 0.95), alpha);
   }
 `;
 
 function createSnow(compact: boolean) {
-  const count = compact ? 200 : 600;
+  const count = compact ? 180 : 480;
   const random = randomSource(0xdec028);
   const positions = new Float32Array(count * 3);
   const randoms = new Float32Array(count);
@@ -508,7 +520,7 @@ interface Atmosphere {
 }
 
 /** Mount outside the rotating tree group to keep snow and background stars in place. */
-export function TreeAtmosphere({ compact, reducedMotion }: Pick<TreeDetailsProps, 'compact' | 'reducedMotion'>) {
+export function TreeAtmosphere({ compact, reducedMotion, snow = true }: Pick<TreeDetailsProps, 'compact' | 'reducedMotion'> & { snow?: boolean }) {
   const groupRef = useRef<THREE.Group>(null);
   const atmosphereRef = useRef<Atmosphere | null>(null);
   const elapsed = useRef(0);
@@ -535,12 +547,13 @@ export function TreeAtmosphere({ compact, reducedMotion }: Pick<TreeDetailsProps
   }, [compact, renderer, invalidate]);
 
   useLayoutEffect(() => {
+    if (atmosphereRef.current) atmosphereRef.current.snow.visible = snow;
     invalidate();
-  }, [reducedMotion, invalidate]);
+  }, [reducedMotion, snow, compact, invalidate]);
 
   useFrame((_, delta) => {
     const atmosphere = atmosphereRef.current;
-    if (reducedMotion || !atmosphere) return;
+    if (reducedMotion || !snow || !atmosphere) return;
     elapsed.current += Math.min(delta, 0.06);
     atmosphere.snow.material.uniforms.uTime.value = elapsed.current;
     atmosphere.snow.material.uniforms.uPixelRatio.value = pointPixelRatio(renderer, compact);

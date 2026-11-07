@@ -15,34 +15,34 @@
   ],
   "after": [
     {
-      "name": "PhotoGallery-BbEStYui.js",
+      "name": "PhotoGallery-mqqLkUmB.js",
       "bytes": 3875,
-      "gzipBytes": 1707
+      "gzipBytes": 1706
     },
     {
-      "name": "ShareGift-B24jsh-t.js",
+      "name": "ShareGift-BlLD9DWy.js",
       "bytes": 26660,
       "gzipBytes": 10683
     },
     {
-      "name": "TreeScene-auGeCVZ0.js",
-      "bytes": 871205,
-      "gzipBytes": 233703
+      "name": "TreeScene-BmuFGzog.js",
+      "bytes": 882701,
+      "gzipBytes": 237807
     },
     {
-      "name": "index-BLOtNF8_.css",
-      "bytes": 7949,
-      "gzipBytes": 2520
+      "name": "index-D3Kq0Hqz.css",
+      "bytes": 7089,
+      "gzipBytes": 2369
     },
     {
-      "name": "index-C0OtHvqz.js",
-      "bytes": 152795,
-      "gzipBytes": 49870
+      "name": "index-gbIKVk58.js",
+      "bytes": 156480,
+      "gzipBytes": 51264
     }
   ],
   "initialTreeJavaScript": {
-    "bytes": 1024000,
-    "gzipBytes": 283573
+    "bytes": 1039181,
+    "gzipBytes": 289071
   },
   "photos": {
     "count": 32,
@@ -53,7 +53,25 @@
     "atlasMaximumBytes": 16777216
   },
   "visualValidation": {
-    "webgl": "blocked in provided browser: GL_VENDOR=Disabled; no GPU screenshot or frame rate claim",
-    "geometry": "cone coverage, upright radial orientation, bounds and camera projection checked in Node"
+    "webgl": "Provided browser has GL_VENDOR=Disabled; shader compilation, final glow and FPS remain unverified",
+    "geometry": "Actual solid tree vertices, outward trunk normals, 12-view trunk occlusion, photo clearance and hanger endpoints tested",
+    "offlineReference": "Actual body geometry and 128 actual photo placements rendered in Blender Cycles CPU for structural inspection; approximate lighting, not a browser screenshot",
+    "browser": "Zero visible homepage buttons; exact greeting; single/double pointer discrimination, drag cancellation and hidden share entry verified",
+    "tests": 45
+  },
+  "background": {
+    "source": "public/backgrounds/winter-night.svg",
+    "runtimeAsset": "generated/background/night-ed40e2b94fc43c223d0b.webp",
+    "bytes": 11722
+  },
+  "structure": {
+    "photoCardsDesktop": 128,
+    "photoCardsCompact": 90,
+    "solidBodyBatches": 3,
+    "photoAndHangerBatches": 1,
+    "foliagePointsDesktop": 6800,
+    "foliagePointsCompact": 4000,
+    "snowPointsDesktop": 480,
+    "snowPointsCompact": 180
   }
 }

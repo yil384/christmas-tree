@@ -8,8 +8,12 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import type { Photo } from '../lib/content';
+import type { SceneBackground } from '../lib/scene-config';
 import PhotoOrnaments from './PhotoOrnaments';
 import TreeDetails, { TreeAtmosphere } from './TreeDetails';
+import TreeBody from './TreeBody';
+import NightBackground from './NightBackground';
+import { DEFAULT_CAMERA_TARGET_Y, DEFAULT_CAMERA_Y, MIN_CAMERA_DISTANCE, TREE_OFFSET_Y } from './tree-profile';
 
 interface TreeSceneProps {
   photos: Photo[];
@@ -17,7 +21,9 @@ interface TreeSceneProps {
   paused: boolean;
   reducedMotion: boolean;
   active: boolean;
-  onPhotoSelect: (index: number) => void;
+  onPhotoPress: (index: number) => void;
+  background: SceneBackground;
+  snow: boolean;
 }
 
 function CameraControls({ interacting }: { interacting: MutableRefObject<number> }) {
@@ -35,10 +41,11 @@ function CameraControls({ interacting }: { interacting: MutableRefObject<number>
     controls.maxDistance = 115;
     controls.minPolarAngle = 0.3;
     controls.maxPolarAngle = Math.PI / 1.65;
-    controls.target.set(0, -6, 0);
-    const onStart = () => { interacting.current = Infinity; };
-    const onEnd = () => { interacting.current = performance.now() + 1400; };
-    const onChange = () => invalidate();
+    controls.target.set(0, DEFAULT_CAMERA_TARGET_Y, 0);
+    let moved = false;
+    const onStart = () => { moved = false; interacting.current = Infinity; };
+    const onEnd = () => { interacting.current = moved ? performance.now() + 1000 : 0; };
+    const onChange = () => { if (interacting.current === Infinity) moved = true; invalidate(); };
     controls.addEventListener('start', onStart);
     controls.addEventListener('end', onEnd);
     controls.addEventListener('change', onChange);
@@ -54,10 +61,10 @@ function CameraControls({ interacting }: { interacting: MutableRefObject<number>
     const perspective = camera as THREE.PerspectiveCamera;
     // Fit the same broad original cone without cropping its photos on narrow screens.
     const aspect = size.width / Math.max(1, size.height);
-    const distance = Math.max(50, 11.8 / (Math.tan(THREE.MathUtils.degToRad(perspective.fov / 2)) * aspect));
+    const distance = Math.max(MIN_CAMERA_DISTANCE, 11.8 / (Math.tan(THREE.MathUtils.degToRad(perspective.fov / 2)) * aspect));
     controls.maxDistance = Math.max(115, distance * 1.5);
-    camera.position.set(0, 2, distance);
-    controls.target.set(0, -6, 0);
+    camera.position.set(0, DEFAULT_CAMERA_Y, distance);
+    controls.target.set(0, DEFAULT_CAMERA_TARGET_Y, 0);
     camera.lookAt(controls.target);
     controls.update();
     invalidate();
@@ -93,25 +100,28 @@ function Bloom({ compact }: { compact: boolean }) {
   return null;
 }
 
-function SceneContents({ photos, state, paused, reducedMotion, onPhotoSelect }: TreeSceneProps) {
+function SceneContents({ photos, state, paused, reducedMotion, onPhotoPress, background, snow }: TreeSceneProps) {
   const tree = useRef<THREE.Group>(null);
   const interacting = useRef(0);
   const compact = useThree(root => root.size.width < 700);
+  useEffect(() => { if (!paused) interacting.current = 0; }, [paused]);
   useFrame((_, delta) => {
     if (tree.current && !paused && !reducedMotion && performance.now() > interacting.current) {
       tree.current.rotation.y += Math.min(delta, 0.05) * 0.065;
     }
   });
   return <>
-    <color attach="background" args={['#000300']} />
+    <NightBackground background={background} />
+    <hemisphereLight args={['#dbe9ef', '#172618', 1.1]} />
     <ambientLight intensity={0.6} color="#9ab79d" />
     <pointLight position={[25, 30, 30]} intensity={100} color="#FFD54F" />
     <pointLight position={[-25, 10, -20]} intensity={65} color="#FFD700" />
     <pointLight position={[0, -20, 10]} intensity={35} color="#FFFFFF" />
-    <TreeAtmosphere compact={compact} reducedMotion={reducedMotion} />
-    <group ref={tree} position={[0, -6, 0]}>
+    <TreeAtmosphere compact={compact} reducedMotion={reducedMotion} snow={snow} />
+    <group ref={tree} position={[0, TREE_OFFSET_Y, 0]}>
+      <TreeBody state={state} reducedMotion={reducedMotion} />
       <TreeDetails state={state} compact={compact} reducedMotion={reducedMotion} />
-      <PhotoOrnaments state={state} photos={photos} count={compact ? 220 : 300} reducedMotion={reducedMotion} onPhotoSelect={onPhotoSelect} />
+      <PhotoOrnaments state={state} photos={photos} count={compact ? 90 : 128} reducedMotion={reducedMotion} onPhotoPress={onPhotoPress} />
     </group>
     <CameraControls interacting={interacting} />
     <Bloom compact={compact} />
@@ -120,7 +130,7 @@ function SceneContents({ photos, state, paused, reducedMotion, onPhotoSelect }: 
 
 export default function TreeScene(props: TreeSceneProps) {
   return <Canvas
-    camera={{ position: [0, 2, 50], fov: 45, near: 0.1, far: 500 }}
+    camera={{ position: [0, DEFAULT_CAMERA_Y, MIN_CAMERA_DISTANCE], fov: 45, near: 0.1, far: 500 }}
     dpr={[1, 1.5]}
     frameloop={props.active ? (props.reducedMotion ? 'demand' : 'always') : 'never'}
     gl={{ antialias: false, alpha: false, powerPreference: 'high-performance', stencil: false }}

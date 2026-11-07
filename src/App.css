@@ -1,20 +1,16 @@
 .tree-app { position: relative; width: 100%; height: 100%; height: 100svh; overflow: hidden; background: #000300; }
 .tree-stage { position: absolute; inset: 0; touch-action: none; }
 .tree-stage canvas { display: block; outline: none; }
-.tree-controls { position: absolute; bottom: max(28px, env(safe-area-inset-bottom)); left: 32px; right: 32px; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; pointer-events: none; }
-.tree-hint { display: flex; flex-direction: column; gap: 6px; padding-bottom: 8px; font-size: 11px; letter-spacing: .08em; line-height: 1.5; color: #90988d; text-shadow: 0 1px 6px #000; }
-.hint-mobile { display: none; }
-.toolbar { display: flex; align-items: center; gap: 4px; padding: 5px; border: 1px solid #b6c4a827; border-radius: 9px; background: #080c08d9; pointer-events: auto; box-shadow: 0 6px 30px #0004; }
-.toolbar button { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 0; border-radius: 5px; background: transparent; color: #c9cdc5; font-size: 12px; letter-spacing: .05em; transition: background .15s, color .15s; }
-.toolbar button:hover { color: #fff; background: #ffffff0d; }
-.toolbar .tree-toggle { background: #ddd2ac12; color: #ead9a7; }
-.toolbar .tree-toggle:hover { background: #ddd2ac20; }
-.toolbar svg { width: 17px; height: 17px; }
-.toolbar-divider { height: 20px; width: 1px; margin: 0 3px; background: #ffffff16; }
+.night-backdrop { position: absolute; inset: 0; pointer-events: none; background-color: #030b16; background-size: cover; background-repeat: no-repeat; }
+.christmas-greeting { position: absolute; left: max(30px, env(safe-area-inset-left)); bottom: max(28px, env(safe-area-inset-bottom)); z-index: 3; margin: 0; max-width: calc(100% - 60px); pointer-events: none; color: #eee3cb; font-family: "Songti SC", "Noto Serif CJK SC", "STSong", serif; font-size: 18px; font-weight: 400; line-height: 1.75; letter-spacing: .08em; text-shadow: 0 2px 12px #000b; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; white-space: nowrap; clip-path: inset(50%); border: 0; }
+.tree-stage { user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; cursor: grab; }
+.tree-stage:active { cursor: grabbing; }
+.tree-stage:focus { outline: none; }
+.tree-stage:focus-visible { outline: 1px solid #dcc79466; outline-offset: -5px; }
 .scene-message { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; padding: 28px; color: #b7c0b2; font-size: 13px; line-height: 1.8; }
 .scene-message p { margin: 0; }.scene-message span { color: #7e8878; font-size: 12px; }.scene-message .loading-star { font-size: 28px; color: #ebce76; }
-.photo-load-notice, .toast { position: fixed; z-index: 1100; left: 50%; top: max(22px, env(safe-area-inset-top)); transform: translateX(-50%); padding: 12px 16px; border: 1px solid #ffffff20; border-radius: 6px; background: #151a15ed; color: #dadcd3; font-size: 12px; max-width: calc(100% - 32px); }
-.photo-load-notice button { background: none; border: 0; color: #ead9a7; text-decoration: underline; padding: 0 4px; }
+.toast { position: fixed; z-index: 1100; left: 50%; top: max(22px, env(safe-area-inset-top)); transform: translateX(-50%); padding: 12px 16px; border: 1px solid #ffffff20; border-radius: 6px; background: #151a15ed; color: #dadcd3; font-size: 12px; max-width: calc(100% - 32px); }
 .gift-dialog { color: #e9ebe5; border: 1px solid #ffffff24; border-radius: 12px; padding: 0; background: #101510; width: min(800px, calc(100% - 40px)); max-height: 92svh; overflow: auto; box-shadow: 0 30px 120px #0009; }
 .gift-dialog::backdrop { background: #000b; }
 .dialog-inner { position: relative; padding: 30px; }
@@ -46,13 +42,9 @@
 .share-copy-status { min-height: 17px; margin: 6px 0; font-size: 11px; color: #c8d4bc; }
 .download-qr { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: #c3c8b9; text-underline-offset: 4px; }.download-qr svg { width: 14px; }
 @media (max-width: 600px) {
-  .tree-controls { left: 14px; right: 14px; bottom: max(18px, env(safe-area-inset-bottom)); flex-direction: column; align-items: center; gap: 12px; }
-  .tree-hint { flex-direction: row; gap: 12px; padding: 0; font-size: 10px; color: #88937d; }.hint-desktop { display: none; }.hint-mobile { display: inline; }
-  .toolbar { justify-content: center; padding: 4px; gap: 0; max-width: 100%; }.toolbar button { min-height: 44px; padding: 0 14px; gap: 6px; font-size: 11px; }.toolbar svg { width: 16px; height: 16px; }
   .gift-dialog { width: calc(100% - 20px); max-height: 94svh; border-radius: 9px; }.dialog-inner { padding: 22px 14px; }.dialog-close { top: 12px; right: 12px; width: 36px; height: 36px; }
   .gallery-header { margin-bottom: 20px; padding-right: 44px; }.gallery-header h2 { font-size: 16px; }.gallery-photo { height: 52svh; }.thumbnail-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 5px; }.gallery-nav { width: 34px; height: 44px; }.gallery-nav.previous { left: 5px; }.gallery-nav.next { right: 5px; }
   .share-dialog { max-width: 360px; }.share-content { padding: 8px; }
 }
-@media (max-width: 350px) { .toolbar button { padding: 0 10px; }.toolbar-divider { margin: 0 2px; }.tree-hint { font-size: 9px; } }
-@media (max-height: 500px) and (min-width: 601px) { .tree-controls { top: 14px; bottom: auto; left: 16px; right: 16px; align-items: flex-start; }.tree-hint { display: none; }.toolbar { margin-left: auto; }.toolbar button { padding: 0 12px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; } }
+@media (max-width: 600px) { .christmas-greeting { left: max(20px, env(safe-area-inset-left)); bottom: max(23px, env(safe-area-inset-bottom)); max-width: calc(100% - 40px); font-size: 14px; letter-spacing: .06em; } }
