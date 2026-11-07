@@ -31,6 +31,10 @@
 
 使用方法、扩展接口和验证范围见 [手势魔法说明](docs/HAND_MAGIC.md)，参与开发见 [贡献说明](CONTRIBUTING.md)。
 
+![已发布版本的手势图鉴](docs/hand-magic-interface.jpg)
+
+图为实际线上手势图鉴。截图环境未启用摄像头、禁用了 WebGL，不能作为 3D 合成效果或真人手势准确率的验证。
+
 ## 本地运行
 
 需要 Node.js 20.19 或更新版本。
