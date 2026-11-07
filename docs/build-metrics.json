@@ -1,0 +1,44 @@
+{
+  "baselineCommit": "844295431c728a315494ba59c9601572e7fcf818",
+  "before": [
+    {
+      "name": "index-D4FaRapw.js",
+      "bytes": 1261876,
+      "gzipBytes": 355158
+    },
+    {
+      "name": "index-Dtn62Xmo.css",
+      "bytes": 911,
+      "gzipBytes": 494
+    }
+  ],
+  "after": [
+    {
+      "name": "PhotoGallery-B7i-N9CF.js",
+      "bytes": 4131,
+      "gzipBytes": 1904
+    },
+    {
+      "name": "ShareGift-BfLfDAuO.js",
+      "bytes": 27281,
+      "gzipBytes": 11130
+    },
+    {
+      "name": "index-C_pXtjVI.js",
+      "bytes": 170955,
+      "gzipBytes": 56846
+    },
+    {
+      "name": "index-D2eqC75D.css",
+      "bytes": 19428,
+      "gzipBytes": 5466
+    }
+  ],
+  "photos": {
+    "count": 32,
+    "originalBytes": 5988722,
+    "allThumbnailBytes": 311472,
+    "firstFiveThumbnailBytes": 54196,
+    "allDisplayBytes": 4105400
+  }
+}

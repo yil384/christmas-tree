@@ -2,33 +2,30 @@
   "name": "christmas-tree",
   "homepage": "https://www.weiyirao.com",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "photos": "node scripts/prepare-photos.mjs",
+    "predev": "npm run photos",
+    "dev": "vite --host 0.0.0.0",
+    "prebuild": "npm run photos",
+    "build": "tsc -b && vite build && node scripts/finalize-build.mjs",
+    "test": "node --test tests/*.test.mjs",
     "lint": "eslint .",
-    "preview": "vite preview",
+    "preview": "vite preview --host 0.0.0.0",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "@mediapipe/tasks-vision": "^0.10.22-rc.20250304",
-    "@react-three/drei": "^9.117.0",
-    "@react-three/fiber": "^8.17.10",
-    "@react-three/postprocessing": "^2.16.3",
-    "maath": "^0.10.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "three": "^0.169.0",
-    "uuid": "^11.0.3"
+    "qrcode": "^1.5.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.14.0",
     "@types/node": "^22.9.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "@types/three": "^0.169.0",
     "@vitejs/plugin-react": "^4.3.3",
     "eslint": "^9.14.0",
     "eslint-plugin-react-hooks": "^5.0.0",
@@ -37,6 +34,11 @@
     "globals": "^15.11.0",
     "typescript": "^5.9.0-beta",
     "typescript-eslint": "^8.11.0",
-    "vite": "^5.4.11"
+    "vite": "^5.4.11",
+    "sharp": "^0.34.5",
+    "@types/qrcode": "^1.5.6"
+  },
+  "engines": {
+    "node": ">=20.19"
   }
 }

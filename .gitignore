@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Rebuilt from the selected originals before dev/build
+public/generated/
