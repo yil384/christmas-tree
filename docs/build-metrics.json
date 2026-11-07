@@ -1,5 +1,6 @@
 {
   "baselineCommit": "844295431c728a315494ba59c9601572e7fcf818",
+  "method": "Vite production files and node:zlib gzipSync; not network timing or FPS",
   "before": [
     {
       "name": "index-D4FaRapw.js",
@@ -14,31 +15,45 @@
   ],
   "after": [
     {
-      "name": "PhotoGallery-B7i-N9CF.js",
-      "bytes": 4131,
-      "gzipBytes": 1904
+      "name": "PhotoGallery-BbEStYui.js",
+      "bytes": 3875,
+      "gzipBytes": 1707
     },
     {
-      "name": "ShareGift-BfLfDAuO.js",
-      "bytes": 27281,
-      "gzipBytes": 11130
+      "name": "ShareGift-B24jsh-t.js",
+      "bytes": 26660,
+      "gzipBytes": 10683
     },
     {
-      "name": "index-C_pXtjVI.js",
-      "bytes": 170955,
-      "gzipBytes": 56846
+      "name": "TreeScene-auGeCVZ0.js",
+      "bytes": 871205,
+      "gzipBytes": 233703
     },
     {
-      "name": "index-D2eqC75D.css",
-      "bytes": 19428,
-      "gzipBytes": 5466
+      "name": "index-BLOtNF8_.css",
+      "bytes": 7949,
+      "gzipBytes": 2520
+    },
+    {
+      "name": "index-C0OtHvqz.js",
+      "bytes": 152795,
+      "gzipBytes": 49870
     }
   ],
+  "initialTreeJavaScript": {
+    "bytes": 1024000,
+    "gzipBytes": 283573
+  },
   "photos": {
     "count": 32,
     "originalBytes": 5988722,
     "allThumbnailBytes": 311472,
-    "firstFiveThumbnailBytes": 54196,
-    "allDisplayBytes": 4105400
+    "allDisplayBytes": 4105400,
+    "atlasForCurrentCollectionBytes": 4194304,
+    "atlasMaximumBytes": 16777216
+  },
+  "visualValidation": {
+    "webgl": "blocked in provided browser: GL_VENDOR=Disabled; no GPU screenshot or frame rate claim",
+    "geometry": "cone coverage, upright radial orientation, bounds and camera projection checked in Node"
   }
 }

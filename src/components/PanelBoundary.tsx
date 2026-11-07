@@ -8,10 +8,10 @@ export class PanelBoundary extends Component<{ children: ReactNode }, { failed: 
   render() {
     if (!this.state.failed) return this.props.children;
     return <div className="panel-state" role="alert">
-      <h2>这部分礼物暂时没打开</h2>
-      <p>可以重新打开礼物再试一次，<br />也可以先关掉这个窗口，继续欣赏圣诞树。</p>
+      <h2>加载失败</h2>
+      <p>请关闭后重试，或重新加载页面。</p>
       {/* React.lazy caches rejected imports; a page reload really retries the chunk. */}
-      <button className="primary-button" onClick={() => window.location.reload()}>重新打开礼物</button>
+      <button className="primary-button" onClick={() => window.location.reload()}>重新加载</button>
     </div>;
   }
 }

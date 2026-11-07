@@ -35,7 +35,7 @@ function PhotoImage({ photo }: { photo: Photo }) {
       src={imageUrl.href}
       width={photo.width}
       height={photo.height}
-      alt={photo.alt || '珍藏的照片'}
+      alt={photo.alt || '照片'}
       decoding="async"
       draggable={false}
       aria-busy={status === 'loading'}
@@ -86,8 +86,7 @@ export default function PhotoGallery({ photos, initialIndex }: PhotoGalleryProps
     return (
       <div className="panel-state empty-album">
         <Icon name="photos" />
-        <h2>留一些位置，给以后的回忆。</h2>
-        <p>照片还没挂上来，这棵树已经在等你了。</p>
+        <h2>暂无照片</h2>
       </div>
     );
   }
@@ -100,8 +99,7 @@ export default function PhotoGallery({ photos, initialIndex }: PhotoGalleryProps
   return (
     <div className="gallery-content">
       <div className="gallery-header">
-        <p className="overline">LITTLE MOMENTS, BIG FEELINGS</p>
-        <h2>树上的回忆</h2>
+        <h2>相册</h2>
         <span className="gallery-count" aria-live="polite" aria-atomic="true">
           {String(currentIndex + 1).padStart(2, '0')} <i>/ {String(count).padStart(2, '0')}</i>
         </span>
@@ -132,7 +130,7 @@ export default function PhotoGallery({ photos, initialIndex }: PhotoGalleryProps
         </>}
       </div>
 
-      <p className="photo-caption">{photo.caption || '一个值得被好好收藏的瞬间。'}<span aria-hidden="true">✧</span></p>
+      <>{photo.caption && <p className="photo-caption">{photo.caption}</p>}</>
 
       {count > 1 && <div className="thumbnail-grid" aria-label="选择照片">
         {photos.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE).map((item, offset) => {
