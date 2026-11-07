@@ -15,19 +15,19 @@
   ],
   "after": [
     {
-      "name": "PhotoGallery-mqqLkUmB.js",
+      "name": "PhotoGallery-Ck2G5fze.js",
       "bytes": 3875,
-      "gzipBytes": 1706
+      "gzipBytes": 1705
     },
     {
-      "name": "ShareGift-BlLD9DWy.js",
+      "name": "ShareGift-_UBAH-Yz.js",
       "bytes": 26660,
       "gzipBytes": 10683
     },
     {
-      "name": "TreeScene-BmuFGzog.js",
-      "bytes": 882701,
-      "gzipBytes": 237807
+      "name": "TreeScene-BJCgpzgw.js",
+      "bytes": 898866,
+      "gzipBytes": 243316
     },
     {
       "name": "index-D3Kq0Hqz.css",
@@ -35,14 +35,14 @@
       "gzipBytes": 2369
     },
     {
-      "name": "index-gbIKVk58.js",
+      "name": "index-DkSEo4dw.js",
       "bytes": 156480,
-      "gzipBytes": 51264
+      "gzipBytes": 51265
     }
   ],
   "initialTreeJavaScript": {
-    "bytes": 1039181,
-    "gzipBytes": 289071
+    "bytes": 1055346,
+    "gzipBytes": 294581
   },
   "photos": {
     "count": 32,
@@ -53,16 +53,17 @@
     "atlasMaximumBytes": 16777216
   },
   "visualValidation": {
-    "webgl": "Provided browser has GL_VENDOR=Disabled; shader compilation, final glow and FPS remain unverified",
-    "geometry": "Actual solid tree vertices, outward trunk normals, 12-view trunk occlusion, photo clearance and hanger endpoints tested",
-    "offlineReference": "Actual body geometry and 128 actual photo placements rendered in Blender Cycles CPU for structural inspection; approximate lighting, not a browser screenshot",
-    "browser": "Zero visible homepage buttons; exact greeting; single/double pointer discrimination, drag cancellation and hidden share entry verified",
-    "tests": 45
+    "webgl": "Browser reports GL_VENDOR=Disabled; final browser composition and target-device frame rate remain unverified",
+    "shaderCompiler": "18 full Three r169 programs compiled/linked in Mesa GLES 3.2 llvmpipe; no compiler or linker logs; see shader-validation.json",
+    "geometry": "Actual tree, paper/card/clip geometry and attachment, stem burial, camera framing and 120 snow camera cases tested",
+    "offlineReference": "Actual geometry and photos in Blender Cycles CPU for structural inspection; approximate lighting, not a browser screenshot",
+    "tests": 53
   },
   "background": {
-    "source": "public/backgrounds/winter-night.svg",
-    "runtimeAsset": "generated/background/night-ed40e2b94fc43c223d0b.webp",
-    "bytes": 11722
+    "source": "public/backgrounds/winter-night-photo.webp",
+    "runtimeAsset": "generated/background/night-cc7b7b2c1e6fb8539004.webp",
+    "bytes": 73484,
+    "provenance": "AI-generated photographic-style winter-night forest"
   },
   "structure": {
     "photoCardsDesktop": 128,
@@ -71,7 +72,13 @@
     "photoAndHangerBatches": 1,
     "foliagePointsDesktop": 6800,
     "foliagePointsCompact": 4000,
-    "snowPointsDesktop": 480,
-    "snowPointsCompact": 180
+    "snowPointsDesktop": 960,
+    "snowPointsCompact": 480,
+    "solidNeedles": 24705,
+    "solidBodyTriangles": 174912,
+    "solidBodyBufferBytesApprox": 12900000,
+    "photoSharedGeometryVertices": 342,
+    "photoSharedGeometryTriangles": 424,
+    "foliagePointsVisibleWhenFormed": 0
   }
 }

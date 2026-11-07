@@ -54,7 +54,7 @@ function signedVolume(geometry) {
 test('the tree has finite solid wood and evergreen geometry without any photographs', () => {
   assert.ok(wood?.isMesh, 'The tree needs an actual wooden stem and branches');
   assert.ok(crown?.isMesh, 'The tree needs actual evergreen surfaces beneath the cards');
-  assert.ok(needles?.isLineSegments, 'Needle detail must remain independent of the photo layer');
+  assert.ok(needles?.isMesh, 'Needles need solid surfaces and normals to share the tree lighting');
   for (const object of body.objects) {
     const geometry = object.geometry;
     const positions = geometry.getAttribute('position');

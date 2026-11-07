@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { assetUrl } from '../lib/content';
 import type { Photo } from '../lib/content';
 import { createPhotoPlacements } from './photo-layout';
+import { createPrintGeometry, createPrintMaterial } from './photo-material';
 
 interface PhotoOrnamentsProps {
   state: 'CHAOS' | 'FORMED';
@@ -20,60 +21,6 @@ const MAX_ATLAS_PHOTOS = 256;
 const TILE_SIZE = 128;
 const GUTTER = 2;
 const MAX_PARALLEL_IMAGES = 3;
-
-const vertexShader = /* glsl */ `
-  attribute vec4 aPhotoRect;
-  attribute vec3 aFrameColor;
-  attribute vec3 aHangerEnd;
-  attribute float aPart;
-  varying vec2 vCardUv;
-  varying vec4 vPhotoRect;
-  varying vec3 vFrameColor;
-  varying float vPart;
-  void main() {
-    vCardUv = uv;
-    vPhotoRect = aPhotoRect;
-    vFrameColor = aFrameColor;
-    vPart = aPart;
-    vec3 localPosition = position;
-    if (aPart > 1.5) {
-      // One thin ribbon joins the clip to a branch; all of its vertices share
-      // the print's instance matrix, so it follows the card while scattered.
-      localPosition = mix(vec3(0.0, 0.65, -0.012), aHangerEnd, uv.y);
-      localPosition.x += (uv.x - 0.5) * 0.026;
-    }
-    gl_Position = projectionMatrix * modelViewMatrix * instanceMatrix * vec4(localPosition, 1.0);
-  }
-`;
-
-const fragmentShader = /* glsl */ `
-  uniform sampler2D uAtlas;
-  varying vec2 vCardUv;
-  varying vec4 vPhotoRect;
-  varying vec3 vFrameColor;
-  varying float vPart;
-  void main() {
-    // The back of a real two-sided print is readable, rather than mirrored.
-    vec2 cardUv = vCardUv;
-    if (!gl_FrontFacing) cardUv.x = 1.0 - cardUv.x;
-    // Original 1.2 × 1.5 border with a square 1 × 1 photo and a deeper lower margin.
-    vec2 photoUv = (cardUv - vec2(1.0 / 12.0, 4.0 / 15.0)) / vec2(5.0 / 6.0, 2.0 / 3.0);
-    float inPhoto = step(0.0, photoUv.x) * step(photoUv.x, 1.0)
-                  * step(0.0, photoUv.y) * step(photoUv.y, 1.0);
-    vec2 atlasUv = vPhotoRect.xy + clamp(photoUv, 0.0, 1.0) * vPhotoRect.zw;
-    vec3 photograph = texture2D(uAtlas, atlasUv).rgb;
-    vec3 color = mix(vFrameColor, photograph, inPhoto);
-    if (vPart > 1.5) {
-      color = vec3(0.38, 0.25, 0.105);
-    } else if (vPart > 0.5) {
-      // A small wooden clip with its central notch, not another photo border.
-      float notch = step(0.4, vCardUv.y) * step(vCardUv.y, 0.48);
-      color = mix(vec3(0.48, 0.31, 0.13), vec3(0.2, 0.12, 0.045), notch);
-    }
-    gl_FragColor = vec4(color, 1.0);
-    #include <colorspace_fragment>
-  }
-`;
 
 function createAtlas(slotCount: number) {
   const columns = Math.ceil(Math.sqrt(Math.max(1, slotCount)));
@@ -122,23 +69,7 @@ export default function PhotoOrnaments({ state, photos, count, reducedMotion = f
     [slotCount, photos.length],
   );
   const geometry = useMemo(() => {
-    const plane = new THREE.BufferGeometry();
-    // The first quad retains the original photo UVs and deeper lower margin.
-    // The second is its small clip. The third is a procedural ribbon from UVs,
-    // positioned by aHangerEnd in the shader without adding another draw call.
-    // Its CPU triangles are degenerate so they cannot steal photo raycasts.
-    plane.setAttribute('position', new THREE.Float32BufferAttribute([
-      -0.6, 0.6, 0, 0.6, 0.6, 0, -0.6, -0.9, 0, 0.6, -0.9, 0,
-      -0.065, 0.73, 0.018, 0.065, 0.73, 0.018, -0.065, 0.51, 0.018, 0.065, 0.51, 0.018,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    ], 3));
-    plane.setAttribute('uv', new THREE.Float32BufferAttribute([
-      0, 1, 1, 1, 0, 0, 1, 0,
-      0, 1, 1, 1, 0, 0, 1, 0,
-      0, 1, 1, 1, 0, 0, 1, 0,
-    ], 2));
-    plane.setAttribute('aPart', new THREE.Float32BufferAttribute([0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2], 1));
-    plane.setIndex([0, 2, 1, 2, 3, 1, 4, 6, 5, 6, 7, 5, 8, 10, 9, 10, 11, 9]);
+    const plane = createPrintGeometry();
     const rects = new Float32Array(visibleCount * 4);
     const colors = new Float32Array(visibleCount * 3);
     const anchors = new Float32Array(visibleCount * 3);
@@ -162,13 +93,7 @@ export default function PhotoOrnaments({ state, photos, count, reducedMotion = f
     plane.setAttribute('aHangerEnd', new THREE.InstancedBufferAttribute(anchors, 3));
     return plane;
   }, [atlas, placements, slotCount, visibleCount]);
-  const material = useMemo(() => new THREE.ShaderMaterial({
-    uniforms: { uAtlas: { value: atlas.texture } },
-    vertexShader,
-    fragmentShader,
-    side: THREE.DoubleSide,
-    toneMapped: false,
-  }), [atlas]);
+  const material = useMemo(() => createPrintMaterial(atlas.texture), [atlas]);
 
   useLayoutEffect(() => {
     const mesh = meshRef.current;
@@ -307,8 +232,8 @@ export default function PhotoOrnaments({ state, photos, count, reducedMotion = f
   if (!visibleCount) return null;
   const pressPhoto = (event: ThreeEvent<PointerEvent>) => {
     if (event.instanceId === undefined || !event.face) return;
-    // The string's positions are generated in the shader; it is not a second
-    // picking surface. Only the actual print records a long-press candidate.
+    // Cord vertices are generated in the shader. Only the actual front/back
+    // paper surfaces record a long-press candidate; pegs and edges do not.
     if (geometry.getAttribute('aPart').getX(event.face.a) !== 0) return;
     event.stopPropagation();
     onPhotoPress(photoIndexes[event.instanceId % slotCount]);

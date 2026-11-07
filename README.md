@@ -15,7 +15,7 @@
 | 单击／单点 | 暂停或继续自动旋转 |
 | 双击／双点 | 散开或聚合 |
 | 拖动／单指滑动 | 改变观察视角 |
-| 滚轮／双指缩放 | 拉近或拉远 |
+| 滚轮／双指缩放 | 在当前屏幕的有限范围内拉近或拉远 |
 | 长按照片约 0.65 秒 | 打开这张照片的大图 |
 | 长按空白约 0.65 秒 | 打开链接与二维码分享 |
 | 舞台获得键盘焦点后按空格／回车 | 分别控制旋转／聚散 |
@@ -90,7 +90,7 @@ public/photos/
 }
 ```
 
-将对应图片放到 `public/backgrounds/night.jpg`。支持 JPG、JPEG、PNG、WebP、AVIF、SVG。默认使用仓库内的轻量星夜／松林插画；可以直接换成实景夜景照片。
+将对应图片放到 `public/backgrounds/night.jpg`。支持 JPG、JPEG、PNG、WebP、AVIF、SVG。默认使用摄影质感的冬夜林地背景 `winter-night-photo.webp`（AI 生成）；可以直接换成自己的实景夜景照片。生成说明见 `public/backgrounds/README.md`。
 
 - `image`：位于 `public/backgrounds/` 内的本地文件，设为 `null` 使用纯深色夜空。
 - `brightness`：背景亮度，0.12～1；较暗的背景更衬托照片。
@@ -112,13 +112,16 @@ Vite 使用相对资源路径，支持根目录或子目录托管。生产构建
 
 ## 实现与验证
 
-- `src/scene/TreeBody.tsx`：棕色主干、连续绿色树冠、不规则松枝和针叶，三批实体几何。
+- `src/scene/TreeBody.tsx`：粗糙树皮、层叠松枝和约 2.47 万根有厚度的针叶，共三批受光照的实体几何。
 - `src/scene/photo-layout.ts`：卡片和树体的空间关系、照片朝向和挂绳连接。
-- `src/scene/PhotoOrnaments.tsx`：照片、木夹和挂绳共用一批实例化绘制，渐进加载受限图集。
+- `src/scene/PhotoOrnaments.tsx`：带厚度和轻微卷曲的纸张、木夹与挂绳共用一批实例化绘制；`photo-material.ts` 提供物理材质与共享几何。
 - `src/scene/TreeDetails.tsx`：彩灯、挂件、顶星，以及有远近层次的飘雪。
 - `src/scene/NightBackground.tsx`：独立夜景图层与裁切。
+- `src/scene/SnowGround.tsx`：世界坐标中的雪地、树脚接触阴影和背景色彩衔接。
+- `src/scene/Snowfall.ts`：有远近层次、覆盖当前视野并在地面上方回收的雪花。
+- `src/scene/camera-framing.ts`：按横竖屏计算相机缩放与俯仰边界。
 - `src/hooks/useSecretInteractions.ts`：无可见按钮的鼠标、触摸与键盘交互。
 - `scripts/prepare-scene.mjs`：背景压缩与场景配置生成。
 - `docs/PERFORMANCE.md`：性能与验证范围。
 
-当前运行环境中的浏览器禁用了 WebGL。代码测试、手势的网页状态切换、背景与祝福布局，以及真实几何的 CPU 检查和离线结构渲染可以验证；这些不能替代网页 shader 在真实 GPU 上的编译、最终光效、手机帧率或微信浏览器验收。
+当前运行环境中的浏览器禁用了 WebGL。53 项自动检查、TypeScript 与生产构建通过；另外使用实际 Three r169 生成的完整 GLSL 在 Mesa GLES 3.2 中验证了 18 个程序的编译与链接。真实几何也进行了离线结构渲染。上述验证不代表最终浏览器合成画面、手机帧率或微信浏览器已经实机验收，详细范围见 `docs/PERFORMANCE.md`。

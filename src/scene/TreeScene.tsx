@@ -13,6 +13,8 @@ import PhotoOrnaments from './PhotoOrnaments';
 import TreeDetails, { TreeAtmosphere } from './TreeDetails';
 import TreeBody from './TreeBody';
 import NightBackground from './NightBackground';
+import SnowGround from './SnowGround';
+import { clampCameraDistance, getCameraFraming } from './camera-framing';
 import { DEFAULT_CAMERA_TARGET_Y, DEFAULT_CAMERA_Y, MIN_CAMERA_DISTANCE, TREE_OFFSET_Y } from './tree-profile';
 
 interface TreeSceneProps {
@@ -29,6 +31,7 @@ interface TreeSceneProps {
 function CameraControls({ interacting }: { interacting: MutableRefObject<number> }) {
   const { camera, gl, size, invalidate } = useThree();
   const controls = useMemo(() => new OrbitControls(camera), [camera]);
+  const previousFraming = useRef<ReturnType<typeof getCameraFraming> | null>(null);
   useEffect(() => {
     controls.domElement = gl.domElement;
     controls.connect();
@@ -37,10 +40,8 @@ function CameraControls({ interacting }: { interacting: MutableRefObject<number>
     controls.dampingFactor = 0.06;
     controls.rotateSpeed = 0.65;
     controls.zoomSpeed = 0.8;
-    controls.minDistance = 22;
-    controls.maxDistance = 115;
-    controls.minPolarAngle = 0.3;
-    controls.maxPolarAngle = Math.PI / 1.65;
+    controls.minPolarAngle = 1.24;
+    controls.maxPolarAngle = 1.52;
     controls.target.set(0, DEFAULT_CAMERA_TARGET_Y, 0);
     let moved = false;
     const onStart = () => { moved = false; interacting.current = Infinity; };
@@ -49,27 +50,74 @@ function CameraControls({ interacting }: { interacting: MutableRefObject<number>
     controls.addEventListener('start', onStart);
     controls.addEventListener('end', onEnd);
     controls.addEventListener('change', onChange);
+    // Safari trackpad gestures can zoom the HTML document independently of
+    // OrbitControls. Route those gestures through the same bounded camera.
+    let gestureScale = 1;
+    const touches = new Set<number>();
+    const onPointerDown = (event: PointerEvent) => { if (event.pointerType === 'touch') touches.add(event.pointerId); };
+    const onPointerUp = (event: PointerEvent) => touches.delete(event.pointerId);
+    const onGestureStart = (event: Event) => {
+      event.preventDefault();
+      gestureScale = 1;
+      interacting.current = Infinity;
+    };
+    const onGestureChange = (event: Event) => {
+      event.preventDefault();
+      const scale = (event as Event & { scale?: number }).scale ?? 1;
+      if (Number.isFinite(scale) && scale > 0 && touches.size < 2) {
+        const distance = camera.position.distanceTo(controls.target);
+        const next = clampCameraDistance(distance * gestureScale / scale, controls.minDistance, controls.maxDistance);
+        camera.position.sub(controls.target).multiplyScalar(next / Math.max(distance, 0.001)).add(controls.target);
+        controls.update();
+        invalidate();
+      }
+      gestureScale = scale > 0 && Number.isFinite(scale) ? scale : 1;
+    };
+    const onGestureEnd = (event: Event) => {
+      event.preventDefault();
+      interacting.current = performance.now() + 1000;
+    };
+    const canvas = gl.domElement;
+    canvas.addEventListener('gesturestart', onGestureStart, { passive: false });
+    canvas.addEventListener('gesturechange', onGestureChange, { passive: false });
+    canvas.addEventListener('gestureend', onGestureEnd, { passive: false });
+    canvas.addEventListener('pointerdown', onPointerDown);
+    window.addEventListener('pointerup', onPointerUp);
+    window.addEventListener('pointercancel', onPointerUp);
     return () => {
       controls.removeEventListener('start', onStart);
       controls.removeEventListener('end', onEnd);
       controls.removeEventListener('change', onChange);
+      canvas.removeEventListener('gesturestart', onGestureStart);
+      canvas.removeEventListener('gesturechange', onGestureChange);
+      canvas.removeEventListener('gestureend', onGestureEnd);
+      canvas.removeEventListener('pointerdown', onPointerDown);
+      window.removeEventListener('pointerup', onPointerUp);
+      window.removeEventListener('pointercancel', onPointerUp);
       controls.dispose();
     };
-  }, [controls, gl, interacting, invalidate]);
+  }, [camera, controls, gl, interacting, invalidate]);
 
   useEffect(() => {
     const perspective = camera as THREE.PerspectiveCamera;
-    // Fit the same broad original cone without cropping its photos on narrow screens.
-    const aspect = size.width / Math.max(1, size.height);
-    const distance = Math.max(MIN_CAMERA_DISTANCE, 11.8 / (Math.tan(THREE.MathUtils.degToRad(perspective.fov / 2)) * aspect));
-    controls.maxDistance = Math.max(115, distance * 1.5);
-    camera.position.set(0, DEFAULT_CAMERA_Y, distance);
+    const framing = getCameraFraming(size.width, size.height, perspective.fov);
+    const prior = previousFraming.current;
+    const offset = camera.position.clone().sub(controls.target);
+    const ratio = prior ? offset.length() / prior.defaultDistance : 1;
+    const distance = clampCameraDistance(framing.defaultDistance * ratio, framing.minDistance, framing.maxDistance);
+    controls.minDistance = framing.minDistance;
+    controls.maxDistance = framing.maxDistance;
+    controls.minPolarAngle = framing.minPolarAngle;
+    controls.maxPolarAngle = framing.maxPolarAngle;
     controls.target.set(0, DEFAULT_CAMERA_TARGET_Y, 0);
+    if (prior) camera.position.copy(offset.normalize().multiplyScalar(distance).add(controls.target));
+    else camera.position.set(0, DEFAULT_CAMERA_TARGET_Y + distance * 0.09, distance * Math.sqrt(1 - 0.09 ** 2));
+    previousFraming.current = framing;
     camera.lookAt(controls.target);
     controls.update();
     invalidate();
   }, [camera, controls, size.width, size.height, invalidate]);
-  useFrame(() => controls.update());
+  useFrame((_, delta) => controls.update(delta), -1);
   return null;
 }
 
@@ -79,7 +127,7 @@ function Bloom({ compact }: { compact: boolean }) {
     const composer = new EffectComposer(gl);
     const scenePass = new RenderPass(scene, camera);
     // HDR lights glow; ordinary photo whites stay sharp below the threshold.
-    const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), compact ? 0.85 : 1.15, 0.45, 1.05);
+    const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), compact ? 0.42 : 0.58, 0.32, 1.35);
     const output = new OutputPass();
     composer.addPass(scenePass);
     composer.addPass(bloom);
@@ -112,12 +160,13 @@ function SceneContents({ photos, state, paused, reducedMotion, onPhotoPress, bac
   });
   return <>
     <NightBackground background={background} />
-    <hemisphereLight args={['#dbe9ef', '#172618', 1.1]} />
-    <ambientLight intensity={0.6} color="#9ab79d" />
-    <pointLight position={[25, 30, 30]} intensity={100} color="#FFD54F" />
-    <pointLight position={[-25, 10, -20]} intensity={65} color="#FFD700" />
-    <pointLight position={[0, -20, 10]} intensity={35} color="#FFFFFF" />
-    <TreeAtmosphere compact={compact} reducedMotion={reducedMotion} snow={snow} />
+    <hemisphereLight args={['#b9cce8', '#243545', 0.82]} />
+    <directionalLight position={[-22, 32, 18]} intensity={2.05} color="#c9dcf8" />
+    <directionalLight position={[14, 10, 24]} intensity={1.28} color="#ffddab" />
+    <directionalLight position={[8, 16, -25]} intensity={1.15} color="#adc9ee" />
+    <pointLight position={[0, -13, 3]} intensity={85} distance={24} decay={2} color="#ffbd6b" />
+    <SnowGround state={state} reducedMotion={reducedMotion} />
+    <TreeAtmosphere compact={compact} reducedMotion={reducedMotion} snow={snow} stars={!background.src} />
     <group ref={tree} position={[0, TREE_OFFSET_Y, 0]}>
       <TreeBody state={state} reducedMotion={reducedMotion} />
       <TreeDetails state={state} compact={compact} reducedMotion={reducedMotion} />
@@ -133,8 +182,8 @@ export default function TreeScene(props: TreeSceneProps) {
     camera={{ position: [0, DEFAULT_CAMERA_Y, MIN_CAMERA_DISTANCE], fov: 45, near: 0.1, far: 500 }}
     dpr={[1, 1.5]}
     frameloop={props.active ? (props.reducedMotion ? 'demand' : 'always') : 'never'}
-    gl={{ antialias: false, alpha: false, powerPreference: 'high-performance', stencil: false }}
-    onCreated={({ gl }) => { gl.toneMapping = THREE.NoToneMapping; gl.outputColorSpace = THREE.SRGBColorSpace; }}
+    gl={{ antialias: true, alpha: false, powerPreference: 'high-performance', stencil: false }}
+    onCreated={({ gl }) => { gl.toneMapping = THREE.ACESFilmicToneMapping; gl.toneMappingExposure = 1.05; gl.outputColorSpace = THREE.SRGBColorSpace; }}
     fallback={<div className="scene-message" role="status"><p>当前浏览器无法显示 3D 圣诞树。</p><span>请在系统浏览器中打开。</span></div>}
   >
     <SceneContents {...props} />

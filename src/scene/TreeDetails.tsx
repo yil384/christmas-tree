@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import { createSnow } from './Snowfall';
 
 type TreeState = 'CHAOS' | 'FORMED';
 
@@ -12,8 +13,8 @@ interface TreeDetailsProps {
 
 const TREE_HEIGHT = 22;
 const TREE_RADIUS = 9;
-const GIFT_COLORS = ['#D32F2F', '#FFD700', '#1976D2', '#2E7D32'];
-const LIGHT_COLORS = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00'];
+const GIFT_COLORS = ['#853c46', '#c7a76b', '#4d6981', '#365f4b'];
+const LIGHT_COLORS = ['#ffe4a7', '#ffdfa1', '#fff2ce', '#fff1d1', '#ffdba0', '#ffeac2', '#e36b61', '#84b39b', '#87a6cb', '#dbbc75'];
 
 /** Stable positions keep the original tree arrangement consistent on rerenders. */
 function randomSource(seed: number) {
@@ -57,7 +58,7 @@ const foliageFragment = /* glsl */ `
     float radius = distance(gl_PointCoord, vec2(0.5));
     if (radius > 0.5) discard;
     vec3 color = mix(uColor * 0.3, uColor * 1.2, vMix);
-    gl_FragColor = vec4(color, 1.0);
+    gl_FragColor = vec4(color, (1.0 - smoothstep(0.7, 0.97, vMix)) * 0.6);
   }
 `;
 
@@ -120,8 +121,8 @@ const lightsVertex = /* glsl */ `
   void main() {
     vec3 finalPos = mix(position, aTargetPos, uProgress);
     vec4 viewPos = modelViewMatrix * vec4(finalPos, 1.0);
-    float blink = (sin(uTime * aTiming.x + aTiming.y) + 1.0) * 0.5;
-    vColor = aColor * mix(0.3, 3.0 + blink * 4.0, uProgress);
+    float blink = (sin(uTime * aTiming.x * 0.35 + aTiming.y) + 1.0) * 0.5;
+    vColor = aColor * mix(0.3, 1.75 + blink * 0.65, uProgress);
     gl_PointSize = clamp(190.0 / max(1.0, -viewPos.z), 1.2, 12.0) * uPixelRatio;
     gl_Position = projectionMatrix * viewPos;
   }
@@ -213,8 +214,9 @@ function createDecorations(compact: boolean): DecorationBatch[] {
       scattered: new THREE.Vector3((random() - 0.5) * 60, (random() - 0.5) * 60, (random() - 0.5) * 60),
       rotation: new THREE.Euler(random() * Math.PI, random() * Math.PI, random() * Math.PI),
       speed: new THREE.Vector3((random() - 0.5) * 2, (random() - 0.5) * 2, (random() - 0.5) * 2),
-      scale: type === 0 ? 0.8 + random() * 0.4 : type === 1 ? 0.6 + random() * 0.4 : 0.7 + random() * 0.3,
-      color: type === 2 ? (random() > 0.5 ? '#D32F2F' : '#FFFFFF') : GIFT_COLORS[Math.floor(random() * GIFT_COLORS.length)],
+      // Smaller gifts and candy ornaments let the real branches and prints lead.
+      scale: type === 0 ? (0.8 + random() * 0.4) * 0.65 : type === 1 ? 0.6 + random() * 0.4 : (0.7 + random() * 0.3) * 0.67,
+      color: type === 2 ? (random() > 0.5 ? '#853c46' : '#ddcfb5') : GIFT_COLORS[Math.floor(random() * GIFT_COLORS.length)],
     });
   }
 
@@ -225,10 +227,10 @@ function createDecorations(compact: boolean): DecorationBatch[] {
   ];
   const material = new THREE.MeshStandardMaterial({
     color: '#FFFFFF',
-    roughness: 0.3,
+    roughness: 0.36,
     metalness: 0.4,
     emissive: '#FFFFFF',
-    emissiveIntensity: 0.2,
+    emissiveIntensity: 0.03,
   });
   // Match the original individually colored emissive materials in one shared material.
   material.onBeforeCompile = (shader) => {
@@ -259,7 +261,7 @@ function createTopStar() {
     else shape.lineTo(x, y);
   }
   shape.closePath();
-  const geometry = new THREE.ExtrudeGeometry(shape, {
+  const starShape = new THREE.ExtrudeGeometry(shape, {
     depth: 0.4,
     bevelEnabled: true,
     bevelThickness: 0.1,
@@ -267,9 +269,24 @@ function createTopStar() {
     bevelSegments: 3,
     curveSegments: 1,
   });
-  geometry.translate(0, 0, -0.2);
-  // One material keeps the front and beveled sides in a single draw call.
-  geometry.clearGroups();
+  starShape.translate(0, 0, -0.2);
+  // A narrow physical mounting stem reaches into the leader shoot even during
+  // the star's small sway. Merge it into the same mesh/material/draw batch.
+  const cylinder = new THREE.CylinderGeometry(0.045, 0.07, 1.8, 8);
+  const mounting = cylinder.toNonIndexed();
+  cylinder.dispose();
+  mounting.translate(0, -1.45, 0);
+  const geometry = new THREE.BufferGeometry();
+  for (const name of ['position', 'normal', 'uv']) {
+    const starAttribute = starShape.getAttribute(name);
+    const stemAttribute = mounting.getAttribute(name);
+    const data = new Float32Array(starAttribute.array.length + stemAttribute.array.length);
+    data.set(starAttribute.array);
+    data.set(stemAttribute.array, starAttribute.array.length);
+    geometry.setAttribute(name, new THREE.BufferAttribute(data, starAttribute.itemSize));
+  }
+  starShape.dispose();
+  mounting.dispose();
   const material = new THREE.MeshStandardMaterial({
     color: '#FFD700',
     emissive: '#FFD700',
@@ -280,71 +297,6 @@ function createTopStar() {
   const star = new THREE.Mesh(geometry, material);
   star.position.y = TREE_HEIGHT / 2 + 1.8;
   return star;
-}
-
-const snowVertex = /* glsl */ `
-  uniform float uTime;
-  uniform float uPixelRatio;
-  attribute float aRandom;
-  varying float vAlpha;
-  varying float vAngle;
-  varying float vCrystalline;
-  void main() {
-    vec3 finalPos = position;
-    finalPos.y = mod(position.y + 25.0 - uTime * (0.42 + aRandom * 0.85), 50.0) - 25.0;
-    finalPos.x += sin(uTime * 0.32 + aRandom * 30.0) * (0.35 + aRandom * 0.65);
-    vec4 viewPos = modelViewMatrix * vec4(finalPos, 1.0);
-    float size = clamp(220.0 * (0.5 + aRandom * 1.25) / max(1.0, -viewPos.z), 1.1, 11.0);
-    gl_PointSize = size * uPixelRatio;
-    gl_Position = projectionMatrix * viewPos;
-    vAlpha = 0.24 + aRandom * 0.32;
-    vAngle = aRandom * 6.28318 + uTime * (aRandom - 0.5) * 0.35;
-    vCrystalline = smoothstep(4.5, 8.0, size);
-  }
-`;
-
-const snowFragment = /* glsl */ `
-  varying float vAlpha;
-  varying float vAngle;
-  varying float vCrystalline;
-  void main() {
-    vec2 point = gl_PointCoord - vec2(0.5);
-    float radius = length(point);
-    if (radius > 0.5) discard;
-    float angle = atan(point.y, point.x) + vAngle;
-    float arm = 1.0 - smoothstep(0.012, 0.05, abs(sin(angle * 3.0)) * radius);
-    float crystal = max(arm * (1.0 - smoothstep(0.34, 0.48, radius)), 1.0 - smoothstep(0.02, 0.13, radius));
-    float distant = 1.0 - smoothstep(0.02, 0.48, radius);
-    float alpha = mix(distant, crystal, vCrystalline) * vAlpha;
-    gl_FragColor = vec4(vec3(0.92, 0.94, 0.95), alpha);
-  }
-`;
-
-function createSnow(compact: boolean) {
-  const count = compact ? 180 : 480;
-  const random = randomSource(0xdec028);
-  const positions = new Float32Array(count * 3);
-  const randoms = new Float32Array(count);
-  for (let i = 0; i < count; i += 1) {
-    positions[i * 3] = (random() - 0.5) * 50;
-    positions[i * 3 + 1] = (random() - 0.5) * 50;
-    positions[i * 3 + 2] = (random() - 0.5) * 50;
-    randoms[i] = random();
-  }
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1));
-  geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 45);
-  const material = new THREE.ShaderMaterial({
-    uniforms: { uTime: { value: 0 }, uPixelRatio: { value: 1 } },
-    vertexShader: snowVertex,
-    fragmentShader: snowFragment,
-    transparent: true,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending,
-    toneMapped: false,
-  });
-  return new THREE.Points(geometry, material);
 }
 
 function createStars(compact: boolean) {
@@ -396,6 +348,7 @@ interface Motion {
 }
 
 function syncDetails(details: Details, motion: Motion, pixelRatio: number) {
+  details.foliage.visible = motion.foliage < 0.995;
   details.foliage.material.uniforms.uTime.value = motion.time;
   details.foliage.material.uniforms.uProgress.value = motion.foliage;
   details.foliage.material.uniforms.uPixelRatio.value = pixelRatio;
@@ -519,11 +472,10 @@ interface Atmosphere {
   stars: ReturnType<typeof createStars>;
 }
 
-/** Mount outside the rotating tree group to keep snow and background stars in place. */
-export function TreeAtmosphere({ compact, reducedMotion, snow = true }: Pick<TreeDetailsProps, 'compact' | 'reducedMotion'> & { snow?: boolean }) {
+/** Mount outside the rotating tree group to keep the weather independent. */
+export function TreeAtmosphere({ compact, reducedMotion, snow = true, stars = true }: Pick<TreeDetailsProps, 'compact' | 'reducedMotion'> & { snow?: boolean; stars?: boolean }) {
   const groupRef = useRef<THREE.Group>(null);
   const atmosphereRef = useRef<Atmosphere | null>(null);
-  const elapsed = useRef(0);
   const renderer = useThree((root) => root.gl);
   const invalidate = useThree((root) => root.invalidate);
 
@@ -531,15 +483,12 @@ export function TreeAtmosphere({ compact, reducedMotion, snow = true }: Pick<Tre
     const group = groupRef.current;
     if (!group) return;
     const atmosphere = { snow: createSnow(compact), stars: createStars(compact) };
-    atmosphere.snow.material.uniforms.uTime.value = elapsed.current;
-    atmosphere.snow.material.uniforms.uPixelRatio.value = pointPixelRatio(renderer, compact);
     atmosphereRef.current = atmosphere;
-    group.add(atmosphere.snow, atmosphere.stars);
+    group.add(atmosphere.snow.points, atmosphere.stars);
     invalidate();
     return () => {
-      group.remove(atmosphere.snow, atmosphere.stars);
-      atmosphere.snow.geometry.dispose();
-      atmosphere.snow.material.dispose();
+      group.remove(atmosphere.snow.points, atmosphere.stars);
+      atmosphere.snow.dispose();
       atmosphere.stars.geometry.dispose();
       atmosphere.stars.material.dispose();
       if (atmosphereRef.current === atmosphere) atmosphereRef.current = null;
@@ -547,16 +496,20 @@ export function TreeAtmosphere({ compact, reducedMotion, snow = true }: Pick<Tre
   }, [compact, renderer, invalidate]);
 
   useLayoutEffect(() => {
-    if (atmosphereRef.current) atmosphereRef.current.snow.visible = snow;
+    if (atmosphereRef.current) {
+      atmosphereRef.current.snow.points.visible = snow;
+      atmosphereRef.current.stars.visible = stars;
+    }
     invalidate();
-  }, [reducedMotion, snow, compact, invalidate]);
+  }, [reducedMotion, snow, stars, compact, invalidate]);
 
-  useFrame((_, delta) => {
+  useFrame(({ camera, size }, delta) => {
     const atmosphere = atmosphereRef.current;
-    if (reducedMotion || !snow || !atmosphere) return;
-    elapsed.current += Math.min(delta, 0.06);
-    atmosphere.snow.material.uniforms.uTime.value = elapsed.current;
-    atmosphere.snow.material.uniforms.uPixelRatio.value = pointPixelRatio(renderer, compact);
+    if (!snow || !atmosphere) return;
+    // Reduced motion freezes falling, but the volume must still follow an
+    // intentional camera zoom/orbit or screen resize in a demand frame.
+    atmosphere.snow.update(camera as THREE.PerspectiveCamera, size.width, size.height,
+      pointPixelRatio(renderer, compact), reducedMotion ? 0 : delta);
   });
 
   return <group ref={groupRef} dispose={null} />;
