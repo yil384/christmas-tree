@@ -176,6 +176,91 @@
       "link_log": ""
     },
     {
+      "name": "cat-stars-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "cat-contact-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "cat-sprite-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "world-panorama-cube-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "panorama-equirect-conversion-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
       "name": "evergreen-trunk-and-branches-aces-srgb-direct",
       "shaders": [
         {
@@ -330,6 +415,91 @@
     },
     {
       "name": "hand-magic-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "cat-stars-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "cat-contact-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "cat-sprite-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "world-panorama-cube-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "panorama-equirect-conversion-aces-srgb-direct",
       "shaders": [
         {
           "stage": "vertex",

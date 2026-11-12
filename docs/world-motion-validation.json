@@ -1,0 +1,128 @@
+{
+  "scope": "Offline native EGL verification: actual production environment/ground shaders and geometry, actual tree geometry with diagnostic Lambert shade. Not a browser screenshot.",
+  "cases": [
+    {
+      "pose": "1200x750-0-zoom1",
+      "uncoveredBackgroundPixels": 0
+    },
+    {
+      "pose": "1200x750-0-zoom2",
+      "uncoveredBackgroundPixels": 0
+    },
+    {
+      "pose": "1200x750-45-zoom1",
+      "uncoveredBackgroundPixels": 0
+    },
+    {
+      "pose": "1200x750-45-zoom2",
+      "uncoveredBackgroundPixels": 0
+    },
+    {
+      "pose": "1200x750-90-zoom1",
+      "uncoveredBackgroundPixels": 0
+    },
+    {
+      "pose": "1200x750-90-zoom2",
+      "uncoveredBackgroundPixels": 0
+    },
+    {
+      "pose": "390x844-0-zoom1",
+      "uncoveredBackgroundPixels": 0
+    },
+    {
+      "pose": "390x844-0-zoom2",
+      "uncoveredBackgroundPixels": 0
+    },
+    {
+      "pose": "390x844-45-zoom1",
+      "uncoveredBackgroundPixels": 0
+    },
+    {
+      "pose": "390x844-45-zoom2",
+      "uncoveredBackgroundPixels": 0
+    },
+    {
+      "pose": "390x844-90-zoom1",
+      "uncoveredBackgroundPixels": 0
+    },
+    {
+      "pose": "390x844-90-zoom2",
+      "uncoveredBackgroundPixels": 0
+    }
+  ],
+  "glErrors": [],
+  "shaderLogs": [
+    {
+      "program": "production-background",
+      "stage": "vertex",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-background",
+      "stage": "fragment",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-background",
+      "stage": "link",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-ground",
+      "stage": "vertex",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-ground",
+      "stage": "fragment",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-ground",
+      "stage": "link",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-output",
+      "stage": "vertex",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-output",
+      "stage": "fragment",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-output",
+      "stage": "link",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "actual-tree-diagnostic-shade",
+      "stage": "vertex",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "actual-tree-diagnostic-shade",
+      "stage": "fragment",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "actual-tree-diagnostic-shade",
+      "stage": "link",
+      "success": true,
+      "log": ""
+    }
+  ]
+}

@@ -1,0 +1,380 @@
+{
+  "scope": "Round fairy-tale baby-kitten replacement: actual current 3D geometry, source materials/lights and open/closed eye poses. Offline native GL, not a browser screenshot or full site acceptance.",
+  "backgroundScope": "Existing built panorama supplies context; the background was not changed in this cat redesign.",
+  "sourceSha256": {
+    "src/scene/ChristmasCat.tsx": "266f6069957ada408b5d08682bfb3b8ea79d31058efd1de8f0b2e9d90f9403bb",
+    "src/scene/cat-behavior.ts": "44d3b916a2771618afad733e2947993c15fd36d90f98b32ac3d2467faae3c8d7",
+    "src/scene/cat-placement.ts": "3def4a7cff4d06406db08f0756f01f4f1acf111a6ce6d62d7d2f8e8f47410db7"
+  },
+  "changes": [
+    "New large round head, short round body, four simple round paws, padded ears, pink nose and small cat smile; red cape and gold star retained.",
+    "Shallow warm round eyes follow the face surface; small highlights and low reflection replace protruding glassy eyes. Closed eyes use gentle curves.",
+    "Removed hair spikes, almond-eye/lid construction, split toes, long forearms, tongue and grooming rig.",
+    "Only quiet breathing, slow blinking, slight head tilt, tiny ear movement and tip-only tail deformation; all four paws and contacts remain stationary.",
+    "Rounded cape trim endpoints and enclosed tail tip eliminate exposed end gaps.",
+    "Existing click/film/hand input and pause/active/reduced-motion APIs remain available."
+  ],
+  "automatedChecks": {
+    "command": "node --test tests/christmas-cat.test.mjs",
+    "passed": 6,
+    "failed": 0,
+    "typescript": "tsc --noEmit -p tsconfig.app.json passed"
+  },
+  "verification": [
+    {
+      "method": "Actual current geometry, vertex colors, instance transforms and world transforms. Three.js MeshPhysicalMaterial shader chunks with source material roughness/metalness/sheen/clearcoat, current scene lights, camera, production panorama/contact shaders and ACES/sRGB output. 640 px square preview output. Offline native GL; not a browser screenshot; no bloom.",
+      "actionTime": 0,
+      "behavior": {
+        "breath": 0,
+        "headYaw": 0,
+        "headPitch": -0.025,
+        "headRoll": -0.025,
+        "eyeOpen": 1,
+        "ears": [
+          6.572340305426089e-208,
+          -1.2008594385904419e-71
+        ],
+        "tailSweep": 0,
+        "tailLift": 0
+      },
+      "renderedMeshes": 23,
+      "outputs": [
+        "kitten-model-front.png",
+        "kitten-model-side.png"
+      ],
+      "glErrors": [],
+      "context": {
+        "egl": "1.5",
+        "vendor": "Mesa",
+        "renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+        "version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1",
+        "glsl": "4.50"
+      },
+      "shaderCompilation": [
+        {
+          "program": "production-background",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-background",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-background",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-ground",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-ground",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-ground",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "ground-measurement",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "ground-measurement",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "ground-measurement",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-output-pass",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-output-pass",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-output-pass",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "actual-trunk-geometry-diagnostic-shade",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "actual-trunk-geometry-diagnostic-shade",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "actual-trunk-geometry-diagnostic-shade",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "buried-trunk-visibility",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "buried-trunk-visibility",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "buried-trunk-visibility",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "three-kitten-physical",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "three-kitten-physical",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "three-kitten-physical",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "three-kitten-basic",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "three-kitten-basic",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "three-kitten-basic",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        }
+      ]
+    },
+    {
+      "method": "Actual current geometry, vertex colors, instance transforms and world transforms. Three.js MeshPhysicalMaterial shader chunks with source material roughness/metalness/sheen/clearcoat, current scene lights, camera, production panorama/contact shaders and ACES/sRGB output. 640 px square preview output. Offline native GL; not a browser screenshot; no bloom.",
+      "actionTime": 3.99,
+      "behavior": {
+        "breath": 0.407373471820654,
+        "headYaw": 0.1,
+        "headPitch": -0.05,
+        "headRoll": -0.08,
+        "eyeOpen": 0,
+        "ears": [
+          7.223984815875453e-46,
+          -0.015241670888423852
+        ],
+        "tailSweep": 0,
+        "tailLift": 0
+      },
+      "renderedMeshes": 19,
+      "outputs": [
+        "kitten-model-blink.png"
+      ],
+      "glErrors": [],
+      "context": {
+        "egl": "1.5",
+        "vendor": "Mesa",
+        "renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+        "version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1",
+        "glsl": "4.50"
+      },
+      "shaderCompilation": [
+        {
+          "program": "production-background",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-background",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-background",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-ground",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-ground",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-ground",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "ground-measurement",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "ground-measurement",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "ground-measurement",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-output-pass",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-output-pass",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "production-output-pass",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "actual-trunk-geometry-diagnostic-shade",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "actual-trunk-geometry-diagnostic-shade",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "actual-trunk-geometry-diagnostic-shade",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "buried-trunk-visibility",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "buried-trunk-visibility",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "buried-trunk-visibility",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "three-kitten-physical",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "three-kitten-physical",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "three-kitten-physical",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "three-kitten-basic",
+          "stage": "vertex",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "three-kitten-basic",
+          "stage": "fragment",
+          "success": true,
+          "log": ""
+        },
+        {
+          "program": "three-kitten-basic",
+          "stage": "link",
+          "success": true,
+          "log": ""
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Deliberately stylized fairy-tale character, not a photoreal scan.",
+    "Native Three physical-material preview does not include browser composition or bloom."
+  ]
+}

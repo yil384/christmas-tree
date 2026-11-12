@@ -1,0 +1,514 @@
+{
+  "scope": "Offline native OpenGL material and geometry verification; not a browser screenshot or full product render.",
+  "method": "Production background and projective-ground shader bodies, Three.js-expanded chunks, actual geometry, actual camera/plane matrices; desktop-GL syntax adaptation only. Float32 linear render target, shared hardware sRGB source texture/mipmaps, actual Three.js ACES/sRGB OutputShader for PNGs. No browser, no bloom, no MSAA. Closeup trunk uses exact production geometry and diagnostic Lambert/vertex-color shade.",
+  "context": {
+    "egl": "1.5",
+    "vendor": "Mesa",
+    "renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1",
+    "glsl": "4.50"
+  },
+  "samplerAnisotropy": 1,
+  "shaderLogs": [
+    {
+      "program": "production-background",
+      "stage": "vertex",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-background",
+      "stage": "fragment",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-background",
+      "stage": "link",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-ground",
+      "stage": "vertex",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-ground",
+      "stage": "fragment",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-ground",
+      "stage": "link",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "ground-measurement",
+      "stage": "vertex",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "ground-measurement",
+      "stage": "fragment",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "ground-measurement",
+      "stage": "link",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-output-pass",
+      "stage": "vertex",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-output-pass",
+      "stage": "fragment",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "production-output-pass",
+      "stage": "link",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "actual-trunk-geometry-diagnostic-shade",
+      "stage": "vertex",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "actual-trunk-geometry-diagnostic-shade",
+      "stage": "fragment",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "actual-trunk-geometry-diagnostic-shade",
+      "stage": "link",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "buried-trunk-visibility",
+      "stage": "vertex",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "buried-trunk-visibility",
+      "stage": "fragment",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "buried-trunk-visibility",
+      "stage": "link",
+      "success": true,
+      "log": ""
+    }
+  ],
+  "cases": [
+    {
+      "texture": "actual-castle",
+      "pose": "390x844-initial",
+      "pixels": 329160,
+      "receiverPixels": 172940,
+      "outsideContactPixels": 165396,
+      "contactPixels": 7544,
+      "outsideMaxAbsLinearRGB": 0.0001271963119506836,
+      "outsideMeanAbsLinearRGB": 1.8867898461394361e-06,
+      "contactMaxBrighteningLinearRGB": 9.834766387939453e-06,
+      "contactMaxDarkeningLinearRGB": 0.28069084882736206,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "390x844-min-min-near",
+      "pixels": 329160,
+      "receiverPixels": 191699,
+      "outsideContactPixels": 180853,
+      "contactPixels": 10846,
+      "outsideMaxAbsLinearRGB": 0.00016939640045166016,
+      "outsideMeanAbsLinearRGB": 1.718033672659658e-06,
+      "contactMaxBrighteningLinearRGB": 9.715557098388672e-06,
+      "contactMaxDarkeningLinearRGB": 0.2734927833080292,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "390x844-max-max-far",
+      "pixels": 329160,
+      "receiverPixels": 155800,
+      "outsideContactPixels": 152818,
+      "contactPixels": 2982,
+      "outsideMaxAbsLinearRGB": 4.750490188598633e-05,
+      "outsideMeanAbsLinearRGB": 2.1223170278972248e-06,
+      "contactMaxBrighteningLinearRGB": 4.291534423828125e-06,
+      "contactMaxDarkeningLinearRGB": 0.27155447006225586,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "390x844-min-max-far",
+      "pixels": 329160,
+      "receiverPixels": 155829,
+      "outsideContactPixels": 152774,
+      "contactPixels": 3055,
+      "outsideMaxAbsLinearRGB": 4.565715789794922e-05,
+      "outsideMeanAbsLinearRGB": 1.740348011480819e-06,
+      "contactMaxBrighteningLinearRGB": 6.556510925292969e-06,
+      "contactMaxDarkeningLinearRGB": 0.28033018112182617,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "390x844-max-min-near",
+      "pixels": 329160,
+      "receiverPixels": 191681,
+      "outsideContactPixels": 180980,
+      "contactPixels": 10701,
+      "outsideMaxAbsLinearRGB": 0.0001488327980041504,
+      "outsideMeanAbsLinearRGB": 1.7241832210856955e-06,
+      "contactMaxBrighteningLinearRGB": 8.046627044677734e-06,
+      "contactMaxDarkeningLinearRGB": 0.28328847885131836,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "1440x900-initial",
+      "pixels": 1296000,
+      "receiverPixels": 675763,
+      "outsideContactPixels": 653251,
+      "contactPixels": 22512,
+      "outsideMaxAbsLinearRGB": 0.0001576840877532959,
+      "outsideMeanAbsLinearRGB": 1.4115969406702789e-06,
+      "contactMaxBrighteningLinearRGB": 8.52346420288086e-06,
+      "contactMaxDarkeningLinearRGB": 0.28814467787742615,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "1440x900-min-min-near",
+      "pixels": 1296000,
+      "receiverPixels": 753720,
+      "outsideContactPixels": 722945,
+      "contactPixels": 30775,
+      "outsideMaxAbsLinearRGB": 0.00018042325973510742,
+      "outsideMeanAbsLinearRGB": 1.6201610151256318e-06,
+      "contactMaxBrighteningLinearRGB": 1.1026859283447266e-05,
+      "contactMaxDarkeningLinearRGB": 0.28482359647750854,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "1440x900-max-max-far",
+      "pixels": 1296000,
+      "receiverPixels": 603247,
+      "outsideContactPixels": 593698,
+      "contactPixels": 9549,
+      "outsideMaxAbsLinearRGB": 6.362795829772949e-05,
+      "outsideMeanAbsLinearRGB": 1.5839721072552493e-06,
+      "contactMaxBrighteningLinearRGB": 1.0192394256591797e-05,
+      "contactMaxDarkeningLinearRGB": 0.28533631563186646,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "1440x900-min-max-far",
+      "pixels": 1296000,
+      "receiverPixels": 603272,
+      "outsideContactPixels": 593556,
+      "contactPixels": 9716,
+      "outsideMaxAbsLinearRGB": 0.00016424059867858887,
+      "outsideMeanAbsLinearRGB": 1.4190405863701017e-06,
+      "contactMaxBrighteningLinearRGB": 5.900859832763672e-06,
+      "contactMaxDarkeningLinearRGB": 0.29504117369651794,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "1440x900-max-min-near",
+      "pixels": 1296000,
+      "receiverPixels": 753650,
+      "outsideContactPixels": 723155,
+      "contactPixels": 30495,
+      "outsideMaxAbsLinearRGB": 0.00021767616271972656,
+      "outsideMeanAbsLinearRGB": 1.7338556972390506e-06,
+      "contactMaxBrighteningLinearRGB": 1.138448715209961e-05,
+      "contactMaxDarkeningLinearRGB": 0.29609206318855286,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "844x390-initial",
+      "pixels": 329160,
+      "receiverPixels": 169957,
+      "outsideContactPixels": 165725,
+      "contactPixels": 4232,
+      "outsideMaxAbsLinearRGB": 0.00015151500701904297,
+      "outsideMeanAbsLinearRGB": 1.4346460375236347e-06,
+      "contactMaxBrighteningLinearRGB": 5.185604095458984e-06,
+      "contactMaxDarkeningLinearRGB": 0.2723628580570221,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "844x390-min-min-near",
+      "pixels": 329160,
+      "receiverPixels": 189508,
+      "outsideContactPixels": 183726,
+      "contactPixels": 5782,
+      "outsideMaxAbsLinearRGB": 0.00018233060836791992,
+      "outsideMeanAbsLinearRGB": 1.963503564184066e-06,
+      "contactMaxBrighteningLinearRGB": 4.351139068603516e-06,
+      "contactMaxDarkeningLinearRGB": 0.28059324622154236,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "844x390-max-max-far",
+      "pixels": 329160,
+      "receiverPixels": 151757,
+      "outsideContactPixels": 149969,
+      "contactPixels": 1788,
+      "outsideMaxAbsLinearRGB": 0.00013002753257751465,
+      "outsideMeanAbsLinearRGB": 1.3784483599010855e-06,
+      "contactMaxBrighteningLinearRGB": 3.0994415283203125e-06,
+      "contactMaxDarkeningLinearRGB": 0.265179306268692,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "844x390-min-max-far",
+      "pixels": 329160,
+      "receiverPixels": 151762,
+      "outsideContactPixels": 149932,
+      "contactPixels": 1830,
+      "outsideMaxAbsLinearRGB": 0.0001271069049835205,
+      "outsideMeanAbsLinearRGB": 1.2370014701446053e-06,
+      "contactMaxBrighteningLinearRGB": 3.4570693969726562e-06,
+      "contactMaxDarkeningLinearRGB": 0.2769615650177002,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "844x390-max-min-near",
+      "pixels": 329160,
+      "receiverPixels": 189496,
+      "outsideContactPixels": 183770,
+      "contactPixels": 5726,
+      "outsideMaxAbsLinearRGB": 0.00021502375602722168,
+      "outsideMeanAbsLinearRGB": 2.484214292053366e-06,
+      "contactMaxBrighteningLinearRGB": 9.059906005859375e-06,
+      "contactMaxDarkeningLinearRGB": 0.28084105253219604,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "768x1024-initial",
+      "pixels": 786432,
+      "receiverPixels": 414251,
+      "outsideContactPixels": 385089,
+      "contactPixels": 29162,
+      "outsideMaxAbsLinearRGB": 0.00012552738189697266,
+      "outsideMeanAbsLinearRGB": 1.4997551716078306e-06,
+      "contactMaxBrighteningLinearRGB": 1.1026859283447266e-05,
+      "contactMaxDarkeningLinearRGB": 0.2790208160877228,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "768x1024-min-min-near",
+      "pixels": 786432,
+      "receiverPixels": 462034,
+      "outsideContactPixels": 422202,
+      "contactPixels": 39832,
+      "outsideMaxAbsLinearRGB": 0.00020581483840942383,
+      "outsideMeanAbsLinearRGB": 2.2921426534594502e-06,
+      "contactMaxBrighteningLinearRGB": 1.7940998077392578e-05,
+      "contactMaxDarkeningLinearRGB": 0.2768826186656952,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "768x1024-max-max-far",
+      "pixels": 786432,
+      "receiverPixels": 369656,
+      "outsideContactPixels": 357283,
+      "contactPixels": 12373,
+      "outsideMaxAbsLinearRGB": 5.0187110900878906e-05,
+      "outsideMeanAbsLinearRGB": 1.371208327327622e-06,
+      "contactMaxBrighteningLinearRGB": 9.5367431640625e-06,
+      "contactMaxDarkeningLinearRGB": 0.28631436824798584,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "768x1024-min-max-far",
+      "pixels": 786432,
+      "receiverPixels": 369622,
+      "outsideContactPixels": 357059,
+      "contactPixels": 12563,
+      "outsideMaxAbsLinearRGB": 6.0558319091796875e-05,
+      "outsideMeanAbsLinearRGB": 1.6280425825243583e-06,
+      "contactMaxBrighteningLinearRGB": 1.4662742614746094e-05,
+      "contactMaxDarkeningLinearRGB": 0.2880249321460724,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "actual-castle",
+      "pose": "768x1024-max-min-near",
+      "pixels": 786432,
+      "receiverPixels": 461991,
+      "outsideContactPixels": 422515,
+      "contactPixels": 39476,
+      "outsideMaxAbsLinearRGB": 0.0001850128173828125,
+      "outsideMeanAbsLinearRGB": 1.8529913177189883e-06,
+      "contactMaxBrighteningLinearRGB": 1.6748905181884766e-05,
+      "contactMaxDarkeningLinearRGB": 0.27889347076416016,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "diagnostic-checker",
+      "pose": "390x844-initial",
+      "pixels": 329160,
+      "receiverPixels": 172940,
+      "outsideContactPixels": 165396,
+      "contactPixels": 7544,
+      "outsideMaxAbsLinearRGB": 0.00021147727966308594,
+      "outsideMeanAbsLinearRGB": 9.212872669195349e-07,
+      "contactMaxBrighteningLinearRGB": 5.926191806793213e-05,
+      "contactMaxDarkeningLinearRGB": 0.21257004141807556,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "diagnostic-checker",
+      "pose": "390x844-max-max-far",
+      "pixels": 329160,
+      "receiverPixels": 155800,
+      "outsideContactPixels": 152818,
+      "contactPixels": 2982,
+      "outsideMaxAbsLinearRGB": 0.00019666552543640137,
+      "outsideMeanAbsLinearRGB": 1.1109344768556184e-06,
+      "contactMaxBrighteningLinearRGB": 6.00665807723999e-05,
+      "contactMaxDarkeningLinearRGB": 0.21539321541786194,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "diagnostic-checker",
+      "pose": "1440x900-initial",
+      "pixels": 1296000,
+      "receiverPixels": 675763,
+      "outsideContactPixels": 653251,
+      "contactPixels": 22512,
+      "outsideMaxAbsLinearRGB": 0.00015370547771453857,
+      "outsideMeanAbsLinearRGB": 6.356269182106189e-07,
+      "contactMaxBrighteningLinearRGB": 6.0088932514190674e-05,
+      "contactMaxDarkeningLinearRGB": 0.2828264832496643,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "diagnostic-checker",
+      "pose": "1440x900-max-max-far",
+      "pixels": 1296000,
+      "receiverPixels": 603247,
+      "outsideContactPixels": 593698,
+      "contactPixels": 9549,
+      "outsideMaxAbsLinearRGB": 0.00018864870071411133,
+      "outsideMeanAbsLinearRGB": 9.496362736172159e-07,
+      "contactMaxBrighteningLinearRGB": 8.503720164299011e-05,
+      "contactMaxDarkeningLinearRGB": 0.2737638056278229,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "diagnostic-checker",
+      "pose": "844x390-initial",
+      "pixels": 329160,
+      "receiverPixels": 169957,
+      "outsideContactPixels": 165725,
+      "contactPixels": 4232,
+      "outsideMaxAbsLinearRGB": 0.00013577938079833984,
+      "outsideMeanAbsLinearRGB": 6.89786816110427e-07,
+      "contactMaxBrighteningLinearRGB": 2.9996037483215332e-05,
+      "contactMaxDarkeningLinearRGB": 0.21576616168022156,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "diagnostic-checker",
+      "pose": "844x390-max-max-far",
+      "pixels": 329160,
+      "receiverPixels": 151757,
+      "outsideContactPixels": 149969,
+      "contactPixels": 1788,
+      "outsideMaxAbsLinearRGB": 0.0002387017011642456,
+      "outsideMeanAbsLinearRGB": 1.1263268788752612e-06,
+      "contactMaxBrighteningLinearRGB": 2.950429916381836e-05,
+      "contactMaxDarkeningLinearRGB": 0.21550333499908447,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "diagnostic-checker",
+      "pose": "768x1024-initial",
+      "pixels": 786432,
+      "receiverPixels": 414251,
+      "outsideContactPixels": 385089,
+      "contactPixels": 29162,
+      "outsideMaxAbsLinearRGB": 0.00017380714416503906,
+      "outsideMeanAbsLinearRGB": 7.014498919488688e-07,
+      "contactMaxBrighteningLinearRGB": 6.002187728881836e-05,
+      "contactMaxDarkeningLinearRGB": 0.21549808979034424,
+      "outsidePixelsAbove1Over255": 0
+    },
+    {
+      "texture": "diagnostic-checker",
+      "pose": "768x1024-max-max-far",
+      "pixels": 786432,
+      "receiverPixels": 369656,
+      "outsideContactPixels": 357283,
+      "contactPixels": 12373,
+      "outsideMaxAbsLinearRGB": 0.00015434622764587402,
+      "outsideMeanAbsLinearRGB": 6.949403541511856e-07,
+      "contactMaxBrighteningLinearRGB": 5.321204662322998e-05,
+      "contactMaxDarkeningLinearRGB": 0.21363934874534607,
+      "outsidePixelsAbove1Over255": 0
+    }
+  ],
+  "depthOcclusion": {
+    "buried_without_receiver": 2444,
+    "buried_with_receiver": 0,
+    "exposed_without_receiver": 26395,
+    "exposed_with_receiver": 26395
+  },
+  "glErrors": [],
+  "summary": {
+    "cases": 28,
+    "outsideContactPixels": 9519925,
+    "maxOutsideError": 0.0002387017011642456,
+    "maxContactBrightening": 8.503720164299011e-05,
+    "outsidePixelsAbove1Over255": 0,
+    "buriedDepthPass": true,
+    "exposedDepthPass": true
+  },
+  "measuredScene": {
+    "backgroundImage": "/workspace/scratch/7dbdec9a2b48/background-fix/.sites-checkout/public/generated/background/night-0e8734d8f47b63d4ceeb.webp",
+    "backgroundPlaneZ": -18,
+    "focus": [
+      0.83,
+      0.2
+    ],
+    "brightness": 0.92,
+    "samplerAnisotropy": 1
+  }
+}

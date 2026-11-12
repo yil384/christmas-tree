@@ -1,10 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
+import { assetUrl } from '../lib/content';
+import { defaultScene } from '../lib/scene-config';
 
 /** The greeting stays visually quiet; a deliberate hold reveals the optional camera mode. */
 export default function GreetingGate({ greeting, onOpen }: { greeting: string; onOpen: () => void }) {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const press = useRef<{ id: number; x: number; y: number } | null>(null);
   const [holding, setHolding] = useState(false);
+  const [letteringFailed, setLetteringFailed] = useState(false);
+  const useLettering = greeting === defaultScene.greeting && !letteringFailed;
   const cancel = () => {
     if (timer.current !== null) clearTimeout(timer.current);
     timer.current = null;
@@ -30,7 +34,7 @@ export default function GreetingGate({ greeting, onOpen }: { greeting: string; o
 
   return <button
     type="button"
-    className={`christmas-greeting greeting-gate${holding ? ' is-holding' : ''}`}
+    className={`christmas-greeting greeting-gate${useLettering ? ' has-lettering' : ''}${holding ? ' is-holding' : ''}`}
     aria-label={`${greeting}。长按一秒开启手势魔法，或按 H。`}
     title="长按一秒 · 手势魔法"
     onPointerDown={event => {
@@ -50,5 +54,13 @@ export default function GreetingGate({ greeting, onOpen }: { greeting: string; o
     onLostPointerCapture={cancel}
     onContextMenu={event => event.preventDefault()}
     onClick={event => { if (event.detail === 0) onOpen(); }}
-  >{greeting}<span className="greeting-hold-line" aria-hidden="true" /></button>;
+  >
+    {useLettering ? <img
+      className="greeting-lettering"
+      src={assetUrl('lettering/christmas-paw-greeting.svg?rev=rounded-ji-2')}
+      width="478" height="172" alt="" aria-hidden="true" draggable={false}
+      onError={() => setLetteringFailed(true)}
+    /> : <span className="greeting-text">{greeting}</span>}
+    <span className="greeting-hold-line" aria-hidden="true" />
+  </button>;
 }

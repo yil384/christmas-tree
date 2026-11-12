@@ -53,6 +53,22 @@ test('missing build output fails before deleting anything', async t => {
   assert.equal(await readFile(join(root, 'dist', 'photos', 'keep.jpg'), 'utf8'), 'keep');
 });
 
+test('interrupted photo staging is excluded while source staging and published media survive', async t => {
+  const root = await temporaryProject(t);
+  const staging = '.photos-69e61d96-6886-4b15-8dea-3fb0301da10e/unfinished.webp';
+  const paths = ['dist/index.html', `dist/generated/${staging}`, `public/generated/${staging}`,
+    'dist/generated/photos/final.webp', 'dist/generated/videos/final.mp4', 'dist/video-posters/christmas-film.webp'];
+  for (const path of paths) {
+    await mkdir(join(root, path, '..'), { recursive: true });
+    await writeFile(join(root, path), path);
+  }
+  await finalizeBuild({ root });
+  await assert.rejects(readFile(join(root, 'dist/generated', staging)), { code: 'ENOENT' });
+  for (const path of paths.filter(path => path !== `dist/generated/${staging}`)) {
+    assert.equal(await readFile(join(root, path), 'utf8'), path);
+  }
+});
+
 test('a symlinked dist directory is rejected without touching its target', async t => {
   const root = await temporaryProject(t);
   await mkdir(join(root, 'unrelated', 'photos'), { recursive: true });

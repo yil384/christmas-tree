@@ -53,7 +53,7 @@ function GestureGuide() {
     <div><span aria-hidden="true">↔</span><p><b>双掌拉开 / 靠近</b><small>拉近 / 拉远观察</small></p></div>
     <div><span aria-hidden="true">✌️</span><p><b>比 V，停留片刻</b><small>照片与枝叶缓缓散开</small></p></div>
     <div><span aria-hidden="true">✊</span><p><b>握拳，停留片刻</b><small>聚合成树；相册中返回</small></p></div>
-    <div><span aria-hidden="true">👍</span><p><b>竖起拇指</b><small>暂停 / 继续自动旋转</small></p></div>
+    <div><span aria-hidden="true">👍</span><p><b>竖起拇指</b><small>暂停 / 继续镜头漫游</small></p></div>
     <div><span aria-hidden="true">☝️</span><p><b>指向照片，再捏合</b><small>食指瞄准，拇指与食指轻合</small></p></div>
     <div><span aria-hidden="true">👋</span><p><b>相册里左右挥掌</b><small>向左下一张，向右上一张</small></p></div>
     <div><span aria-hidden="true">🤟</span><p><b>做出「我爱你」手势</b><small>拇指、食指、小指伸出，唤出星光</small></p></div>
@@ -212,7 +212,7 @@ export default function HandMagicMode({ input, view, onCommand, onRunningChange,
       <div className="hand-intro">
         <span className="hand-eyebrow">A LITTLE CHRISTMAS MAGIC</span>
         <h2>让心意，随手而动。</h2>
-        <p className="hand-lead">伸出手，转动这棵树。<br />把一张回忆，轻轻捧到眼前。</p>
+        <p className="hand-lead">伸出手，让镜头轻轻环绕。<br />把一张回忆，轻轻捧到眼前。</p>
         <div className="hand-guide-scroll">
           <GestureGuide />
           <div className="hand-privacy"><span aria-hidden="true">◈</span><p>画面只在你的设备上识别，不上传、不录像，也不使用麦克风。关闭模式或离开页面后，摄像头会停止。</p></div>

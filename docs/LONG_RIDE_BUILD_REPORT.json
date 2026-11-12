@@ -1,0 +1,61 @@
+{
+  "signature": "30cec16a91db9f1fafe7",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "duration": 228.5,
+  "finaleDuration": 90.0,
+  "totalExperienceDuration": 318.5,
+  "frames": 5484,
+  "fps": 24,
+  "master": "/workspace/shared/long-castle-ride/build/master-1080p.mkv",
+  "output": "/workspace/scratch/7dbdec9a2b48/background-fix/.sites-checkout/public/journey/film",
+  "variants": {
+    "1080p": {
+      "segments": 39,
+      "duration": 228.5,
+      "bytes": 106988356,
+      "decodedFrames": 5484,
+      "fps": 24,
+      "width": 1080,
+      "height": 1920,
+      "maxSegmentBytes": 3397348,
+      "averageBandwidth": 3745764,
+      "bandwidth": 4756288
+    },
+    "720p": {
+      "segments": 39,
+      "duration": 228.5,
+      "bytes": 54375804,
+      "decodedFrames": 5484,
+      "fps": 24,
+      "width": 720,
+      "height": 1280,
+      "maxSegmentBytes": 1733548,
+      "averageBandwidth": 1903749,
+      "bandwidth": 2426968
+    }
+  },
+  "settings": {
+    "crossfadeFrames": 12,
+    "audioLUFS": -18,
+    "audioTruePeakDBTP": -4,
+    "audioBitrate": 128000,
+    "segmentSeconds": 6,
+    "masterCRF": 16,
+    "masterPreset": "fast",
+    "hlsPreset": "medium",
+    "encoderThreads": 4
+  },
+  "audioVerification": {
+    "measuredClips": 18,
+    "outputLUFSRange": [
+      -18.22,
+      -17.74
+    ],
+    "largestOutputTruePeakDBTP": -4.0
+  },
+  "stillImages": {
+    "cover.webp": 313098,
+    "ending.webp": 151018
+  },
+  "publicFilmBytes": 161374572
+}

@@ -6,7 +6,8 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // HLS segments use .ts for MPEG transport streams, not TypeScript source.
+  globalIgnores(['dist', 'public/journey/film/**/*.ts']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [

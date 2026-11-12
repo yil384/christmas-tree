@@ -1,0 +1,267 @@
+{
+  "testedAt": "2026-11-07T20:17:12.159614+00:00",
+  "sourceFile": "/workspace/scratch/633e0ad66d25/christmas-site/.sites-checkout/src/scene/NightBackground.tsx",
+  "sourceSha256": "dbbc7bcf852b11b46335704c2ea6311e658346d51ca6fa85bb391f6d8807bb00",
+  "factorySha256": "7951b03ee401a976f49f12878d41f45f8a9ef18bc6db46a6ad6501cee7a563d0",
+  "threeRevision": "169",
+  "sourceExtraction": "TypeScript AST extracts actual createPanorama; executes factory with installed Three; installed WebGLPrograms builds parameters and WebGLProgram expands includes and prefixes; capture shaderSource only, no mocked compilation claims.",
+  "validation": "Actual EGL OpenGL ES shader compilation and program linking via Mesa; no browser, no rendering, no visual, texture or interaction claim.",
+  "eglVersion": "1.5",
+  "glVendor": "Mesa",
+  "glRenderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+  "glVersion": "OpenGL ES 3.2 Mesa 25.0.7-2+deb13u1",
+  "glShadingLanguageVersion": "OpenGL ES GLSL ES 3.20",
+  "maxFragmentTextureUnits": 32,
+  "programs": [
+    {
+      "name": "panorama-direct-four-details-linear-compositor",
+      "toneMapping": 0,
+      "outputColorSpace": "srgb-linear",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "sourceSha256": "813264181c22694a5e6eefefbc0fde95780f63c3b28a099a04cbc2a4de799686",
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "sourceSha256": "b5640718ea9ae772a0757268f4a322f2a105f9df86f136e13decb03bf7ba848f",
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "linkLog": "",
+      "activeSampler2DUniforms": [
+        "panorama",
+        "detail0",
+        "detail1",
+        "detail2",
+        "detail3"
+      ],
+      "activeUniforms": [
+        {
+          "name": "modelMatrix",
+          "size": 1,
+          "glType": "0x8b5c"
+        },
+        {
+          "name": "modelViewMatrix",
+          "size": 1,
+          "glType": "0x8b5c"
+        },
+        {
+          "name": "projectionMatrix",
+          "size": 1,
+          "glType": "0x8b5c"
+        },
+        {
+          "name": "panorama",
+          "size": 1,
+          "glType": "0x8b5e"
+        },
+        {
+          "name": "skyRotation",
+          "size": 1,
+          "glType": "0x8b5b"
+        },
+        {
+          "name": "brightness",
+          "size": 1,
+          "glType": "0x1406"
+        },
+        {
+          "name": "detail0",
+          "size": 1,
+          "glType": "0x8b5e"
+        },
+        {
+          "name": "detailRect0",
+          "size": 1,
+          "glType": "0x8b52"
+        },
+        {
+          "name": "detailReady0",
+          "size": 1,
+          "glType": "0x1406"
+        },
+        {
+          "name": "detail1",
+          "size": 1,
+          "glType": "0x8b5e"
+        },
+        {
+          "name": "detailRect1",
+          "size": 1,
+          "glType": "0x8b52"
+        },
+        {
+          "name": "detailReady1",
+          "size": 1,
+          "glType": "0x1406"
+        },
+        {
+          "name": "detail2",
+          "size": 1,
+          "glType": "0x8b5e"
+        },
+        {
+          "name": "detailRect2",
+          "size": 1,
+          "glType": "0x8b52"
+        },
+        {
+          "name": "detailReady2",
+          "size": 1,
+          "glType": "0x1406"
+        },
+        {
+          "name": "detail3",
+          "size": 1,
+          "glType": "0x8b5e"
+        },
+        {
+          "name": "detailRect3",
+          "size": 1,
+          "glType": "0x8b52"
+        },
+        {
+          "name": "detailReady3",
+          "size": 1,
+          "glType": "0x1406"
+        }
+      ],
+      "allFiveSamplersActive": true,
+      "glErrorAfterLink": "0x0"
+    },
+    {
+      "name": "panorama-direct-four-details-aces-srgb-direct",
+      "toneMapping": 4,
+      "outputColorSpace": "srgb",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "sourceSha256": "813264181c22694a5e6eefefbc0fde95780f63c3b28a099a04cbc2a4de799686",
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "sourceSha256": "b46ba1eda7bcb4a4b070a646587c85e888ca7537777dda800b321040f894152c",
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "linkLog": "",
+      "activeSampler2DUniforms": [
+        "panorama",
+        "detail0",
+        "detail1",
+        "detail2",
+        "detail3"
+      ],
+      "activeUniforms": [
+        {
+          "name": "modelMatrix",
+          "size": 1,
+          "glType": "0x8b5c"
+        },
+        {
+          "name": "modelViewMatrix",
+          "size": 1,
+          "glType": "0x8b5c"
+        },
+        {
+          "name": "projectionMatrix",
+          "size": 1,
+          "glType": "0x8b5c"
+        },
+        {
+          "name": "toneMappingExposure",
+          "size": 1,
+          "glType": "0x1406"
+        },
+        {
+          "name": "panorama",
+          "size": 1,
+          "glType": "0x8b5e"
+        },
+        {
+          "name": "skyRotation",
+          "size": 1,
+          "glType": "0x8b5b"
+        },
+        {
+          "name": "brightness",
+          "size": 1,
+          "glType": "0x1406"
+        },
+        {
+          "name": "detail0",
+          "size": 1,
+          "glType": "0x8b5e"
+        },
+        {
+          "name": "detailRect0",
+          "size": 1,
+          "glType": "0x8b52"
+        },
+        {
+          "name": "detailReady0",
+          "size": 1,
+          "glType": "0x1406"
+        },
+        {
+          "name": "detail1",
+          "size": 1,
+          "glType": "0x8b5e"
+        },
+        {
+          "name": "detailRect1",
+          "size": 1,
+          "glType": "0x8b52"
+        },
+        {
+          "name": "detailReady1",
+          "size": 1,
+          "glType": "0x1406"
+        },
+        {
+          "name": "detail2",
+          "size": 1,
+          "glType": "0x8b5e"
+        },
+        {
+          "name": "detailRect2",
+          "size": 1,
+          "glType": "0x8b52"
+        },
+        {
+          "name": "detailReady2",
+          "size": 1,
+          "glType": "0x1406"
+        },
+        {
+          "name": "detail3",
+          "size": 1,
+          "glType": "0x8b5e"
+        },
+        {
+          "name": "detailRect3",
+          "size": 1,
+          "glType": "0x8b52"
+        },
+        {
+          "name": "detailReady3",
+          "size": 1,
+          "glType": "0x1406"
+        }
+      ],
+      "allFiveSamplersActive": true,
+      "glErrorAfterLink": "0x0"
+    }
+  ],
+  "allPassed": true
+}

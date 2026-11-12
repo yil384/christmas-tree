@@ -1,0 +1,24 @@
+{
+  "shot_id": "S02",
+  "beat_id": "B02",
+  "planned_start_s": 12,
+  "planned_end_s": 24,
+  "planned_usable_duration_s": 12,
+  "mode": "Create; deliberately cut to this camera angle",
+  "request_duration_s": 15,
+  "request_duration_condition": "Use 15 s only if currently available in Vids; otherwise split deliberately or obtain genuine Extend footage, then recompute the edit plan. Never pad.",
+  "scene": "A",
+  "references_relative_to_this_folder": [
+    "../../../docs/film/HUMAN_ORIGINAL.jpg",
+    "../../../docs/malaysia-film/references/A_PALACE_MASTER.png",
+    "../../../docs/malaysia-film/references/CAT_IDENTITY.png"
+  ],
+  "status": "not_generated",
+  "actual_source_duration_s": null,
+  "approved_in_s": null,
+  "approved_out_s": null,
+  "source_file": null,
+  "qa_approved": false,
+  "prompt_file": "S02-prompt.txt",
+  "execution_note": "Original planned quality-probe prompt; no generated or approved footage. The separate 3-second motion probe records the actual submitted prompt."
+}

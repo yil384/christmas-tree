@@ -1,0 +1,52 @@
+{
+  "sourceAsset": {
+    "path": "backgrounds/storybook-castle-360.webp",
+    "sha256": "7b4635283c2f90abc180ff576deb41ed9b74df37997b141b3cdca1dfcc172e3f",
+    "nativeDimensions": [
+      1774,
+      887
+    ],
+    "projection": "equirectangular",
+    "rotationDegrees": 0,
+    "brightness": 0.94
+  },
+  "visuallyAnnotatedSnowBand": {
+    "minImageY": 0.55,
+    "maxImageY": 1.0,
+    "allLongitudes": true
+  },
+  "checkedRootAndPawPoints": 139320,
+  "viewports": [
+    [
+      390,
+      844
+    ],
+    [
+      844,
+      390
+    ],
+    [
+      768,
+      1024
+    ],
+    [
+      1440,
+      900
+    ],
+    [
+      1920,
+      1080
+    ]
+  ],
+  "azimuthDegrees": {
+    "from": 0,
+    "to": 345,
+    "step": 15
+  },
+  "sampling": "All min/default/max zoom and min/default/max polar poses; actual tree root/contact footprint and actual shared kitten body/paw footprint. Source top-left image coordinates.",
+  "minimumImageY": 0.5557978224451493,
+  "maximumImageY": 0.7239611808513137,
+  "minimumSnowMarginNativePixels": 5.142668508847392,
+  "initialCastleReview": "Complete spire visible at initial desktop and portrait-phone views; enough visible sky remains above it.",
+  "seamReview": "Two-degree shared feather per side removes the observed hard edge at quarter turn; interior source mapping remains unchanged."
+}

@@ -13,6 +13,11 @@ export function useSecretInteractions(options: SecretInteractionOptions) {
   latest.current = options;
   const controller = useMemo(() => createSceneGestureController({
     onTap: () => { if (latest.current.enabled) latest.current.onTap(); },
+    onPhotoTap: index => {
+      if (!latest.current.enabled) return;
+      if (latest.current.onPhotoTap) latest.current.onPhotoTap(index);
+      else latest.current.onTap();
+    },
     onDoubleTap: () => { if (latest.current.enabled) latest.current.onDoubleTap(); },
     onLongPress: index => { if (latest.current.enabled) latest.current.onLongPress(index); },
   }, {
@@ -82,5 +87,5 @@ export function useSecretInteractions(options: SecretInteractionOptions) {
     if (latest.current.enabled) controller.pickPhoto(index);
   }, [controller]);
 
-  return { bind, onPhotoPress };
+  return { bind, onPhotoPress, cancel: controller.cancel };
 }

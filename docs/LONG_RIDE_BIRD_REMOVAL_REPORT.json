@@ -1,0 +1,291 @@
+{
+  "revision": "birdfree-r1",
+  "kind": "old-film-bird-removal",
+  "newStoryFilmGenerated": false,
+  "originalDuration": 228.5,
+  "removedInterval": [
+    88.5,
+    114.0
+  ],
+  "removedFrames": 612,
+  "duration": 203.0,
+  "durationFrames": 4872,
+  "finaleDuration": 90.0,
+  "totalExperienceDuration": 293.0,
+  "removedShotIds": [
+    8,
+    9
+  ],
+  "retainedShotIds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "sourceManifest": {
+    "1080p/index.m3u8": {
+      "bytes": 1428,
+      "sha256": "ba1e966129e924e4444563f491c7ecfaec045c5c4a9d7ff5d6f1f0980256903b"
+    },
+    "1080p/segment-000.ts": {
+      "bytes": 2719232,
+      "sha256": "a8a202250a82ef5d9517017191d5a0593bf6b7ed4e2a74a4bcff0a68a97ce672"
+    },
+    "1080p/segment-001.ts": {
+      "bytes": 2620532,
+      "sha256": "79bf3eb3277284478bcbbb222c32d2cc1c175587f0ca9baa6ca09145bfe826d9"
+    },
+    "1080p/segment-002.ts": {
+      "bytes": 2899336,
+      "sha256": "94fe84103aef6bd789cf33b06be818cc9ac0b0ac84009d4bbf0700612dbccf2b"
+    },
+    "1080p/segment-003.ts": {
+      "bytes": 3067596,
+      "sha256": "c906d48a4c5734f2db2cee9f22dd4f3f4cf3e5e1f766e1cd2fb93a9fd387eeef"
+    },
+    "1080p/segment-004.ts": {
+      "bytes": 3038080,
+      "sha256": "8451cac4cae85de58c093cd3781c065842edf5d2fea8b56686974fce8cb089f4"
+    },
+    "1080p/segment-005.ts": {
+      "bytes": 2924152,
+      "sha256": "34ffd84257d60f817cbb5c3eaa9246d3edc1997ade1e4c00b4c140c2d7ac869b"
+    },
+    "1080p/segment-006.ts": {
+      "bytes": 2684640,
+      "sha256": "b95a38c259ee84e96038a6c3e40320bc240411addcb5e7dacacb8b551d79d012"
+    },
+    "1080p/segment-007.ts": {
+      "bytes": 2312212,
+      "sha256": "847e2475959d5ffc2fb86e07bad5e5eb51cc3e02db164e866221894dc3a75aae"
+    },
+    "1080p/segment-008.ts": {
+      "bytes": 2402452,
+      "sha256": "e2a2bf4b1ebef889ccb2be6e0269eea5e2bbdef2d4288669f61abd74397883eb"
+    },
+    "1080p/segment-009.ts": {
+      "bytes": 2703816,
+      "sha256": "b5f018bc531d4b64f8f941bd13a9c77a24f45cd0c3f17d396ede631e5f4a2352"
+    },
+    "1080p/segment-010.ts": {
+      "bytes": 3145992,
+      "sha256": "c1536430822deebfcdaad8128d3965c324138683a64a8fba4d29ab0a77c55be5"
+    },
+    "1080p/segment-011.ts": {
+      "bytes": 3307672,
+      "sha256": "5736762abc40f683c41c666d54599c45d46aba46ce5883cb7f41b397f2b73500"
+    },
+    "1080p/segment-012.ts": {
+      "bytes": 2626736,
+      "sha256": "2a5b980c8deb453db8d605b0d0f1d2ca124d5abc681568c534ffeebd4f2c5736"
+    },
+    "1080p/segment-013.ts": {
+      "bytes": 2483668,
+      "sha256": "021ad456dbf1550ef71b026024d45efdf4d70ecbf836e104d22b71130264f4b6"
+    },
+    "1080p/segment-014.ts": {
+      "bytes": 3202392,
+      "sha256": "5cf37442aebf5229d5ab2eacd9f2c748e7d718ec64a14b2e2e509dec628700d3"
+    },
+    "1080p/segment-015.ts": {
+      "bytes": 2992584,
+      "sha256": "79e95fb06a88757f7c6ed596715fd7a5249548075edb115b1c2a5df1ddf797ae"
+    },
+    "1080p/segment-016.ts": {
+      "bytes": 2543076,
+      "sha256": "bd66c669d4e81c32e012befb8c2cb3762bae05d1720eb30962a9b901bc907bd6"
+    },
+    "1080p/segment-017.ts": {
+      "bytes": 2838800,
+      "sha256": "a2316ec9ca5e3a8cf02523990efdd7f606776ebf1a4bab24a66bc856efabfa30"
+    },
+    "1080p/segment-018.ts": {
+      "bytes": 3011196,
+      "sha256": "c4a482228d39dbb5e3d4a855e08e3b2f31850359e142dc3eb5e164dcb350ec74"
+    },
+    "1080p/segment-019.ts": {
+      "bytes": 2601356,
+      "sha256": "02d2ebf2b06c427587cf8e02f549c2580cc1ec7f64f4ba0f0e0de8e4a61461a4"
+    },
+    "1080p/segment-020.ts": {
+      "bytes": 2800448,
+      "sha256": "9a6722ed595aaab92ab9c4184d2c0ca6cf1a258ca536a8c28c892b75d7990cd9"
+    },
+    "1080p/segment-021.ts": {
+      "bytes": 2610568,
+      "sha256": "3564ebc84e2d761d893f84a615c345e304e22317d23534f1558cb75b926fd7d6"
+    },
+    "1080p/segment-022.ts": {
+      "bytes": 2967016,
+      "sha256": "0567113d0b83b7bf70f6c7033c0ad0a4511734a2a6d658d53f44529b69d62739"
+    },
+    "1080p/segment-023.ts": {
+      "bytes": 2620532,
+      "sha256": "c2ba332887be0c4ab37b96c4e4c25461b05a13b378c1361b7121a40187b92094"
+    },
+    "1080p/segment-024.ts": {
+      "bytes": 2769428,
+      "sha256": "f196134cc8864cf42eb0987a46a7cc247c5d3afce8072e6b4b9a04193e341975"
+    },
+    "1080p/segment-025.ts": {
+      "bytes": 2714908,
+      "sha256": "ff8d178d8450b3c5ed4ef793f63d3b5035c6a96fc068a061fe9f5bacff11b777"
+    },
+    "1080p/segment-026.ts": {
+      "bytes": 2719420,
+      "sha256": "4fba0300dbf3859d59d2c621628bc58eefb891d3cfbe51b697c171501281763a"
+    },
+    "1080p/segment-027.ts": {
+      "bytes": 3397348,
+      "sha256": "56bb29149d9391947308d5c68614bfbe40ed99c254cdf9269ecbbf7cee210783"
+    },
+    "1080p/segment-028.ts": {
+      "bytes": 2797816,
+      "sha256": "abbc341b132363c240e1a2d4a4c18667e16544c4ad0d9d297e6378f9fb974524"
+    },
+    "1080p/segment-029.ts": {
+      "bytes": 2942952,
+      "sha256": "4e70ac5d31e8cd28d1f6dc636b214a6c0931a37102163b525538bd46dce46303"
+    },
+    "1080p/segment-030.ts": {
+      "bytes": 2616960,
+      "sha256": "f38df6552c8348ac7656b4d4eac628f55dc287d6bcaef69871be191a8beb6ae2"
+    },
+    "1080p/segment-031.ts": {
+      "bytes": 3066468,
+      "sha256": "592ad4bd16ac6c2ee550d9612624191c387c65e9015fee3bf4b36ea8a516d984"
+    },
+    "1080p/segment-032.ts": {
+      "bytes": 2337968,
+      "sha256": "9a5c4e654e55cc6cb8e065b923766c144f1fecac4cff07a0c00fc9f3781b6052"
+    },
+    "1080p/segment-033.ts": {
+      "bytes": 2783716,
+      "sha256": "08bd8043b1de30b1303e3014135c4367bdbd5b943b8a96883a79662271fed333"
+    },
+    "1080p/segment-034.ts": {
+      "bytes": 3183028,
+      "sha256": "688e549a5f6627e3fccc987a07c18947beb60251b97c9ed03fa7ae6c98e9f3dd"
+    },
+    "1080p/segment-035.ts": {
+      "bytes": 2647040,
+      "sha256": "033a6254612d996c7f87dd5dfbce91deac6cc4aaa3b3d047b7f0ed5e4be5b504"
+    },
+    "1080p/segment-036.ts": {
+      "bytes": 3051616,
+      "sha256": "7a682446f20527643a8a38e20905841f6926bfb2b2bbabb0dfbc7dfd848e771d"
+    },
+    "1080p/segment-037.ts": {
+      "bytes": 2587068,
+      "sha256": "44fd06fd8ddb8d2d79e0ebaa832bc9bd9bb5dea130e8cab6978afdac3b50fbe7"
+    },
+    "1080p/segment-038.ts": {
+      "bytes": 248536,
+      "sha256": "64887fc3658f28305b6a34dbb14c427e7e510e48e8582b58383679212f8bc4b5"
+    },
+    "timeline.json": {
+      "bytes": 7007,
+      "sha256": "7f49bae90bed736abe92330b3e354b20bc386b841d20694513bdd16e309525ea"
+    }
+  },
+  "source1080pSegmentBytes": 106988356,
+  "sourceSnapshot": "/workspace/scratch/7dbdec9a2b48/malaysia-rebuild/bird-removal/original-film",
+  "master": {
+    "frames": 4872,
+    "pcmSamples": 9744000,
+    "duration": 203.0,
+    "bytes": 320185647,
+    "sha256": "d79fa4d4e24560d59e8671540e71d78bdc603ecb8dfb8a6969e77207c9f4c7e5"
+  },
+  "variants": {
+    "1080p": {
+      "segments": 34,
+      "duration": 203.0,
+      "bytes": 95059380,
+      "decodedFrames": 4872,
+      "fps": 24,
+      "width": 1080,
+      "height": 1920,
+      "maxSegmentBytes": 3617120,
+      "averageBandwidth": 3746183,
+      "bandwidth": 5063969
+    },
+    "720p": {
+      "segments": 34,
+      "duration": 203.0,
+      "bytes": 48259036,
+      "decodedFrames": 4872,
+      "fps": 24,
+      "width": 720,
+      "height": 1280,
+      "maxSegmentBytes": 1890716,
+      "averageBandwidth": 1901834,
+      "bandwidth": 2647003
+    }
+  },
+  "masterPlaylist": "journey/film/index-birdfree-r1.m3u8",
+  "signature": "05de25f588305d0502c2",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "commands": "/workspace/scratch/7dbdec9a2b48/malaysia-rebuild/bird-removal/commands.jsonl",
+  "appliedLocally": true,
+  "note": "An edit of existing footage. No new story shots, extended runtime, loops, still padding, or speed changes.",
+  "runtimeVerification": {
+    "revision": "birdfree-r1",
+    "passed": true,
+    "filmDuration": 203,
+    "totalExperienceDuration": 293,
+    "retainedShots": 16,
+    "retainedHotspots": 16,
+    "unchangedHotspots": 7,
+    "shiftedHotspots": 9,
+    "shiftSeconds": 25.5,
+    "removedShotIds": [
+      8,
+      9
+    ],
+    "sourceAndPublicTimelineMatch": true,
+    "cacheVersionedMediaExists": true,
+    "confessionCopyVerified": true
+  },
+  "fontVerification": {
+    "bytes": 29740,
+    "family": "Siyi Confession Serif",
+    "weight": 400,
+    "mappedCharacters": 221,
+    "newSentenceMissingGlyphs": []
+  },
+  "localAssetAudit": {
+    "publicBytesBefore": 257312940,
+    "publicBytesAfter": 239271143,
+    "filmBytesBefore": 161374572,
+    "filmBytesAfter": 143332775,
+    "oldSegmentNamesRemaining": 0,
+    "currentSegmentCounts": {
+      "1080p": 34,
+      "720p": 34
+    }
+  },
+  "boundaryFrameReview": {
+    "newFrames": [
+      2123,
+      2124
+    ],
+    "correspondingOriginalFrames": [
+      2123,
+      2736
+    ],
+    "finding": "The two inspected re-encoded boundary stills show the library doorway followed by the mirror hall; no visible paper birds. This is not a frame-by-frame review of the whole film."
+  }
+}

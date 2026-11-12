@@ -1,12 +1,76 @@
 {
   "greeting": "祝集美小喵【zkl】圣诞节快乐",
   "background": {
-    "image": "backgrounds/fairytale-castle-winter.webp",
-    "brightness": 0.86,
+    "image": "backgrounds/storybook-castle-360.webp",
+    "brightness": 0.94,
+    "projection": "equirectangular",
+    "rotation": 0,
     "focus": [
-      0.82,
-      0.22
+      0.25,
+      0.5
+    ],
+    "panels": [
+      {
+        "image": "backgrounds/storybook-view-00.webp",
+        "yaw": 5.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      },
+      {
+        "image": "backgrounds/storybook-view-01.webp",
+        "yaw": 50.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      },
+      {
+        "image": "backgrounds/storybook-view-02.webp",
+        "yaw": 95.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      },
+      {
+        "image": "backgrounds/storybook-view-03.webp",
+        "yaw": 140.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      },
+      {
+        "image": "backgrounds/storybook-view-04.webp",
+        "yaw": 185.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      },
+      {
+        "image": "backgrounds/storybook-view-05.webp",
+        "yaw": 230.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      },
+      {
+        "image": "backgrounds/storybook-view-06.webp",
+        "yaw": 275.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      },
+      {
+        "image": "backgrounds/storybook-view-07.webp",
+        "yaw": 320.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      }
     ]
   },
-  "snow": true
+  "snow": true,
+  "cat": {
+    "image": "characters/christmas-cat.png",
+    "video": "videos/starlight-return.mp4"
+  }
 }

@@ -1,145 +1,68 @@
-# 照片圣诞树
+# 思仪的城堡奇旅 · 照片圣诞树
 
-一棵有棕色主干、绿色松枝和照片挂卡的 3D 圣诞树，置于蓝紫暮色、暖金灯窗和雪庭组成的童话城堡夜景中。保留旋转、散开和聚合、彩灯、柔金顶星与飘雪，并支持更换夜景背景图片。
+为谭陈思仪制作的手机网页：平时是城堡奇旅与告白，圣诞节切换为照片圣诞树。技术栈为 React、TypeScript、Vite、Three.js 和 HLS 视频。
 
-首页只显示场景和左下角祝福：
+**2026-11-12 交接状态：现有网站与制作资料交给 Claude Code 继续。新电影《今晚，改道》还没有生成片段，目标 5:22 尚未实现；GitHub 交接不代表重新发布网站。** 先读 [CLAUDE.md](CLAUDE.md) 与 [完整交接](docs/CLAUDE_HANDOFF.md)。远端确认后，使用交接分支克隆：
 
-> 祝集美小喵【zkl】圣诞节快乐
+```bash
+git clone --branch handoff/claude-2026-11-12 https://github.com/yil384/christmas-tree.git
+cd christmas-tree
+```
 
-没有常驻工具栏或可见操作说明。相册、分享和可选的手势魔法保留为隐藏入口。
+## 现有网站
 
-## 隐藏交互
-
-| 操作 | 效果 |
+| 地址 / 内容 | 当前状态 |
 | --- | --- |
-| 单击／单点 | 暂停或继续自动旋转 |
-| 双击／双点 | 散开或聚合 |
-| 拖动／单指滑动 | 改变观察视角 |
-| 滚轮／双指缩放 | 在当前屏幕的有限范围内拉近或拉远 |
-| 长按照片约 0.65 秒 | 打开这张照片的大图 |
-| 长按空白约 0.65 秒 | 打开链接与二维码分享 |
-| 舞台获得键盘焦点后按空格／回车 | 分别控制旋转／聚散 |
-| 长按左下角祝福约 1 秒，或按 H | 打开手势魔法图鉴；点击开启后才请求摄像头 |
+| [tanchensiyi.com](https://tanchensiyi.com/) | 当前打开城堡奇旅；2026-12-25 00:00（北京时间）起自动选择圣诞树 |
+| [/letter/](https://tanchensiyi.com/letter/) | 固定告白入口：现有影片 203 秒，加 90 秒交互尾声，共约 4:53；包含明确告白 |
+| [/christmas/](https://tanchensiyi.com/christmas/) | 固定圣诞入口：95 张照片、3D 树、八方向背景、骨骼小猫、高清相册、可选手势 |
+| [原礼物域名](https://jimeixiaomiao.wildmole.chatgpt.site/) | 首页继续打开圣诞树 |
+| 《今晚，改道》 | 新的 5:22 剧情方案；22 段剧情、29 个明确切镜镜头、4 组优先 Extend；**生成 / 验收 / 集成均为 0** |
 
-单击延迟约 330 ms 判定，避免双击先误触暂停。拖动、两指缩放和指针取消不会触发这些彩蛋。系统开启减少动态效果时，树保持静止并直接切换聚散状态。上述说明仅供维护者查看，不会出现在首页。
-
-## 可选的手势魔法
-
-开启后可用张掌移动转动视角、双掌拉开 / 靠近缩放、V 手势散开、握拳聚合、竖拇指暂停 / 继续、食指瞄准后捏合打开照片、相册里挥手翻页，以及 🤟 唤出柔和星光。图鉴、预览、识别状态和退出按钮只在用户进入模式后出现。
-
-模型在本机 Worker 中运行，摄像头画面不上传、不录像，不请求麦克风。普通首屏不加载模型；退出模式或切到后台就停止摄像头。部分微信浏览器不能使用摄像头时可继续用触摸操作。
-
-使用方法、扩展接口和验证范围见 [手势魔法说明](docs/HAND_MAGIC.md)，参与开发见 [贡献说明](CONTRIBUTING.md)。
-
-![已发布版本的手势图鉴](docs/hand-magic-interface.jpg)
-
-图为实际线上手势图鉴。截图环境未启用摄像头、禁用了 WebGL，不能作为 3D 合成效果或真人手势准确率的验证。
+交接基线为 Sites **v26** 对应源码 `2abfef734dab07d8279e04ac35b981bcb8bb2287`。现有主页影片是旧片去除纸鸟段落后的 `birdfree-r1`，不是新的马来西亚剧情电影。圣诞配置当前仍引用 `videos/starlight-return.mp4`；旧 README 所写“`cat.video` 为 `null`”已过时。
 
 ## 本地运行
 
-需要 Node.js 20.19 或更新版本。
+需要 Node.js **20.19 或更新版本**；现有 CI 使用 Node.js 24。
 
 ```bash
 npm ci
 npm run dev
 ```
 
-开发和构建前自动处理照片、背景、场景配置和固定版本手势资源。首次准备模型需要网络连接：
+开发和构建前会自动准备照片、场景和手势资源。`public/generated/` 不入库，由保留的源照片和背景重新生成；首次准备手势模型需要访问 Google 模型下载地址。普通网页构建不需要运行视频剪辑脚本。
 
 ```bash
-npm run photos
-npm run scene
 npm run lint
 npm test
 npm run build
 npm run preview
 ```
 
-## 替换照片
+`build` 包含 TypeScript 检查、Vite 打包和静态入口整理，输出 `dist/`，同时生成 `/letter/` 与 `/christmas/` 的实际入口文件。请分别检查两条路线。
 
-把照片放进 `public/photos/`，支持 JPG、JPEG、PNG、WebP、AVIF。文件名不用连续编号，张数也不用预先确定。默认 `top.*` 在前，其余按自然文件名排序。
+本次恢复后在 Node.js **24.22.1** 完成实际复验：**生产构建通过，244 项测试通过，lint 0 错误 / 4 个既有 Hook 警告**。没有新增 iPhone 微信实机或 GitHub CI 验收记录；详见交接文档。
 
-```text
-public/photos/
-  top.jpg
-  1.jpg
-  2.jpg
-  海边.png
-```
+## 维护入口
 
-生成脚本不覆盖原始文件。生成结果在 `public/generated/`，不提交到源码仓库。
+| 位置 | 用途 |
+| --- | --- |
+| [CLAUDE.md](CLAUDE.md) / [交接详情](docs/CLAUDE_HANDOFF.md) | 代码地图、当前事实、已知风险、下一步与验证范围 |
+| [电影制作交接](production/tonight-we-change-course/README.md) | Google Vids 工程、实际尝试、参考图、恢复制作顺序 |
+| [《今晚，改道》导演包](docs/malaysia-film/README.md) | 剧本、逐镜 prompt、生成队列、Extend 方案、连续性约束 |
+| [季节路由](docs/SEASONAL_SITE.md) | 主域名与圣诞切换机制 |
+| [现有影片 QA](docs/LONG_RIDE_QA.md) / [去鸟剪辑报告](docs/LONG_RIDE_BIRD_REMOVAL_REPORT.json) | 现有影片的历史验证与当前时长；不能当作新片验收 |
+| [圣诞树维护历史](docs/CHRISTMAS_TREE_GUIDE.md) | 原 README 的交互、场景、照片与手势说明；顶部列明过时状态 |
+| [贡献约定](CONTRIBUTING.md) / [媒体源码交付](docs/SITES_MEDIA_DELIVERY.md) | 开发检查与 Sites 大文件传输经验 |
 
-可选地创建 `public/photos/manifest.json`，指定顺序和说明：
+95 张原始照片保留在 `public/photos/`，顺序见 `manifest.json`。不要替换真人身份参考、重绘原照片中的脸，或把生成参考图当作已生成的视频。保护圣诞入口、固定照片顺序和来源记录。
 
-```json
-{
-  "photos": [
-    {"file": "top.jpg", "alt": "第一张照片"},
-    {"file": "海边.png", "caption": "想写的说明", "alt": "海边合照"},
-    "2.jpg"
-  ]
-}
-```
+运行所需的旧片 HLS 与优化图片齐全；18 条旧 `clip-*.mp4` 原始镜头及部分原始旅程 PNG 不在恢复资料中，源级重剪需先从原 Google Vids 工程导出。这不阻碍当前网页构建。
 
-有清单时只选择列出的照片；无清单时自动发现目录内照片。替换有清单引用的文件时，也要更新清单。显式的 `{"photos":[]}` 表示空相册；即使没有照片，实体树、灯和星星仍然存在。
+优先适配 iPhone 在微信内的竖屏使用：安全区域、触摸操作、首次加载、开声、后台恢复和真实设备流畅度都需要实测。自动检查、桌面视口模拟、Canvas 降级或离屏检查不能代替手机 WebGL 与猫动作观感验收。
 
-每张照片生成最长边 320 px 的 WebP 缩略图，以及最长边 1600 px 的显示图。自动修正 EXIF 方向、去除输出元数据，不放大较小原图。树先加载缩略图，打开相册才加载较大图片。
+## 发布边界
 
-本轮照片是“挂在树上的卡片”：桌面 128 个实例、窄屏 90 个，主要为较小照片，少量大照片点缀。按树表面积分布，给顶端、主干和枝叶留出空间。照片数量不足时重复使用；这不是要求提供的原照片数量。大相册会均匀采样到树上，完整相册仍可浏览。
+当前线上使用 **Sites**，项目配置在 `.openai/hosting.json`。GitHub 推送、GitHub Pages 预览和 Sites 生产部署是不同操作；本次只交接，不修改域名或重新部署。发布前确认源码提交与构建产物对应，并完整验证媒体清单、片段与时间轴。
 
-## 更换夜景背景和祝福
-
-编辑 `public/scene.json`：
-
-```json
-{
-  "greeting": "祝集美小喵【zkl】圣诞节快乐",
-  "background": {
-    "image": "backgrounds/night.jpg",
-    "brightness": 0.52,
-    "focus": [0.5, 0.42]
-  },
-  "snow": true
-}
-```
-
-将对应图片放到 `public/backgrounds/night.jpg`。支持 JPG、JPEG、PNG、WebP、AVIF、SVG。默认使用童话城堡冬夜背景 `fairytale-castle-winter.webp`（AI 生成），搭配香槟金灯串、蓝紫环境光和柔和泛光；可以直接换成自己的实景夜景照片。生成说明见 `public/backgrounds/README.md`。
-
-- `image`：位于 `public/backgrounds/` 内的本地文件，设为 `null` 使用纯深色夜空。
-- `brightness`：背景亮度，0.12～1；较暗的背景更衬托照片。
-- `focus`：横向、纵向裁切焦点，均为 0～1；0 是左／上，1 是右／下。
-- `snow`：是否飘雪。
-- `greeting`：左下角文字。
-
-背景自动转换为最长边不超过 1920 px 的 WebP，保留原始文件。手机竖屏按焦点等比裁切，不拉伸图片。背景和雪独立于整树旋转，照片、枝叶与主干共享树的旋转。背景不会请求外部 HDR 或第三方图片服务。
-
-## 发布
-
-Vite 使用相对资源路径，支持根目录或子目录托管。生产构建只保留生成的 WebP 和运行时清单；原始照片、背景图片及源配置不会重复放入最终产物。
-
-本分支预览工作流只更新 `gh-pages/preview-2026/`，保留站点根目录及根目录 `CNAME`。预览准备完成后必须确认 GitHub Pages 部署成功；不能仅凭推送成功认定公开页面已更新。
-
-`npm run deploy` 是整个站点发布命令，仅适用于确认正式发布时。
-
-静态托管中的照片能通过公开网址访问；`noindex` 是搜索索引设置，不是访问控制。
-
-## 实现与验证
-
-- `src/scene/TreeBody.tsx`：粗糙树皮、层叠松枝和约 2.47 万根有厚度的针叶，共三批受光照的实体几何。
-- `src/scene/photo-layout.ts`：卡片和树体的空间关系、照片朝向和挂绳连接。
-- `src/scene/PhotoOrnaments.tsx`：带厚度和轻微卷曲的纸张、木夹与挂绳共用一批实例化绘制；`photo-material.ts` 提供物理材质与共享几何。
-- `src/scene/TreeDetails.tsx`：彩灯、挂件、顶星，以及有远近层次的飘雪。
-- `src/scene/NightBackground.tsx`：独立夜景图层与裁切。
-- `src/scene/SnowGround.tsx`：世界坐标中的雪地、树脚接触阴影和背景色彩衔接。
-- `src/scene/Snowfall.ts`：有远近层次、覆盖当前视野并在地面上方回收的雪花。
-- `src/scene/camera-framing.ts`：按横竖屏计算相机缩放与俯仰边界。
-- `src/hooks/useSecretInteractions.ts`：无可见按钮的鼠标、触摸与键盘交互。
-- `src/lib/hand-gestures.ts`：独立于模型的手势意图与防误触状态机。
-- `src/hand-tracking/`：按需启动的摄像头、Worker、本机推理与资源释放。
-- `src/components/HandMagicMode.tsx`：手势图鉴、模式状态、预览和退出。
-- `scripts/prepare-scene.mjs`：背景压缩与场景配置生成。
-- `docs/PERFORMANCE.md`：性能与验证范围。
-
-当前 143 项自动检查、ESLint、TypeScript 与生产构建通过。其中新增 37 项手势意图测试、25 项相机运行时与资源测试、28 项相机与真实照片命中测试；实际 Three r169 生成的完整 GLSL 在 Mesa GLES 3.2 中验证了 20 个程序的编译与链接，包含新星光效果。此前也对真实几何进行了离线结构渲染。
-
-核验环境的浏览器禁用了 WebGL，真实摄像头测试也尚未完成。因此上述检查不代表最终浏览器合成画面、真人手势识别准确率、手机帧率或微信浏览器已经实机验收，详细范围见 [性能与验证说明](docs/PERFORMANCE.md)。
+`npm run deploy` 是保留的 GitHub Pages 命令；`gift-preview.yml` 只更新历史分支的 `preview-2026/`。不要把这些结果当作 `tanchensiyi.com` 更新成功。仓库不保存登录凭据、验证码、Cookie 或会话链接。

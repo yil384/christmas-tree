@@ -125,7 +125,7 @@ export function createPrintGeometry() {
   return geometry;
 }
 
-export function createPrintMaterial(atlas: THREE.Texture) {
+export function createPrintMaterial(atlas: THREE.Texture, photoReveal = { value: 1 }) {
   const material = new THREE.MeshStandardMaterial({
     map: atlas,
     roughness: 0.72,
@@ -134,6 +134,7 @@ export function createPrintMaterial(atlas: THREE.Texture) {
   });
   material.onBeforeCompile = shader => {
     shader.uniforms.uCordStart = { value: CORD_START };
+    shader.uniforms.uPhotoReveal = photoReveal;
     shader.vertexShader = /* glsl */ `
       attribute vec4 aPhotoRect;
       attribute vec3 aFrameColor;
@@ -177,6 +178,7 @@ export function createPrintMaterial(atlas: THREE.Texture) {
       vPaperPosition = transformed;
     `);
     shader.fragmentShader = /* glsl */ `
+      uniform float uPhotoReveal;
       varying vec2 vCardUv;
       varying vec4 vPhotoRect;
       varying vec3 vFrameColor;
@@ -195,14 +197,14 @@ export function createPrintMaterial(atlas: THREE.Texture) {
       float inPhoto = step(0.0, photoUv.x) * step(photoUv.x, 1.0)
         * step(0.0, photoUv.y) * step(photoUv.y, 1.0) * (1.0 - step(0.5, vPart));
       vec2 atlasUv = vPhotoRect.xy + clamp(photoUv, 0.0, 1.0) * vPhotoRect.zw;
-      // CanvasTexture is SRGBColorSpace; Three uploads it as sRGB, decoding
+      // The atlas is SRGBColorSpace; Three uploads it as sRGB, decoding
       // these pixels to linear light before the standard lighting pipeline.
       vec3 photograph = texture2D(map, atlasUv).rgb;
       float grain = paperGrain(floor(cardUv * vec2(680.0, 850.0)));
       vec3 paper = mix(vFrameColor, vec3(0.89, 0.86, 0.80), 0.66) * (0.986 + grain * 0.028);
-      vec3 surfaceColor = mix(paper, photograph, inPhoto);
+      vec3 surfaceColor = mix(paper, photograph, inPhoto * uPhotoReveal);
       float edgeDistance = min(min(photoUv.x, 1.0 - photoUv.x), min(photoUv.y, 1.0 - photoUv.y));
-      surfaceColor *= 1.0 - inPhoto * 0.12 * (1.0 - smoothstep(0.0, 0.012, edgeDistance));
+      surfaceColor *= 1.0 - inPhoto * uPhotoReveal * 0.12 * (1.0 - smoothstep(0.0, 0.012, edgeDistance));
       if (vPart > 3.5) {
         surfaceColor = vec3(0.32, 0.34, 0.35);
       } else if (vPart > 2.5) {
@@ -227,6 +229,6 @@ export function createPrintMaterial(atlas: THREE.Texture) {
       metalnessFactor = vPart > 3.5 ? 0.72 : 0.0;
     `);
   };
-  material.customProgramCacheKey = () => 'physical-polaroid-wood-cord-v1';
+  material.customProgramCacheKey = () => 'physical-polaroid-wood-cord-v2-batch-reveal';
   return material;
 }

@@ -16,10 +16,12 @@ const compile = source => ts.transpileModule(source, {
 }).outputText;
 const moduleUrl = source => `data:text/javascript;base64,${Buffer.from(source).toString('base64')}`;
 const profileUrl = moduleUrl(compile(await readFile(new URL('../src/scene/tree-profile.ts', import.meta.url), 'utf8')));
+const baseUrl = moduleUrl(compile(await readFile(new URL('../src/scene/tree-base.ts', import.meta.url), 'utf8'))
+  .replace(/from\s+(['"])\.\/tree-profile\1/g, `from ${JSON.stringify(profileUrl)}`));
 const source = await readFile(new URL('../src/scene/TreeBody.tsx', import.meta.url), 'utf8');
 const moduleCode = compile(`${source}\nexport { createTreeBody };`).replace(
   /from\s+(['"])([^'"]+)\1/g,
-  (_match, _quote, name) => `from ${JSON.stringify(name === './tree-profile' ? profileUrl : import.meta.resolve(name))}`,
+  (_match, _quote, name) => `from ${JSON.stringify(name === './tree-profile' ? profileUrl : name === './tree-base' ? baseUrl : import.meta.resolve(name))}`,
 );
 const { createTreeBody } = await import(moduleUrl(moduleCode));
 const {

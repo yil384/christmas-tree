@@ -15,9 +15,14 @@
   ],
   "after": [
     {
-      "name": "HandMagicMode-DxJkroEK.js",
-      "bytes": 18541,
-      "gzipBytes": 7559
+      "name": "ChristmasFilm-DL4ZpPZv.js",
+      "bytes": 435,
+      "gzipBytes": 387
+    },
+    {
+      "name": "HandMagicMode--P2k4THL.js",
+      "bytes": 18544,
+      "gzipBytes": 7553
     },
     {
       "name": "HandMagicMode-TjuieOol.css",
@@ -25,66 +30,73 @@
       "gzipBytes": 2186
     },
     {
-      "name": "PhotoGallery-Dq9MgtYn.js",
+      "name": "PhotoGallery-DvSFkhao.js",
       "bytes": 4325,
       "gzipBytes": 1915
     },
     {
-      "name": "ShareGift-jSSKST0V.js",
-      "bytes": 26660,
-      "gzipBytes": 10683
+      "name": "ShareGift-D82qNYl6.js",
+      "bytes": 34280,
+      "gzipBytes": 13760
     },
     {
-      "name": "TreeScene-CoyAVk70.js",
-      "bytes": 907245,
-      "gzipBytes": 246146
+      "name": "ShareGift-jjUbg1kE.css",
+      "bytes": 3793,
+      "gzipBytes": 1278
     },
     {
-      "name": "index-BDgpjFhy.js",
-      "bytes": 160943,
-      "gzipBytes": 52765
+      "name": "TreeScene-CAKftb5s.js",
+      "bytes": 912670,
+      "gzipBytes": 248274
     },
     {
-      "name": "index-BZ3kugXf.css",
-      "bytes": 7599,
-      "gzipBytes": 2495
+      "name": "index-CTViEv7F.css",
+      "bytes": 7905,
+      "gzipBytes": 2581
     },
     {
-      "name": "session-HbvATeqt.js",
+      "name": "index-VHMnsM6k.js",
+      "bytes": 161935,
+      "gzipBytes": 53116
+    },
+    {
+      "name": "session-BF5K4xB3.js",
       "bytes": 8733,
-      "gzipBytes": 3740
+      "gzipBytes": 3739
     }
   ],
   "initialTreeJavaScript": {
-    "bytes": 1068188,
-    "gzipBytes": 298911
+    "bytes": 1074605,
+    "gzipBytes": 301390
   },
   "photos": {
-    "count": 32,
-    "originalBytes": 5988722,
-    "allThumbnailBytes": 311472,
-    "allDisplayBytes": 4105400,
-    "atlasForCurrentCollectionBytes": 4194304,
+    "count": 95,
+    "originalBytes": 20019426,
+    "allThumbnailBytes": 1055562,
+    "allDisplayBytes": 13662360,
+    "atlasForCurrentCollectionBytes": 16777216,
     "atlasMaximumBytes": 16777216
   },
   "visualValidation": {
     "webgl": "Browser reports GL_VENDOR=Disabled; final browser composition and target-device frame rate remain unverified",
-    "shaderCompiler": "20 full Three r169 programs / 40 stages compiled and linked in Mesa GLES 3.2 llvmpipe; no compiler or linker logs; includes HandMagic in compositor and direct output paths",
-    "geometry": "Actual tree, paper/card/clip geometry and attachment, stem burial, camera framing and 120 snow camera cases tested",
-    "offlineReference": "Current fairytale-castle composition and rounded star inspected with source geometry and photos in Blender Cycles CPU; approximate lighting, not a browser screenshot. Portrait background crop checked separately.",
-    "tests": 143,
+    "shaderCompiler": "30 full Three r169 programs / 60 stages compiled and linked in Mesa GLES 3.2 llvmpipe; includes panorama conversion/cube, cat sprite/contact/stars, root relief and photo geometry",
+    "geometry": "World-stationary tree/photographs and camera orbit with real OrbitControls; six buried root buttresses, contact snow mesh, framing, photo picking and 120 snowfall camera cases tested",
+    "offlineReference": "Actual new trunk root and snow geometry inspected in Blender CPU close-up; structural reference only, not a browser screenshot.",
+    "tests": 163,
     "topStar": "One CPU check: closed rounded shell and mounting stem, finite values, outward faces, smooth unit normals, fixed local pose and assembly scale",
     "handTracking": "37 deterministic gesture tests, 25 runtime/worker/network/model tests, 28 scene/picking tests; physical webcam inference and target-device FPS not yet verified"
   },
   "background": {
-    "source": "public/backgrounds/fairytale-castle-winter.webp",
-    "runtimeAsset": "generated/background/night-c320cca44ca81f2cb835.webp",
-    "bytes": 154710,
-    "provenance": "AI-generated fairytale winter castle with blue-lavender twilight and warm golden windows"
+    "source": "public/backgrounds/fairytale-courtyard-360.webp",
+    "runtimeAsset": "generated/background/night-b04f909d883318ea6525.webp",
+    "bytes": 109196,
+    "projection": "equirectangular",
+    "rotationDegrees": 78,
+    "provenance": "AI-generated 360-degree fairytale courtyard; fixed world environment, not a full 3D castle model"
   },
   "structure": {
     "photoCardsDesktop": 128,
-    "photoCardsCompact": 90,
+    "photoCardsCompact": 96,
     "solidBodyBatches": 3,
     "photoAndHangerBatches": 1,
     "foliagePointsDesktop": 6800,
@@ -99,7 +111,9 @@
     "foliagePointsVisibleWhenFormed": 0,
     "topStarTriangles": 3864,
     "topStarVertices": 11592,
-    "topStarDrawBatches": 1
+    "topStarDrawBatches": 1,
+    "snowGroundVertices": 3937,
+    "snowGroundTriangles": 7776
   },
   "handTracking": {
     "sdkVersion": "1.2.2",
@@ -153,5 +167,24 @@
         "sha256": "3b5cf016f4f69b4f852e219a9163ff26f1337f938c2f8bf47e7ce9cbacca67c4"
       }
     ]
+  },
+  "cat": {
+    "source": "public/characters/christmas-cat.png",
+    "runtimeAsset": "generated/characters/cat-d83aa7a8fb0f0d831634.webp",
+    "bytes": 378568,
+    "representation": "World-positioned transparent sprite with snow-height contact and optional local MP4; no video currently configured",
+    "magicInstances": 12
+  },
+  "cameraOrbit": {
+    "lapSeconds": 330,
+    "sceneObjectsRotate": false,
+    "resumeAfterManualMs": 1800,
+    "maximumFrameDeltaSeconds": 0.05
+  },
+  "giftCard": {
+    "width": 1200,
+    "height": 1800,
+    "qrValidation": "ZBar decoded cat/new-Site and fallback/old-preview cards, at full size and 720px width",
+    "generatedLocally": true
   }
 }

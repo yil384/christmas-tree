@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "project": "今晚，改道",
+  "updated_date": "2026-11-12",
+  "path_base": "repository_root",
+  "note": "Includes approved original plan/reference bytes and current reconstructed handoff records; excludes this manifest to avoid self-reference. No generated new film exists.",
+  "files": [
+    {
+      "path": "docs/film/HUMAN_ORIGINAL.jpg",
+      "bytes": 190984,
+      "sha256": "eb53cf7157484c28ebb8be3e0caf2aaab51ed3017317cfc4cceeb84326094384"
+    },
+    {
+      "path": "docs/malaysia-film/CONTINUITY.md",
+      "bytes": 5293,
+      "sha256": "c4daa9fdd573e44eab89f8c8adce63761c021523c14fba9aed41888cea556fe0"
+    },
+    {
+      "path": "docs/malaysia-film/DIRECTOR_SCRIPT.md",
+      "bytes": 27568,
+      "sha256": "b592fb59b28ec2fead723d7d1b6a1f9435a53ca7d20e41dcc78778ddbe59b0dc"
+    },
+    {
+      "path": "docs/malaysia-film/README.md",
+      "bytes": 5014,
+      "sha256": "ab0a14baebd06a8d049fc6172195bbf8fccdaa2df93c9ed8861541ae406c50af"
+    },
+    {
+      "path": "docs/malaysia-film/REFERENCE_BRIEFS.txt",
+      "bytes": 5574,
+      "sha256": "b98458e31f6935645e39451d13ca2a6b9bfa42af5953f1c16cdf81d271c6b56a"
+    },
+    {
+      "path": "docs/malaysia-film/REFERENCE_NOTES.md",
+      "bytes": 1612,
+      "sha256": "ed79a2ea4793df08519f3b701575980adecac765ab476f73a45090f4c054827b"
+    },
+    {
+      "path": "docs/malaysia-film/SHOT_QUEUE.csv",
+      "bytes": 3986,
+      "sha256": "dc485e967d1791b508024c04fa55299820be6447422647e2e55d8e6485bc8cf5"
+    },
+    {
+      "path": "docs/malaysia-film/VIDS_PROMPTS.md",
+      "bytes": 94251,
+      "sha256": "f133f1deadbc3ea9860e9758a6c7d477a8e24b143a82fa9e3c0d736c9ff4e8af"
+    },
+    {
+      "path": "docs/malaysia-film/director-cues.json",
+      "bytes": 18750,
+      "sha256": "a9a912c9a520d9a0c0b1c434383891c742d00593835b9a10165851ad9f6d2b33"
+    },
+    {
+      "path": "docs/malaysia-film/generation-queue.json",
+      "bytes": 122152,
+      "sha256": "d1cc0b0997b919327d420b1a3391685fae9ef9c1478edc1710aef8efcb41ccad"
+    },
+    {
+      "path": "docs/malaysia-film/production-status.json",
+      "bytes": 2882,
+      "sha256": "3d97cd39c89cb62fe7da6bd14c0dbaff569790ca90db0c1b1b231cf16ccbde3f"
+    },
+    {
+      "path": "docs/malaysia-film/references/A_PALACE_MASTER.png",
+      "bytes": 2653634,
+      "sha256": "81150f082c1f8b38b67d0141c5daa0857c92a513ffc7b44e2cdddaa4d2f7f938"
+    },
+    {
+      "path": "docs/malaysia-film/references/B_PREPARATION_ROOM.png",
+      "bytes": 2602443,
+      "sha256": "a076bd4a68236db495ed4469a3bd73e5e8b78d77cacdcee9137dc5e4c07e7b8d"
+    },
+    {
+      "path": "docs/malaysia-film/references/CAT_IDENTITY.png",
+      "bytes": 2228419,
+      "sha256": "081182deb7fe5e4e90335f8cfd3f2ecc7065f4510845a0d8ad888baff99a4a35"
+    },
+    {
+      "path": "docs/malaysia-film/references/C_DEPARTURE_PLATFORM.png",
+      "bytes": 2684851,
+      "sha256": "b6a5ccc33e1f69e96b725a52508fc26d1720beed2a4987e3299f9b72d8a9d924"
+    },
+    {
+      "path": "production/tonight-we-change-course/.gitignore",
+      "bytes": 23,
+      "sha256": "07bd872a15091d0f14116faf13f17a5f1046f7b94e43ca76665f3048389e5e5e"
+    },
+    {
+      "path": "production/tonight-we-change-course/ATTEMPTS.md",
+      "bytes": 2732,
+      "sha256": "fede623fc6dc84cd506adf4653d8fa94a524d84cb2ab7786dbc3e9d402b3676d"
+    },
+    {
+      "path": "production/tonight-we-change-course/README.md",
+      "bytes": 6806,
+      "sha256": "5cc96ed94a1346bc373990d779ed7e0366fc148c4ecb1b3c915009e3e98060a3"
+    },
+    {
+      "path": "production/tonight-we-change-course/progress.json",
+      "bytes": 3951,
+      "sha256": "e15676a4c21fdf7f8a76136ec20e8cf780080ee991cd51247406987414b37ce3"
+    },
+    {
+      "path": "production/tonight-we-change-course/quality-probes/S02-metadata.json",
+      "bytes": 1000,
+      "sha256": "798e25b779ec4b0b39654f7362aed6262256f87ec4b97e3152be79de95b7f16b"
+    },
+    {
+      "path": "production/tonight-we-change-course/quality-probes/S02-motion-test-3s-v1-metadata.json",
+      "bytes": 1055,
+      "sha256": "0501b2d58d77a2ec2fb5a75679f6b257ef0439f56b17a91acbe0367c546690c5"
+    },
+    {
+      "path": "production/tonight-we-change-course/quality-probes/S02-motion-test-3s-v1.txt",
+      "bytes": 1904,
+      "sha256": "67824805be26c685bbb4b4d14c718757be774924f7f1fbf212ad00492bcbae88"
+    },
+    {
+      "path": "production/tonight-we-change-course/quality-probes/S02-prompt.txt",
+      "bytes": 2878,
+      "sha256": "2864388e0ed8ab9497118d3806fd60cdfc4c5735f076e7cceca446a784b3972f"
+    },
+    {
+      "path": "production/tonight-we-change-course/quality-probes/S06B-metadata.json",
+      "bytes": 938,
+      "sha256": "44a20ada8d25457b3c08adc3cd29ee38ff5746cd86e2ad99b84f60dd89f59872"
+    },
+    {
+      "path": "production/tonight-we-change-course/quality-probes/S06B-prompt.txt",
+      "bytes": 2621,
+      "sha256": "ef9634034e0cf087973d19f95be51dbdaba39985080c124bd6fe9e889e39edb5"
+    },
+    {
+      "path": "production/tonight-we-change-course/tonight-we-change-course.pdf",
+      "bytes": 3467975,
+      "sha256": "53cf5a6fa97a55df4786e90945fc61e286d1fbd2c6b3a34fb2165a23d76a9bb0"
+    },
+    {
+      "path": "production/tonight-we-change-course/tools/inspect_video.py",
+      "bytes": 5345,
+      "sha256": "37848f692da396d64b767d161e1efc8d287229b66b0fd5a70aad68025939ae59"
+    }
+  ]
+}

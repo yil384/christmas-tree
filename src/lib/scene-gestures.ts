@@ -15,6 +15,7 @@ export interface GesturePoint {
 
 export interface SceneGestureCallbacks {
   onTap: () => void;
+  onPhotoTap?: (photoIndex: number) => void;
   onDoubleTap: () => void;
   onLongPress: (photoIndex: number | null) => void;
 }
@@ -31,6 +32,7 @@ interface CompletedTap {
   y: number;
   time: number;
   pointerType: string;
+  photoIndex: number | null;
   timer: number | null;
 }
 
@@ -81,19 +83,24 @@ export function createSceneGestureController(callbacks: SceneGestureCallbacks, c
       press.previousTap = null;
     }
   };
-  const deferTap = (point: GesturePoint) => {
+  const fireTap = (photoIndex: number | null) => {
+    if (photoIndex !== null && callbacks.onPhotoTap) callbacks.onPhotoTap(photoIndex);
+    else callbacks.onTap();
+  };
+  const deferTap = (point: GesturePoint, photoIndex: number | null) => {
     const tap: CompletedTap = {
       x: point.clientX,
       y: point.clientY,
       time: clock.now(),
       pointerType: point.pointerType,
+      photoIndex,
       timer: null,
     };
     pendingTap = tap;
     tap.timer = clock.setTimeout(() => {
       if (pendingTap !== tap) return;
       pendingTap = null;
-      callbacks.onTap();
+      fireTap(tap.photoIndex);
     }, SCENE_GESTURE_TIMING.tapDelay);
   };
 
@@ -126,7 +133,7 @@ export function createSceneGestureController(callbacks: SceneGestureCallbacks, c
           // a hold or drag after the first tap must not also toggle rotation.
           current.previousTap = previous;
         } else {
-          callbacks.onTap();
+          fireTap(previous.photoIndex);
         }
       }
 
@@ -161,9 +168,9 @@ export function createSceneGestureController(callbacks: SceneGestureCallbacks, c
           callbacks.onDoubleTap();
           return;
         }
-        callbacks.onTap();
+        fireTap(previous.photoIndex);
       }
-      deferTap(point);
+      deferTap(point, completed.photoIndex);
     },
 
     pointerLeave(pointerId: number) {

@@ -1,0 +1,28 @@
+Siyi Story Serif — limited Simplified Chinese story font
+
+Source font: /usr/share/fonts/opentype/noto/NotoSerifCJK-Regular.ttc
+TTC face index: 2 (zero-based)
+Original family: Noto Serif CJK SC
+Original version: Version 2.003;hotconv 1.1.1;makeotfexe 2.6.0
+Embedded source copyright: © 2017-2024 Adobe (http://www.adobe.com/).
+Source TTC SHA-256: 5d9c31a059600193c9d7968a998bde886ccdc77e934006ad243b41794c496a7d
+Upstream: https://github.com/notofonts/noto-cjk/tree/main/Serif
+License: SIL Open Font License 1.1; see siyi-serif.LICENSE.txt.
+
+Modification: SC face extraction; glyph subset; removal of unused layout
+features, vertical metrics and hinting; renamed Siyi Story Serif; WOFF2 encoding.
+No glyph outlines were redesigned. Copyright and OFL metadata are retained.
+CSS @font-face alias suggestion: SiyiStorySerif, weight 400, style normal.
+
+Rebuild: /usr/bin/python3 scripts/build-siyi-font.py
+Uses existing system fontTools and Brotli; no project dependency is added.
+The script reads all Chinese characters from src/confession/ConfessionPage.tsx,
+adds the approved story-title seed and the punctuation used by that page.
+It is a text-specific subset, not a general-purpose CJK web font.
+
+Page SHA-256: ff1b8906b380fcdeeff710daaa9c8e8e6db13b75f740790ed223837036e31b86
+Chinese characters: 181
+Total mapped characters: 190
+WOFF2 size: 34912 bytes
+WOFF2 SHA-256: de188090f251e4d12fc65efccfbde5867951db442c50ee91a589ad581197b6fb
+Included characters:  ·“”…、。一三上下不与个中为主久也了二于亮人今以仪份位住你借假停先光入公关其再冕冠出初别到加午印厅去发句只可右后呢唯喜回在场城堡声多夜大奕女好始完宝实导就属左已帅幕度开张归当往思悄想我戴手打拨按搬播放新时星是晚暂更替有朵来松次欢正没游满灯点烟片王玩现珍珠用的皇看着短石私秒空站第等粉紧终经绕给继续耍能脚舞色花蓄行要见角触试话说请谭起路踮轻载辰过还这进邀都里重金镶长闭陈音顶，？

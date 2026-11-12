@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { FOLIAGE_BOTTOM, FOLIAGE_TOP, TRUNK_BOTTOM, foliageRadiusAt } from './tree-profile';
+import { rootFlareAt, TREE_GROUND_LOCAL_Y, TRUNK_BASE_HEIGHTS } from './tree-base';
 
 interface TreeBodyProps {
   state: 'CHAOS' | 'FORMED';
@@ -121,26 +122,32 @@ function appendBark(
   const center = new THREE.Vector3();
   const point = new THREE.Vector3();
   const color = new THREE.Color();
-  const bark = new THREE.Color(trunk ? '#715039' : '#513d2c');
+  const bark = new THREE.Color(trunk ? '#795541' : '#594334');
   const phase = random() * Math.PI * 2;
 
   for (let row = 0; row <= steps; row++) {
-    const fraction = row / steps;
+    // Resolve the first two metres of root collar without adding a draw or
+    // changing random consumption (the established branch layout stays intact).
+    const height = trunk
+      ? row < TRUNK_BASE_HEIGHTS.length ? TRUNK_BASE_HEIGHTS[row]
+        : THREE.MathUtils.lerp(TRUNK_BASE_HEIGHTS[TRUNK_BASE_HEIGHTS.length - 1], end.y - start.y,
+          (row - TRUNK_BASE_HEIGHTS.length + 1) / (steps - TRUNK_BASE_HEIGHTS.length + 1))
+      : (end.y - start.y) * row / steps;
+    const fraction = trunk ? height / (end.y - start.y) : row / steps;
     center.lerpVectors(start, end, fraction);
     if (trunk) {
       center.x += Math.sin(fraction * 4.5) * 0.09;
       center.z += Math.sin(fraction * 7) * 0.06;
     }
-    // A flare at the base gives the stem a rooted, load-bearing silhouette.
-    const radius = THREE.MathUtils.lerp(startRadius, endRadius, fraction)
-      * (trunk ? 1 + 0.28 * Math.exp(-fraction * 42) : 1);
+    const radius = THREE.MathUtils.lerp(startRadius, endRadius, fraction);
     const ring: number[] = [];
     for (let side = 0; side < segments; side++) {
       const angle = side / segments * Math.PI * 2;
       const ridge = 1 + 0.09 * Math.sin(angle * 7 + phase + fraction * 1.4) + 0.035 * Math.cos(angle * 13);
+      const supportRadius = radius * ridge + (trunk ? rootFlareAt(height, angle) : 0);
       point.copy(center)
-        .addScaledVector(horizontal, Math.cos(angle) * radius * ridge)
-        .addScaledVector(vertical, Math.sin(angle) * radius * ridge);
+        .addScaledVector(horizontal, Math.cos(angle) * supportRadius)
+        .addScaledVector(vertical, Math.sin(angle) * supportRadius);
       if (!trunk) containFoliage(point);
       const stripe = 0.72 + 0.2 * Math.sin(angle * 5 + phase) + random() * 0.12;
       color.copy(bark).multiplyScalar(stripe);
@@ -163,7 +170,7 @@ function appendInnerCrown(builder: GeometryBuilder, part: Part) {
   const rings: number[][] = [];
   const point = new THREE.Vector3();
   const color = new THREE.Color();
-  const base = new THREE.Color('#102e20');
+  const base = new THREE.Color('#142d2d');
   const segments = 56;
   const rows = 40;
   for (let row = 0; row <= rows; row++) {
@@ -204,7 +211,7 @@ function appendBough(
   const point = new THREE.Vector3();
   const center = new THREE.Vector3();
   const color = new THREE.Color();
-  const base = new THREE.Color(small ? '#214d31' : '#163d28');
+  const base = new THREE.Color(small ? '#2f6752' : '#1b493b');
   const phase = random() * Math.PI * 2;
   const rows = small ? 3 : 6;
   const segments = small ? 4 : 6;
@@ -258,9 +265,9 @@ function appendNeedles(
   const crease = new THREE.Vector3();
   const middle = new THREE.Vector3();
   const point = new THREE.Vector3();
-  const dark = new THREE.Color('#173c29');
-  const green = new THREE.Color('#3d714c');
-  const silver = new THREE.Color('#66816b');
+  const dark = new THREE.Color('#214d42');
+  const green = new THREE.Color('#4d8a68');
+  const silver = new THREE.Color('#94a78b');
   const color = new THREE.Color();
   const count = Math.max(5, Math.ceil(length * (small ? 3.5 : 4.5)));
   const angleOffset = random() * Math.PI * 2;
@@ -364,6 +371,8 @@ function applyPartMotion(material: THREE.MeshStandardMaterial, assembly: Assembl
         float barkCrack = smoothstep(0.33, 0.47, barkGrain);
         float barkFine = treeNoise(barkP * vec3(3.0, 5.0, 1.0));
         diffuseColor.rgb *= (0.58 + 0.47 * barkCrack + 0.12 * barkFine);
+        float rootDampness = exp(-max(0.0, vTreeRestPosition.y - ${TREE_GROUND_LOCAL_Y.toFixed(4)}) * 1.8);
+        diffuseColor.rgb *= 1.0 - rootDampness * 0.16;
       `);
       // Differential height in view space avoids UV seams or tangent buffers.
       shader.fragmentShader = shader.fragmentShader.replace('#include <normal_fragment_maps>', /* glsl */ `
@@ -380,12 +389,14 @@ function applyPartMotion(material: THREE.MeshStandardMaterial, assembly: Assembl
     } else if (surface === 'foliage') {
       shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', /* glsl */ `
         #include <color_fragment>
-        float foliageGrain = treeNoise(vTreeRestPosition * vec3(8.0, 19.0, 8.0));
-        diffuseColor.rgb *= 0.63 + 0.48 * foliageGrain;
+        // Broad, quiet pigment variation belongs to the painted world.
+        // Keep the actual branch/needle geometry and every photograph sharp.
+        float foliageGrain = treeNoise(vTreeRestPosition * vec3(2.0, 5.0, 2.0));
+        diffuseColor.rgb *= 0.82 + 0.22 * foliageGrain;
       `);
     }
   };
-  material.customProgramCacheKey = () => 'evergreen-body-parts-v2-' + surface;
+  material.customProgramCacheKey = () => 'storybook-evergreen-body-v4-' + surface;
 }
 
 function createTreeBody(assembly: AssemblyUniform) {
@@ -452,12 +463,12 @@ function createTreeBody(assembly: AssemblyUniform) {
   });
   const foliageMaterial = new THREE.MeshStandardMaterial({
     vertexColors: true,
-    roughness: 0.87,
+    roughness: 0.96,
     metalness: 0,
   });
   const needleMaterial = new THREE.MeshStandardMaterial({
     vertexColors: true,
-    roughness: 0.62,
+    roughness: 0.88,
     metalness: 0,
     side: THREE.DoubleSide,
   });

@@ -7,7 +7,7 @@ import * as THREE from 'three';
 // Load the real scene helpers and geometry, using the same Node 20-compatible
 // transpilation as the tree tests. No renderer, DOM, or copied picking math.
 const paths = ['scene/camera-framing.ts', 'lib/hand-types.ts', 'scene/hand-scene.ts',
-  'scene/tree-profile.ts', 'scene/photo-material.ts', 'scene/HandMagic.tsx'];
+  'scene/tree-profile.ts', 'scene/photo-material.ts', 'scene/HandMagic.tsx', 'scene/camera-orbit.ts'];
 const sources = await Promise.all(paths.map(path => readFile(new URL(`../src/${path}`, import.meta.url), 'utf8')));
 const compile = source => ts.transpileModule(source, {
   compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX },
@@ -16,7 +16,7 @@ const moduleUrl = source => `data:text/javascript;base64,${Buffer.from(source).t
 const resolveImports = (code, aliases = {}) => code.replace(/from\s+(['"])([^'"]+)\1/g,
   (_match, _quote, name) => `from ${JSON.stringify(aliases[name] ?? import.meta.resolve(name))}`);
 const framingUrl = moduleUrl(compile(sources[0]));
-const { getCameraFraming } = await import(framingUrl);
+const { getCameraFraming, CAMERA_ZOOM_LIMITS, setCameraOpticalZoom } = await import(framingUrl);
 const { createHandSceneInput } = await import(moduleUrl(compile(sources[1])));
 const { createHandCameraController, createHandPhotoPicker, consumeHandPhotoSelection, clearHandSceneInput } = await import(
   moduleUrl(resolveImports(compile(sources[2]), { './camera-framing': framingUrl })),
@@ -27,9 +27,10 @@ const { createPrintGeometry } = await import(moduleUrl(resolveImports(compile(so
 const { createMagicParticles } = await import(moduleUrl(resolveImports(
   compile(`${sources[5]}\nexport { createMagicParticles };`), { './tree-profile': profileUrl },
 )));
+const { PERSPECTIVE_CAMERA_LIMITS } = await import(moduleUrl(resolveImports(compile(sources[6]))));
 
-function cameraFixture() {
-  const limits = getCameraFraming(1440, 900, 45);
+function cameraFixture(extraLimits = {}) {
+  const limits = { ...getCameraFraming(1440, 900, 45), ...extraLimits };
   const target = new THREE.Vector3(0, DEFAULT_CAMERA_TARGET_Y, 0);
   const camera = new THREE.PerspectiveCamera(45, 1.6, 0.1, 500);
   const start = new THREE.Spherical(limits.defaultDistance, Math.acos(0.09), 0);
@@ -65,21 +66,24 @@ test('vertical hand travel retains its complete rotation after easing', () => {
   assert.ok(Math.abs(fixture.position().phi - fixture.start.phi - 0.03) < 0.00001);
 });
 
-test('logarithmic zoom retains its complete scale after easing', () => {
+test('logarithmic hand zoom retains its complete optical scale without moving the orbit radius', () => {
   const fixture = cameraFixture();
+  setCameraOpticalZoom(fixture.camera, 2);
   fixture.input.zoomLog = Math.log(1.1);
   fixture.settle();
-  assert.ok(Math.abs(fixture.position().radius / fixture.start.radius - 1.1) < 0.00001);
+  assert.ok(Math.abs(fixture.camera.zoom - 2 / 1.1) < 0.00001);
+  assert.ok(Math.abs(fixture.position().radius - fixture.start.radius) < 1e-9);
 });
 
-test('repeated hand zoom cannot leave the existing camera distance limits', () => {
+test('repeated hand zoom clamps to the shared optical range while the scene stays at one distance', () => {
   const fixture = cameraFixture();
   for (const direction of [-1, 1]) {
     for (let frame = 0; frame < 60; frame++) {
       fixture.input.zoomLog = direction;
       fixture.tick();
       const { radius } = fixture.position();
-      assert.ok(radius >= fixture.limits.minDistance - 1e-8 && radius <= fixture.limits.maxDistance + 1e-8);
+      assert.ok(Math.abs(radius - fixture.start.radius) < 1e-8);
+      assert.ok(fixture.camera.zoom >= CAMERA_ZOOM_LIMITS.min && fixture.camera.zoom <= CAMERA_ZOOM_LIMITS.max);
     }
   }
 });
@@ -93,6 +97,39 @@ test('repeated hand orbit cannot leave the existing camera polar limits', () => 
       const { phi } = fixture.position();
       assert.ok(phi >= fixture.limits.minPolarAngle - 1e-8 && phi <= fixture.limits.maxPolarAngle + 1e-8);
     }
+  }
+});
+
+test('perspective hand rotation obeys the shared azimuth and polar boundaries', () => {
+  const fixture = cameraFixture(PERSPECTIVE_CAMERA_LIMITS);
+  for (const direction of [-1, 1]) {
+    for (let frame = 0; frame < 60; frame++) {
+      fixture.input.orbitX = direction;
+      fixture.input.orbitY = direction;
+      fixture.tick();
+      const { theta, phi, radius } = fixture.position();
+      assert.ok(theta >= fixture.limits.minAzimuthAngle - 1e-10 && theta <= fixture.limits.maxAzimuthAngle + 1e-10);
+      assert.ok(phi >= fixture.limits.minPolarAngle - 1e-10 && phi <= fixture.limits.maxPolarAngle + 1e-10);
+      assert.ok(Math.abs(radius - fixture.start.radius) < 1e-9, 'rotation must not dolly the camera');
+    }
+  }
+});
+
+test('perspective hand boundaries discard outward inertia and accept a small reverse gesture immediately', () => {
+  for (const direction of [-1, 1]) {
+    const fixture = cameraFixture(PERSPECTIVE_CAMERA_LIMITS);
+    fixture.input.orbitX = direction;
+    fixture.tick();
+    const boundary = direction > 0 ? fixture.limits.minAzimuthAngle : fixture.limits.maxAzimuthAngle;
+    assert.ok(Math.abs(fixture.position().theta - boundary) < 1e-10);
+    const atBoundary = fixture.camera.position.clone();
+    assert.equal(fixture.tick(), false, 'the clamped easing tail must already be empty');
+    assert.deepEqual(fixture.camera.position.toArray(), atBoundary.toArray());
+    fixture.input.orbitX = -direction * 0.003;
+    fixture.tick();
+    assert.ok(direction * (fixture.position().theta - boundary) > 0, 'a small reverse gesture must move inward on its first frame');
+    fixture.settle();
+    assert.ok(Math.abs(fixture.position().theta - (boundary + direction * 0.009)) < 1e-5);
   }
 });
 
@@ -154,6 +191,12 @@ function photoFixture(t) {
 test('the nearest real paper triangle returns its original album index', t => {
   const fixture = photoFixture(t);
   assert.equal(fixture.pick(fixture.cursor(0)), 5);
+});
+
+test('photo picking uses the zoomed projection and retains the selected source index', t => {
+  const fixture = photoFixture(t);
+  setCameraOpticalZoom(fixture.camera, 4);
+  assert.equal(fixture.pick(fixture.cursor(3)), 5);
 });
 
 test('photo selection follows updated instance transforms', t => {

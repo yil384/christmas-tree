@@ -310,7 +310,7 @@ export function createHandGestureInterpreter(overrides: Partial<HandGestureThres
           commands.push({ type: 'orbit', dx: clamp(dx, -t.maxOrbitDelta, t.maxOrbitDelta), dy: clamp(dy, -t.maxOrbitDelta, t.maxOrbitDelta) });
           moving.anchor = moving.filtered;
         }
-        return result('orbit', '移动手掌 · 转动圣诞树', 1, commands);
+        return result('orbit', '移动手掌 · 环绕观察', 1, commands);
       }
       moving.history.push({ at: now, point: moving.filtered });
       while (moving.history.length > 1 && now - moving.history[0].at > t.swipeMaxMs) moving.history.shift();
@@ -344,7 +344,7 @@ export function createHandGestureInterpreter(overrides: Partial<HandGestureThres
       hold = { gesture, since: now, frames: 1, origin: sample.center };
     } else hold.frames++;
     const progress = (now - hold.since) / t.holdMs;
-    const labels: Record<string, string> = { scatter: '保持 V 手势 · 散开', gather: '保持握拳 · 聚拢', 'close-gallery': '保持握拳 · 关闭照片', 'toggle-rotation': '保持点赞 · 切换旋转', magic: '保持爱你手势 · 星光魔法' };
+    const labels: Record<string, string> = { scatter: '保持 V 手势 · 散开', gather: '保持握拳 · 聚拢', 'close-gallery': '保持握拳 · 关闭照片', 'toggle-rotation': '保持点赞 · 镜头漫游', magic: '保持爱你手势 · 星光魔法' };
     if (progress >= 1 && hold.frames >= t.holdMinFrames) {
       locks.set(gesture, { releasedAt: null }); lastEventAt = now; hold = null;
       return result('cooldown', '手势已生效，请放松手势', 1, [action], 1);

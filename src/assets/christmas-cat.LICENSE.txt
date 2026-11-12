@@ -1,0 +1,23 @@
+Christmas kitten — adapted from Cat by Quaternius
+
+Original: Cat, Animal Pack Vol.2 by @Quaternius (2017).
+Author's publication: https://opengameart.org/content/animated-animales-low-poly
+Author: https://quaternius.com/
+Original download: https://opengameart.org/sites/default/files/Animal%20Pack%20Vol.2%20by%20%40Quaternius.zip
+License: Creative Commons CC0 1.0 Universal (public domain dedication).
+License text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Retrieved: 2026-11-09.
+
+The author explicitly permits use and modification in personal and commercial
+projects: https://quaternius.com/faq.html
+
+Adaptation for 集美小喵的魔法圣诞:
+- Converted the artist's FBX skin, 24-bone rig and Idle / Walking clips to glTF.
+- Merged materials into one vertex-colored skinned mesh, with no external textures.
+- Added one subdivision pass and smooth normals to soften the low-poly outline.
+- Shortened the body, softened the cheeks/paws and used a silver/cream coat.
+- Added small amber eyes attached to the existing head bone, plus a blink morph.
+- Bundled as a 345,976-byte GLB; no runtime third-party asset requests.
+
+The original model and its authored animation remain CC0. This is a Quaternius
+asset adaptation; it is not an official Disney asset or a Disney character.

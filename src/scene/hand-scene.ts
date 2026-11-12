@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import type { HandSceneInput } from '../lib/hand-types';
-import { clampCameraDistance } from './camera-framing';
+import { setCameraOpticalZoom } from './camera-framing';
 
 export const HAND_INTERACTION_HOLD_MS = 1200;
 export const HAND_POINTER_MAX_AGE_MS = 600;
@@ -48,6 +48,8 @@ interface CameraLimits {
   maxDistance: number;
   minPolarAngle: number;
   maxPolarAngle: number;
+  minAzimuthAngle?: number;
+  maxAzimuthAngle?: number;
 }
 
 /** Consume camera-rate messages, with a short easing tail between hand frames. */
@@ -88,13 +90,19 @@ export function createHandCameraController() {
       pendingZoom -= zoom;
       offset.copy(camera.position).sub(target);
       spherical.setFromVector3(offset);
-      spherical.theta -= dx * 3;
+      const azimuth = spherical.theta - dx * 3;
+      spherical.theta = THREE.MathUtils.clamp(azimuth, limits.minAzimuthAngle ?? -Infinity, limits.maxAzimuthAngle ?? Infinity);
+      // Discard outward easing at a hard edge so a reverse gesture moves
+      // inward immediately instead of fighting the previous gesture's tail.
+      if (spherical.theta !== azimuth) pendingX = 0;
       const polar = spherical.phi - dy;
       spherical.phi = THREE.MathUtils.clamp(polar, limits.minPolarAngle, limits.maxPolarAngle);
       if (spherical.phi !== polar) pendingY = 0;
-      const distance = spherical.radius * Math.exp(zoom);
-      spherical.radius = clampCameraDistance(distance, limits.minDistance, limits.maxDistance);
-      if (spherical.radius !== distance) pendingZoom = 0;
+      // Hand zoom uses the same projection as wheel/pinch. Keeping the orbit
+      // radius fixed makes the scenery and photographs enlarge together.
+      const perspective = camera as THREE.PerspectiveCamera;
+      const requestedZoom = perspective.zoom * Math.exp(-zoom);
+      if (setCameraOpticalZoom(perspective, requestedZoom) !== requestedZoom) pendingZoom = 0;
       spherical.makeSafe();
       camera.position.setFromSpherical(spherical).add(target);
       camera.lookAt(target);

@@ -8,7 +8,9 @@ import type { Photo } from '../lib/content';
 import type { HandSceneInput } from '../lib/hand-types';
 import { consumeHandPhotoSelection, createHandPhotoPicker, HAND_POINTER_MAX_AGE_MS } from './hand-scene';
 import { createPhotoPlacements } from './photo-layout';
+import { loadPhotoAtlas } from './photo-atlas-loader';
 import { createPrintGeometry, createPrintMaterial } from './photo-material';
+import { createPhotoTexture, replacePhotoTexture } from './photo-texture';
 
 interface PhotoOrnamentsProps {
   state: 'CHAOS' | 'FORMED';
@@ -21,41 +23,57 @@ interface PhotoOrnamentsProps {
   onHandPhotoSelect?: (index: number | null) => void;
 }
 
-// At most 16 MiB of uncompressed atlas pixels, even for an enormous album.
-// The complete album remains available in the gallery; the tree is its preview.
+// New albums ship one prebuilt atlas; older manifests retain a batched fallback.
+// Full-resolution gallery images are never requested by the tree.
 const MAX_ATLAS_PHOTOS = 256;
-const TILE_SIZE = 128;
-const GUTTER = 2;
-const MAX_PARALLEL_IMAGES = 3;
+const PREFERRED_TILE_SIZE = 384;
+const GUTTER = 8;
 
-function createAtlas(slotCount: number) {
+function createPreparedAtlas(src: string, anisotropy: number) {
+  // Compile and show the tree immediately using a 1px map. The decoded atlas
+  // gets a new Texture: WebGL immutable storage cannot grow this placeholder.
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = 1;
+  const texture = createPhotoTexture(canvas, anisotropy);
+  return { prepared: true as const, src, texture };
+}
+
+function createAtlas(slotCount: number, maximumTextureSize: number, anisotropy: number) {
   const columns = Math.ceil(Math.sqrt(Math.max(1, slotCount)));
-  const size = THREE.MathUtils.ceilPowerOfTwo(columns * TILE_SIZE);
+  const limit = Math.min(4096, maximumTextureSize);
+  const tileSize = Math.min(PREFERRED_TILE_SIZE, Math.floor(limit / columns));
+  const size = Math.min(limit, THREE.MathUtils.ceilPowerOfTwo(columns * tileSize));
   const canvas = document.createElement('canvas');
   canvas.width = size;
   canvas.height = size;
   const context = canvas.getContext('2d', { alpha: false });
   if (!context) throw new Error('Unable to create the photo atlas');
+  context.imageSmoothingEnabled = true;
+  context.imageSmoothingQuality = 'high';
   context.fillStyle = '#16342c';
   context.fillRect(0, 0, size, size);
 
   // The complete shell can appear immediately, independently of image requests.
   for (let index = 0; index < Math.max(1, slotCount); index++) {
-    const x = (index % columns) * TILE_SIZE;
-    const y = Math.floor(index / columns) * TILE_SIZE;
-    const gradient = context.createLinearGradient(x, y, x + TILE_SIZE, y + TILE_SIZE);
+    const x = (index % columns) * tileSize;
+    const y = Math.floor(index / columns) * tileSize;
+    const gradient = context.createLinearGradient(x, y, x + tileSize, y + tileSize);
     gradient.addColorStop(0, '#2c493e');
     gradient.addColorStop(1, '#102b25');
     context.fillStyle = gradient;
-    context.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+    context.fillRect(x, y, tileSize, tileSize);
   }
 
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.minFilter = THREE.LinearFilter;
-  texture.magFilter = THREE.LinearFilter;
-  texture.generateMipmaps = false;
-  return { canvas, context, texture, columns, size };
+  const texture = createPhotoTexture(canvas, anisotropy);
+  return { prepared: false as const, canvas, context, texture, columns, size, tileSize };
+}
+
+function fallbackPhotoRect(atlas: ReturnType<typeof createAtlas>, slot: number): [number, number, number, number] {
+  const innerSize = atlas.tileSize - GUTTER * 2;
+  const x = (slot % atlas.columns) * atlas.tileSize + GUTTER;
+  const y = Math.floor(slot / atlas.columns) * atlas.tileSize + GUTTER;
+  return [(x + 0.5) / atlas.size, 1 - (y + innerSize - 0.5) / atlas.size,
+    (innerSize - 1) / atlas.size, (innerSize - 1) / atlas.size];
 }
 
 /** Actual 3D prints, wooden clips and strings together in one instanced draw. */
@@ -65,13 +83,22 @@ export default function PhotoOrnaments({ state, photos, count, reducedMotion = f
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const isMoving = useRef(false);
   const handPicker = useMemo(() => handInput && handActive ? createHandPhotoPicker() : null, [handInput, handActive]);
+  const pointerPicker = useMemo(() => createHandPhotoPicker(), []);
   const handHover = useRef({ at: -Infinity, x: NaN, y: NaN });
   const handOccluders = useRef<THREE.Object3D[]>([]);
   const gl = useThree(root => root.gl);
   const invalidate = useThree(root => root.invalidate);
   const placements = useMemo(() => createPhotoPlacements(visibleCount), [visibleCount]);
   const matrixHelper = useMemo(() => new THREE.Object3D(), []);
-  const atlas = useMemo(() => createAtlas(slotCount), [slotCount]);
+  const atlasSource = useMemo(() => {
+    const src = photos[0]?.atlas?.src;
+    return src && photos.every(photo => photo.atlas?.src === src) ? src : undefined;
+  }, [photos]);
+  const atlas = useMemo(() => atlasSource
+    ? createPreparedAtlas(atlasSource, gl.capabilities.getMaxAnisotropy())
+    : createAtlas(slotCount, gl.capabilities.maxTextureSize, gl.capabilities.getMaxAnisotropy()), [atlasSource, slotCount, gl]);
+  const photoReveal = useMemo(() => ({ value: 0 }), [atlas]);
+  const atlasReady = useRef(false);
   // Sample the whole album when it exceeds the atlas/card limit, retaining original indexes for clicks.
   const photoIndexes = useMemo(
     () => Array.from({ length: slotCount }, (_, index) => Math.floor(index * photos.length / slotCount)),
@@ -82,18 +109,13 @@ export default function PhotoOrnaments({ state, photos, count, reducedMotion = f
     const rects = new Float32Array(visibleCount * 4);
     const colors = new Float32Array(visibleCount * 3);
     const anchors = new Float32Array(visibleCount * 3);
-    const innerSize = TILE_SIZE - GUTTER * 2;
     for (let index = 0; index < visibleCount; index++) {
       const slot = index % slotCount;
-      const x = (slot % atlas.columns) * TILE_SIZE + GUTTER;
-      const y = Math.floor(slot / atlas.columns) * TILE_SIZE + GUTTER;
-      // Half-texel insets plus extruded gutters prevent adjacent atlas photos bleeding.
-      rects.set([
-        (x + 0.5) / atlas.size,
-        1 - (y + innerSize - 0.5) / atlas.size,
-        (innerSize - 1) / atlas.size,
-        (innerSize - 1) / atlas.size,
-      ], index * 4);
+      if (atlas.prepared) {
+        rects.set(photos[photoIndexes[slot]].atlas!.rect, index * 4);
+      } else {
+        rects.set(fallbackPhotoRect(atlas, slot), index * 4);
+      }
       placements[index].frameColor.toArray(colors, index * 3);
       placements[index].hangerEnd.toArray(anchors, index * 3);
     }
@@ -101,8 +123,8 @@ export default function PhotoOrnaments({ state, photos, count, reducedMotion = f
     plane.setAttribute('aFrameColor', new THREE.InstancedBufferAttribute(colors, 3));
     plane.setAttribute('aHangerEnd', new THREE.InstancedBufferAttribute(anchors, 3));
     return plane;
-  }, [atlas, placements, slotCount, visibleCount]);
-  const material = useMemo(() => createPrintMaterial(atlas.texture), [atlas]);
+  }, [atlas, photoIndexes, photos, placements, slotCount, visibleCount]);
+  const material = useMemo(() => createPrintMaterial(atlas.texture, photoReveal), [atlas, photoReveal]);
 
   useEffect(() => {
     handHover.current = { at: -Infinity, x: NaN, y: NaN };
@@ -148,73 +170,70 @@ export default function PhotoOrnaments({ state, photos, count, reducedMotion = f
 
   useEffect(() => {
     let cancelled = false;
-    let nextSlot = 0;
-    let uploadFrame = 0;
-    const active = new Set<HTMLImageElement>();
-    atlas.texture.needsUpdate = true;
-    const scheduleUpload = () => {
-      if (uploadFrame || cancelled) return;
-      uploadFrame = requestAnimationFrame(() => {
-        uploadFrame = 0;
-        if (cancelled) return;
-        atlas.texture.needsUpdate = true;
-        invalidate();
-      });
+    atlasReady.current = false;
+    photoReveal.value = 0;
+    const revealAll = () => {
+      if (cancelled) return;
+      atlas.texture.needsUpdate = true;
+      atlasReady.current = true;
+      invalidate();
     };
-    const startNext = () => {
-      if (cancelled || nextSlot >= photoIndexes.length) return;
-      const slot = nextSlot++;
-      const photo = photos[photoIndexes[slot]];
-      const image = new Image();
-      image.decoding = 'async';
-      active.add(image);
-      const finish = () => {
-        active.delete(image);
-        image.onload = null;
-        image.onerror = null;
-        startNext();
-      };
-      image.onload = () => {
+    let fallbackAtlas = atlas.prepared ? undefined : atlas;
+    const cancelLoading = loadPhotoAtlas({
+      atlasUrl: atlas.prepared ? assetUrl(atlas.src) : undefined,
+      cardUrls: photoIndexes.map(index => {
+        const photo = photos[index];
+        return assetUrl(photo.ornament || photo.thumbnail || photo.src);
+      }),
+      onAtlas: image => {
         if (cancelled) return;
-        try {
-          const width = image.naturalWidth;
-          const height = image.naturalHeight;
-          if (width && height) {
-            const inner = TILE_SIZE - GUTTER * 2;
-            const x = (slot % atlas.columns) * TILE_SIZE + GUTTER;
-            const y = Math.floor(slot / atlas.columns) * TILE_SIZE + GUTTER;
-            const crop = Math.min(width, height);
-            const { context, canvas } = atlas;
-            // Center-cover cropping preserves portrait/landscape proportions inside the square print.
-            context.drawImage(image, (width - crop) / 2, (height - crop) / 2, crop, crop, x, y, inner, inner);
-            context.drawImage(canvas, x, y, 1, inner, x - GUTTER, y, GUTTER, inner);
-            context.drawImage(canvas, x + inner - 1, y, 1, inner, x + inner, y, GUTTER, inner);
-            context.drawImage(canvas, x - GUTTER, y, TILE_SIZE, 1, x - GUTTER, y - GUTTER, TILE_SIZE, GUTTER);
-            context.drawImage(canvas, x - GUTTER, y + inner - 1, TILE_SIZE, 1, x - GUTTER, y + inner, TILE_SIZE, GUTTER);
-            scheduleUpload();
+        replacePhotoTexture(atlas, material, createPhotoTexture(image, gl.capabilities.getMaxAnisotropy()));
+        revealAll();
+      },
+      onFallbackStart: () => {
+        // This canvas is allocated only for an old album or one failed atlas.
+        fallbackAtlas ??= createAtlas(slotCount, gl.capabilities.maxTextureSize, gl.capabilities.getMaxAnisotropy());
+      },
+      onCard: (slot, image) => {
+        if (!fallbackAtlas) return;
+        const { tileSize, context, canvas, columns } = fallbackAtlas;
+        const width = image.naturalWidth;
+        const height = image.naturalHeight;
+        if (!width || !height) return;
+        const inner = tileSize - GUTTER * 2;
+        const x = (slot % columns) * tileSize + GUTTER;
+        const y = Math.floor(slot / columns) * tileSize + GUTTER;
+        const crop = Math.min(width, height);
+        context.drawImage(image, (width - crop) / 2, (height - crop) / 2, crop, crop, x, y, inner, inner);
+        context.drawImage(canvas, x, y, 1, inner, x - GUTTER, y, GUTTER, inner);
+        context.drawImage(canvas, x + inner - 1, y, 1, inner, x + inner, y, GUTTER, inner);
+        context.drawImage(canvas, x - GUTTER, y, tileSize, 1, x - GUTTER, y - GUTTER, tileSize, GUTTER);
+        context.drawImage(canvas, x - GUTTER, y + inner - 1, tileSize, 1, x - GUTTER, y + inner, tileSize, GUTTER);
+      },
+      onFallbackComplete: () => {
+        if (cancelled || !fallbackAtlas) return;
+        if (atlas.prepared) {
+          // A fallback uses local slots rather than the prebuilt album's layout.
+          // Change all UVs and the map together, while every photo is still hidden.
+          const rects = geometry.getAttribute('aPhotoRect');
+          for (let index = 0; index < visibleCount; index++) {
+            const rect = fallbackPhotoRect(fallbackAtlas, index % slotCount);
+            rects.setXYZW(index, ...rect);
           }
-        } catch {
-          // Keep the placeholder if a decoded image cannot be drawn into the atlas.
-        } finally {
-          // A bad thumbnail must never stall one of the three loading lanes.
-          finish();
+          rects.needsUpdate = true;
+          replacePhotoTexture(atlas, material, fallbackAtlas.texture);
         }
-      };
-      image.onerror = () => { if (!cancelled) finish(); };
-      image.src = assetUrl(photo.thumbnail);
-    };
-    for (let index = 0; index < MAX_PARALLEL_IMAGES; index++) startNext();
+        revealAll();
+      },
+    });
     return () => {
       cancelled = true;
-      cancelAnimationFrame(uploadFrame);
-      active.forEach(image => {
-        image.onload = null;
-        image.onerror = null;
-        image.src = '';
-      });
-      active.clear();
+      cancelLoading();
+      // Once adopted, the fallback belongs to atlas and its unmount cleanup.
+      // Only an abandoned, never-installed fallback is owned by this request.
+      if (atlas.prepared && fallbackAtlas && fallbackAtlas.texture !== atlas.texture) fallbackAtlas.texture.dispose();
     };
-  }, [atlas, invalidate, photoIndexes, photos]);
+  }, [atlas, geometry, gl, invalidate, material, photoIndexes, photoReveal, photos, slotCount, visibleCount]);
 
   // These memoized assets are ours; only replacement/unmount disposes them.
   // R3F also disposes the InstancedMesh itself, releasing its instance-matrix buffer.
@@ -224,6 +243,10 @@ export default function PhotoOrnaments({ state, photos, count, reducedMotion = f
   useEffect(() => () => { gl.domElement.style.cursor = ''; }, [gl]);
 
   useFrame(({ camera }, rawDelta) => {
+    if (atlasReady.current && photoReveal.value < 1) {
+      photoReveal.value = reducedMotion ? 1 : Math.min(1, photoReveal.value + Math.min(rawDelta, 0.05) / 0.45);
+      invalidate();
+    }
     const mesh = meshRef.current;
     if (!mesh) {
       if (handInput) {
@@ -311,12 +334,24 @@ export default function PhotoOrnaments({ state, photos, count, reducedMotion = f
 
   if (!visibleCount) return null;
   const pressPhoto = (event: ThreeEvent<PointerEvent>) => {
-    if (event.instanceId === undefined || !event.face) return;
+    const mesh = meshRef.current;
+    if (!mesh || event.instanceId === undefined || !event.face) return;
     // Cord vertices are generated in the shader. Only the actual front/back
-    // paper surfaces record a long-press candidate; pegs and edges do not.
+    // paper surfaces can open a photograph; pegs and edges do not.
     if (geometry.getAttribute('aPart').getX(event.face.a) !== 0) return;
+    const occluders = handOccluders.current;
+    occluders.length = 0;
+    if (state === 'FORMED' && !isMoving.current) {
+      for (const name of ['evergreen-solid-boughs', 'evergreen-trunk-and-branches']) {
+        const object = mesh.parent?.getObjectByName(name);
+        if (object) occluders.push(object);
+      }
+    }
+    const selected = pointerPicker(mesh, event.camera,
+      { x: (event.pointer.x + 1) / 2, y: (1 - event.pointer.y) / 2 }, photoIndexes, occluders);
+    if (selected === null) return;
     event.stopPropagation();
-    onPhotoPress(photoIndexes[event.instanceId % slotCount]);
+    onPhotoPress(selected);
   };
 
   return (

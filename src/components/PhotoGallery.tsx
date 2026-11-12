@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { assetUrl, type Photo } from '../lib/content';
 import { Icon } from './Icon';
+import PhotoViewer from './PhotoViewer';
 
 const PAGE_SIZE = 18;
 
@@ -14,41 +15,6 @@ type PhotoGalleryProps = {
 
 function startIndex(index: number, count: number) {
   return Number.isFinite(index) ? Math.max(0, Math.min(Math.trunc(index), count - 1)) : 0;
-}
-
-function PhotoImage({ photo }: { photo: Photo }) {
-  const [attempt, setAttempt] = useState(0);
-  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
-  const imageUrl = new URL(assetUrl(photo.src), window.location.href);
-  if (attempt) imageUrl.searchParams.set('retry', String(attempt));
-
-  if (status === 'error') {
-    return (
-      <div className="photo-error" role="status">
-        <Icon name="photos" />
-        <p>这张照片暂时没打开。</p>
-        <button type="button" className="more-photos" onClick={() => { setStatus('loading'); setAttempt(value => value + 1); }}>
-          再试一次
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <img
-      key={attempt}
-      className="gallery-image"
-      src={imageUrl.href}
-      width={photo.width}
-      height={photo.height}
-      alt={photo.alt || '照片'}
-      decoding="async"
-      draggable={false}
-      aria-busy={status === 'loading'}
-      onLoad={() => setStatus('ready')}
-      onError={() => setStatus('error')}
-    />
-  );
 }
 
 function Thumbnail({ photo }: { photo: Photo }) {
@@ -68,7 +34,6 @@ function Thumbnail({ photo }: { photo: Photo }) {
 
 export default function PhotoGallery({ photos, initialIndex, handNavigation, handMode, onCloseHandMode }: PhotoGalleryProps) {
   const [index, setIndex] = useState(() => startIndex(initialIndex, photos.length));
-  const touch = useRef<{ x: number; y: number; time: number } | null>(null);
   const previousNavigation = useRef(handNavigation?.sequence ?? 0);
   const count = photos.length;
   const currentIndex = count ? ((index % count) + count) % count : 0;
@@ -112,7 +77,7 @@ export default function PhotoGallery({ photos, initialIndex, handNavigation, han
   return (
     <div className="gallery-content">
       <div className="gallery-header">
-        <h2>相册</h2>
+        <h2>高清照片</h2>
         <span className="gallery-count" aria-live="polite" aria-atomic="true">
           {String(currentIndex + 1).padStart(2, '0')} <i>/ {String(count).padStart(2, '0')}</i>
         </span>
@@ -120,30 +85,7 @@ export default function PhotoGallery({ photos, initialIndex, handNavigation, han
 
       {handMode && <div className="gallery-hand-bar"><span><span className="camera-dot" /> 摄像头已开启 · 左右挥掌翻页，握拳返回</span><button type="button" onClick={onCloseHandMode}>关闭摄像头</button></div>}
 
-      <div
-        className="gallery-photo"
-        onTouchStart={event => {
-          const point = event.touches[0];
-          touch.current = event.touches.length === 1 ? { x: point.clientX, y: point.clientY, time: Date.now() } : null;
-        }}
-        onTouchMove={event => { if (event.touches.length !== 1) touch.current = null; }}
-        onTouchCancel={() => { touch.current = null; }}
-        onTouchEnd={event => {
-          const start = touch.current;
-          touch.current = null;
-          const end = event.changedTouches[0];
-          if (!start || !end || count < 2 || Date.now() - start.time > 1000) return;
-          const dx = end.clientX - start.x;
-          const dy = end.clientY - start.y;
-          if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.25) move(dx < 0 ? 1 : -1);
-        }}
-      >
-        <PhotoImage key={`${photo.id}:${photo.src}`} photo={photo} />
-        {count > 1 && <>
-          <button type="button" className="gallery-nav previous" aria-label="上一张照片" onClick={() => move(-1)}><Icon name="left" /></button>
-          <button type="button" className="gallery-nav next" aria-label="下一张照片" onClick={() => move(1)}><Icon name="left" /></button>
-        </>}
-      </div>
+      <PhotoViewer key={`${photo.id}:${photo.src}`} photo={photo} onStep={count > 1 ? move : undefined} />
 
       <>{photo.caption && <p className="photo-caption">{photo.caption}</p>}</>
 

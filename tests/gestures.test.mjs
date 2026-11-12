@@ -17,6 +17,7 @@ function setup() {
   const events = [];
   const controller = createSceneGestureController({
     onTap: () => events.push({ type: 'tap' }),
+    onPhotoTap: photo => events.push({ type: 'photo', photo }),
     onDoubleTap: () => events.push({ type: 'double' }),
     onLongPress: photo => events.push({ type: 'hold', photo }),
   }, {
@@ -44,6 +45,34 @@ function setup() {
 }
 
 for (const pointerType of ['mouse', 'touch']) {
+  test(pointerType + ' single photo tap opens exactly the picked original without also pausing', () => {
+    const { controller, events, advance, point, tasks } = setup();
+    const p = point({ pointerType });
+    controller.pointerDown(p);
+    controller.pickPhoto(23);
+    advance(40);
+    controller.pointerUp(p);
+    // The moving tree cannot overwrite the photo captured at pointer-down.
+    controller.pickPhoto(51);
+    advance(timing.tapDelay);
+    assert.deepEqual(events, [{ type: 'photo', photo: 23 }]);
+    assert.equal(tasks.size, 0);
+  });
+
+  test(pointerType + ' photo double tap still scatters the tree and never opens a viewer', () => {
+    const { controller, events, advance, point } = setup();
+    const p = point({ pointerType });
+    controller.pointerDown(p);
+    controller.pickPhoto(7);
+    controller.pointerUp(p);
+    advance(100);
+    controller.pointerDown(p);
+    controller.pickPhoto(7);
+    controller.pointerUp(p);
+    advance(timing.longPressDelay);
+    assert.deepEqual(events, [{ type: 'double' }]);
+  });
+
   test(pointerType + ' single tap waits for the double-tap window, then fires exactly once', () => {
     const { controller, events, advance, point, tasks } = setup();
     const p = point({ pointerType });
@@ -73,6 +102,28 @@ for (const pointerType of ['mouse', 'touch']) {
     assert.deepEqual(events, [{ type: 'double' }]);
     advance(timing.longPressDelay * 2);
     assert.deepEqual(events, [{ type: 'double' }]);
+    assert.equal(tasks.size, 0);
+  });
+
+  test(pointerType + ' cat claiming a stage press cancels tap and share hold, then a normal stage tap still works', () => {
+    const { controller, events, advance, point, tasks } = setup();
+    const catPress = point({ pointerType });
+    // Stage capture runs first; the R3F cat hit then explicitly claims the press.
+    controller.pointerDown(catPress);
+    controller.cancel();
+    advance(timing.longPressDelay + 100);
+    // React's stage pointer-up capture can still run before the cat's handler.
+    controller.pointerUp(catPress);
+    advance(timing.tapDelay + 100);
+    assert.deepEqual(events, []);
+    assert.equal(tasks.size, 0);
+
+    const stagePress = point({ pointerType, pointerId: pointerType === 'touch' ? 2 : 1 });
+    controller.pointerDown(stagePress);
+    advance(30);
+    controller.pointerUp(stagePress);
+    advance(timing.tapDelay);
+    assert.deepEqual(events, [{ type: 'tap' }]);
     assert.equal(tasks.size, 0);
   });
 }
@@ -222,6 +273,19 @@ test('distant or different-input taps remain two singles, not an accidental doub
     advance(timing.tapDelay);
     assert.deepEqual(events, [{ type: 'tap' }, { type: 'tap' }]);
   }
+});
+
+test('distant photo taps retain separate photo indexes through the pending-tap queue', () => {
+  const { controller, events, advance, point } = setup();
+  controller.pointerDown(point());
+  controller.pickPhoto(7);
+  controller.pointerUp(point());
+  advance(100);
+  controller.pointerDown(point({ clientX: 220 }));
+  controller.pickPhoto(18);
+  controller.pointerUp(point({ clientX: 220 }));
+  advance(timing.tapDelay);
+  assert.deepEqual(events, [{ type: 'photo', photo: 7 }, { type: 'photo', photo: 18 }]);
 });
 
 test('an expired second release cannot retroactively turn the first single into a double', () => {

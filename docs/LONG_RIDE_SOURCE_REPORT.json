@@ -1,0 +1,455 @@
+{
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "sources": [
+    {
+      "file": "clip-01.mp4",
+      "sha256": "74017ee5768ad67cb3cc66494cf273908af885323705a142327a838871271338",
+      "bytes": 25420474,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-02.mp4",
+      "sha256": "89eda6954bd0e3055b82757a8a29a4bc56477d959493a763418cd0c5e4a04dcf",
+      "bytes": 25594909,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-03.mp4",
+      "sha256": "a64bb357278cc2660dfd0b4c99a35ba2443d6375d7f6f66086179fa49dda6505",
+      "bytes": 30195978,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-04.mp4",
+      "sha256": "694dc201b40b12adcb3988476b4aae22e956c65edecfbf295261839590d7e204",
+      "bytes": 24640171,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-05.mp4",
+      "sha256": "a83d83e2339d5a594eb5220eb00530489099f485ea9facb1081a6c1abba0db86",
+      "bytes": 22831015,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-06.mp4",
+      "sha256": "20b7c2a8ecec7caefe30550f5e7ee39c7ff1f20e9e1b7624b6718a33f92e1d4c",
+      "bytes": 27488403,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-07.mp4",
+      "sha256": "8a2bfd2185f961332b3f828051612ab8b46cc85ca9854ec0cdc4b91ddd2dcb28",
+      "bytes": 23334269,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-08.mp4",
+      "sha256": "eafa7afae282e12a0bb5bb4a11b38cda7e725d30f16b8e1497ec237d2440839b",
+      "bytes": 25359508,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-09.mp4",
+      "sha256": "b0174899aacaf5afb1474df560e135cbeacaad663bb49152a8106ef5ede99eac",
+      "bytes": 27426402,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-10.mp4",
+      "sha256": "2663c51419cc7fdb2b0164504e30ea02025a194b544d5d8e22981e0aa61ee604",
+      "bytes": 24008585,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-11.mp4",
+      "sha256": "a85a42234ba786175d7d22d513233b321698fa1b8b801bc625e2e6b40f94df1b",
+      "bytes": 24499902,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-12.mp4",
+      "sha256": "3b1666596cc10a320d4523265b5269f0a3dac9cd4c60e3f5ca62f5aa60d17365",
+      "bytes": 20508702,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-13.mp4",
+      "sha256": "9673b92f14d9ac6f76bc673caf01ded7e648c78cbb069e4d8ada5f42139779fe",
+      "bytes": 23175395,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-14.mp4",
+      "sha256": "cbf7ab36cea320474e5bbd2ea12a8a76529ae908c8f244c848864acee6a276a4",
+      "bytes": 25745623,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-15.mp4",
+      "sha256": "4f490a4b12de229b82b59537a3c1b4f61fcfb0844527de62c34d068434888b53",
+      "bytes": 25670021,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-16.mp4",
+      "sha256": "9fbcb08e162ca3a094393f7ac5deeebe28193aa59b1cd87d75f6aca3cf2ba931",
+      "bytes": 21498941,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-17.mp4",
+      "sha256": "f8b412bf2d001154ea671c3930a6ca170fdcff44bcafccaa3bfa25673f8a2369",
+      "bytes": 27056384,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    },
+    {
+      "file": "clip-18.mp4",
+      "sha256": "d50933489912bb45cae514326867e775cdfb5409e7024e63b91d2a2bafd7bb6c",
+      "bytes": 26695933,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "duration": "15.000000",
+        "nb_frames": "360",
+        "color_space": "smpte170m",
+        "color_transfer": "iec61966-2-1",
+        "color_primaries": "bt709"
+      },
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "15.040000"
+      },
+      "containerDuration": 15.04
+    }
+  ]
+}

@@ -1,0 +1,2337 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-11-12T15:57:18.702207+00:00",
+  "purpose": "Current website and film-production handoff for Claude Code",
+  "source_baseline": {
+    "provider": "Sites",
+    "version": 26,
+    "commit": "2abfef734dab07d8279e04ac35b981bcb8bb2287",
+    "project_id": "appgprj_6aef1795eb688191a80ffb20460dbab1"
+  },
+  "github_destination": {
+    "repository": "yil384/christmas-tree",
+    "branch": "handoff/claude-2026-11-12",
+    "history_base_commit": "4af42e828c3d955484832f9488bea4a246578ccd",
+    "remote_status_at_manifest_creation": "Not yet pushed; verify remote branch separately"
+  },
+  "recovery_note": "Earlier local-only ad81a9f commit was lost when scratch was reset. This reconstructed snapshot restores exact v26 source and original production assets, with rebuilt handoff prose. It does not claim byte identity with that lost commit.",
+  "checks": {
+    "node": "24.22.1",
+    "build": "passed in restored checkout",
+    "test_pass": 244,
+    "test_fail": 0,
+    "lint_errors": 0,
+    "lint_warnings": 4,
+    "real_iphone_wechat_qa": "not performed in this handoff"
+  },
+  "snapshot_note": "Hashes cover every source and handoff file except this manifest. Generated assets, build output, dependencies, Git internals and credentials are excluded. Historical raw film clips and original journey PNGs remain unavailable; runtime HLS and optimized images are complete.",
+  "file_count_excluding_manifest": 461,
+  "total_bytes_excluding_manifest": 264921461,
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 296,
+      "sha256": "49090f273098d671626db2872830a8cce47261b1d0c7b14ed243930e02ec266c"
+    },
+    {
+      "path": ".github/workflows/check.yml",
+      "bytes": 619,
+      "sha256": "f173adf46e693b23ffa9a8a011a97359a1056a248d0d339a6b9ed18bda51dce6"
+    },
+    {
+      "path": ".github/workflows/gift-preview.yml",
+      "bytes": 3250,
+      "sha256": "42399336d77e29e7880903d332970a483aecc0fc97d4220bdd20882bb15385ef"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 327,
+      "sha256": "b4a405426edc2cf57db5552d9269227d91fad473d794cd763f60dab20b039379"
+    },
+    {
+      "path": ".openai/hosting.json",
+      "bytes": 106,
+      "sha256": "a85d0151f8038d7a2eb589b9b9fcb96fc1138864527f0be9f0b0edce7013e80a"
+    },
+    {
+      "path": "CLAUDE.md",
+      "bytes": 7430,
+      "sha256": "6d99e873d77b7babaa47ef93729e1018317eb5613d10ddd0c42dc8f0d0f1f35e"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "bytes": 2029,
+      "sha256": "acd6aadd4b065a0f47c59f875f201ce13fd6f2406f8020c718e0a76641b56348"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4936,
+      "sha256": "04201eac49cbcc3538b875cec067d30724bbded23aece44c26abaf32245db892"
+    },
+    {
+      "path": "docs/CAT_MODEL_OPTIONS.md",
+      "bytes": 3258,
+      "sha256": "7c6c30877b34406a1640c02adbf706ee16fdfeb1e32def47a02f6419e25136bf"
+    },
+    {
+      "path": "docs/CHRISTMAS_TREE_GUIDE.md",
+      "bytes": 20081,
+      "sha256": "39a212b5b8975bd8b337e8f615b50dcbb138a3b36105826130b9f64b93897e92"
+    },
+    {
+      "path": "docs/CHRISTMAS_VIDEO.md",
+      "bytes": 30553,
+      "sha256": "786f7c6cd8f99270c3134021ac7c16dd9ec1ac86ecc614f284bfeb083810146b"
+    },
+    {
+      "path": "docs/CLAUDE_HANDOFF.md",
+      "bytes": 19733,
+      "sha256": "7435b0d301e923c461010edba2fda2172a82ef80bfa641c2f2ab912b89e33cc9"
+    },
+    {
+      "path": "docs/GOOGLE_VIDS.md",
+      "bytes": 13859,
+      "sha256": "719e7a10ad8560f1bb92b25fb26a489922c136774473a90aad3a7922f5ae7f4c"
+    },
+    {
+      "path": "docs/HAND_MAGIC.md",
+      "bytes": 6249,
+      "sha256": "583a78d1d1cb04b36154d6891888f8f8e61a5a8d0effcd95c1b052118dbfb32f"
+    },
+    {
+      "path": "docs/LONG_RIDE_ASSETS.md",
+      "bytes": 15411,
+      "sha256": "3077c31230f1c9d78b13a2a7f3660399c1800818aea5b95e59270d256e668176"
+    },
+    {
+      "path": "docs/LONG_RIDE_BIRD_REMOVAL_REPORT.json",
+      "bytes": 8978,
+      "sha256": "85682bf3eb876b8602e9ddbf1df3e9d0e1b73c8b47d83617bbac81e74d9c98cd"
+    },
+    {
+      "path": "docs/LONG_RIDE_BUILD_REPORT.json",
+      "bytes": 1508,
+      "sha256": "138a84a3b596ac200bfaca644430d1db137de829d55061f8b325de3eff6520cc"
+    },
+    {
+      "path": "docs/LONG_RIDE_CLIP_PROVENANCE.json",
+      "bytes": 28906,
+      "sha256": "3eb1bff5ab3ef4da7b341c57826a43f8daab1e157d414ec56ef328ba5bc929db"
+    },
+    {
+      "path": "docs/LONG_RIDE_EDIT_LIST.json",
+      "bytes": 1219,
+      "sha256": "e86b0184d65a3518da704c57d9e5e400d30773317333cda07ef9bd37dcd24b63"
+    },
+    {
+      "path": "docs/LONG_RIDE_FINALE.md",
+      "bytes": 4245,
+      "sha256": "e3898fc1c16283f67d66f5cdd09842c2436afe732be618dfdb33b46625796567"
+    },
+    {
+      "path": "docs/LONG_RIDE_QA.md",
+      "bytes": 6838,
+      "sha256": "76a12e14fc0f9437eb54daec704f889808565f3c924afb2b9d1340e40f09d739"
+    },
+    {
+      "path": "docs/LONG_RIDE_SOURCE_REPORT.json",
+      "bytes": 12696,
+      "sha256": "7096ed79967c2eeae58aab40488572f3054d8b485d80aeae59cddf31b7f6f6f9"
+    },
+    {
+      "path": "docs/LONG_RIDE_VIDEO_PIPELINE.md",
+      "bytes": 19654,
+      "sha256": "a0d6c15d11459cc833b2e6d04f2100bf31c1c8a2a0dbb5f2be1ea6afd79dd679"
+    },
+    {
+      "path": "docs/PERFORMANCE.md",
+      "bytes": 21103,
+      "sha256": "7cf11044079a5cc2f7915a1ad2008c8ff659bd6debdf457277ecbbc2f3665fc1"
+    },
+    {
+      "path": "docs/PHOTO_SOURCES.md",
+      "bytes": 1034,
+      "sha256": "15a6ff06f81bed5ec5c9951a97d432d7d47defcd076e500fdf5835c5fa22dcda"
+    },
+    {
+      "path": "docs/PRINCESS_FILM_STORYBOARD.md",
+      "bytes": 21247,
+      "sha256": "d4fbaee389883375e60fdb298885417980b57adad3a60ce0320227436e933ec0"
+    },
+    {
+      "path": "docs/PRINCESS_RIDE.md",
+      "bytes": 4923,
+      "sha256": "c29a28ab1c8ddd2525080a9e6ca46cc2d19ef3283ec55e02e3e13810235e8890"
+    },
+    {
+      "path": "docs/PRINCESS_RIDE_ASSETS.md",
+      "bytes": 7193,
+      "sha256": "5ee3cdc4b7f1df17e503035218350b7ba7cf5bfeb31440ddfb788cf109b94dfa"
+    },
+    {
+      "path": "docs/SEASONAL_SITE.md",
+      "bytes": 3859,
+      "sha256": "292d8b194e49da8e21c7304484529267bc22d5b2ba00df304cd58bda3c4b54a0"
+    },
+    {
+      "path": "docs/SITES_MEDIA_DELIVERY.md",
+      "bytes": 1557,
+      "sha256": "42490bfef24471e81c492612204524b29edbbdeec13d9a2765a662e4ea2fb6d1"
+    },
+    {
+      "path": "docs/THIRD_PARTY.md",
+      "bytes": 7110,
+      "sha256": "1cf62a2a827caa75e6a480b944fb376725e0865ce9d13b642f9bcb8ffef3da59"
+    },
+    {
+      "path": "docs/build-metrics.json",
+      "bytes": 6401,
+      "sha256": "6a5beb4b7fba375b42d1a424f71571d5f55db91f28b48c7175e83aab47de9c65"
+    },
+    {
+      "path": "docs/film/HUMAN_ORIGINAL.jpg",
+      "bytes": 190984,
+      "sha256": "eb53cf7157484c28ebb8be3e0caf2aaab51ed3017317cfc4cceeb84326094384"
+    },
+    {
+      "path": "docs/film/PRINCESS_IDENTITY_REFERENCE.png",
+      "bytes": 2382972,
+      "sha256": "974f613b61829ea69cb977973433915e417fef7f0c9a9ef23f24b6fd4de1e24e"
+    },
+    {
+      "path": "docs/film/generation-prompts.json",
+      "bytes": 15808,
+      "sha256": "e595954d1cb3aac3c9b8dfa7c08f25620860c94f44bb03089c335e9f9d9ca5d7"
+    },
+    {
+      "path": "docs/ground-composite-validation.json",
+      "bytes": 17203,
+      "sha256": "0d71ec1f4dd09e6ab5a0632128504ddd67fd0004b072bfc516f136ec08af28dc"
+    },
+    {
+      "path": "docs/ground-contact-framing.json",
+      "bytes": 8559,
+      "sha256": "c45df048044f8ed66cc6759da6e3c2564bb5000c0e49ee44be74762af9acdb3a"
+    },
+    {
+      "path": "docs/ground-contact-offline.png",
+      "bytes": 673594,
+      "sha256": "aed1d60a72d20cbe65d8c96ac37cc802760122d61bdf98a279ec50d2e2ad956f"
+    },
+    {
+      "path": "docs/hand-magic-interface.jpg",
+      "bytes": 65319,
+      "sha256": "2e53fb3ac4ac80ac558029b63cb1d6b452151d6e7014dc981b8504291cf00bf4"
+    },
+    {
+      "path": "docs/kitten-groom-front.png",
+      "bytes": 847311,
+      "sha256": "649f79db1a5e77c6f7ce0519a6227b6a97c3693f9e976c44130c208a7ba40126"
+    },
+    {
+      "path": "docs/kitten-groom-side.png",
+      "bytes": 640567,
+      "sha256": "8247dc38deb8e7404ef34a47aeb7f3b21a8a589b0ae57aa472b6769fceec7028"
+    },
+    {
+      "path": "docs/kitten-model-blink.png",
+      "bytes": 114793,
+      "sha256": "4bac2a7b157762c31ce672746960fea1ca22e6f45ab65e43ba1f6afcd8358edd"
+    },
+    {
+      "path": "docs/kitten-model-front.png",
+      "bytes": 116553,
+      "sha256": "8142c77a684fdd5e42eabd1390339f1a602186d9a986ee9b5b8f9f8590be933d"
+    },
+    {
+      "path": "docs/kitten-model-side.png",
+      "bytes": 106530,
+      "sha256": "0af49cee10c80a385e44a7ae2f52d2455bf09699cd05e3c23f5773416d86cd48"
+    },
+    {
+      "path": "docs/kitten-model-validation.json",
+      "bytes": 10931,
+      "sha256": "4f6ec968dcf60575455ecf000e66b3568533878e0bd7f0b3c86cea034b0895e0"
+    },
+    {
+      "path": "docs/long-ride-generation-plan.json",
+      "bytes": 11424,
+      "sha256": "ffda5638ce77a6913da50662219d91a367e4483f38c37273834afa3ffa7c4d24"
+    },
+    {
+      "path": "docs/malaysia-film/CONTINUITY.md",
+      "bytes": 5293,
+      "sha256": "c4daa9fdd573e44eab89f8c8adce63761c021523c14fba9aed41888cea556fe0"
+    },
+    {
+      "path": "docs/malaysia-film/DIRECTOR_SCRIPT.md",
+      "bytes": 27568,
+      "sha256": "b592fb59b28ec2fead723d7d1b6a1f9435a53ca7d20e41dcc78778ddbe59b0dc"
+    },
+    {
+      "path": "docs/malaysia-film/README.md",
+      "bytes": 5014,
+      "sha256": "ab0a14baebd06a8d049fc6172195bbf8fccdaa2df93c9ed8861541ae406c50af"
+    },
+    {
+      "path": "docs/malaysia-film/REFERENCE_BRIEFS.txt",
+      "bytes": 5574,
+      "sha256": "b98458e31f6935645e39451d13ca2a6b9bfa42af5953f1c16cdf81d271c6b56a"
+    },
+    {
+      "path": "docs/malaysia-film/REFERENCE_NOTES.md",
+      "bytes": 1612,
+      "sha256": "ed79a2ea4793df08519f3b701575980adecac765ab476f73a45090f4c054827b"
+    },
+    {
+      "path": "docs/malaysia-film/SHOT_QUEUE.csv",
+      "bytes": 3986,
+      "sha256": "dc485e967d1791b508024c04fa55299820be6447422647e2e55d8e6485bc8cf5"
+    },
+    {
+      "path": "docs/malaysia-film/VIDS_PROMPTS.md",
+      "bytes": 94251,
+      "sha256": "f133f1deadbc3ea9860e9758a6c7d477a8e24b143a82fa9e3c0d736c9ff4e8af"
+    },
+    {
+      "path": "docs/malaysia-film/director-cues.json",
+      "bytes": 18750,
+      "sha256": "a9a912c9a520d9a0c0b1c434383891c742d00593835b9a10165851ad9f6d2b33"
+    },
+    {
+      "path": "docs/malaysia-film/generation-queue.json",
+      "bytes": 122152,
+      "sha256": "d1cc0b0997b919327d420b1a3391685fae9ef9c1478edc1710aef8efcb41ccad"
+    },
+    {
+      "path": "docs/malaysia-film/production-status.json",
+      "bytes": 2882,
+      "sha256": "3d97cd39c89cb62fe7da6bd14c0dbaff569790ca90db0c1b1b231cf16ccbde3f"
+    },
+    {
+      "path": "docs/malaysia-film/references/A_PALACE_MASTER.png",
+      "bytes": 2653634,
+      "sha256": "81150f082c1f8b38b67d0141c5daa0857c92a513ffc7b44e2cdddaa4d2f7f938"
+    },
+    {
+      "path": "docs/malaysia-film/references/B_PREPARATION_ROOM.png",
+      "bytes": 2602443,
+      "sha256": "a076bd4a68236db495ed4469a3bd73e5e8b78d77cacdcee9137dc5e4c07e7b8d"
+    },
+    {
+      "path": "docs/malaysia-film/references/CAT_IDENTITY.png",
+      "bytes": 2228419,
+      "sha256": "081182deb7fe5e4e90335f8cfd3f2ecc7065f4510845a0d8ad888baff99a4a35"
+    },
+    {
+      "path": "docs/malaysia-film/references/C_DEPARTURE_PLATFORM.png",
+      "bytes": 2684851,
+      "sha256": "b6a5ccc33e1f69e96b725a52508fc26d1720beed2a4987e3299f9b72d8a9d924"
+    },
+    {
+      "path": "docs/multiview-background-assets.json",
+      "bytes": 8072,
+      "sha256": "e2c69f35f4fb194c45a5e07a80f2df141c9645a43a38807a5e8def6c1b74a7b4"
+    },
+    {
+      "path": "docs/multiview-background-prompts.txt",
+      "bytes": 2163,
+      "sha256": "a7de9b6b34da70e457f5c31d815ee469a2721967848623d26c4b6d3a61969027"
+    },
+    {
+      "path": "docs/multiview-background-validation.json",
+      "bytes": 12811,
+      "sha256": "cae8bc64dd6a3d6484f2e0e475537e1ca0331870d617c5e6319f38e13e75ad4a"
+    },
+    {
+      "path": "docs/multiview-background.md",
+      "bytes": 5301,
+      "sha256": "7b2002d45cee42a1d15eda643f51cce85716c0f55b3f7fa7f657af5200fa9b0b"
+    },
+    {
+      "path": "docs/multiview-desktop-zoom4.png",
+      "bytes": 1110368,
+      "sha256": "6b5d51efd27e607e36be73ee91e67b91932e6b0f171852c34f4953ab04fcdb12"
+    },
+    {
+      "path": "docs/multiview-desktop.png",
+      "bytes": 1182470,
+      "sha256": "fcd54d241d4a7ca3fafd9a5ae408129f4b7e5ad9775070a32966c8e7d4d22195"
+    },
+    {
+      "path": "docs/multiview-mobile-zoom4.png",
+      "bytes": 309828,
+      "sha256": "f19159cb7c9e92a7c8e511d4b959aba7a5b34ae6175f76a5ed552c03bc104a4f"
+    },
+    {
+      "path": "docs/multiview-mobile.png",
+      "bytes": 313608,
+      "sha256": "babc8c62b3677dc13d873aef670e56f614666a5148a657ad9c7e0a19371e5d92"
+    },
+    {
+      "path": "docs/multiview-wrap-join.png",
+      "bytes": 1454189,
+      "sha256": "21f4b52b5e066b0206468f747766d11f15593a9a9fca40e348b16abbc0c9ec2b"
+    },
+    {
+      "path": "docs/panorama-contact-framing.json",
+      "bytes": 1316,
+      "sha256": "fe69b8badb5733ff27ac547d042770bfc6994ed613675e0cb8a8877e8eea1234"
+    },
+    {
+      "path": "docs/panorama-contact-validation.json",
+      "bytes": 25193,
+      "sha256": "b78ad832212cc340eef90bd86b886350a00a58b4248b61f25229b05ff33a6de6"
+    },
+    {
+      "path": "docs/panorama-root-contact.png",
+      "bytes": 180364,
+      "sha256": "f8ca0876e3f3e9bef8d4cf877fcb56f14193817ca2e7597d7d9179929e833683"
+    },
+    {
+      "path": "docs/panorama-shader-validation.json",
+      "bytes": 6573,
+      "sha256": "d7f7c4a69cdeb185e3765aa6a5eea68b06adc4bdd995a466a32aa84612f12709"
+    },
+    {
+      "path": "docs/princess-ride-generation.json",
+      "bytes": 3555,
+      "sha256": "e42c0aeb686d555f6818ec1df92c6ef2998304e703bde42fbeabc53bb631ccd9"
+    },
+    {
+      "path": "docs/shader-validation.json",
+      "bytes": 10208,
+      "sha256": "0954a9988e58098ccb3988359ece1ce1cdf50d7b318acf5c66377ae6f6aaedd9"
+    },
+    {
+      "path": "docs/storybook-background-prompt.txt",
+      "bytes": 3080,
+      "sha256": "c37dd387cdaa3358248b30cd5338647d1eb5b73bd44a65b7d298f4df49d3637b"
+    },
+    {
+      "path": "docs/world-motion-validation.json",
+      "bytes": 2679,
+      "sha256": "fafc42e55775564f0f8cce1cf7939dd05f69adb145ae093559b219f1bfddee71"
+    },
+    {
+      "path": "eslint.config.js",
+      "bytes": 799,
+      "sha256": "6ed88c2ab47f3f5d1e6eaf5050863285886c599ec8679e23a5ecf4ec871bea0f"
+    },
+    {
+      "path": "index.html",
+      "bytes": 1732,
+      "sha256": "885222a69ca4b56f0147e0a970636c7ebe5b7085d1aa3fe8b57b8e12361d3cbb"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 168164,
+      "sha256": "388749b7ba9dbf1ab889815fc7788f5b8f28aa87b63f1dfa920f1e6547bf0598"
+    },
+    {
+      "path": "package.json",
+      "bytes": 1597,
+      "sha256": "28d1724d7be2720ba6c56995414aef36de01691c7263e4e462256db823a85d85"
+    },
+    {
+      "path": "production/tonight-we-change-course/.gitignore",
+      "bytes": 23,
+      "sha256": "07bd872a15091d0f14116faf13f17a5f1046f7b94e43ca76665f3048389e5e5e"
+    },
+    {
+      "path": "production/tonight-we-change-course/ATTEMPTS.md",
+      "bytes": 2732,
+      "sha256": "fede623fc6dc84cd506adf4653d8fa94a524d84cb2ab7786dbc3e9d402b3676d"
+    },
+    {
+      "path": "production/tonight-we-change-course/README.md",
+      "bytes": 6806,
+      "sha256": "5cc96ed94a1346bc373990d779ed7e0366fc148c4ecb1b3c915009e3e98060a3"
+    },
+    {
+      "path": "production/tonight-we-change-course/asset-manifest.json",
+      "bytes": 5313,
+      "sha256": "3a3435a8edf62d7ba3045f91e7bba6a2c61857aea8be718070797443c204651d"
+    },
+    {
+      "path": "production/tonight-we-change-course/progress.json",
+      "bytes": 3951,
+      "sha256": "e15676a4c21fdf7f8a76136ec20e8cf780080ee991cd51247406987414b37ce3"
+    },
+    {
+      "path": "production/tonight-we-change-course/quality-probes/S02-metadata.json",
+      "bytes": 1000,
+      "sha256": "798e25b779ec4b0b39654f7362aed6262256f87ec4b97e3152be79de95b7f16b"
+    },
+    {
+      "path": "production/tonight-we-change-course/quality-probes/S02-motion-test-3s-v1-metadata.json",
+      "bytes": 1055,
+      "sha256": "0501b2d58d77a2ec2fb5a75679f6b257ef0439f56b17a91acbe0367c546690c5"
+    },
+    {
+      "path": "production/tonight-we-change-course/quality-probes/S02-motion-test-3s-v1.txt",
+      "bytes": 1904,
+      "sha256": "67824805be26c685bbb4b4d14c718757be774924f7f1fbf212ad00492bcbae88"
+    },
+    {
+      "path": "production/tonight-we-change-course/quality-probes/S02-prompt.txt",
+      "bytes": 2878,
+      "sha256": "2864388e0ed8ab9497118d3806fd60cdfc4c5735f076e7cceca446a784b3972f"
+    },
+    {
+      "path": "production/tonight-we-change-course/quality-probes/S06B-metadata.json",
+      "bytes": 938,
+      "sha256": "44a20ada8d25457b3c08adc3cd29ee38ff5746cd86e2ad99b84f60dd89f59872"
+    },
+    {
+      "path": "production/tonight-we-change-course/quality-probes/S06B-prompt.txt",
+      "bytes": 2621,
+      "sha256": "ef9634034e0cf087973d19f95be51dbdaba39985080c124bd6fe9e889e39edb5"
+    },
+    {
+      "path": "production/tonight-we-change-course/tonight-we-change-course.pdf",
+      "bytes": 3467975,
+      "sha256": "53cf5a6fa97a55df4786e90945fc61e286d1fbd2c6b3a34fb2165a23d76a9bb0"
+    },
+    {
+      "path": "production/tonight-we-change-course/tools/inspect_video.py",
+      "bytes": 5345,
+      "sha256": "37848f692da396d64b767d161e1efc8d287229b66b0fd5a70aad68025939ae59"
+    },
+    {
+      "path": "public/CNAME",
+      "bytes": 16,
+      "sha256": "50e8732b7345c8c66341cae580f4e3af2b7f8c0bcc165a4726e55f372f556bb2"
+    },
+    {
+      "path": "public/backgrounds/README.md",
+      "bytes": 13684,
+      "sha256": "bd4f902a3c1674f5d8889686b1bb19389c3f940b3feb3e3457a447429a6ecae0"
+    },
+    {
+      "path": "public/backgrounds/castle-center-detail.webp",
+      "bytes": 2108944,
+      "sha256": "18e6ad5a3a649ab0d04b73f6e3de34886de099f81adf505aeee5473d03bd4c80"
+    },
+    {
+      "path": "public/backgrounds/castle-courtyard-grounded.webp",
+      "bytes": 1791328,
+      "sha256": "e74966fefb69da24016e02df394a8c497d442de5d9db117f8cc1eea791bc7ade"
+    },
+    {
+      "path": "public/backgrounds/castle-courtyard-natural.webp",
+      "bytes": 2036758,
+      "sha256": "f99a54e11df3d69b2e6461573afd383f4a0f1548afb72204a3b0d296b8fac9ea"
+    },
+    {
+      "path": "public/backgrounds/fairytale-castle-winter.webp",
+      "bytes": 260710,
+      "sha256": "0730dbd8555aa8bce9294225cc6ba910182aa306b0526cc2ece12892039815f7"
+    },
+    {
+      "path": "public/backgrounds/fairytale-courtyard-360.webp",
+      "bytes": 156142,
+      "sha256": "5f34f150c8abb6e3b19071f52dc08611b0f27d5d9d6e6e3a5bea45b7eda685de"
+    },
+    {
+      "path": "public/backgrounds/fairytale-courtyard-detail.webp",
+      "bytes": 1788010,
+      "sha256": "7869924bea5a5d568890f7d2fd9b1f3ddecf44c2dd75cce29d11d4507c9375db"
+    },
+    {
+      "path": "public/backgrounds/storybook-castle-360.webp",
+      "bytes": 1438910,
+      "sha256": "7b4635283c2f90abc180ff576deb41ed9b74df37997b141b3cdca1dfcc172e3f"
+    },
+    {
+      "path": "public/backgrounds/storybook-view-00.webp",
+      "bytes": 1383340,
+      "sha256": "7b93a65066b5b9be6ddfcd96f2f4f2a908f8d749299a3f14aad4f6e228d351c2"
+    },
+    {
+      "path": "public/backgrounds/storybook-view-01.webp",
+      "bytes": 1737116,
+      "sha256": "dbb643c162372c5d84a2fff577ef1cab38f71d84119e48b2f11b73b95ea8fe4d"
+    },
+    {
+      "path": "public/backgrounds/storybook-view-02.webp",
+      "bytes": 1939126,
+      "sha256": "cf05756114bf43880b36475abb3c4780872e7fea9063c8902068a22026073b10"
+    },
+    {
+      "path": "public/backgrounds/storybook-view-03.webp",
+      "bytes": 1885768,
+      "sha256": "504dc926ab9539a1ca955b818ca351b5fad1a052dcbf3fa7a3f49704ffbb2ce7"
+    },
+    {
+      "path": "public/backgrounds/storybook-view-04.webp",
+      "bytes": 1830498,
+      "sha256": "b4e870287096d4dbbd8ad7fd975c0a6ff283dead5d8187a3c89a7fb1615d00fd"
+    },
+    {
+      "path": "public/backgrounds/storybook-view-05.webp",
+      "bytes": 1744844,
+      "sha256": "ae9aebebd52471259c9b256f8ca54809ab9f1604713226c75c523ab1d9e75e80"
+    },
+    {
+      "path": "public/backgrounds/storybook-view-06.webp",
+      "bytes": 1450880,
+      "sha256": "41497a294acbb68854f72367233e4edf66403f97fe60382b397da6394de618f9"
+    },
+    {
+      "path": "public/backgrounds/storybook-view-07.webp",
+      "bytes": 1701186,
+      "sha256": "3409c7cc9ec45f695ff89d3762899fdaffd45931377434fafd85dab75b44214d"
+    },
+    {
+      "path": "public/backgrounds/winter-night-photo.webp",
+      "bytes": 107416,
+      "sha256": "a0202bb1d6c82a2507f6a936090e17dfd7c93c27d16780be4ed70fa04b993c0b"
+    },
+    {
+      "path": "public/backgrounds/winter-night.svg",
+      "bytes": 14198,
+      "sha256": "9c64572257b3858a3b7447c1847556952540c301196fe7eb13529a213eaef939"
+    },
+    {
+      "path": "public/characters/README.md",
+      "bytes": 2418,
+      "sha256": "f8273a44ae195b0f57c807d1ec8f5cd5cbd8178507fe2ec945d0bccd3f3a1f43"
+    },
+    {
+      "path": "public/characters/christmas-cat.png",
+      "bytes": 2232552,
+      "sha256": "927bda4951d3392dd4a0378af8731ebc3c40dd96bc082888e6ec5041116ce75d"
+    },
+    {
+      "path": "public/film/starlight-return-poster.webp",
+      "bytes": 61964,
+      "sha256": "974d6d4e9b4306150f4550add509fd057a30f08734ed3c64631f8da7eaf61f1e"
+    },
+    {
+      "path": "public/hd-assets/18e6ad5a3a649ab0d04b73f6e3de34886de099f81adf505aeee5473d03bd4c80.webp",
+      "bytes": 2108944,
+      "sha256": "18e6ad5a3a649ab0d04b73f6e3de34886de099f81adf505aeee5473d03bd4c80"
+    },
+    {
+      "path": "public/hd-assets/7869924bea5a5d568890f7d2fd9b1f3ddecf44c2dd75cce29d11d4507c9375db.webp",
+      "bytes": 1788010,
+      "sha256": "7869924bea5a5d568890f7d2fd9b1f3ddecf44c2dd75cce29d11d4507c9375db"
+    },
+    {
+      "path": "public/hd-assets/927bda4951d3392dd4a0378af8731ebc3c40dd96bc082888e6ec5041116ce75d.png",
+      "bytes": 2232552,
+      "sha256": "927bda4951d3392dd4a0378af8731ebc3c40dd96bc082888e6ec5041116ce75d"
+    },
+    {
+      "path": "public/icons/xiaomiao-chibi-v1-180.png",
+      "bytes": 63112,
+      "sha256": "80a71fa40a131a4741ddb8fc9431837c27e64d2f40d1d6a741a4b69cb5223979"
+    },
+    {
+      "path": "public/icons/xiaomiao-chibi-v1-192.png",
+      "bytes": 70714,
+      "sha256": "b2406449337401042b8726256110536b5eaf8377191d90330eb51135f20b253c"
+    },
+    {
+      "path": "public/icons/xiaomiao-chibi-v1-32.png",
+      "bytes": 3107,
+      "sha256": "238a8a38a554f75f809cb505bce7f8a451f08d86776776ab4d3bb3ef6b162cb6"
+    },
+    {
+      "path": "public/icons/xiaomiao-chibi-v1-48.png",
+      "bytes": 6235,
+      "sha256": "17b5954738a24f9635e8d5bb4601a35111688b803d9c86b7854573003fecbbef"
+    },
+    {
+      "path": "public/icons/xiaomiao-chibi-v1-512.png",
+      "bytes": 404501,
+      "sha256": "ba02b50ffce98eb754790f3117965e0790283576ac1ccb15190651e086ac3680"
+    },
+    {
+      "path": "public/icons/xiaomiao-chibi-v1.ico",
+      "bytes": 10445,
+      "sha256": "d80f2ebd345fde8fbcaba2bdeb5cf446b1706c3ea65a706455f6cb8cbb0f0307"
+    },
+    {
+      "path": "public/journey/confession-serif.LICENSE.txt",
+      "bytes": 4665,
+      "sha256": "fba3470cde8993c6017764ffe2d1f65d635d6b58664e465de28a9bd0689c1ad0"
+    },
+    {
+      "path": "public/journey/confession-serif.SOURCE.txt",
+      "bytes": 2239,
+      "sha256": "976fe8bc47762a356f4fcd5ab373e0128338e286fd0841be0a1693afa1c9c56b"
+    },
+    {
+      "path": "public/journey/confession-serif.woff2",
+      "bytes": 29740,
+      "sha256": "822f7c39898c26407a4205c982e8eaba034f331736041200aaaca9214b7d6764"
+    },
+    {
+      "path": "public/journey/cover.webp",
+      "bytes": 313098,
+      "sha256": "176ca8633861c11dae87482145cd365443e0720b157ab20108a4e71bc3e40ea6"
+    },
+    {
+      "path": "public/journey/crystal-river.webp",
+      "bytes": 469492,
+      "sha256": "5819ecc100e93986520668075cf2d589e87bed9556b2fe6fefabdec5d884a36a"
+    },
+    {
+      "path": "public/journey/ending.webp",
+      "bytes": 151018,
+      "sha256": "c5dd01bd5ab7310a974c38e092d758fbf5a2c695df671e46ac9fbafea51382a7"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-000.ts",
+      "bytes": 2690468,
+      "sha256": "19e66cd832664120a56e7d587c3818eacaf82e8f9d71b9db4b3d5c6d2cab1c9b"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-001.ts",
+      "bytes": 2654184,
+      "sha256": "1630df35882c0d070cb564746ea4ce12b99d1e86c98bee125e24402626df418b"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-002.ts",
+      "bytes": 2903472,
+      "sha256": "3cec70b786d57765887fa9675fd5ff8a0b15d3f6b5b244bf7830466a9689d4a6"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-003.ts",
+      "bytes": 3067596,
+      "sha256": "cba8d20fd6b9dc9390f60192a67863b4ea7bfd216d0248ada6fa35abf88733d5"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-004.ts",
+      "bytes": 3112716,
+      "sha256": "e4d14cd608fb49471b7d7f477afcc6cb6de1f9be743b32ed9a6af590407fea02"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-005.ts",
+      "bytes": 2917948,
+      "sha256": "9ccb12f7b51a33f4e6531d23e5f041c6434f7562db6ad1f30283d8c1c339bc52"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-006.ts",
+      "bytes": 2693476,
+      "sha256": "162fcccaec9f29d8a4144ca00d1afed0c21ea9808b0f51747f22d4e7e4341df3"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-007.ts",
+      "bytes": 2324620,
+      "sha256": "5dc4cfcad9946e0c59e7b68d2341fe4c0eadf520064c83081c4455538f5408a1"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-008.ts",
+      "bytes": 2367860,
+      "sha256": "2d91ed0b50c412075cbca9d5bc2b3b4eacee2cca7ca219ea5f8eea740296a401"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-009.ts",
+      "bytes": 2638956,
+      "sha256": "5fcbc9dc29cf15c4830d362385178b81b80f9dc001515cb55757c3526b523271"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-010.ts",
+      "bytes": 3112340,
+      "sha256": "89194e5ac56ff8b3822332a8fb6480c1d7e1f5b876d07704427e8fa223170fde"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-011.ts",
+      "bytes": 3327600,
+      "sha256": "ea01100d9f24b263feff1d6a6b74451ff095c3908619a6133d49e5ab7cc65206"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-012.ts",
+      "bytes": 2653432,
+      "sha256": "5190362617c7e502bf65f8c10a2796077c23727e6d008ab7273ae59f0c49c8a0"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-013.ts",
+      "bytes": 2470696,
+      "sha256": "ed949fc973aa011edeec0de72607bd9568c008c3a933e99dd800ebb5fdb18458"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-014.ts",
+      "bytes": 2966076,
+      "sha256": "e84e2aaa5f4615c626c4fe06454133854a8bdba6af23f1521f079a17f3347072"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-015.ts",
+      "bytes": 2853652,
+      "sha256": "4e55728771c2454dc0081a329e8b4a5d6e0aaa6149df08788057075e60883b0b"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-016.ts",
+      "bytes": 2833912,
+      "sha256": "50ca5666a44f3e231cbcec68b3fe90ead4f975c672310f86525d4b5ee2b7fd02"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-017.ts",
+      "bytes": 3028680,
+      "sha256": "1ff0a06fc48d8e4a4fc22699bc867b692505504d26b1cd4269967b3baae97d66"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-018.ts",
+      "bytes": 2730512,
+      "sha256": "362d51e10008ca95c5e81d27c7af09d960316593d349825dc8dff116c8106382"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-019.ts",
+      "bytes": 2783904,
+      "sha256": "8e961c0f4f2b09c9b5e4b3829189661269151ec21d38422546d41ff4687cf265"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-020.ts",
+      "bytes": 2629180,
+      "sha256": "63680186d9f28647182d9ca246fc71bb2a0a1e06eb97420de73f2134ac99cff8"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-021.ts",
+      "bytes": 2905916,
+      "sha256": "659c1a22f9ef3287fb3e737823ee4f17456994a86e6fe09ede9ba38f1d96a25e"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-022.ts",
+      "bytes": 2619028,
+      "sha256": "b0fdb32eece65ba6b3c4cddf6666f47783af45d6cac99f9b0235bae89b77a1d6"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-023.ts",
+      "bytes": 3617120,
+      "sha256": "16556585fd5e6e8ec492281bc1eb54548dea9c8dec9fd03b26d141b5492582ef"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-024.ts",
+      "bytes": 2377824,
+      "sha256": "fa81555a69558e553761b736048919f32ad1066d8d85d771a1563e1adf13e8c9"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-025.ts",
+      "bytes": 2944456,
+      "sha256": "7a527ac004872ce7f5cbe03b59ff683e384e56682bf9f07eae89f42f7639618f"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-026.ts",
+      "bytes": 2673548,
+      "sha256": "7b2a8f0b5b90c99a58892fd87e9fe5a9d96466cc849552c7b162a55279973576"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-027.ts",
+      "bytes": 2897080,
+      "sha256": "e1d976aa16394c24b4aa4e8c0208b83b3ce0c6519ca9863eb1cab585f7a54a8c"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-028.ts",
+      "bytes": 2389668,
+      "sha256": "16df1dbfeeaa7581e758bed29378f9ff6709cb300d231c2909794fbb2a04059b"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-029.ts",
+      "bytes": 3041840,
+      "sha256": "12d58be8deac932ed5d34f6e334dd8da747235cd9b308ad32c320ee1bb1f5690"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-030.ts",
+      "bytes": 3048608,
+      "sha256": "cee5b5ab95570339882355ca254457bb6d25fed3065808a61b721a7dbb9ad8f4"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-031.ts",
+      "bytes": 2516004,
+      "sha256": "8c167e57918f0a0e5702dd20bac85283987114596b047a60a4b2107d25630966"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-032.ts",
+      "bytes": 3117416,
+      "sha256": "814b47d6e8c75fcc6145e8aa590603bf156786b6c98fc2f4be26dbc44e2e17b8"
+    },
+    {
+      "path": "public/journey/film/1080p/birdfree-r1-segment-033.ts",
+      "bytes": 2149592,
+      "sha256": "a90f7215fa4ff4469d3daa256549e98b344f4a2ff423c0e5383575dd6ae52296"
+    },
+    {
+      "path": "public/journey/film/1080p/index-birdfree-r1.m3u8",
+      "bytes": 1671,
+      "sha256": "6a165952d627264754951a40607e4617b420a0aa613041ddc103d0db11cdaffd"
+    },
+    {
+      "path": "public/journey/film/1080p/index.m3u8",
+      "bytes": 1671,
+      "sha256": "6a165952d627264754951a40607e4617b420a0aa613041ddc103d0db11cdaffd"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-000.ts",
+      "bytes": 1388568,
+      "sha256": "67f7877145cfe99cd76429e6f733f57dc23b78ac070846e4f7589bd9168cd27b"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-001.ts",
+      "bytes": 1317504,
+      "sha256": "f84243791dee9390e6654bf7130dfc1a0474278d9337cbf07d4df8b799cceede"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-002.ts",
+      "bytes": 1479372,
+      "sha256": "acbbcd71f3b85a9b5a009c718db9299c250be90d3e401c708edd5dbda6e71115"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-003.ts",
+      "bytes": 1569424,
+      "sha256": "450be82851cc4f8dfc0f9255e5f89a6d7b3d81613280da0157e4ee3b182eb895"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-004.ts",
+      "bytes": 1524868,
+      "sha256": "c915f21d9246cce76f9a83de000d424c6f4d13cdff7da099c72c6b5b850d02df"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-005.ts",
+      "bytes": 1497420,
+      "sha256": "339498600bc61825c3fc901a4ebe3554f78fcbeead90c85dc377134612832e3b"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-006.ts",
+      "bytes": 1382364,
+      "sha256": "91655a1cbe060c70eda4e574384a49c2867e217a76e4e37671b7b5532906edc8"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-007.ts",
+      "bytes": 1183460,
+      "sha256": "c9f6a4c8bd99dadecc8173ceb20fad763db13675af138cc53836de7ada7c7505"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-008.ts",
+      "bytes": 1158832,
+      "sha256": "06edd214f71a1373a2b2fb683013a3bc0311a3a091a0b5cabbc2d6e95c06bbcf"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-009.ts",
+      "bytes": 1335364,
+      "sha256": "cbd49c3535f28830660e2d6a795be4c5d4ce7431d5adc67e39db219d634bdf99"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-010.ts",
+      "bytes": 1577696,
+      "sha256": "d06fbcf7fa23947f02009ae5c096eed3f14d774c9b932f7b752ec5e515abc0c0"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-011.ts",
+      "bytes": 1630148,
+      "sha256": "a9b94fc710eb82804b502700f31d6aa16addd60e8ea914e200ac8f5b623737e6"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-012.ts",
+      "bytes": 1389508,
+      "sha256": "91c3776782e0ac3e5a07e83be049dbf690755b203ed8f009be4b310803ceb111"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-013.ts",
+      "bytes": 1297012,
+      "sha256": "1148303fd8db9f0f4576e23bf3c23cfb41d8827a7d7096feada5eabe14ef7f89"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-014.ts",
+      "bytes": 1448352,
+      "sha256": "71729d44ff7c22fb8d0924190c6e44cc2bff0dd34301d87233e2f8834a70b5eb"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-015.ts",
+      "bytes": 1498736,
+      "sha256": "05f1ead4aae8c14ce34f75e7fc69c588c54566d41810eb61403e3d82b8a5fb4c"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-016.ts",
+      "bytes": 1485952,
+      "sha256": "87b3f3c9825f700787f52d505953659192f621943d7aeb57938f301f85f483b1"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-017.ts",
+      "bytes": 1593300,
+      "sha256": "c5b4d7ae7b598206e6572329268da7741020e19531e32831be28c4cb7a40d1c3"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-018.ts",
+      "bytes": 1383304,
+      "sha256": "5a8130c65e960aa4a7583dd4a2b0b8d02565e02f942ccceaf8fe0b8d77866929"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-019.ts",
+      "bytes": 1428988,
+      "sha256": "d310f6c8925783342fdf22b28289e59a6f09338a85c0f2210a1dc470f0e74e11"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-020.ts",
+      "bytes": 1304344,
+      "sha256": "08dd787a0ce043e35da9f88618d8fe567701719921eb8fb3ec2b1e0637b5eaeb"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-021.ts",
+      "bytes": 1443840,
+      "sha256": "2a37bdf5d4e096f1d4973459bd1d667d179620e4e369123085dacf519432b9d4"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-022.ts",
+      "bytes": 1336304,
+      "sha256": "d059bbb37d13ff5fd581051af095c681c4d7369f7417ef4cf4c349f74cacf95b"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-023.ts",
+      "bytes": 1890716,
+      "sha256": "28e3bfebb1a5d332e4280e24dbd404c799cfd322ca3d9a0e8fa8e1315fb82d83"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-024.ts",
+      "bytes": 1214292,
+      "sha256": "0b34c07f20ce2ea6d37145b74867ab59b5e0403ba02151208132303555439804"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-025.ts",
+      "bytes": 1501556,
+      "sha256": "2424e983fa1f3ade77c4960d0ee1017c199128432c31c61c57e4088a78d99eb3"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-026.ts",
+      "bytes": 1411316,
+      "sha256": "b4503a6c07c96e822a77e998d7795304095557a54fadacf2de84f7457f781b57"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-027.ts",
+      "bytes": 1494224,
+      "sha256": "6ded6a7817390f955dbddf4bc964282701125b0276dfdd081011d5f6dc546b6d"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-028.ts",
+      "bytes": 1211848,
+      "sha256": "3c504116a0f11a25581ae6805b306fd7a42ef786aef2e10fde638e644d621e44"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-029.ts",
+      "bytes": 1461512,
+      "sha256": "6d292a3816195082ef3908cc4df42157a1364b029cf8e2ff21893bcf2e1e5980"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-030.ts",
+      "bytes": 1477116,
+      "sha256": "a5b242b7cd086b68ca011629266caa023cbcce4cdae2ee7231852a42475baa13"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-031.ts",
+      "bytes": 1254524,
+      "sha256": "3bcfd8b5b004482a6aa4fe99af3f20aebfb65a45caf8880e7d739fa4ac50d42e"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-032.ts",
+      "bytes": 1622440,
+      "sha256": "6c5c227d7a59710521d27c7b9104e2ed1303e687483b11f9c378062a90038ecf"
+    },
+    {
+      "path": "public/journey/film/720p/birdfree-r1-segment-033.ts",
+      "bytes": 1064832,
+      "sha256": "57a23029737f198e92965094a6924b3561ecc5790d87b0e0688371096595f101"
+    },
+    {
+      "path": "public/journey/film/720p/index-birdfree-r1.m3u8",
+      "bytes": 1671,
+      "sha256": "6a165952d627264754951a40607e4617b420a0aa613041ddc103d0db11cdaffd"
+    },
+    {
+      "path": "public/journey/film/720p/index.m3u8",
+      "bytes": 1671,
+      "sha256": "6a165952d627264754951a40607e4617b420a0aa613041ddc103d0db11cdaffd"
+    },
+    {
+      "path": "public/journey/film/index-birdfree-r1.m3u8",
+      "bytes": 373,
+      "sha256": "c01ec9d7cbe83c1a030835bc451656151d56302ae67ddb2eef55a04ad4c90e14"
+    },
+    {
+      "path": "public/journey/film/index.m3u8",
+      "bytes": 373,
+      "sha256": "c01ec9d7cbe83c1a030835bc451656151d56302ae67ddb2eef55a04ad4c90e14"
+    },
+    {
+      "path": "public/journey/film/timeline.json",
+      "bytes": 6929,
+      "sha256": "c99e6c5cc31cfcdb28da5b4e2a45588edcf4bf0b4f5f6630110abba31665f43f"
+    },
+    {
+      "path": "public/journey/finale-palace.webp",
+      "bytes": 312372,
+      "sha256": "5ee0c30767506d9448c844fa90e405760e31182ad7da2d4318d4e0723b04f60c"
+    },
+    {
+      "path": "public/journey/finale-score.m4a",
+      "bytes": 1828240,
+      "sha256": "274c677ce07252885148252c9ad331781177b319cda1910627a770bd19a7f79d"
+    },
+    {
+      "path": "public/journey/moon-garden.webp",
+      "bytes": 484774,
+      "sha256": "dca65992260323293edd8c13f0627aeb3d48f02ead62dafe9aca2981a0229962"
+    },
+    {
+      "path": "public/journey/moonlit-lake-gate.webp",
+      "bytes": 400148,
+      "sha256": "ca8cda6035a3dadb2786016d6da5742f16bbb2237b5ada254125eafbdf1c9dfc"
+    },
+    {
+      "path": "public/journey/music-hall.webp",
+      "bytes": 452408,
+      "sha256": "d617be985a9f4b2aed284dae45e2a32b961c362350919cae97105dffcd3c0cb3"
+    },
+    {
+      "path": "public/journey/royal-ballroom.webp",
+      "bytes": 444738,
+      "sha256": "8c116ced522d2d3737fa7f22c2bcbcfd6d157ff519bd72e551a83f52aa4be3de"
+    },
+    {
+      "path": "public/journey/star-library.webp",
+      "bytes": 540958,
+      "sha256": "deedfd8af6150dc2381d08964ab58f5618da82a39874e197bfca4518b9e3ee0a"
+    },
+    {
+      "path": "public/letter/paper-greenhouse-small.webp",
+      "bytes": 97078,
+      "sha256": "9fdc6f04dec6e55acfe6297386eb696c555b3119edd9e416efbdaff7959ee351"
+    },
+    {
+      "path": "public/letter/paper-greenhouse.webp",
+      "bytes": 247346,
+      "sha256": "207aa262ee1022406cf3dc5f7a4f01a03453f748ed12fafa8f880cb147abe13f"
+    },
+    {
+      "path": "public/lettering/christmas-paw-greeting.svg",
+      "bytes": 7238,
+      "sha256": "7062bf503d17d0323d338cb629ed7b12d6c73789fffd41d91decda0d4b68914a"
+    },
+    {
+      "path": "public/manifest.webmanifest",
+      "bytes": 510,
+      "sha256": "e5e501499845b9542ad7118fb8b9299a9f1eee55123405ef75f25d5a598f36f4"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040031_831.jpg",
+      "bytes": 191396,
+      "sha256": "78863d114f9c780a6b455c81e506bd52ef6a464fec79fa01b1444d1a5220eef6"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040044_604.jpg",
+      "bytes": 240990,
+      "sha256": "3dfcf861632f42c0c9b8dbb2214d9d4c609ca96b7bd07bd37337d2e9859356fb"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040048_334.jpg",
+      "bytes": 187061,
+      "sha256": "05ec6c78fab15896e72f998a86b6555160f0e6a258b858bd1d76dfe3e9697440"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040050_624.jpg",
+      "bytes": 140302,
+      "sha256": "d143c7edc93188c1c92119e959e24f18ccb3378df9652bf820f5dd10fe55dbee"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040053_175.jpg",
+      "bytes": 164385,
+      "sha256": "b26d26b56d448b11b335609f5e577fb110410733b2752994c78d19c6d6ac9d84"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040055_584.jpg",
+      "bytes": 219760,
+      "sha256": "aeee4d30c2028df5dae067cadea9811ead12737142c699f7a14c9e0033b16afc"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040057_406.jpg",
+      "bytes": 310993,
+      "sha256": "e1a85a6bb153032f1c441a5983df78057c1dcd4870a1f97c8d60e69299f8a3eb"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040059_391.jpg",
+      "bytes": 204457,
+      "sha256": "cc7e8cd930529c1b8d82a9c46ac91206cff13232f0c4a31fcf5d3069730f2f8b"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040101_372.jpg",
+      "bytes": 286946,
+      "sha256": "806ae492bf3e3bb87bc274769330b267cf3171b98d95679f692de6decc781b61"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040110_871.jpg",
+      "bytes": 228441,
+      "sha256": "8db28a183263df0ba97109e8f862ca4d3f94da856c34860af4e241828b1982c3"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040116_117.jpg",
+      "bytes": 193604,
+      "sha256": "0f297f3000c6ef6b76cb57878ae0dba7334f7cc91cc0771ce6632fd6085092e2"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040122_128.jpg",
+      "bytes": 345418,
+      "sha256": "e6bbc70b1eac74a8ef101efd8e2f88d2ff07f14210df6537c3dd58256fcbddd8"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040123_859.jpg",
+      "bytes": 289075,
+      "sha256": "73aaa436c6225252dc11ca9fe1c8374a8b92f20b33d0ca72382e1f3476e72b73"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040125_407.jpg",
+      "bytes": 229981,
+      "sha256": "d37314d1f6aab3a22b3168fd20a441a6f60110abca856003b1ed3445b01706e5"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040126_903.jpg",
+      "bytes": 300766,
+      "sha256": "a750f5cc91124e2dd4bf7d6dde9b8ca52ce4525f208001479828ac63f0066b14"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040128_479.jpg",
+      "bytes": 298136,
+      "sha256": "3d664940f09d52702b2627c8c01a624802c5368665c971e281944b79e27b9a07"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040129_939.jpg",
+      "bytes": 282950,
+      "sha256": "9e8028b60a31947e787a05056e26d60651844d3837644de1a18c46df0779b268"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040135_689.jpg",
+      "bytes": 219673,
+      "sha256": "723393f071250208c139d883649e5a5faaa52f7e3bccc1a6cdd3538e96bac68a"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040137_088.jpg",
+      "bytes": 145726,
+      "sha256": "df460654eec05b7ef9314bdd2d5191a9f161c9c59f7202a8ee8b169035ceff28"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040139_038.jpg",
+      "bytes": 180466,
+      "sha256": "f8857829e7d4579bcd4656f9e8846ae8e4dcd899e7fa6a9ca57f9d6d019af753"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040140_759.jpg",
+      "bytes": 136802,
+      "sha256": "2307a33302bb822484c31b2328e94b29a6f25dddfb844c23427d116169acc5a4"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040142_498.jpg",
+      "bytes": 202831,
+      "sha256": "5b1199331e315a0f3dc0905215bf398c3c636d2cefedffe313858bebd865012c"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040144_237.jpg",
+      "bytes": 190984,
+      "sha256": "eb53cf7157484c28ebb8be3e0caf2aaab51ed3017317cfc4cceeb84326094384"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040155_748.jpg",
+      "bytes": 277119,
+      "sha256": "7d2bbd8ff863294caaaca5c927cc156fbdd3e3767d060b561e91e502562554ec"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040157_290.jpg",
+      "bytes": 213895,
+      "sha256": "15b63d02274e16df3e02d46a99d1a7c915bc0bf4fc054031903844c7d72a8394"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040159_036.jpg",
+      "bytes": 274497,
+      "sha256": "beb6c286cfc43bd0f5f31868d2c9b06b792635ee20efa4efc444740a52befb33"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040200_703.jpg",
+      "bytes": 165814,
+      "sha256": "c40d406816ab546fc8c0d9856cd7d6fab6871ad6875c354c52412707c65aa503"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040206_800.jpg",
+      "bytes": 174780,
+      "sha256": "781181e8795d399bb32396ef46c118ce5a6934326b536b3a84d2c7e65a7a2240"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040208_230.jpg",
+      "bytes": 149230,
+      "sha256": "3fb2712094dd5b80949b28a8c0380f5141cebb9812f488f872e252e96152b9f1"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040209_605.jpg",
+      "bytes": 175938,
+      "sha256": "b1abb9f3f71e5e80355e33363dec3bc9b011984d1075d9dc63439ba6c371ff45"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040211_106.jpg",
+      "bytes": 141019,
+      "sha256": "8f7cf7ed63034b64516a85091fb9d393c8b75fec34814677559e13956f2aac98"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040218_389.jpg",
+      "bytes": 133148,
+      "sha256": "3eefc24fad6ac99e5894e2f262d18abcc63eb8c2823bc75e6202559a4dc94256"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040219_910.jpg",
+      "bytes": 125058,
+      "sha256": "fdb747ce8a1fddf67edbe10c8077ad124dd3f61ad82ffa6abc1d6a4e21e685ba"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040221_295.jpg",
+      "bytes": 110718,
+      "sha256": "13382706750ccd50e363eee579e4c24b1a086649fd0e9694e123eed9af455d5b"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040222_710.jpg",
+      "bytes": 96013,
+      "sha256": "3a5d1b947f7c9e97ccc41f9dc9aa9319324a8ec9c039b8c0ab9c7ae5a7ac0f6e"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040224_163.jpg",
+      "bytes": 128129,
+      "sha256": "a88f88d43da24543f3722272cebfd3276086dff8b3e629ebeff1e42b40053fe3"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040225_600.jpg",
+      "bytes": 96865,
+      "sha256": "8a712156a9cf853fce213555fd17a53b6a4aabe6125f6a4e2aeb6589c5067b3b"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040226_989.jpg",
+      "bytes": 131422,
+      "sha256": "a77bba828a499202fe10384e50a3577025587c7069c60be47aaf4a7446b2c6f0"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040228_789.jpg",
+      "bytes": 138884,
+      "sha256": "3420aae80ac47e3d7f2c959170e497a0b218841e54abeff79b5f9de4951e9565"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040230_269.jpg",
+      "bytes": 143332,
+      "sha256": "053abcfcc3f910b0651d882f285bd7f90643db99c5ce7156a8042b0bd0562e3b"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040235_404.jpg",
+      "bytes": 573080,
+      "sha256": "b1c399bead88418e6edbade81556d2e6062d5cb6db3717728e88d7a4b86636f4"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040236_833.jpg",
+      "bytes": 356434,
+      "sha256": "3508affdab49deea27b232224fb32941faf474f8857d740bca02fc279b945abf"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040238_183.jpg",
+      "bytes": 660794,
+      "sha256": "0096d99ec26734cdd946e3c08e047986df0393148eb64b9f1bcf5a1ce444ef70"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040239_622.jpg",
+      "bytes": 373090,
+      "sha256": "1b1a017cecb72cc0eb78a97bf2454f714b49279241f7a075f22aafe6cf352610"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040241_029.jpg",
+      "bytes": 762143,
+      "sha256": "53c56430554f851af84819cc21ad82123d9617add260d33b6d05ff5695c33478"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040242_514.jpg",
+      "bytes": 765250,
+      "sha256": "833e6a76c2816718f452fbd7deed743fbbd42a722fd9c95e632e350474959d0d"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040243_975.jpg",
+      "bytes": 633152,
+      "sha256": "b2a77b61cb1a9549eb2f1c97a7f6eb8890f290c0dfc56e7a08fcc1fe72ed62c6"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040245_618.jpg",
+      "bytes": 429175,
+      "sha256": "8e0d94759e13ae183badd03372381ffa1e9ab6dc377d298cf07e797036693ac6"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040247_378.jpg",
+      "bytes": 486449,
+      "sha256": "31900359df75b7d16d403c85bdddd213795e82cf4062c2b47a53da74d435ca6e"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040253_048.jpg",
+      "bytes": 92104,
+      "sha256": "402adf19803f84835ab71aff8b70b60b5a0d8ef880b6f11265d6e5fc53de9c5a"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040254_689.jpg",
+      "bytes": 72876,
+      "sha256": "931739ff293c41ad5f96188f3df3b80460f1e35ffa9af0fb061a471eaa067dd5"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040256_191.jpg",
+      "bytes": 79283,
+      "sha256": "bdd821208d3d3ea880c630636b18dbf95761de13cb4b0f636ec26386eb06a8bd"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040257_675.jpg",
+      "bytes": 95780,
+      "sha256": "28ad12592ecc0f8a445ff6f0d32cf49306eff85aa772b3ca6a560c70b22cef9a"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040259_103.jpg",
+      "bytes": 96235,
+      "sha256": "446abee1a823cd363612c4e41537757ce7af38e37ce1b625750803e585b3c2ae"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040300_707.jpg",
+      "bytes": 101977,
+      "sha256": "dc42ca9387231299367d00a19e8f2d8560e7028e79d1d973f8b78b10f1e437f2"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040302_183.jpg",
+      "bytes": 111165,
+      "sha256": "0cbd45b362649e8f99adb1a1c8400d80fc3a1393c11f61356eb1540e70906780"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040304_013.jpg",
+      "bytes": 93833,
+      "sha256": "80be340754f3f73e757b6726111a6ae52c5b1477441b7db28fa2973df9224779"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040305_826.jpg",
+      "bytes": 110836,
+      "sha256": "71408858947213fcd70d4e8da0cd451994abb6930bf2d12e39c0272a3757d8d1"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040315_669.jpg",
+      "bytes": 88650,
+      "sha256": "b42c86bbb77c1c178201810af1c8805361318443056dc8f1e78243c4f9a4de24"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040317_192.jpg",
+      "bytes": 103161,
+      "sha256": "71b0655db7db1109fed73bca2f2869fcffe41b605a215e88bd1bf3abb0d68b79"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040318_638.jpg",
+      "bytes": 111101,
+      "sha256": "b8c125e10a5100c638ab074b04d7a3f1da832481dc8eca15731965008693cdef"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040320_170.jpg",
+      "bytes": 100100,
+      "sha256": "b129ad53c73c278db6c88d82e59f005d2fe28b274f797f256baf0987458b7aaf"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040321_831.jpg",
+      "bytes": 107864,
+      "sha256": "3984adfdae1417b9cbc7c857e8062eeb0ffe49abe1e531b22aef847a76ca3bff"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040323_329.jpg",
+      "bytes": 65404,
+      "sha256": "2503639ddbae8b34e44694f060eb076c486ef10530b86ee0c79b4f54f322a151"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040324_700.jpg",
+      "bytes": 70920,
+      "sha256": "ea5e15b559a9294d647853b67f6996d3fe074fb004017275327ea0322a387d69"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040326_084.jpg",
+      "bytes": 70802,
+      "sha256": "a348c5e89a625acab7d54b1b3c167aabdc98c0c2f2dc5ac93e02686bbb7924a4"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040327_480.jpg",
+      "bytes": 95611,
+      "sha256": "89c5630adcefe1e2a7be2c06f5f02dfbe3ade8495aab5255cfd5badc38e8b8b5"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040332_832.jpg",
+      "bytes": 191757,
+      "sha256": "6b08f4651a3adcad46803a621d96614eab311f41d3293b8e39d852f7d9784f1b"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040334_437.jpg",
+      "bytes": 125996,
+      "sha256": "ce9bb7c87af6dc5b68c83663c9223ecdf406a9f3dd4f5afb2e21eba39fbd04f4"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040335_884.jpg",
+      "bytes": 121262,
+      "sha256": "0c98d0427f632a46b8396b25d4a547807978dea4760e09e69ffbca44bf96b28e"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040337_440.jpg",
+      "bytes": 69563,
+      "sha256": "6963067fa7081e0ce5cee65cb5c868d5b082cebacd3d3f59224d7c3502ede12e"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040339_033.jpg",
+      "bytes": 119027,
+      "sha256": "86a04e0240403e1e2eb5e1ef971bf2270e819704eb1290ad5230fa63e89576f1"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040340_622.jpg",
+      "bytes": 136910,
+      "sha256": "3b8b47611af53b30317babaac4eeea7d98c285265dd2a39c2640eefa7947d1f9"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040342_165.jpg",
+      "bytes": 142126,
+      "sha256": "3d8beb2a3bd0c136ae6da07bb549c0afda3aa693ce8a1c6950cdb6857f8eb3fd"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040343_766.jpg",
+      "bytes": 140331,
+      "sha256": "5b28ab985b17b34b4c1c22dec9704ebd0b5c3f892363bd20c378e723f67ee034"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040345_384.jpg",
+      "bytes": 94907,
+      "sha256": "b21d3d67a49a836ee9e19276c26d23f191801dea107b5523b168c0eaa365f260"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040351_133.jpg",
+      "bytes": 182240,
+      "sha256": "9f445c27ccfa57124ad5ab898436f0f9d365194d6a408bf65312b9dae502efda"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040352_571.jpg",
+      "bytes": 169795,
+      "sha256": "c1cd179227fb7428828d26d149e6dbd4c1ca95223cb8027c4a02c7d0f71f3460"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040353_915.jpg",
+      "bytes": 140807,
+      "sha256": "8e60a65ca42d87cc901cd6afee605901262ee7a99e697f0d2fab3c9f52dbefef"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040355_278.jpg",
+      "bytes": 204960,
+      "sha256": "bc82ef68dd90437c4a5dcdfef664996394f0f299ad0bb3b61adbe2d711151648"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040356_672.jpg",
+      "bytes": 198823,
+      "sha256": "bc9651a3831a1c5c9274d2c285ccd080d427ef4a074dc38cd31455eecd1021ed"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040358_108.jpg",
+      "bytes": 125890,
+      "sha256": "20c4854c19caa870d95b9b446e671425628481e46ae4c7dfe3eb437e1f2ab63d"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040359_510.jpg",
+      "bytes": 474136,
+      "sha256": "0f8b9c6c54c944ebee8b3f1bcd4bff458915fea44acced63ac6840924b569c47"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040400_959.jpg",
+      "bytes": 441979,
+      "sha256": "f15957c11ce3832fd8a762cdfa36907ed3e568c5bd01ef946131f4a0d9d42568"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040402_563.jpg",
+      "bytes": 1084556,
+      "sha256": "3b5837b3a409aa6c4c57ec0744786205bff35a8c6acbaf0d1c9745d177d9565f"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040408_835.jpg",
+      "bytes": 117394,
+      "sha256": "076d20b70bb067cdf3dfefee4d2e19885ce8164e7be19ed2e583ff2a5b9a51d1"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040412_506.jpg",
+      "bytes": 120411,
+      "sha256": "339c0664f22324502bd5b81afc68f7b95c8158a8708a47d71ee0a215a3ca1d95"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040413_874.jpg",
+      "bytes": 89463,
+      "sha256": "3ad8ad40750fb558d886f275980b999f1cd352cabff9a7c18977451aade904a4"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040415_148.jpg",
+      "bytes": 151983,
+      "sha256": "ce38e6cf74fcd5042d413c18185d4d55db7a0122e7b424255b98fb98624ec161"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040416_485.jpg",
+      "bytes": 138014,
+      "sha256": "7bb9449b07c6c4fc3c9402d4ef24a15182be33cac7f7fa2933a8fff32386bfa4"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040417_881.jpg",
+      "bytes": 147433,
+      "sha256": "f1de8ec24012c97ebaca000af2cb4a4ccbe95035ba9878872d3eb0aa410f5b6e"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040419_236.jpg",
+      "bytes": 128850,
+      "sha256": "ebe3389e663f75180f67e8ad2619f28fc4ad0f8f959d37953436959bfe4e0de9"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040420_549.jpg",
+      "bytes": 112797,
+      "sha256": "37d6e01ce8f306687a1ece4f37fcaaf363eb1a8bc612dccff4d041f7dd852ac0"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040422_566.jpg",
+      "bytes": 166762,
+      "sha256": "eb0ff245f6f7331c943ed2b9b32e9c9e18a2fa485cf46e83c2807bf4d9e25a87"
+    },
+    {
+      "path": "public/photos/Image_2026-11-07_040428_115.jpg",
+      "bytes": 106981,
+      "sha256": "1afc717f6509bdd7d46cab632b3de7df376fbc561ad0dcf6aed7aae95a941bc4"
+    },
+    {
+      "path": "public/photos/manifest.json",
+      "bytes": 3726,
+      "sha256": "ddfcf5c94cc6f6a7c33ad34ee7b273a975430da8d38a4a5b1cc97d8250410aae"
+    },
+    {
+      "path": "public/princess/arrival-poster.webp",
+      "bytes": 315626,
+      "sha256": "a80b263a3ce941d06d20269f38b878cf5591be646deee51d2ebd6f7dab5dcd0d"
+    },
+    {
+      "path": "public/princess/arrival.mp4",
+      "bytes": 4244822,
+      "sha256": "6b18f488371b7565d6250636cab2f4711ce34a880eb72398280de25ae005925b"
+    },
+    {
+      "path": "public/princess/ballroom-poster.webp",
+      "bytes": 108806,
+      "sha256": "4b6b6f30591385f024fc3de81254de848bf5f9d143365ba562e902364d013429"
+    },
+    {
+      "path": "public/princess/ballroom.mp4",
+      "bytes": 2969228,
+      "sha256": "7cea5c5b1fdaf393ba187a793a30d2012fe181acc90a6f1a5d648977fa6fe4e8"
+    },
+    {
+      "path": "public/princess/crown-room-poster.webp",
+      "bytes": 98898,
+      "sha256": "01d671b2c8f3fe2748fff023cc63b9c97b2ccf8bbff39fea7e11d6c7ea72f588"
+    },
+    {
+      "path": "public/princess/crown.webp",
+      "bytes": 129726,
+      "sha256": "44a184d2ed98f8f601c25f4641c46e308f05c30ba12494f15cd897d5d30d661f"
+    },
+    {
+      "path": "public/princess/siyi-serif.LICENSE.txt",
+      "bytes": 4660,
+      "sha256": "37183c96cf468c92ed7bcbb7cdcea0c30b36351b339fd024337e845abec5d7e2"
+    },
+    {
+      "path": "public/princess/siyi-serif.SOURCE.txt",
+      "bytes": 2024,
+      "sha256": "53cd64e4b8beb91755ecfb9455959197878350fc4c25f437af92ebe1771868ec"
+    },
+    {
+      "path": "public/princess/siyi-serif.woff2",
+      "bytes": 34912,
+      "sha256": "de188090f251e4d12fc65efccfbde5867951db442c50ee91a589ad581197b6fb"
+    },
+    {
+      "path": "public/scene.json",
+      "bytes": 1766,
+      "sha256": "c9e09d246e9f50319c398e2c5a1e2b61dd7844818a7bb08af1ee6ccfff67eb78"
+    },
+    {
+      "path": "public/star.svg",
+      "bytes": 269,
+      "sha256": "4067d545ca742e18d8f3e5d791fbb288837ab1370bb2a94058ba9b87514d8383"
+    },
+    {
+      "path": "public/video-posters/christmas-film.webp",
+      "bytes": 77182,
+      "sha256": "cffeac6896ce732f420301b6cfe737213f2c06aaf80d92bab293a6889f1889db"
+    },
+    {
+      "path": "public/videos/christmas-transformation.mp4",
+      "bytes": 5496862,
+      "sha256": "22eb5498858446f5a159ef1a9709723ba8cfdd155a7b89ab3d999bb743f732ce"
+    },
+    {
+      "path": "public/videos/starlight-return.mp4",
+      "bytes": 24270945,
+      "sha256": "5c1fe60031a51da6531dfcf96123221d05092db55ae5ee1eff1967e0309126da"
+    },
+    {
+      "path": "scripts/build-confession-font.py",
+      "bytes": 7033,
+      "sha256": "03c55b707a08381f202d3cff15eef4305221557b2ae5adac156bc01b38867f9e"
+    },
+    {
+      "path": "scripts/build-long-ride.py",
+      "bytes": 33951,
+      "sha256": "3c4631691bbe70d5b70777c6dd8398d12047902deea170cc69636da2f95093d1"
+    },
+    {
+      "path": "scripts/build-siyi-font.py",
+      "bytes": 4725,
+      "sha256": "ce331ba935a8c6c0e8b71276a72d0a3bffbe6715665fbbcdba5fcde05f97d6d1"
+    },
+    {
+      "path": "scripts/create-paw-lettering.py",
+      "bytes": 5857,
+      "sha256": "dba5b8f1501ed8ee56f5c6e1da7270628bb323ec466aadaa025c49d251ab0f95"
+    },
+    {
+      "path": "scripts/export-background-views.mjs",
+      "bytes": 3830,
+      "sha256": "4d771aacff89b96fc8b20c3dce48f874757ce935e757da860f4a09db6cb14b63"
+    },
+    {
+      "path": "scripts/finalize-build.mjs",
+      "bytes": 4466,
+      "sha256": "a00aa484779f53612d82e7fb543d2d0d6adf9bafb3a9623096518c72ba4b3fcd"
+    },
+    {
+      "path": "scripts/prepare-hand-tracking.mjs",
+      "bytes": 5407,
+      "sha256": "f8887319242017ae590d00a408f8c6aab46c20ff33e7999758a9917ad1eee261"
+    },
+    {
+      "path": "scripts/prepare-photos.mjs",
+      "bytes": 12665,
+      "sha256": "663c6085363c3e5c4a909ebe5faaba1d501db375566a0b3bfe356dfb644e8dbb"
+    },
+    {
+      "path": "scripts/prepare-scene.mjs",
+      "bytes": 11664,
+      "sha256": "54ca9258e26cbf98799341756d0e375628ce5a053fded5f3de79f159dfe3f464"
+    },
+    {
+      "path": "scripts/preview-long-ride.py",
+      "bytes": 4931,
+      "sha256": "371f33edf15d34ded8ea781be227ee6d20043b38c9ea2c7fcff131f3ff49623c"
+    },
+    {
+      "path": "scripts/revise-ride-without-birds.py",
+      "bytes": 14875,
+      "sha256": "8a339aae68ba15268478a04149d6d30c5192fbe7c0a90aa3c9991108d27f7986"
+    },
+    {
+      "path": "scripts/verify-ride-bird-removal.mjs",
+      "bytes": 4734,
+      "sha256": "4f04cdab1393afc5fb7655c5a08bf1eeccf55f8fdca59fac15abd736acb67cf7"
+    },
+    {
+      "path": "src/App.css",
+      "bytes": 17017,
+      "sha256": "d097fc1b813b91404fbfc13d065804a0e8b649bdd1f6c3d05e8573ecdd4cc269"
+    },
+    {
+      "path": "src/App.tsx",
+      "bytes": 14598,
+      "sha256": "9e7b9e6d40d3d7dbd218806aa0b5ccc40511277ed34044a674b512d60aca966f"
+    },
+    {
+      "path": "src/SeasonalEntry.tsx",
+      "bytes": 2215,
+      "sha256": "d62569871fc18fdb1cb6ec1d64ec6594d2e31c91323a3085bec05543107789f3"
+    },
+    {
+      "path": "src/assets/christmas-cat.LICENSE.txt",
+      "bytes": 1298,
+      "sha256": "750792883e8c0481895734b02915b05504f7a26ce90a7fde1e8d8655c587a5e3"
+    },
+    {
+      "path": "src/assets/christmas-cat.glb",
+      "bytes": 345976,
+      "sha256": "db1e7efbb24a3c7a8211b5613660462bf0b6376871f8afe7db22e2b362228885"
+    },
+    {
+      "path": "src/components/ChristmasFilm.tsx",
+      "bytes": 6548,
+      "sha256": "ccc80aca92727b6107e1646dc26257ca9538aea6011612a29185b1ecefb461ff"
+    },
+    {
+      "path": "src/components/Dialog.tsx",
+      "bytes": 3283,
+      "sha256": "85a7c1464e69867f7b510f6ba13f9d7cb1df0abfd4c39ae3642a53f99e94b1b1"
+    },
+    {
+      "path": "src/components/GreetingGate.tsx",
+      "bytes": 2765,
+      "sha256": "290b3c98434db4acaefc0e0432fc1505d08397a43e92d86a468b7d846444257e"
+    },
+    {
+      "path": "src/components/HandMagicMode.css",
+      "bytes": 7434,
+      "sha256": "cd9666d63b7590f2bb2d3613d7bf4239d3af8c2564fd85f78797b7a0ed1d6c2b"
+    },
+    {
+      "path": "src/components/HandMagicMode.tsx",
+      "bytes": 12938,
+      "sha256": "6bece41aaadb5e46535a62cef5d81e8a03662ebbe59bbb407e11d9983de83a66"
+    },
+    {
+      "path": "src/components/Icon.tsx",
+      "bytes": 1937,
+      "sha256": "f6c41ce152b2eb010d2d079252aabe2b642fe501f516fc08f38dd37b94ff6b27"
+    },
+    {
+      "path": "src/components/PanelBoundary.tsx",
+      "bytes": 765,
+      "sha256": "0076272428d8a523048c98db367f559084277f1d651dfc63c472c9c1fb1d7c42"
+    },
+    {
+      "path": "src/components/PhotoGallery.tsx",
+      "bytes": 4761,
+      "sha256": "6af8c9d38ce844a6faed5e3082369127a267458bd3ae35ed92db5785f91d21f9"
+    },
+    {
+      "path": "src/components/PhotoViewer.css",
+      "bytes": 2540,
+      "sha256": "a2e8b0206da30657ea5512fc8835d57881067ecf8e84f1616ce9a421b6688604"
+    },
+    {
+      "path": "src/components/PhotoViewer.tsx",
+      "bytes": 12271,
+      "sha256": "de6012886594f38db36761a6b0df7326a64afff76318da15102c7b9cee76531f"
+    },
+    {
+      "path": "src/components/ShareGift.css",
+      "bytes": 4437,
+      "sha256": "04158eefd1f58e1f09db14711d84ef7721e412d18ddaafa8696662942c9336ac"
+    },
+    {
+      "path": "src/components/ShareGift.tsx",
+      "bytes": 6506,
+      "sha256": "2b0ad088da8da86cfab4d070db90e5612473175cc489d549035f46c66d50d8f5"
+    },
+    {
+      "path": "src/components/StorybookFrame.tsx",
+      "bytes": 1490,
+      "sha256": "e7ede3612c7b5b0eedd0c453372e937f86bb40f1fcec7a06dfc2a6bd5a442d86"
+    },
+    {
+      "path": "src/components/gift-card.ts",
+      "bytes": 11076,
+      "sha256": "9d982c0bf68b43852f0a266e48a2494b0fbf87e42b489afc5ce833695f7826fe"
+    },
+    {
+      "path": "src/confession/ConfessionPage.css",
+      "bytes": 22615,
+      "sha256": "ba6f4066834fb482344a9a6d09cfc7b885feb4c0bc5af67a9727ada96d28d534"
+    },
+    {
+      "path": "src/confession/ConfessionPage.tsx",
+      "bytes": 25711,
+      "sha256": "58f65207dd593b4719cec4f1777884376fdfb53d71609ddfcafdddf3a67f10e3"
+    },
+    {
+      "path": "src/confession/CrownScene.tsx",
+      "bytes": 25647,
+      "sha256": "510b7282bbf2bf0a1746e65ec1e126c669aa3fa355c7443a5a0697fe819cc79b"
+    },
+    {
+      "path": "src/confession/FireworkSky.ts",
+      "bytes": 8454,
+      "sha256": "ae212f0e7de44d083bd9e61dcaca76dd10be1f1ed8899310b7eb72f7cfc6d6f0"
+    },
+    {
+      "path": "src/confession/PaperFlower.tsx",
+      "bytes": 1376,
+      "sha256": "bdcb0e526c7b81a7728f24c71ecb7be840145e3e29d1658c77a6932f77075cd1"
+    },
+    {
+      "path": "src/confession/usePrincessAudio.ts",
+      "bytes": 5762,
+      "sha256": "b508483b9e9b08e53a2a44c72510eaaa138d6f9afc2c6ea11d68c6bf5f5d858e"
+    },
+    {
+      "path": "src/confession/usePrincessEnvironment.ts",
+      "bytes": 1785,
+      "sha256": "97f7bdad5e7f62587f54a9b3ae79921802f7fd1726647bcd0c786d160f46ba66"
+    },
+    {
+      "path": "src/hand-tracking/licenses/NOTICE.txt",
+      "bytes": 1834,
+      "sha256": "646086132276b573256213bcb6be4f128b21cad6540dfc25e29dec6638162c71"
+    },
+    {
+      "path": "src/hand-tracking/licenses/mediapipe-LICENSE.txt",
+      "bytes": 12331,
+      "sha256": "8707eef0533987efc5b155d64761eeb6e20793f50b9bd1a68dad1cf4719d0ed8"
+    },
+    {
+      "path": "src/hand-tracking/session-core.ts",
+      "bytes": 11019,
+      "sha256": "ed597da9239236e471bd30c86c969a72929efe8b498bfd980b0a199b588e3edc"
+    },
+    {
+      "path": "src/hand-tracking/session.test.mjs",
+      "bytes": 12603,
+      "sha256": "d079a35216db3d59bdcaeacbfc51eba9ec1971d2322a00566b9054bc1ba52bef"
+    },
+    {
+      "path": "src/hand-tracking/session.ts",
+      "bytes": 3391,
+      "sha256": "84dc8021452438de238555d195f038bd4ca20351f8cecf84739751d6e3aeb5a7"
+    },
+    {
+      "path": "src/hand-tracking/types.ts",
+      "bytes": 3998,
+      "sha256": "82de894b849591e012bfe1b0a4af41247d0f9e78420f38b9cddfc86338b64fde"
+    },
+    {
+      "path": "src/hand-tracking/worker.js",
+      "bytes": 5528,
+      "sha256": "3b5cf016f4f69b4f852e219a9163ff26f1337f938c2f8bf47e7ce9cbacca67c4"
+    },
+    {
+      "path": "src/hand-tracking/worker.test.mjs",
+      "bytes": 7709,
+      "sha256": "0927aafcf9224c019c112265c6906c5af6165dd196b98f1b6c3e89939efdd4ee"
+    },
+    {
+      "path": "src/hooks/useSecretInteractions.ts",
+      "bytes": 3699,
+      "sha256": "4220c24765d6609ed9b51969596b5a8fffc8caab49df15a381a849779ecab210"
+    },
+    {
+      "path": "src/index.css",
+      "bytes": 1130,
+      "sha256": "b788a65b4ca4a249d87ccf555608519214026c2c668bb0f6e8d6ff2fc27b2e84"
+    },
+    {
+      "path": "src/journey/CastleRide.css",
+      "bytes": 10529,
+      "sha256": "4fc29249436506d5b1a283972c9d09c13b01fb118b214e365de962f440e3ea81"
+    },
+    {
+      "path": "src/journey/CastleRide.tsx",
+      "bytes": 19338,
+      "sha256": "d329172ba0cb66247a457ec82bf25831a2c8f345e320fd9ca08b07895ba82296"
+    },
+    {
+      "path": "src/journey/RideConfession.css",
+      "bytes": 6211,
+      "sha256": "e6fc0d145fb7756d78edab6721c5c40356abf9b414abd32b1b7b56a46c93deb6"
+    },
+    {
+      "path": "src/journey/RideConfession.tsx",
+      "bytes": 4901,
+      "sha256": "b58a90df8023e16a4edff902be0e9470c7802c5bfbf3d8a8854c1322943201fc"
+    },
+    {
+      "path": "src/journey/RideFinaleFallback.tsx",
+      "bytes": 4476,
+      "sha256": "74b64a23940a49a1e5282fa8540f68ae37419181766c7094df809cc80687b210"
+    },
+    {
+      "path": "src/journey/RideMagicFallback.tsx",
+      "bytes": 9304,
+      "sha256": "1c0c188a76f9b8d8c880673e48506afab41087bfa2a4b4f195fc71496f9d93b0"
+    },
+    {
+      "path": "src/journey/RideMagicScene.tsx",
+      "bytes": 5686,
+      "sha256": "a7e28bf54e10564f67c97134fa9746405c80bb42231ad5fdaf3b54d7f678c717"
+    },
+    {
+      "path": "src/journey/finale/FinaleScene.tsx",
+      "bytes": 9429,
+      "sha256": "1fdd88d44c3c6babca8679826b4840c4dc96b10ddbc1c8643fe9a1c39a8482d7"
+    },
+    {
+      "path": "src/journey/finale/canvasFinaleRuntime.ts",
+      "bytes": 25712,
+      "sha256": "f99d97f20138adb516808eee1c4c75f7b6437633224da00e76ad4ae2245749c8"
+    },
+    {
+      "path": "src/journey/finale/finaleGeometry.ts",
+      "bytes": 2980,
+      "sha256": "b945e7d503c04e9941e5c146db6e4ba8405318f2baa207587355f4cf8e56818c"
+    },
+    {
+      "path": "src/journey/finale/finaleRuntime.ts",
+      "bytes": 25297,
+      "sha256": "d2df33ce624f6f3a0fccaab4bdd54270665d0f4bc9ff268235cee2e3076b3819"
+    },
+    {
+      "path": "src/journey/finale/finaleScore.ts",
+      "bytes": 3792,
+      "sha256": "9fd6544eaee511b29f39b081d122cd0c8ca34d83ede633a689123d807d3701f3"
+    },
+    {
+      "path": "src/journey/finale/finaleTypes.ts",
+      "bytes": 516,
+      "sha256": "4c96b77cbe69762af4d7d8a2c8ba29865042d7daffe791e75e7fb8a282553e4e"
+    },
+    {
+      "path": "src/journey/mapRideHotspots.ts",
+      "bytes": 2180,
+      "sha256": "e8916e1299cc77f3acc2c6f1df53b102dc3505d63de3f2a625ce091bfb5d0f00"
+    },
+    {
+      "path": "src/journey/rideHotspots.ts",
+      "bytes": 2848,
+      "sha256": "a2b1c2292b89f3e275e72fbefbd90314a324904d2ba3215d9dbf99ba4c8d8360"
+    },
+    {
+      "path": "src/journey/rideMagicRuntime.ts",
+      "bytes": 22171,
+      "sha256": "0794d396685d08711a19d03c3483bd1d4e3ebf507d16a2175bc25c74f43a700d"
+    },
+    {
+      "path": "src/journey/rideSequenceConfig.ts",
+      "bytes": 185,
+      "sha256": "5c9448eb42425a8cc0b15a42a55a9ccbcf6f35cc14ca27cb63a52cad344a7e27"
+    },
+    {
+      "path": "src/journey/rideTimeline.json",
+      "bytes": 6929,
+      "sha256": "c99e6c5cc31cfcdb28da5b4e2a45588edcf4bf0b4f5f6630110abba31665f43f"
+    },
+    {
+      "path": "src/journey/rideTypes.ts",
+      "bytes": 985,
+      "sha256": "3b03e568a3ceed1d75c4dcabf15a5d679dd66261f87b690d5c1a433e15aded71"
+    },
+    {
+      "path": "src/journey/useFinaleSound.ts",
+      "bytes": 12029,
+      "sha256": "547c1b6a66df0a5476a799fae0c4878d4ffe7558ebd2546d6d19bec92ceea852"
+    },
+    {
+      "path": "src/journey/useRideChimes.ts",
+      "bytes": 3624,
+      "sha256": "655ac1ead90fc38579b65be1273e4622d054afa1577e55021722a5a6871642fb"
+    },
+    {
+      "path": "src/journey/useRideEnvironment.ts",
+      "bytes": 2243,
+      "sha256": "a6a8252cbfc1caff2e1c06f651bf9e1adcc1e558bf11bfafa96a6c522fbe9661"
+    },
+    {
+      "path": "src/journey/useRidePlayback.ts",
+      "bytes": 14641,
+      "sha256": "f10a50366b136e6daeb3bb4f842735ff567fafd04c21f2df46633f61416a04d2"
+    },
+    {
+      "path": "src/journey/useRideSequence.ts",
+      "bytes": 4683,
+      "sha256": "5b4445c6fb1ae3100b7accc54b0925ddb46c9bef2bd22b5e2801ebab09eef23e"
+    },
+    {
+      "path": "src/lib/content.ts",
+      "bytes": 1843,
+      "sha256": "ce02328142d4a23f1c20ab5eff5a7dedd017743a3babd3c49575a5c8af0f3125"
+    },
+    {
+      "path": "src/lib/experience-route.ts",
+      "bytes": 1006,
+      "sha256": "ef09a172e35e92ab8ad68eed738bbe249e5f6419d06eaed211bef6802224b49f"
+    },
+    {
+      "path": "src/lib/film-presentation.ts",
+      "bytes": 966,
+      "sha256": "8fe5928284645f0d45c59ddf21bbbdcfb9d80a38a276cbe80b3d503241d53cd4"
+    },
+    {
+      "path": "src/lib/hand-gestures.ts",
+      "bytes": 19379,
+      "sha256": "1d1a6c3b24bfac212dd564d5863ecaf82cfdcfca44632718da8975e287076042"
+    },
+    {
+      "path": "src/lib/hand-types.ts",
+      "bytes": 1968,
+      "sha256": "2a44756b1766fe85a4f6e9fe7c2acdd984d2cb0d0480c461c6a7cca0979a49f3"
+    },
+    {
+      "path": "src/lib/photo-viewer.ts",
+      "bytes": 2610,
+      "sha256": "0536fc995e3fda4be7b87e21d32f8e3cce4035d51cc8cbfb6d8e69ef424a1fb5"
+    },
+    {
+      "path": "src/lib/scene-config.ts",
+      "bytes": 4591,
+      "sha256": "c58d67d383604defbb3720f0241f9fa87b9eddf649824d4d8d4c4dd264728775"
+    },
+    {
+      "path": "src/lib/scene-gestures.ts",
+      "bytes": 6277,
+      "sha256": "aa4c0d03370c1d941431d068aec706727ace22253366bb472e7aa63a8592f625"
+    },
+    {
+      "path": "src/main.tsx",
+      "bytes": 260,
+      "sha256": "73b5b06915df0440da75f8499a2433d47300596a30c06f4055d925e0f9118f3f"
+    },
+    {
+      "path": "src/scene/ChristmasCat.tsx",
+      "bytes": 5823,
+      "sha256": "bae7ec81d5e4d477fe95d7fc3e8a5620a33691c9d61b300da9afa1fb3c640e90"
+    },
+    {
+      "path": "src/scene/FairytaleFireworks.tsx",
+      "bytes": 9110,
+      "sha256": "af1dc6b98cdb944c66321dc19ca1a2d4fe604a124ee0f6beb2c319f26ab5be91"
+    },
+    {
+      "path": "src/scene/HandMagic.tsx",
+      "bytes": 5635,
+      "sha256": "640fbb56cdc185b65a050c0fbb5035b623e6b20a765bc7d738cb1871a7a7469c"
+    },
+    {
+      "path": "src/scene/NightBackground.tsx",
+      "bytes": 11397,
+      "sha256": "3372fcd070869ca6a7e828e7e40c8da5d21210216e10681601b544b046ca290b"
+    },
+    {
+      "path": "src/scene/PhotoOrnaments.tsx",
+      "bytes": 16965,
+      "sha256": "ed56f84b5ce76105db7ddddd2b939c765876b20320d9480da5e8759b67312972"
+    },
+    {
+      "path": "src/scene/SnowGround.tsx",
+      "bytes": 9646,
+      "sha256": "71125ea43f8b249067d325b9cb2d9b9a5b048a25c0505b13a2899823d5c0d90b"
+    },
+    {
+      "path": "src/scene/Snowfall.ts",
+      "bytes": 10397,
+      "sha256": "81367f917be84c8fb86236d96480803d1ad3ddbde27d5151d53d6699500fb202"
+    },
+    {
+      "path": "src/scene/TreeBody.tsx",
+      "bytes": 23389,
+      "sha256": "a0111a9090f230a4393b18d50e64982862d7ccfb6d7a165b75fbacee2414c05c"
+    },
+    {
+      "path": "src/scene/TreeDetails.tsx",
+      "bytes": 21339,
+      "sha256": "c2895d9a5f511859820e300834d082a463455b1dfd3b09f173fa23f308484229"
+    },
+    {
+      "path": "src/scene/TreeScene.tsx",
+      "bytes": 17688,
+      "sha256": "7cff065dee64ed2a1226b196968edb28f26a51a1143fc8f72d955c4ba8fbe1fd"
+    },
+    {
+      "path": "src/scene/camera-framing.ts",
+      "bytes": 1710,
+      "sha256": "cad0956e77571cdd360e641362026077c71eccbe775361cf306d0f5ad67cb1c1"
+    },
+    {
+      "path": "src/scene/camera-orbit.ts",
+      "bytes": 2724,
+      "sha256": "57478061ffab59378f324abe809fbc7c1e8d5f5f1a7f7bc5214c1e7248f6a8eb"
+    },
+    {
+      "path": "src/scene/cat-behavior.ts",
+      "bytes": 1013,
+      "sha256": "02625b3a6944c7df838591d33538a420c755b5630c60291d7f7481bc9008c357"
+    },
+    {
+      "path": "src/scene/cat-placement.ts",
+      "bytes": 2124,
+      "sha256": "95d823392f3566cd443495e86b93c51397dad61822055ce48baf16a99777fdee"
+    },
+    {
+      "path": "src/scene/cat-rig.ts",
+      "bytes": 6792,
+      "sha256": "b5416c5c831b2516aae9f4dbaf3d41707749206391d4e85d2960ea9efeb95047"
+    },
+    {
+      "path": "src/scene/ground-composite.ts",
+      "bytes": 12905,
+      "sha256": "22e3fad29f5d36fffd00d528fc36fc7d104113028379bf33d4657b9220c5c38e"
+    },
+    {
+      "path": "src/scene/hand-scene.ts",
+      "bytes": 6332,
+      "sha256": "0456a62dbdbd55aec797adce9cb590a750b2b70b4b5ff7c6523fdbd0b1f067fe"
+    },
+    {
+      "path": "src/scene/panorama-panels.ts",
+      "bytes": 3339,
+      "sha256": "0c2ca3f021b8ee3cb0c0b0385630f62e4713c146af07794168ea3a62ed4da9d2"
+    },
+    {
+      "path": "src/scene/perspective-background.ts",
+      "bytes": 3720,
+      "sha256": "043c6b37924d56ec0aa18a8fffcf69a6bd4c8c962c7d3b013c543c213e0f2f9e"
+    },
+    {
+      "path": "src/scene/photo-atlas-loader.ts",
+      "bytes": 2697,
+      "sha256": "b62dddb271034205148cfc5eb855df87e27e0ce053ce58eabcb79e54b9f46f21"
+    },
+    {
+      "path": "src/scene/photo-layout.ts",
+      "bytes": 4726,
+      "sha256": "5ec405390b884a96629c218b2b9289f78f38e4eb9f2191d1a043960cdd8b2e4e"
+    },
+    {
+      "path": "src/scene/photo-material.ts",
+      "bytes": 10162,
+      "sha256": "8c30d40cc65003fb89d275f17d22be7da5af29b6432578e686992dcb8ea8f67d"
+    },
+    {
+      "path": "src/scene/photo-texture.ts",
+      "bytes": 940,
+      "sha256": "dc72827e262043f818bfae4b74c4007e63a145323a4152902471128e546c6200"
+    },
+    {
+      "path": "src/scene/tree-base.ts",
+      "bytes": 3284,
+      "sha256": "2b01f94ec34d5639c93c3522630a0c3410bb952e67095b665d48728ed2fd5a31"
+    },
+    {
+      "path": "src/scene/tree-profile.ts",
+      "bytes": 990,
+      "sha256": "70f700063ff9d48701b29ecba5894f400efde974cdc8aa5bb792b5c61c1f26f4"
+    },
+    {
+      "path": "tests/build.test.mjs",
+      "bytes": 4210,
+      "sha256": "0484541c384a524f1d766b07c01040e701cd69884ab5e07107f7019c045dcd7f"
+    },
+    {
+      "path": "tests/camera-framing.test.mjs",
+      "bytes": 4150,
+      "sha256": "5c3da1e152b1f2ffb5e61e7c106c2c77a7cbd07ca38705762b0fa67dec82efc5"
+    },
+    {
+      "path": "tests/camera-orbit.test.mjs",
+      "bytes": 22577,
+      "sha256": "ca697133e15f1b8f41abce6023bc90da14ce1e562d94558df4d58b4b3f60897b"
+    },
+    {
+      "path": "tests/christmas-cat.test.mjs",
+      "bytes": 8671,
+      "sha256": "222c3b4a42f1d87c3dacb88e75ac570cdeda2259aed31e3f30a5c627b0b3d650"
+    },
+    {
+      "path": "tests/experience-route.test.mjs",
+      "bytes": 1717,
+      "sha256": "cecf4984522a9635197ff79b9e1ff44a00cb4d319f5dcb9e4601772406434add"
+    },
+    {
+      "path": "tests/fairytale-fireworks.test.mjs",
+      "bytes": 6168,
+      "sha256": "0c9ff905288670a7b45d956a5364006cfd06554ac424be95c986fee287c2e680"
+    },
+    {
+      "path": "tests/film-presentation.test.mjs",
+      "bytes": 2184,
+      "sha256": "34ad079f07b4c1793368e73ab36a41a8179647cb3a188af394bb7de7ea86caf3"
+    },
+    {
+      "path": "tests/gestures.test.mjs",
+      "bytes": 11946,
+      "sha256": "c9eefd80efbfa6c0d21eca78dec0400996480ddfeca5ca940003a685d7c30974"
+    },
+    {
+      "path": "tests/ground-composite.test.mjs",
+      "bytes": 14710,
+      "sha256": "1566df7af0302d2304342101b3d0ed0e3a771b4269aedc3dc65424bdb5b8d60f"
+    },
+    {
+      "path": "tests/hand-gestures.test.mjs",
+      "bytes": 24352,
+      "sha256": "3ef48d27bc6ab06f49933c211e985aefcf52de99ad6104e917d9cbc4552b135a"
+    },
+    {
+      "path": "tests/hand-scene.test.mjs",
+      "bytes": 16492,
+      "sha256": "817a3235c6c2c23688a4c1b58bf7ad89459415ff14995202234a8709ba8b18fd"
+    },
+    {
+      "path": "tests/panorama-ground.test.mjs",
+      "bytes": 16030,
+      "sha256": "a63a6a15bf8ff158d2fdefddbf35e8743252721c8a087b1b0fdb1080669a8215"
+    },
+    {
+      "path": "tests/panorama-panels.test.mjs",
+      "bytes": 6319,
+      "sha256": "784eef98fa40aa46df996b321856b860d18b24cc11b7d405af2886744c2de7b3"
+    },
+    {
+      "path": "tests/perspective-background.test.mjs",
+      "bytes": 13968,
+      "sha256": "9aef1bb651a07532740608adccb4790aa0fa929364e71e40f451c49f6e6fdc74"
+    },
+    {
+      "path": "tests/photo-atlas-loader.test.mjs",
+      "bytes": 5702,
+      "sha256": "46ef038bab98037af072490ec9ca80a7ee036bc8048e46e81a1d3f99cd0826ab"
+    },
+    {
+      "path": "tests/photo-texture.test.mjs",
+      "bytes": 4752,
+      "sha256": "a74900b154a93a0bcbc74ff9884eadbad256c3927b0adbd04c008a5fb934e8c2"
+    },
+    {
+      "path": "tests/photo-viewer.test.mjs",
+      "bytes": 3376,
+      "sha256": "4b380df12befda447821a9ccd63babaa37d900f004e2961b0c3b687d48203e5b"
+    },
+    {
+      "path": "tests/photos.test.mjs",
+      "bytes": 9351,
+      "sha256": "945b2e4a540014b6744ef725dceb939b9a6560b801f0e9ef886c50e2505d26b8"
+    },
+    {
+      "path": "tests/scene-config.test.mjs",
+      "bytes": 22580,
+      "sha256": "0ea1d76ccbf75b1569441f53e0a44c247dff0515fd9742170b9f3173605388a4"
+    },
+    {
+      "path": "tests/scene.test.mjs",
+      "bytes": 8829,
+      "sha256": "6c856fa498953086a8957e891f351b07654e5686a2ed4f2ca3f156158f4cd63f"
+    },
+    {
+      "path": "tests/snowfall.test.mjs",
+      "bytes": 5708,
+      "sha256": "6cd85b3894bbde987980e816194f5f1fefc3641c01804a0a9ccd8a5dddbb786c"
+    },
+    {
+      "path": "tests/tree-base.test.mjs",
+      "bytes": 7956,
+      "sha256": "5ccde48fdf2e8a1a3584f6fdad1912edcf9cffb046b71bc3b3a60cfa756fb3b4"
+    },
+    {
+      "path": "tests/tree-body.test.mjs",
+      "bytes": 8108,
+      "sha256": "67c106c4c38e7f805fb99582bc89c92b90b083537ee2ac4369739827552fa805"
+    },
+    {
+      "path": "tests/tree-details.test.mjs",
+      "bytes": 3567,
+      "sha256": "54225c974f2d0a0cf3a88457ba29e79bb8bc848e65d083b8afa591fc0dc37cc9"
+    },
+    {
+      "path": "tsconfig.app.json",
+      "bytes": 732,
+      "sha256": "922bc5bfb41bdc0768023b2487d54b3ae23c587d999024d4f32cde879ae6f4d8"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 119,
+      "sha256": "770b4140bbb581e2dfd9ea9946ffc9c75a1d86ba7d2db5f77c83e37cbdf9d808"
+    },
+    {
+      "path": "tsconfig.node.json",
+      "bytes": 653,
+      "sha256": "c3dd0fb522feba3596713f51b95bd53d781d845d24aedbfa2ac093d8b39c5120"
+    },
+    {
+      "path": "vite.config.ts",
+      "bytes": 174,
+      "sha256": "e4f8db9f7f1f21648b38832adc1fe802f98775f94c81c2415291fca4f3dfcca4"
+    }
+  ]
+}

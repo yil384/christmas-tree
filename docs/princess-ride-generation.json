@@ -1,0 +1,20 @@
+{
+  "projectTitle": "思仪公主 · 城堡夜游 · 竖屏奇幻之旅",
+  "projectUrl": "https://docs.google.com/videos/d/1cosPd9SaGNiJrV1Vwg_cN0ioTQ2AE_gbT5TGG4tF7fU/edit?scene=id.h5848d7de89b51256_0_1#scene=id.h5848d7de89b51256_0_1",
+  "service": "Google Vids",
+  "modelLabelObserved": "Omni",
+  "sourceResolution": "1080x1920",
+  "sourceFrameRate": 24,
+  "clipDurationSeconds": 15.04,
+  "clips": [
+    {
+      "name": "arrival",
+      "prompt": "Generated video: Create one beautiful continuous 15-second vertical cinematic shot, 9:16, of a private princess castle night journey. Use @Image1 as the exact architectural, lighting and color reference, retaining the pearl-ivory towers, champagne-gold windows, ornate gold gates, pink roses, water garden and lavender midnight sky. Begin at the same entrance composition. The viewer is seated in a gentle floating theme-park ride: smoothly glide through the ornate golden gates, just above the garden water, then approach the castle entrance beyond the little transverse bridge. Foreground roses and gate filigree pass the camera with convincing physical 3D parallax, water reflections ripple, lantern flames flicker and a few tiny golden fireflies drift. Gradually reveal the tall grand doors opening into a warm ballroom at the end. Rich cinematic princess fairytale atmosphere, luminous fine jewelry detail, graceful architecture, restrained pink and blue, realistic depth and polished animation. Keep the architecture stable with consistent perspective: real forward camera travel, not a still-image zoom or warped picture. No people, no words, no logos, no snow or Christmas decorations, no jump cuts, no fast spinning, no camera shake. Slow luxurious motion throughout. Soft magical harp and orchestral ambience, no speech., 1080p, 15 seconds"
+    },
+    {
+      "name": "ballroom",
+      "prompt": "Generated video: Create a new 15-second vertical 9:16 cinematic princess ballroom scene with continuous real movement. This is the interior of the pearl-ivory, champagne-gold palace in @Image1: coherent warm grand architecture, tall arched midnight-blue windows, crystal chandeliers, pink roses, cream marble reflections and a little drifting golden starlight. The only person is the adult woman in @Image2. Preserve her recognizable real facial identity faithfully: same facial proportions, eyes, nose, lips, natural skin tone, brown hair and fringe. Do not substitute a generic cartoon princess or change her face. Keep her beautiful pale blue flower-applique ball gown from the photo and add the delicate pink-gem champagne-gold tiara in @Image3. No winter cape. Shot choreography: 0–4s, a gentle forward camera glide through opening ballroom doors, she is seen full-body beneath a chandelier; 4–10s, she takes two light natural steps and makes one graceful half-turn, the silk skirt follows with realistic inertia, hair and earrings move softly; 10–15s, she turns toward the viewer, relaxes into a warm natural smile and extends one inviting hand, no speech. Slow elegant stabilized camera, subtle parallax, a genuine dimensional fairytale movie with a real human face, fine jewelry and fabric detail. Frame her whole head, hands and gown naturally in the central 65% of the portrait image. Natural anatomy, natural blinking, one continuous person, no face morphing, no frozen photo, no cut-out collage, no text, no logos, no snow, no Christmas decorations, no other people. Soft harp and warm strings, no dialogue.Image3, 1080p, 15 seconds"
+    }
+  ],
+  "timelineDissolveSeconds": 0.5
+}

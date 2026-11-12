@@ -13,8 +13,8 @@ interface TreeDetailsProps {
 
 const TREE_HEIGHT = 22;
 const TREE_RADIUS = 9;
-const GIFT_COLORS = ['#853c46', '#c7a76b', '#4d6981', '#365f4b'];
-const LIGHT_COLORS = ['#ffe5b2', '#ffe8c0', '#ffdda0', '#fff0cf', '#f8d78e', '#fff1d9', '#ffe4ad', '#f3dbad', '#fff8ed', '#d9ccf1'];
+const GIFT_COLORS = ['#a93243', '#ddb96c', '#315a89', '#326749'];
+const LIGHT_COLORS = ['#ffe5b2', '#ffe8c0', '#ffdda0', '#fff0cf', '#f8d78e', '#fff1d9', '#ffe4ad', '#f3dbad', '#fff8ed', '#f0d9ad'];
 
 /** Stable positions keep the original tree arrangement consistent on rerenders. */
 function randomSource(seed: number) {
@@ -217,7 +217,7 @@ function createDecorations(compact: boolean): DecorationBatch[] {
       speed: new THREE.Vector3((random() - 0.5) * 2, (random() - 0.5) * 2, (random() - 0.5) * 2),
       // Smaller gifts and candy ornaments let the real branches and prints lead.
       scale: type === 0 ? (0.8 + random() * 0.4) * 0.65 : type === 1 ? 0.6 + random() * 0.4 : (0.7 + random() * 0.3) * 0.67,
-      color: type === 2 ? (random() > 0.5 ? '#853c46' : '#ddcfb5') : GIFT_COLORS[Math.floor(random() * GIFT_COLORS.length)],
+      color: type === 2 ? (random() > 0.5 ? '#a93243' : '#f2e2bc') : GIFT_COLORS[Math.floor(random() * GIFT_COLORS.length)],
     });
   }
 
@@ -228,8 +228,8 @@ function createDecorations(compact: boolean): DecorationBatch[] {
   ];
   const material = new THREE.MeshStandardMaterial({
     color: '#FFFFFF',
-    roughness: 0.36,
-    metalness: 0.4,
+    roughness: 0.48,
+    metalness: 0.3,
     emissive: '#FFFFFF',
     emissiveIntensity: 0.03,
   });
@@ -417,11 +417,9 @@ function syncDetails(details: Details, motion: Motion, pixelRatio: number) {
     for (let i = 0; i < items.length; i += 1) {
       const item = items[i];
       transform.position.lerpVectors(item.scattered, item.target, motion.decorations);
-      transform.rotation.set(
-        item.rotation.x + motion.time * item.speed.x,
-        item.rotation.y + motion.time * item.speed.y,
-        item.rotation.z + motion.time * item.speed.z,
-      );
+      // Decorations share the branches' fixed orientation; only the camera
+      // turns the assembled scene. Assembly still moves each item into place.
+      transform.rotation.copy(item.rotation);
       transform.scale.setScalar(item.scale);
       transform.updateMatrix();
       mesh.setMatrixAt(i, transform.matrix);
@@ -449,13 +447,14 @@ function disposeDetails(details: Details) {
   details.decorations[0].mesh.material.dispose();
 }
 
-function pointPixelRatio(renderer: THREE.WebGLRenderer, compact: boolean) {
-  // Match Bloom's render target resolution, including its lower mobile DPR.
-  return Math.min(renderer.getPixelRatio(), compact ? 1 : 1.5);
+function pointPixelRatio(renderer: THREE.WebGLRenderer) {
+  // The scene and canvas now share one bounded physical-pixel resolution.
+  return renderer.getPixelRatio();
 }
 
 /** Original emerald tree, colored ornaments and gold star: six batched draws. */
 export default function TreeDetails({ state, compact, reducedMotion }: TreeDetailsProps) {
+  const canvasPixelRatio = useThree((root) => root.viewport.dpr);
   const groupRef = useRef<THREE.Group>(null);
   const detailsRef = useRef<Details | null>(null);
   const renderer = useThree((root) => root.gl);
@@ -481,7 +480,7 @@ export default function TreeDetails({ state, compact, reducedMotion }: TreeDetai
       details.star,
     ];
     detailsRef.current = details;
-    syncDetails(details, motion.current, pointPixelRatio(renderer, compact));
+    syncDetails(details, motion.current, pointPixelRatio(renderer));
     group.add(...objects);
     invalidate();
     return () => {
@@ -500,10 +499,10 @@ export default function TreeDetails({ state, compact, reducedMotion }: TreeDetai
       motion.current.star = target;
     }
     if (detailsRef.current) {
-      syncDetails(detailsRef.current, motion.current, pointPixelRatio(renderer, compact));
+      syncDetails(detailsRef.current, motion.current, pointPixelRatio(renderer));
     }
     invalidate();
-  }, [state, compact, reducedMotion, renderer, invalidate]);
+  }, [state, compact, reducedMotion, renderer, invalidate, canvasPixelRatio]);
 
   useFrame((_, delta) => {
     const details = detailsRef.current;
@@ -517,7 +516,7 @@ export default function TreeDetails({ state, compact, reducedMotion }: TreeDetai
     current.lights = THREE.MathUtils.damp(current.lights, target, 2, step);
     current.decorations = THREE.MathUtils.damp(current.decorations, target, 1.5, step);
     current.star = THREE.MathUtils.damp(current.star, target, 3, step);
-    syncDetails(details, current, pointPixelRatio(renderer, compact));
+    syncDetails(details, current, pointPixelRatio(renderer));
   });
 
   return <group ref={groupRef} dispose={null} />;
@@ -565,7 +564,7 @@ export function TreeAtmosphere({ compact, reducedMotion, snow = true, stars = tr
     // Reduced motion freezes falling, but the volume must still follow an
     // intentional camera zoom/orbit or screen resize in a demand frame.
     atmosphere.snow.update(camera as THREE.PerspectiveCamera, size.width, size.height,
-      pointPixelRatio(renderer, compact), reducedMotion ? 0 : delta);
+      pointPixelRatio(renderer), reducedMotion ? 0 : delta);
   });
 
   return <group ref={groupRef} dispose={null} />;

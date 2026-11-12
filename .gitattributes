@@ -1,0 +1,5 @@
+# Preserve media bytes and avoid treating document/video payloads as source diffs.
+*.pdf binary
+public/journey/film/**/*.ts binary
+# Keep the recovered production queue's original CRLF bytes.
+docs/malaysia-film/SHOT_QUEUE.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

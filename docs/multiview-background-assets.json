@@ -1,0 +1,210 @@
+{
+  "sourcePanorama": "backgrounds/storybook-castle-360.webp",
+  "sourceSize": [
+    1774,
+    887
+  ],
+  "method": "Eight independently generated native perspective detail paintings, each edited from an exact 60-degree camera projection of the approved spherical composition.",
+  "nativePixels": 12580128,
+  "projectionConvention": "Yaw 0 faces -Z; positive yaw toward +X. Negative pitch looks down. All sources are ordinary perspective views, never equirectangular rectangles.",
+  "runtime": {
+    "quality": 96,
+    "maximumEdge": 2048,
+    "withoutEnlargement": true,
+    "residentPanels": 4,
+    "concurrentDecodes": 2,
+    "samplers": {
+      "sky": 9,
+      "ground": 10
+    },
+    "totalFullResolutionBytes": 3070176
+  },
+  "assets": [
+    {
+      "image": "backgrounds/storybook-view-00.webp",
+      "width": 1254,
+      "height": 1254,
+      "yaw": 5.4,
+      "pitch": -10,
+      "horizontalFov": 60,
+      "verticalFov": 60,
+      "sha256": "7b93a65066b5b9be6ddfcd96f2f4f2a908f8d749299a3f14aad4f6e228d351c2",
+      "generatedPngSha256": "da7a22744e20c9226f79d0aa13c3b574a3ecd970205daf489450d36f865f8612",
+      "bytes": 1383340,
+      "generatedOutputFilename": "exec-5a6f0f9b-0520-4477-8c6b-70e701b9d18b.png",
+      "compositionInput": {
+        "source": "public/backgrounds/storybook-castle-360.webp",
+        "projectionScript": "scripts/export-background-views.mjs",
+        "referenceFilename": "view-00-reference.png",
+        "yaw": 5.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      },
+      "styleInput": "Original approved storybook panorama"
+    },
+    {
+      "image": "backgrounds/storybook-view-01.webp",
+      "width": 1254,
+      "height": 1254,
+      "yaw": 50.4,
+      "pitch": -10,
+      "horizontalFov": 60,
+      "verticalFov": 60,
+      "sha256": "dbb643c162372c5d84a2fff577ef1cab38f71d84119e48b2f11b73b95ea8fe4d",
+      "generatedPngSha256": "30ed4c2f810f6c9b12058c4e3f2dc69faa49d8ba1895ad628d9616e5421c247d",
+      "bytes": 1737116,
+      "generatedOutputFilename": "exec-4b73a3cd-c9b5-4ff5-abe0-0dad2c33a570.png",
+      "compositionInput": {
+        "source": "public/backgrounds/storybook-castle-360.webp",
+        "projectionScript": "scripts/export-background-views.mjs",
+        "referenceFilename": "view-01-reference.png",
+        "yaw": 50.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      },
+      "styleInput": "public/backgrounds/storybook-view-00.webp (style only, not scene contents)"
+    },
+    {
+      "image": "backgrounds/storybook-view-02.webp",
+      "width": 1254,
+      "height": 1254,
+      "yaw": 95.4,
+      "pitch": -10,
+      "horizontalFov": 60,
+      "verticalFov": 60,
+      "sha256": "cf05756114bf43880b36475abb3c4780872e7fea9063c8902068a22026073b10",
+      "generatedPngSha256": "6167a318fd046e399f2a85135336c947aa761633d16d11a17b799c579dacf264",
+      "bytes": 1939126,
+      "generatedOutputFilename": "exec-7fc2f691-208b-47cd-9b3f-25be0e4e679d.png",
+      "compositionInput": {
+        "source": "public/backgrounds/storybook-castle-360.webp",
+        "projectionScript": "scripts/export-background-views.mjs",
+        "referenceFilename": "view-02-reference.png",
+        "yaw": 95.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      },
+      "styleInput": "public/backgrounds/storybook-view-00.webp (style only, not scene contents)"
+    },
+    {
+      "image": "backgrounds/storybook-view-03.webp",
+      "width": 1254,
+      "height": 1254,
+      "yaw": 140.4,
+      "pitch": -10,
+      "horizontalFov": 60,
+      "verticalFov": 60,
+      "sha256": "504dc926ab9539a1ca955b818ca351b5fad1a052dcbf3fa7a3f49704ffbb2ce7",
+      "generatedPngSha256": "5a2f49c1cec337af0fd8b11e84b6e2e25cd9b22643ce5d1906b2e9eba089a74e",
+      "bytes": 1885768,
+      "generatedOutputFilename": "exec-5ffb9c0c-2f66-4867-92c5-7ef3bf1564e2.png",
+      "compositionInput": {
+        "source": "public/backgrounds/storybook-castle-360.webp",
+        "projectionScript": "scripts/export-background-views.mjs",
+        "referenceFilename": "view-03-reference.png",
+        "yaw": 140.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      },
+      "styleInput": "public/backgrounds/storybook-view-00.webp (style only, not scene contents)"
+    },
+    {
+      "image": "backgrounds/storybook-view-04.webp",
+      "width": 1254,
+      "height": 1254,
+      "yaw": 185.4,
+      "pitch": -10,
+      "horizontalFov": 60,
+      "verticalFov": 60,
+      "sha256": "b4e870287096d4dbbd8ad7fd975c0a6ff283dead5d8187a3c89a7fb1615d00fd",
+      "generatedPngSha256": "16f0ef07ea3f91fe2c7c2f94a36896855c57a4eea8ee6721357d002a180b13bc",
+      "bytes": 1830498,
+      "generatedOutputFilename": "exec-26b4a771-42f7-41d9-a58e-745dc2f9f381.png",
+      "compositionInput": {
+        "source": "public/backgrounds/storybook-castle-360.webp",
+        "projectionScript": "scripts/export-background-views.mjs",
+        "referenceFilename": "view-04-reference.png",
+        "yaw": 185.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      },
+      "styleInput": "public/backgrounds/storybook-view-00.webp (style only, not scene contents)"
+    },
+    {
+      "image": "backgrounds/storybook-view-05.webp",
+      "width": 1254,
+      "height": 1254,
+      "yaw": 230.4,
+      "pitch": -10,
+      "horizontalFov": 60,
+      "verticalFov": 60,
+      "sha256": "ae9aebebd52471259c9b256f8ca54809ab9f1604713226c75c523ab1d9e75e80",
+      "generatedPngSha256": "27c09b5c59cab188aa6cbc3f4bec8b142e18c975479771f3cf1160baed0a0efb",
+      "bytes": 1744844,
+      "generatedOutputFilename": "exec-1427f22c-d9ae-4f07-bb5a-1eca96ff8242.png",
+      "compositionInput": {
+        "source": "public/backgrounds/storybook-castle-360.webp",
+        "projectionScript": "scripts/export-background-views.mjs",
+        "referenceFilename": "view-05-reference.png",
+        "yaw": 230.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      },
+      "styleInput": "public/backgrounds/storybook-view-00.webp (style only, not scene contents)"
+    },
+    {
+      "image": "backgrounds/storybook-view-06.webp",
+      "width": 1254,
+      "height": 1254,
+      "yaw": 275.4,
+      "pitch": -10,
+      "horizontalFov": 60,
+      "verticalFov": 60,
+      "sha256": "41497a294acbb68854f72367233e4edf66403f97fe60382b397da6394de618f9",
+      "generatedPngSha256": "32f046e90bacc17f73a6235c990e2c71da33814c3cc57cfbbc17408cb0e09558",
+      "bytes": 1450880,
+      "generatedOutputFilename": "exec-2b6d80b8-51b4-4b0c-b53f-a0acdbe9cc75.png",
+      "compositionInput": {
+        "source": "public/backgrounds/storybook-castle-360.webp",
+        "projectionScript": "scripts/export-background-views.mjs",
+        "referenceFilename": "view-06-reference.png",
+        "yaw": 275.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      },
+      "styleInput": "public/backgrounds/storybook-view-00.webp (style only, not scene contents)"
+    },
+    {
+      "image": "backgrounds/storybook-view-07.webp",
+      "width": 1254,
+      "height": 1254,
+      "yaw": 320.4,
+      "pitch": -10,
+      "horizontalFov": 60,
+      "verticalFov": 60,
+      "sha256": "3409c7cc9ec45f695ff89d3762899fdaffd45931377434fafd85dab75b44214d",
+      "generatedPngSha256": "234369488c16dbc4df26384ea77309fb0520a4f7130b4c8f86064973606e076c",
+      "bytes": 1701186,
+      "generatedOutputFilename": "exec-7d33a9a0-2b18-46ad-ba9f-09a4f3155833.png",
+      "compositionInput": {
+        "source": "public/backgrounds/storybook-castle-360.webp",
+        "projectionScript": "scripts/export-background-views.mjs",
+        "referenceFilename": "view-07-reference.png",
+        "yaw": 320.4,
+        "pitch": -10,
+        "horizontalFov": 60,
+        "verticalFov": 60
+      },
+      "styleInput": "public/backgrounds/storybook-view-00.webp (style only, not scene contents)"
+    }
+  ],
+  "generationTool": "image_gen, precise-object-edit",
+  "promptRecord": "docs/multiview-background-prompts.txt"
+}
