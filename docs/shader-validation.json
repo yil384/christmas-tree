@@ -1,0 +1,519 @@
+{
+  "egl_version": "1.5",
+  "gl_version": "OpenGL ES 3.2 Mesa 25.0.7-2+deb13u1",
+  "gl_renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+  "gl_shading_language_version": "OpenGL ES GLSL ES 3.20",
+  "max_vertex_attributes": 16,
+  "programs": [
+    {
+      "name": "evergreen-trunk-and-branches-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "evergreen-solid-boughs-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "evergreen-needles-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "physical-polaroids-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "snow-ground-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "snow-particles-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "tree-lights-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "gold-star-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "foliage-particles-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "hand-magic-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "cat-stars-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "cat-contact-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "cat-sprite-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "world-panorama-cube-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "panorama-equirect-conversion-linear-compositor",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "evergreen-trunk-and-branches-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "evergreen-solid-boughs-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "evergreen-needles-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "physical-polaroids-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "snow-ground-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "snow-particles-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "tree-lights-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "gold-star-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "foliage-particles-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "hand-magic-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "cat-stars-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "cat-contact-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "cat-sprite-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "world-panorama-cube-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    },
+    {
+      "name": "panorama-equirect-conversion-aces-srgb-direct",
+      "shaders": [
+        {
+          "stage": "vertex",
+          "compiled": true,
+          "log": ""
+        },
+        {
+          "stage": "fragment",
+          "compiled": true,
+          "log": ""
+        }
+      ],
+      "linked": true,
+      "link_log": ""
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "project": "今晚，改道",
+  "status": "paused_for_handoff_no_generated_video",
+  "planned_duration_seconds": 322,
+  "planned_beats": 22,
+  "fallback_create_shots": 29,
+  "preferred_extend_groups": 4,
+  "generated_new_video_count": 0,
+  "approved_new_video_count": 0,
+  "generated_reference_stills": 4,
+  "new_movie_assembled": false,
+  "new_movie_published": false,
+  "legacy_bird_removal_is_separate": true,
+  "validated_plan": {
+    "continuous_shot_timecodes": true,
+    "all_referenced_files_exist": true,
+    "source_duration_fields_correctly_unfilled": true,
+    "no_invented_mechanical_gate": true,
+    "early_boat_moored_until_S16": true
+  },
+  "reference_files": [
+    "../film/HUMAN_ORIGINAL.jpg",
+    "references/A_PALACE_MASTER.png",
+    "references/B_PREPARATION_ROOM.png",
+    "references/CAT_IDENTITY.png",
+    "references/C_DEPARTURE_PLATFORM.png"
+  ],
+  "files_sha256": {
+    "DIRECTOR_SCRIPT.md": "b592fb59b28ec2fead723d7d1b6a1f9435a53ca7d20e41dcc78778ddbe59b0dc",
+    "director-cues.json": "a9a912c9a520d9a0c0b1c434383891c742d00593835b9a10165851ad9f6d2b33",
+    "generation-queue.json": "d1cc0b0997b919327d420b1a3391685fae9ef9c1478edc1710aef8efcb41ccad",
+    "VIDS_PROMPTS.md": "f133f1deadbc3ea9860e9758a6c7d477a8e24b143a82fa9e3c0d736c9ff4e8af",
+    "REFERENCE_BRIEFS.txt": "b98458e31f6935645e39451d13ca2a6b9bfa42af5953f1c16cdf81d271c6b56a"
+  },
+  "not_yet_verified": [
+    "Actual generated face identity and motion",
+    "Actual generated cat anatomy and movement",
+    "Absence of birds and bird calls throughout finished footage",
+    "Current Vids Extend availability and returned lengths",
+    "Actual source and final film durations",
+    "Generated branch matching and working website interaction",
+    "Final iPhone WeChat playback and loading"
+  ],
+  "updated_date": "2026-11-12",
+  "known_generation_submission_count": 3,
+  "actual_extend_call_count": 0,
+  "downloaded_new_video_count": 0,
+  "new_movie_connected_to_website": false,
+  "latest_confirmed_generation_result": {
+    "local_date": "2026-11-11",
+    "local_time": "10:30",
+    "timezone": "America/Los_Angeles",
+    "result": "quota_exceeded",
+    "observed_error": "You've hit your limits for generating videos in Vids."
+  },
+  "2026_11_12_result": "Browser signed out; secure authentication request timed out; successful sign-in unverified; no generation submitted; quota unverified today.",
+  "handoff_readme": "../../production/tonight-we-change-course/README.md",
+  "progress_ledger": "../../production/tonight-we-change-course/progress.json",
+  "attempts_ledger": "../../production/tonight-we-change-course/ATTEMPTS.md",
+  "source_plan_snapshot_note": "The approved director-cues and generation-queue retain their original bytes. This status and the progress ledger supersede historical authentication wording and unfilled execution counts in those preproduction snapshots."
+}

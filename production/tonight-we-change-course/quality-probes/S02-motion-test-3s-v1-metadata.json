@@ -1,0 +1,28 @@
+{
+  "probe_id": "S02-motion-test-3s-v1",
+  "shot_id": "S02",
+  "purpose": "Temporary motion/identity quality probe, not a replacement for the planned 12 seconds of usable S02 story footage",
+  "prompt_file": "S02-motion-test-3s-v1.txt",
+  "references_relative_to_this_folder": [
+    "../../../docs/film/HUMAN_ORIGINAL.jpg",
+    "../../../docs/malaysia-film/references/A_PALACE_MASTER.png",
+    "../../../docs/malaysia-film/references/CAT_IDENTITY.png"
+  ],
+  "observed_requested_spec": {
+    "ui_model_label": "Omni",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "duration_seconds": 3
+  },
+  "ui_duration_control_disabled": true,
+  "disabled_duration_cause": "unknown",
+  "observed_result": "quota_exceeded",
+  "known_generation_submission_count": 3,
+  "status": "not_generated",
+  "actual_source_duration_s": null,
+  "approved_in_s": null,
+  "approved_out_s": null,
+  "source_file": null,
+  "qa_approved": false,
+  "note": "UI model label is recorded as observed, not assumed to be Veo. No actual video returned and no Extend performed."
+}

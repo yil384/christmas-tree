@@ -1,0 +1,97 @@
+.castle-ride {
+  --ride-ivory: #fff3d9;
+  --ride-gold: #e9c893;
+  --ride-safe-top: env(safe-area-inset-top, 0px);
+  --ride-safe-bottom: env(safe-area-inset-bottom, 0px);
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100svh;
+  height: var(--ride-viewport-height, 100dvh);
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--ride-ivory);
+  background: radial-gradient(ellipse at 50% 45%, #172437, #060b17 66%);
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+.castle-ride *, .castle-ride *::before, .castle-ride *::after { box-sizing: border-box; }
+.castle-ride button { -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: manipulation; }
+.castle-ride button:focus-visible { outline: 1px solid #ffe8bd; outline-offset: 5px; }
+.ride-stage { position: relative; isolation: isolate; width: 100%; max-width: 520px; height: 100%; min-height: 0; overflow: hidden; background: #081329; container-type: size; }
+.ride-cover, .ride-film { position: absolute; z-index: 0; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center center; }
+.ride-cover { opacity: 1; transition: opacity .65s ease; }
+.ride-cover-behind { opacity: 0; }
+.ride-film { z-index: 1; opacity: 0; pointer-events: none; transition: opacity .65s ease; background: transparent; }
+.ride-film-visible { opacity: 1; }
+.ride-score { display: none; }
+.ride-finale-layer { position: absolute; z-index: 2; inset: 0; opacity: 0; pointer-events: none; transition: opacity 3s ease; }
+.ride-finale-visible { opacity: 1; }
+.ride-finale-palace { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+.ride-finale-magic { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.ride-finale-magic > * { display: block; width: 100%; height: 100%; pointer-events: none; }
+.ride-edge-shade { position: absolute; z-index: 2; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(2, 8, 19, .16), transparent 13%, transparent 83%, rgba(1, 8, 19, .25)); transition: background .6s ease; }
+.ride-status-idle .ride-edge-shade { background: linear-gradient(180deg, rgba(2, 8, 19, .12), transparent 32%, transparent 64%, rgba(1, 8, 19, .45)); }
+.ride-magic-layer { position: absolute; z-index: 3; inset: 0; pointer-events: none; }
+.ride-magic-layer > *, .ride-magic-canvas { display: block; width: 100%; height: 100%; pointer-events: none; }
+.ride-world-touch { position: absolute; z-index: 4; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; cursor: default; }
+.ride-world-touch:focus-visible { outline-offset: -7px !important; }
+.ride-discovery-layer { position: absolute; z-index: 5; inset: 0; pointer-events: none; }
+.ride-hotspot { position: absolute; left: var(--hotspot-x); top: var(--hotspot-y); display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 0; background: none; color: #fff5d0; transform: translate(-50%, -50%); pointer-events: auto; cursor: pointer; transition: left .25s linear, top .25s linear, opacity .8s; }
+.ride-hotspot::before { content: ''; position: absolute; inset: 9px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 233, 172, .28), rgba(255, 233, 172, .035) 44%, transparent 72%); animation: ride-secret-glow 4s ease-in-out infinite; }
+.ride-hotspot > svg { display: block; width: 37px; height: 37px; filter: drop-shadow(0 0 4px rgba(255, 224, 152, .65)); animation: ride-secret-glint 4s ease-in-out infinite; }
+.ride-hotspot-butterflies, .ride-hotspot-petals { color: #ffe4f2; }
+.ride-hotspot-ripple, .ride-hotspot-crystal { color: #d8f4ff; }
+.ride-hotspot-found { opacity: .18; }
+.ride-hotspot-found:hover, .ride-hotspot-found:focus-visible { opacity: 1; }
+.ride-invitation { position: absolute; z-index: 7; inset: 0; pointer-events: none; }
+.ride-entrance-key { position: absolute; left: 50%; bottom: calc(var(--ride-safe-bottom) + 9%); display: grid; place-items: center; width: 114px; height: 146px; padding: 8px; border: 0; background: transparent; color: #ffeaca; transform: translateX(-50%); pointer-events: auto; cursor: pointer; isolation: isolate; animation: ride-key-arrival 1.8s .3s both; }
+.ride-entrance-key > svg { display: block; width: 88px; height: 112px; filter: drop-shadow(0 2px 7px rgba(9, 15, 28, .8)) drop-shadow(0 0 11px rgba(245, 203, 143, .42)); animation: ride-key-float 5.8s ease-in-out infinite; }
+.ride-key-aura { position: absolute; z-index: -1; inset: 12px -17px -8px; border-radius: 50%; background: radial-gradient(ellipse, rgba(247, 206, 145, .16), rgba(215, 169, 196, .035) 43%, transparent 70%); animation: ride-key-breathe 4.6s ease-in-out infinite; }
+.ride-entrance-key:active > svg { opacity: .72; }
+.ride-icon-control { display: grid; place-items: center; width: 46px; height: 46px; padding: 12px; border: 0; border-radius: 50%; background: transparent; color: rgba(255, 239, 207, .86); cursor: pointer; }
+.ride-icon-control > svg { display: block; width: 22px; height: 22px; filter: drop-shadow(0 1px 4px rgba(0, 5, 17, .85)); }
+.ride-icon-control:active { color: #fffdf2; background: rgba(230, 202, 169, .08); }
+.ride-icon-control:disabled { opacity: .2; }
+.ride-sound { position: absolute; z-index: 10; top: calc(var(--ride-safe-top) + 12px); right: 12px; transition: opacity .7s ease; background: radial-gradient(circle, rgba(4, 12, 27, .18), transparent 70%); }
+.ride-sound.ride-control-resting { opacity: 0; pointer-events: none; }
+.ride-sound:focus-visible { opacity: 1; pointer-events: auto; }
+.ride-control-dock { position: absolute; z-index: 9; left: 28px; right: 28px; bottom: calc(var(--ride-safe-bottom) + 24px); opacity: 0; transform: translateY(5px); transition: opacity .7s ease, transform .7s ease; pointer-events: none; }
+.ride-controls-awake .ride-control-dock, .ride-control-dock:focus-within { opacity: 1; transform: translateY(0); }
+.ride-playback-buttons { display: flex; align-items: center; justify-content: center; gap: 29px; margin-bottom: 16px; }
+.ride-playback-buttons .ride-icon-control { pointer-events: none; }
+.ride-controls-awake .ride-playback-buttons .ride-icon-control, .ride-control-dock:focus-within .ride-icon-control { pointer-events: auto; }
+.ride-progress { position: relative; height: 1px; width: 100%; overflow: hidden; background: rgba(240, 225, 201, .19); }
+.ride-progress > i { position: absolute; inset: 0; display: block; transform-origin: left; transition: transform .25s linear; }
+.ride-buffered { background: rgba(241, 226, 201, .24); }
+.ride-played { background: linear-gradient(90deg, #b4d3de, #f4deb3); }
+.ride-buffering { position: absolute; z-index: 8; left: 50%; top: 50%; display: flex; gap: 7px; transform: translate(-50%, -50%); pointer-events: none; animation: ride-loading-arrival .4s .75s both; }
+.ride-buffering > span { width: 3px; height: 3px; transform: rotate(45deg); background: #ffeaca; box-shadow: 0 0 12px rgba(255, 220, 162, .65); animation: ride-buffering 1.4s ease-in-out infinite; }
+.ride-buffering > span:nth-child(2) { animation-delay: .16s; }
+.ride-buffering > span:nth-child(3) { animation-delay: .32s; }
+.ride-resume { position: absolute; z-index: 8; inset: 0; display: grid; place-items: center; pointer-events: none; background: radial-gradient(ellipse at center, rgba(2, 8, 22, .13), transparent 45%); }
+.ride-resume-control { display: grid; place-items: center; width: 76px; height: 76px; padding: 23px; border: 1px solid rgba(250, 231, 193, .42); border-radius: 50%; color: #fff1d6; background: radial-gradient(circle, rgba(15, 23, 40, .19), rgba(15, 23, 40, .035)); box-shadow: 0 0 40px rgba(248, 216, 163, .07), inset 0 0 26px rgba(253, 226, 188, .035); pointer-events: auto; cursor: pointer; }
+.ride-resume-control > svg { width: 28px; height: 28px; filter: drop-shadow(0 1px 8px rgba(0, 5, 17, .5)); }
+.ride-status-ended .ride-control-dock { opacity: 1; transform: none; }
+.ride-status-ended .ride-playback-buttons { margin-bottom: 20px; }
+.ride-status-ended .ride-progress { opacity: .4; }
+.ride-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+@keyframes ride-secret-glint { 0%, 27%, 73%, 100% { opacity: .04; transform: scale(.75) rotate(-8deg); } 46% { opacity: .78; transform: scale(1) rotate(0); } 54% { opacity: .35; transform: scale(.94) rotate(4deg); } }
+@keyframes ride-secret-glow { 0%, 25%, 75%, 100% { opacity: .12; transform: scale(.65); } 49% { opacity: .7; transform: scale(1); } }
+@keyframes ride-key-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes ride-key-breathe { 0%, 100% { opacity: .6; transform: scale(.94); } 50% { opacity: 1; transform: scale(1.07); } }
+@keyframes ride-key-arrival { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ride-loading-arrival { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ride-buffering { 0%, 100% { opacity: .2; } 45% { opacity: .9; } }
+
+@media (min-width: 600px) { .ride-stage { width: 440px; max-height: 956px; box-shadow: 0 0 120px rgba(0, 0, 0, .42), 0 0 0 1px rgba(223, 215, 194, .035); } }
+@container (max-height: 800px) { .ride-entrance-key { bottom: calc(var(--ride-safe-bottom) + 8%); height: 124px; } .ride-entrance-key > svg { width: 76px; height: 98px; } .ride-control-dock { bottom: calc(var(--ride-safe-bottom) + 21px); } .ride-playback-buttons { margin-bottom: 12px; } }
+@container (max-height: 650px) { .ride-entrance-key { bottom: calc(var(--ride-safe-bottom) + 5%); height: 112px; } .ride-entrance-key > svg { width: 67px; height: 87px; } .ride-sound { top: calc(var(--ride-safe-top) + 6px); right: 7px; } .ride-control-dock { left: 22px; right: 22px; bottom: calc(var(--ride-safe-bottom) + 15px); } .ride-playback-buttons { gap: 24px; margin-bottom: 8px; } }
+.ride-reduced-motion *, .ride-reduced-motion *::before, .ride-reduced-motion *::after { animation: none !important; transition-duration: .01ms !important; }
+.ride-reduced-motion .ride-hotspot > svg { opacity: .4; }
+.ride-hidden *, .ride-hidden *::before, .ride-hidden *::after { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) { .castle-ride *, .castle-ride *::before, .castle-ride *::after { animation: none !important; transition-duration: .01ms !important; } .ride-hotspot > svg { opacity: .4; } }

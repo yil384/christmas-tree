@@ -1,0 +1,30 @@
+shot_id,beat_id,planned_start_s,planned_end_s,usable_s,scene,operation,status,references
+S01,B01,0,12,12,A,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/A_PALACE_MASTER.png
+S02,B02,12,24,12,A,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/A_PALACE_MASTER.png; references/CAT_IDENTITY.png
+S03,B03,24,38,14,A,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/A_PALACE_MASTER.png
+S04,B04,38,52,14,A,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/A_PALACE_MASTER.png
+S05,B05,52,64,12,A,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/A_PALACE_MASTER.png; references/CAT_IDENTITY.png
+S06A,B06,64,72,8,A,Create / clear camera cut,NOT GENERATED,references/A_PALACE_MASTER.png
+S06B,B06,72,80,8,A,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/A_PALACE_MASTER.png
+S07,B07,80,94,14,A,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/A_PALACE_MASTER.png
+S08A,B08,94,102,8,B,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/B_PREPARATION_ROOM.png; references/A_PALACE_MASTER.png
+S08B,B08,102,110,8,B,Create / clear camera cut,NOT GENERATED,references/B_PREPARATION_ROOM.png; references/A_PALACE_MASTER.png
+S09,B09,110,124,14,B,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/B_PREPARATION_ROOM.png; references/A_PALACE_MASTER.png
+S10,B10,124,138,14,B,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/B_PREPARATION_ROOM.png; references/A_PALACE_MASTER.png
+S11,B11,138,152,14,B,Create / clear camera cut,NOT GENERATED,references/B_PREPARATION_ROOM.png; references/A_PALACE_MASTER.png
+S12A,B12,152,160,8,B,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/B_PREPARATION_ROOM.png; references/A_PALACE_MASTER.png
+S12B,B12,160,168,8,A,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/A_PALACE_MASTER.png
+S13,B13,168,183,15,A,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/A_PALACE_MASTER.png
+S14,B14,183,197,14,A,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/A_PALACE_MASTER.png
+S15A,B15,197,206,9,C,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/C_DEPARTURE_PLATFORM.png; references/A_PALACE_MASTER.png
+S15B,B15,206,214,8,C,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/C_DEPARTURE_PLATFORM.png; references/A_PALACE_MASTER.png
+S16,B16,214,229,15,C,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/C_DEPARTURE_PLATFORM.png; references/A_PALACE_MASTER.png
+S17A,B17,229,238,9,C,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/C_DEPARTURE_PLATFORM.png; references/A_PALACE_MASTER.png
+S17B,B17,238,247,9,C,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/C_DEPARTURE_PLATFORM.png; references/A_PALACE_MASTER.png; references/CAT_IDENTITY.png
+S18,B18,247,261,14,D,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/C_DEPARTURE_PLATFORM.png
+S19,B19,261,276,15,D,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/C_DEPARTURE_PLATFORM.png
+S20A,B20,276,284,8,D,Create / clear camera cut,NOT GENERATED,references/C_DEPARTURE_PLATFORM.png
+S20B,B20,284,292,8,D,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/C_DEPARTURE_PLATFORM.png
+S21,B21,292,306,14,D,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/C_DEPARTURE_PLATFORM.png
+S22A,B22,306,314,8,D,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/C_DEPARTURE_PLATFORM.png
+S22B,B22,314,322,8,D,Create / clear camera cut,NOT GENERATED,../film/HUMAN_ORIGINAL.jpg; references/C_DEPARTURE_PLATFORM.png

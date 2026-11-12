@@ -1,0 +1,137 @@
+{
+  "base": "15-second continuous first-person fairytale dark-ride shot, vertical 9:16. An original exquisite pearl-ivory princess palace with midnight-blue roofs, delicate champagne-gold tracery, pale blush roses and clear cool moonlight. Premium stylized cinematic 3D feature-film world with intricate physically believable materials and gentle depth, crisp architecture, luminous but not hazy. The visitor glides at seated eye level on a silent invisible floating ride carriage; stable horizon, no roll, no fast spins, no shaky handheld. A subtle trail of tiny champagne-gold motes leads onward. Every described action happens visibly. Preserve the established palace architecture and palette. Keep important objects inside the central 65% of the portrait frame. No people, human faces, humanoid figures, text, subtitles, logos, UI, hearts, snow or Christmas decorations. Natural dimensional parallax; never animate a flat photograph. No dialogue.",
+  "shots": [
+    {
+      "id": 1,
+      "title": "港湾初见",
+      "prompt": "Begin just above a still moonlit lake. Glide toward the distant illuminated palace. Floating lily lights wake one after another beneath the camera, reflecting precisely in the water. The water opens into a narrow garden canal; end entering between two carved ivory posts. Three beats: quiet dark water, a ribbon of warm lights awakens, a promising entrance reveals itself.",
+      "referenceGroup": "exterior"
+    },
+    {
+      "id": 2,
+      "title": "睡莲水道",
+      "prompt": "Continue forward into a palace water garden. Giant delicate white water lilies slowly unfold as the carriage passes; champagne-gold pollen rises from their centers. Ripple reflections travel across the carved stone banks. Follow a soft curve left toward an arch covered in pale pink climbing roses; end framed by the rose arch.",
+      "referenceGroup": "exterior"
+    },
+    {
+      "id": 3,
+      "title": "玫瑰长廊",
+      "prompt": "Glide through a long vaulted passage of climbing roses above the canal. Near roses open gently in sequence; their pale petals lift, briefly turn into translucent glass-like butterflies and drift forward. Show real layered foreground parallax and fresh detail beyond each arch. The final rose arch reveals ornate golden palace gates ahead.",
+      "referenceGroup": "exterior"
+    },
+    {
+      "id": 4,
+      "title": "金门开启",
+      "prompt": "Approach the grand filigree gold gates of the established palace. The two gate leaves slowly open inward while warm lights travel up the ivory carvings. Glide through, across a shallow reflective courtyard pool and toward tall open entrance doors. The final view reveals a vast softly glowing marble vestibule; no jump in camera position.",
+      "referenceGroup": "exterior"
+    },
+    {
+      "id": 5,
+      "title": "宫殿苏醒",
+      "prompt": "Continue through the tall doors into an elegant vaulted marble hall. A tiny warm light travels along a floor inlay; as it passes, wall sconces and three crystal chandeliers illuminate in a graceful wave. Their reflections spread across polished marble. Glide beneath the lowest chandelier toward a music-room arch to the left.",
+      "referenceGroup": "music"
+    },
+    {
+      "id": 6,
+      "title": "会演奏的房间",
+      "prompt": "Enter a warm ivory-and-gold music salon. A beautiful grand piano begins playing by itself with clearly visible moving keys, harp strings shimmer, and small glowing musical light-shapes curl above the instruments without printed notation. Drift in a gentle left arc past the piano so foreground keys, harp and distant arch create distinct depth. End facing an illuminated circular room.",
+      "referenceGroup": "music"
+    },
+    {
+      "id": 7,
+      "title": "天体音乐盒",
+      "prompt": "Glide into a round chamber containing an exquisite waist-high gold celestial orrery. Fine concentric rings slowly unfold, delicate crystal planets rotate into alignment, and a tiny warm star rises from the center. The star's light traces a path up a shallow curved ramp toward a tall library doorway. Continue approaching that doorway; no cuts or humans.",
+      "referenceGroup": "music"
+    },
+    {
+      "id": 8,
+      "title": "会飞的书页",
+      "prompt": "Enter the palace library: towering ivory shelves, midnight-blue bindings without readable words, rose-gold ladders and soft lanterns. A single large book opens gently on a pedestal, then several paper leaves rise and fold into elegant flying paper birds, leading onward between the shelves. Glide past the pedestal with a clear dimensional change in perspective.",
+      "referenceGroup": "library"
+    },
+    {
+      "id": 9,
+      "title": "星空书顶",
+      "prompt": "Continue through the same library toward a round skylight. A ribbon of loose ivory pages spirals upward, transforming into tiny stars. The ceiling iris slowly opens onto a deep clear night sky. Constellation light pours into the room and reveals a bright mirror corridor beyond a side arch. Camera gently tilts up then returns to level while gliding onward.",
+      "referenceGroup": "library"
+    },
+    {
+      "id": 10,
+      "title": "镜中的入口",
+      "prompt": "Glide along a refined corridor of tall antique gold mirrors. Reflections remain coherent and show the empty corridor. One mirror ahead turns into a softly rippling luminous water surface, revealing a crystal grotto through it. Approach and pass through this opening; the water parts without touching the lens. End just inside the grotto with sparkling wet stone and a calm stream.",
+      "referenceGroup": "library"
+    },
+    {
+      "id": 11,
+      "title": "水晶秘境",
+      "prompt": "Continue along a clear shallow stream through a vast graceful grotto beneath the palace. Natural translucent quartz and pale pink crystals catch warm golden light; tiny flowers of light awaken along the bank. Pass under a low crystalline arch with convincing near-field parallax. The scene is luminous and inviting, never horror or neon science fiction.",
+      "referenceGroup": "crystal"
+    },
+    {
+      "id": 12,
+      "title": "水晶回声",
+      "prompt": "Follow the grotto stream around a gentle curve. A small group of hanging crystal prisms vibrate in sequence; each sends a soft ring of light through the neighboring stones. Reflections on the water answer the pattern. Glide close enough to see crystal facets, then reveal a wider underground pool with a star-covered ceiling.",
+      "referenceGroup": "crystal"
+    },
+    {
+      "id": 13,
+      "title": "地下星湖",
+      "prompt": "Emerge into the wide underground pool. Its dark glassy surface mirrors hundreds of tiny warm stars embedded in the cavern roof. A small school of elegant luminous silver fish sweeps beneath the surface, creating a slow constellation-like pattern. Glide over the reflection toward a thin silver waterfall at the far side; keep all motion gentle and natural.",
+      "referenceGroup": "crystal"
+    },
+    {
+      "id": 14,
+      "title": "分开的水幕",
+      "prompt": "Approach the delicate waterfall. Warm motes run up both sides and the falling water separates into two translucent curtains, revealing a moonlit garden terrace behind it. Glide through the opening into fresh air; droplets sparkle beside the lens without covering it. End with pearl stone balustrades and unopened moonflowers nearby.",
+      "referenceGroup": "crystal"
+    },
+    {
+      "id": 15,
+      "title": "月光花园",
+      "prompt": "Glide along the moonlit terrace garden overlooking the same palace courtyard. Tall ivory moonflowers slowly open at shoulder height, revealing tiny warm glowing centers; soft glass-like butterflies lift from the flowers. The breeze moves leaves and silk-thin petals naturally. Follow the curved terrace toward a cluster of small floating gold lanterns.",
+      "referenceGroup": "garden"
+    },
+    {
+      "id": 16,
+      "title": "灯笼升空",
+      "prompt": "The small lantern cluster gently rises beside the carriage. Follow it in a smooth slow vertical lift from the garden terrace to a higher palace balcony, keeping the horizon stable. The courtyard and rose canal gradually fall below with strong real depth. Finish at an open circular observatory doorway glowing with cool starlight.",
+      "referenceGroup": "garden"
+    },
+    {
+      "id": 17,
+      "title": "天文台的秘密",
+      "prompt": "Enter a refined royal observatory with an ivory telescope and delicate gold celestial rings. The domed ceiling opens in overlapping curved panels. A few bright points connect into an original graceful butterfly constellation, and a narrow bridge of solid moonlit crystal appears outside the far balcony. Glide toward that balcony; no printed maps, zodiac labels or text.",
+      "referenceGroup": "garden"
+    },
+    {
+      "id": 18,
+      "title": "月光云桥",
+      "prompt": "Glide along the newly formed clear crystal bridge between two palace towers. A gentle arc reveals the roofline, rose courtyard and moonlit water far below; keep the motion calm and secure, not a roller coaster drop. Tiny star motes flow inside the bridge beneath the viewer. Ahead, tall ballroom doors glow warm gold and open as the carriage approaches.",
+      "referenceGroup": "garden"
+    },
+    {
+      "id": 19,
+      "title": "舞厅揭幕",
+      "prompt": "Cross the ballroom threshold into a breathtaking original princess ballroom: pearl marble, very tall arched windows, champagne-gold crystal chandeliers, blush silk curtains and flower-filled balconies. Light blossoms across the floor's circular floral inlay in concentric waves. Glide forward and slightly left while the full room slowly reveals itself, with no people or human statues.",
+      "referenceGroup": "ballroom"
+    },
+    {
+      "id": 20,
+      "title": "花瓣华尔兹",
+      "prompt": "Continue a gentle sweeping arc through the same ballroom. Pairs of pale rose petals and tiny warm lights begin a graceful waltz around the carriage, silk curtains breathe, and chandelier reflections seem to dance across the marble. The motion has a clear musical rhythm without fast spinning. The petals then lead toward open terrace doors showing the night sky.",
+      "referenceGroup": "ballroom"
+    },
+    {
+      "id": 21,
+      "title": "露台初焰",
+      "prompt": "Glide out through the ballroom terrace doors, descend gently along a broad curved garden route and begin a wide slow turn beside the reflecting lake. The familiar palace towers return into view across the water. The first delicate gold and blush fireworks bloom above them, with believable reflections and drifting sparks. Maintain the same architecture and moon position.",
+      "referenceGroup": "exterior"
+    },
+    {
+      "id": 22,
+      "title": "城堡终幕",
+      "prompt": "Complete the graceful turn beside the lake and hold a magnificent moving view of the established palace. A carefully paced original fireworks finale grows from fine gold comets to large champagne and pale rose peonies, reflected across the water; no strobing, words, logos or symbols. After the final large bloom, glowing trails fall softly and the music settles. Continue a very slight forward glide through the last frame, ending on a beautiful calm illuminated palace, never a sudden black frame.",
+      "referenceGroup": "exterior"
+    }
+  ]
+}

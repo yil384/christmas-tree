@@ -1,0 +1,501 @@
+{
+  "scope": "Actual production shaders and ground geometry in native EGL; not a browser screenshot.",
+  "panelsReady": 8,
+  "renderer": {
+    "egl": "1.5",
+    "vendor": "Mesa",
+    "renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "version": "4.5 (Core Profile) Mesa 25.0.7-2+deb13u1",
+    "glsl": "4.50"
+  },
+  "shaderLogs": [
+    {
+      "program": "directional-panels",
+      "stage": "vertex",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "directional-panels",
+      "stage": "fragment",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "directional-panels",
+      "stage": "link",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "directional-ground",
+      "stage": "vertex",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "directional-ground",
+      "stage": "fragment",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "directional-ground",
+      "stage": "link",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "baseline-panorama",
+      "stage": "vertex",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "baseline-panorama",
+      "stage": "fragment",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "baseline-panorama",
+      "stage": "link",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "output",
+      "stage": "vertex",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "output",
+      "stage": "fragment",
+      "success": true,
+      "log": ""
+    },
+    {
+      "program": "output",
+      "stage": "link",
+      "success": true,
+      "log": ""
+    }
+  ],
+  "poses": [
+    {
+      "pose": "1440x900-yaw0-zoom1",
+      "maximumDifference": 0.00015914440155029297,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw0-zoom4",
+      "maximumDifference": 0.00009641051292419434,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw5.4-zoom1",
+      "maximumDifference": 0.002789139747619629,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw5.4-zoom4",
+      "maximumDifference": 0.0009675025939941406,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw27.9-zoom1",
+      "maximumDifference": 0.0006399750709533691,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw27.9-zoom4",
+      "maximumDifference": 0.0006614029407501221,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw50.4-zoom1",
+      "maximumDifference": 0.004411876201629639,
+      "pixelsOverOneByte": 4,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw50.4-zoom4",
+      "maximumDifference": 0.002625107765197754,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw72.9-zoom1",
+      "maximumDifference": 0.00020712614059448242,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw72.9-zoom4",
+      "maximumDifference": 0.0001347661018371582,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw95.4-zoom1",
+      "maximumDifference": 0.0001695007085800171,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw95.4-zoom4",
+      "maximumDifference": 0.00015503168106079102,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw117.9-zoom1",
+      "maximumDifference": 0.0004158616065979004,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw117.9-zoom4",
+      "maximumDifference": 0.00038951635360717773,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw140.4-zoom1",
+      "maximumDifference": 0.0014518499374389648,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw140.4-zoom4",
+      "maximumDifference": 0.0013554692268371582,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw162.9-zoom1",
+      "maximumDifference": 0.00040477514266967773,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw162.9-zoom4",
+      "maximumDifference": 0.00044396519660949707,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw185.4-zoom1",
+      "maximumDifference": 0.002069920301437378,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw185.4-zoom4",
+      "maximumDifference": 0.0010172128677368164,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw207.9-zoom1",
+      "maximumDifference": 0.0007526278495788574,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw207.9-zoom4",
+      "maximumDifference": 0.0006352663040161133,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw230.4-zoom1",
+      "maximumDifference": 0.004545688629150391,
+      "pixelsOverOneByte": 3,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw230.4-zoom4",
+      "maximumDifference": 0.002602905035018921,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw252.9-zoom1",
+      "maximumDifference": 0.0001774430274963379,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw252.9-zoom4",
+      "maximumDifference": 0.00010570883750915527,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw275.4-zoom1",
+      "maximumDifference": 0.00016456842422485352,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw275.4-zoom4",
+      "maximumDifference": 0.00016289949417114258,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw297.9-zoom1",
+      "maximumDifference": 0.00039499998092651367,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw297.9-zoom4",
+      "maximumDifference": 0.0004133284091949463,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw320.4-zoom1",
+      "maximumDifference": 0.0016663074493408203,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw320.4-zoom4",
+      "maximumDifference": 0.0014680325984954834,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw342.9-zoom1",
+      "maximumDifference": 0.00038814544677734375,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "1440x900-yaw342.9-zoom4",
+      "maximumDifference": 0.0005139857530593872,
+      "pixelsOverOneByte": 0,
+      "pixels": 1296000
+    },
+    {
+      "pose": "390x844-yaw0-zoom1",
+      "maximumDifference": 0.0006213784217834473,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw0-zoom4",
+      "maximumDifference": 0.0005920827388763428,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw5.4-zoom1",
+      "maximumDifference": 0.0007253885269165039,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw5.4-zoom4",
+      "maximumDifference": 0.0008310079574584961,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw27.9-zoom1",
+      "maximumDifference": 0.0009392499923706055,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw27.9-zoom4",
+      "maximumDifference": 0.0008103251457214355,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw50.4-zoom1",
+      "maximumDifference": 0.002253234386444092,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw50.4-zoom4",
+      "maximumDifference": 0.0024723410606384277,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw72.9-zoom1",
+      "maximumDifference": 0.0018648505210876465,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw72.9-zoom4",
+      "maximumDifference": 0.0022315382957458496,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw95.4-zoom1",
+      "maximumDifference": 0.001673966646194458,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw95.4-zoom4",
+      "maximumDifference": 0.0007229447364807129,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw117.9-zoom1",
+      "maximumDifference": 0.0007596909999847412,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw117.9-zoom4",
+      "maximumDifference": 0.00096893310546875,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw140.4-zoom1",
+      "maximumDifference": 0.0038064122200012207,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw140.4-zoom4",
+      "maximumDifference": 0.0037087202072143555,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw162.9-zoom1",
+      "maximumDifference": 0.0017436742782592773,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw162.9-zoom4",
+      "maximumDifference": 0.0017638802528381348,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw185.4-zoom1",
+      "maximumDifference": 0.0009482204914093018,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw185.4-zoom4",
+      "maximumDifference": 0.0010793209075927734,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw207.9-zoom1",
+      "maximumDifference": 0.000833660364151001,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw207.9-zoom4",
+      "maximumDifference": 0.0009949803352355957,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw230.4-zoom1",
+      "maximumDifference": 0.0024205446243286133,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw230.4-zoom4",
+      "maximumDifference": 0.0024148225784301758,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw252.9-zoom1",
+      "maximumDifference": 0.0017600953578948975,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw252.9-zoom4",
+      "maximumDifference": 0.0017979145050048828,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw275.4-zoom1",
+      "maximumDifference": 0.0018511414527893066,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw275.4-zoom4",
+      "maximumDifference": 0.0006963014602661133,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw297.9-zoom1",
+      "maximumDifference": 0.0008973181247711182,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw297.9-zoom4",
+      "maximumDifference": 0.0007472038269042969,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw320.4-zoom1",
+      "maximumDifference": 0.0055269598960876465,
+      "pixelsOverOneByte": 5,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw320.4-zoom4",
+      "maximumDifference": 0.003969341516494751,
+      "pixelsOverOneByte": 1,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw342.9-zoom1",
+      "maximumDifference": 0.0022057294845581055,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    },
+    {
+      "pose": "390x844-yaw342.9-zoom4",
+      "maximumDifference": 0.0021969079971313477,
+      "pixelsOverOneByte": 0,
+      "pixels": 329160
+    }
+  ],
+  "totalPixels": 55255440,
+  "pixelsOverOneByte": 13,
+  "glError": 0,
+  "maximumDifference": 0.0055269598960876465,
+  "review": "All eight joins inspected visually at normal framing. The 13 pixels above 1/255 are isolated floating-point sampling differences (maximum 0.005527 linear); no pale ground ring or visible discontinuity was observed. No numerical-zero claim.",
+  "productionSamplerSha256": "74a5036734273c1acedbdf0373dce931302aa8387685ecba997bccef4f494702"
+}

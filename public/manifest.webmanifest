@@ -1,0 +1,24 @@
+{
+  "name": "给思仪的一份礼物",
+  "short_name": "给思仪",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#080e25",
+  "theme_color": "#080e25",
+  "icons": [
+    {
+      "src": "./icons/xiaomiao-chibi-v1-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/xiaomiao-chibi-v1-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

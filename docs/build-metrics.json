@@ -1,0 +1,190 @@
+{
+  "baselineCommit": "844295431c728a315494ba59c9601572e7fcf818",
+  "method": "Vite production files and node:zlib gzipSync; not network timing or FPS",
+  "before": [
+    {
+      "name": "index-D4FaRapw.js",
+      "bytes": 1261876,
+      "gzipBytes": 355158
+    },
+    {
+      "name": "index-Dtn62Xmo.css",
+      "bytes": 911,
+      "gzipBytes": 494
+    }
+  ],
+  "after": [
+    {
+      "name": "ChristmasFilm-DL4ZpPZv.js",
+      "bytes": 435,
+      "gzipBytes": 387
+    },
+    {
+      "name": "HandMagicMode--P2k4THL.js",
+      "bytes": 18544,
+      "gzipBytes": 7553
+    },
+    {
+      "name": "HandMagicMode-TjuieOol.css",
+      "bytes": 6683,
+      "gzipBytes": 2186
+    },
+    {
+      "name": "PhotoGallery-DvSFkhao.js",
+      "bytes": 4325,
+      "gzipBytes": 1915
+    },
+    {
+      "name": "ShareGift-D82qNYl6.js",
+      "bytes": 34280,
+      "gzipBytes": 13760
+    },
+    {
+      "name": "ShareGift-jjUbg1kE.css",
+      "bytes": 3793,
+      "gzipBytes": 1278
+    },
+    {
+      "name": "TreeScene-CAKftb5s.js",
+      "bytes": 912670,
+      "gzipBytes": 248274
+    },
+    {
+      "name": "index-CTViEv7F.css",
+      "bytes": 7905,
+      "gzipBytes": 2581
+    },
+    {
+      "name": "index-VHMnsM6k.js",
+      "bytes": 161935,
+      "gzipBytes": 53116
+    },
+    {
+      "name": "session-BF5K4xB3.js",
+      "bytes": 8733,
+      "gzipBytes": 3739
+    }
+  ],
+  "initialTreeJavaScript": {
+    "bytes": 1074605,
+    "gzipBytes": 301390
+  },
+  "photos": {
+    "count": 95,
+    "originalBytes": 20019426,
+    "allThumbnailBytes": 1055562,
+    "allDisplayBytes": 13662360,
+    "atlasForCurrentCollectionBytes": 16777216,
+    "atlasMaximumBytes": 16777216
+  },
+  "visualValidation": {
+    "webgl": "Browser reports GL_VENDOR=Disabled; final browser composition and target-device frame rate remain unverified",
+    "shaderCompiler": "30 full Three r169 programs / 60 stages compiled and linked in Mesa GLES 3.2 llvmpipe; includes panorama conversion/cube, cat sprite/contact/stars, root relief and photo geometry",
+    "geometry": "World-stationary tree/photographs and camera orbit with real OrbitControls; six buried root buttresses, contact snow mesh, framing, photo picking and 120 snowfall camera cases tested",
+    "offlineReference": "Actual new trunk root and snow geometry inspected in Blender CPU close-up; structural reference only, not a browser screenshot.",
+    "tests": 163,
+    "topStar": "One CPU check: closed rounded shell and mounting stem, finite values, outward faces, smooth unit normals, fixed local pose and assembly scale",
+    "handTracking": "37 deterministic gesture tests, 25 runtime/worker/network/model tests, 28 scene/picking tests; physical webcam inference and target-device FPS not yet verified"
+  },
+  "background": {
+    "source": "public/backgrounds/fairytale-courtyard-360.webp",
+    "runtimeAsset": "generated/background/night-b04f909d883318ea6525.webp",
+    "bytes": 109196,
+    "projection": "equirectangular",
+    "rotationDegrees": 78,
+    "provenance": "AI-generated 360-degree fairytale courtyard; fixed world environment, not a full 3D castle model"
+  },
+  "structure": {
+    "photoCardsDesktop": 128,
+    "photoCardsCompact": 96,
+    "solidBodyBatches": 3,
+    "photoAndHangerBatches": 1,
+    "foliagePointsDesktop": 6800,
+    "foliagePointsCompact": 4000,
+    "snowPointsDesktop": 960,
+    "snowPointsCompact": 480,
+    "solidNeedles": 24705,
+    "solidBodyTriangles": 174912,
+    "solidBodyBufferBytesApprox": 12900000,
+    "photoSharedGeometryVertices": 342,
+    "photoSharedGeometryTriangles": 424,
+    "foliagePointsVisibleWhenFormed": 0,
+    "topStarTriangles": 3864,
+    "topStarVertices": 11592,
+    "topStarDrawBatches": 1,
+    "snowGroundVertices": 3937,
+    "snowGroundTriangles": 7776
+  },
+  "handTracking": {
+    "sdkVersion": "1.2.2",
+    "modelBytes": 8373440,
+    "modelSha256": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482",
+    "optionalGeneratedBytes": 23487114,
+    "loadedOnInitialVisit": false,
+    "desktopMaxInferenceFps": 15,
+    "mobileMaxInferenceFps": 10,
+    "framesInFlight": 1,
+    "magicPoints": 96,
+    "assets": [
+      {
+        "path": "generated/hand-tracking/LICENSE-MediaPipe.txt",
+        "bytes": 12331,
+        "sha256": "8707eef0533987efc5b155d64761eeb6e20793f50b9bd1a68dad1cf4719d0ed8"
+      },
+      {
+        "path": "generated/hand-tracking/NOTICE.txt",
+        "bytes": 1834,
+        "sha256": "646086132276b573256213bcb6be4f128b21cad6540dfc25e29dec6638162c71"
+      },
+      {
+        "path": "generated/hand-tracking/gesture-recognizer-float16-v1-97952348cf6a6a4915c2.task",
+        "bytes": 8373440,
+        "sha256": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482"
+      },
+      {
+        "path": "generated/hand-tracking/manifest.json",
+        "bytes": 411,
+        "sha256": "ebc8e84d58e22f2b0a0a10173732be9cfc43e223f490a2fd09bcc10b61e3e279"
+      },
+      {
+        "path": "generated/hand-tracking/sdk-1.2.2/vision_bundle.js",
+        "bytes": 156088,
+        "sha256": "a8c95ebecb9efca4ef79ce32f7b77fa5cb61b809e7e21a2f3d792d181ca0b822"
+      },
+      {
+        "path": "generated/hand-tracking/sdk-1.2.2/wasm/vision_wasm_internal.js",
+        "bytes": 334128,
+        "sha256": "f2b9c17131ea79716ec6bf07b117a087b2749a6f8a1e2f1f2e77a9382092db5b"
+      },
+      {
+        "path": "generated/hand-tracking/sdk-1.2.2/wasm/vision_wasm_internal.wasm",
+        "bytes": 14603354,
+        "sha256": "f5bd25147ac89d506074293ce2675969b10e827180db95a0d9689c2ed80764ab"
+      },
+      {
+        "path": "generated/hand-tracking/worker-3b5cf016f4f69b4f852e.js",
+        "bytes": 5528,
+        "sha256": "3b5cf016f4f69b4f852e219a9163ff26f1337f938c2f8bf47e7ce9cbacca67c4"
+      }
+    ]
+  },
+  "cat": {
+    "source": "public/characters/christmas-cat.png",
+    "runtimeAsset": "generated/characters/cat-d83aa7a8fb0f0d831634.webp",
+    "bytes": 378568,
+    "representation": "World-positioned transparent sprite with snow-height contact and optional local MP4; no video currently configured",
+    "magicInstances": 12
+  },
+  "cameraOrbit": {
+    "lapSeconds": 330,
+    "sceneObjectsRotate": false,
+    "resumeAfterManualMs": 1800,
+    "maximumFrameDeltaSeconds": 0.05
+  },
+  "giftCard": {
+    "width": 1200,
+    "height": 1800,
+    "qrValidation": "ZBar decoded cat/new-Site and fallback/old-preview cards, at full size and 720px width",
+    "generatedLocally": true
+  }
+}

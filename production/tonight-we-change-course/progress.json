@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "project": "今晚，改道",
+  "updated_date": "2026-11-12",
+  "timezone": "America/Los_Angeles",
+  "status": "paused_for_claude_code_handoff",
+  "user_direction": "Preserve current work in GitHub for Claude Code to continue; video generation paused.",
+  "planned_duration_seconds": 322,
+  "planned_beats": 22,
+  "fallback_create_shots": 29,
+  "preferred_extend_groups": 4,
+  "known_generation_submission_count": 3,
+  "actual_extend_call_count": 0,
+  "generated_new_video_count": 0,
+  "downloaded_new_video_count": 0,
+  "approved_new_video_count": 0,
+  "new_movie_assembled": false,
+  "new_movie_published": false,
+  "new_movie_connected_to_website": false,
+  "current_vids_project_url": "https://docs.google.com/videos/d/1xqNPZ0ASqpQNVnWTWnn6-8Jmwpuc7lrp5TaCzxB7_zU/edit?scene=id.p#scene=id.p",
+  "project_content_note": "The default 5-second blank scene is not generated footage.",
+  "observed_generation_controls": {
+    "model_label": "Omni",
+    "duration_seconds": 3,
+    "duration_slider_disabled": true,
+    "disabled_slider_cause": "unknown",
+    "observed_resolution": "1080p",
+    "aspect_ratio": "9:16",
+    "reference_image_count": 3
+  },
+  "latest_confirmed_generation_result": {
+    "local_date": "2026-11-11",
+    "local_time": "10:30",
+    "result": "quota_exceeded",
+    "message": "You've hit your limits for generating videos in Vids."
+  },
+  "nov12_state": {
+    "signed_out_observed": true,
+    "secure_authentication_request_result": "timed_out",
+    "later_login_success_verified": false,
+    "generation_submitted": false,
+    "account_quota_verified": false
+  },
+  "quota_rule": {
+    "source_url": "https://support.google.com/docs/answer/16143507?hl=en",
+    "verified_date": "2026-11-12",
+    "rule": "Relevant monthly generation limits reset at 12 AM Pacific Time on the first day of the month; Pro/Ultra family sharing may share the allowance.",
+    "account_plan_verified": false,
+    "account_usage_verified": false,
+    "family_sharing_verified": false,
+    "conditional_next_monthly_reset": "2026-12-01T00:00:00-08:00",
+    "condition": "Only if this account exhausted the monthly quota described by the official rule; not an account-specific recovery promise."
+  },
+  "automation_note": "A prior one-hour retry task has a run record requiring user action, but no verifiable output. Do not count it as a generation submission or success. No ongoing background generation task is claimed.",
+  "reference_files": [
+    "../../docs/film/HUMAN_ORIGINAL.jpg",
+    "../../docs/malaysia-film/references/A_PALACE_MASTER.png",
+    "../../docs/malaysia-film/references/B_PREPARATION_ROOM.png",
+    "../../docs/malaysia-film/references/C_DEPARTURE_PLATFORM.png",
+    "../../docs/malaysia-film/references/CAT_IDENTITY.png"
+  ],
+  "quality_probes": [
+    "quality-probes/S02-prompt.txt",
+    "quality-probes/S06B-prompt.txt",
+    "quality-probes/S02-motion-test-3s-v1.txt"
+  ],
+  "next_steps": [
+    "Confirm the intended creative Google account is signed in and can actually generate.",
+    "Generate S02 human/cat interaction and S06B facial reaction probes; inspect whole clips and compare the original identity image.",
+    "Only after face, anatomy, motion, contact, continuity and audio pass, execute the approved shot queue with genuine Extend where available or deliberate cuts.",
+    "Download real clips, record actual source lengths and approved edit ranges, edit at least 300 seconds of genuine story, then integrate and test on iPhone WeChat."
+  ],
+  "not_done": [
+    "New video generation",
+    "Identity and cat-motion approval",
+    "Genuine Extend",
+    "New-film audio and dialogue",
+    "Final edit",
+    "Interactive alternate media",
+    "New-film website integration",
+    "Real iPhone WeChat acceptance"
+  ],
+  "source_snapshot_note": "Approved director-cues and generation-queue remain original preproduction snapshots; this progress ledger is the current execution status."
+}

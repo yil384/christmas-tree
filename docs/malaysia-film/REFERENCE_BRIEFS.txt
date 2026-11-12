@@ -1,0 +1,31 @@
+《今晚，改道》四张静帧的制作 brief
+
+说明：以下是依据已生成图片和本次导演稿整理的 production briefs / reconstructed reference notes，不是逐字保存的 imagegen 工具调用记录。四张 PNG 是已存在的参考静帧；它们不代表视频已经生成。任何新增人物必须另以 HUMAN_ORIGINAL.jpg 为身份主参考，不从场景图创造替代脸。
+
+1. A_PALACE_MASTER.png — 主厅与码头
+
+Create a sharp, cinematic 9:16 portrait environment plate for an intimate fairy-tale princess film. A beautiful ivory-limestone palace at blue hour, warm champagne-gold candlelight, rose details and restrained floral and water-wave ornament. Keep a coherent real architectural space: broad arched window and low sill on the left, one elegant small round table with two chairs toward the left-middle, one right-hand arch leading to a preparation room, rear canal and a low safe landing. One small wooden two-seat boat points screen right. The existing bay-facing stone arch is open; do not invent a mechanical water gate. Believable materials, grounded contact shadows and readable depth from foreground to background. No humans, no new faces, no writing, no birds, poultry, beaks, bird ornaments, feathered crests, wings or flying animals. Do not make a stretched panoramic photo or spherical projection. This is the spatial reference for A and its later departure arrangement C.
+
+Observed lock: left window, right arch, same stone floor, round table and two chairs, canal, same boat heading. The source still is not evidence that the later music box, rope post or cloche already exists: those minor objects must be established in approved footage, then held consistent.
+
+2. CAT_IDENTITY.png — 灰白小猫
+
+Create a natural young domestic short-haired cat, grey and white, suitable as the fixed feline identity reference for a cinematic palace scene. White chin, chest and paws; soft grey tabby back; normal pink nose, normal-sized eyes, short natural muzzle, realistic proportions, four paws and one tail. It stands comfortably on all four paws near warm ivory stone and gentle window light. Fine believable fur, grounded paws and soft contact shadows. The cat must feel like a real small cat, not a sticker, plastic toy, mascot, cartoon human or exaggerated large-eyed doll. No clothing, crown or accessories, no human gesture, no wings, no other animals, no food, no text.
+
+Observed lock: grey-and-white coat, ordinary face and limb anatomy. In film the cat can sniff, walk, rub, stretch and slow-blink. It stays in the palace; it is not a guide, a key, a talking character or a durian eater.
+
+3. B_PREPARATION_ROOM.png — 尚未收好的旅行准备
+
+Use A_PALACE_MASTER.png as the spatial and lighting reference. Show an intimate warm preparation alcove through the same palace's right doorway. The left doorway looks back toward the ivory palace floor; a round window on the right looks onto the same canal. A dark wooden desk holds an open, untitled illustrated future-travel sketchbook showing two empty seaside chairs and a small boat model. One plate contains exactly three realistic golden durian lobes, with exactly two small spoons. A navy men's jacket stays on a nearby chair; an open empty brown suitcase sits on the floor. Retain the same ivory stone, champagne gold and rose atmosphere. No humans or invented identity face, no readable text, no tickets, booking confirmations, dates or past-trip photos. No birds, beaks, bird ornaments, wings, butterflies or other flying animals.
+
+Observed lock: three durian lobes, two spoons, one plate, one empty suitcase, navy jacket on the chair. This image represents the plate after it reaches B. During S08A, the corresponding desk spot starts empty and the woman places the same plate there; never duplicate it from the reference.
+
+4. C_DEPARTURE_PLATFORM.png — 同一主厅，准备一起出发
+
+Use A_PALACE_MASTER.png and B_PREPARATION_ROOM.png as continuity references. Show the same palace now arranged for departure, with no replacement architecture. Keep the left window, right doorway, stone floor, canal, open stone arch and same wooden two-seat boat. The round table and chairs have shifted to the left-back, curtains are neatly gathered at the existing columns, and the same boat is close to the low safe boarding platform. Through the existing open arch appears a warm, magical preview of a future Malaysian seaside journey: modest pastel shophouses, a tidy durian stall, palms, calm bay and low islands. This is an imagined future trip, not a specific booked destination or a collage of landmarks. Blend the warm bay light deliberately into the same blue-hour palace. No people or new faces, no phone, UI, readable letters, mechanical water gates, birds, beaks, seagulls, poultry, parrots, wings, bird crests, butterflies or other flying animals.
+
+Observed lock: same palace/canal/boat; moving furniture and opening the view explain the change. The picture itself does not supply character acting, true camera parallax or continuous video; these must come from approved generated footage.
+
+Human identity reference (not a new generated still)
+
+../film/HUMAN_ORIGINAL.jpg is the sole primary face reference. Preserve the adult woman's actual facial proportions, skin tone, brown bangs and half-up hair, earrings, necklace and light-blue petal ballgown. Do not replace her with a generic princess or propagate an AI-generated face as the new identity. Model outputs still need individual review; prompt wording cannot guarantee an exact face match.

@@ -1,0 +1,113 @@
+@font-face {
+  font-family: SiyiConfessionSerif;
+  src: url('/journey/confession-serif.woff2?v=malaysia-r1') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+.ride-love-seal {
+  position: absolute;
+  z-index: 10;
+  top: calc(var(--ride-safe-top) + 13px);
+  left: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  width: 68px;
+  min-height: 68px;
+  padding: 2px 7px 7px;
+  border: 0;
+  color: #fbe5be;
+  background: radial-gradient(ellipse, rgba(5, 13, 30, .4), transparent 72%);
+  cursor: pointer;
+  transition: opacity .7s ease;
+  filter: drop-shadow(0 1px 4px rgba(2, 7, 18, .75));
+}
+.ride-love-seal > svg { width: 39px; height: 35px; }
+.ride-love-seal > span { font: 400 13px/1.55 SiyiConfessionSerif, 'Songti SC', serif; letter-spacing: .16em; }
+.ride-love-seal.ride-control-resting { opacity: 0; pointer-events: none; }
+.ride-love-seal:focus-visible { opacity: 1; pointer-events: auto; }
+.ride-love-seal:active { transform: translateY(1px); }
+.castle-ride[data-confession="open"] .ride-love-seal,
+.castle-ride[data-confession="open"] .ride-sound,
+.castle-ride[data-confession="open"] .ride-invitation,
+.castle-ride[data-confession="open"] .ride-control-dock,
+.castle-ride[data-confession="open"] .ride-resume { visibility: hidden; }
+
+.ride-confession {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: 520px;
+  height: var(--ride-viewport-height, 100dvh);
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 0;
+  color: #fff1d9;
+  background: linear-gradient(180deg, rgba(4, 10, 29, .76), rgba(7, 16, 40, .85) 23%, rgba(8, 17, 39, .76) 48%, rgba(5, 13, 31, .34) 77%, rgba(4, 10, 25, .12));
+  font: 400 18px/1.7 SiyiConfessionSerif, 'Songti SC', serif;
+  font-synthesis: none;
+  text-align: center;
+  overscroll-behavior: contain;
+  animation: confession-arrive .85s ease both;
+}
+.ride-confession::backdrop { background: rgba(2, 6, 15, .15); }
+.confession-close { position: absolute; z-index: 3; top: calc(var(--ride-safe-top) + 12px); right: 12px; }
+.confession-words { position: relative; z-index: 2; width: 100%; padding: clamp(92px, 17svh, 170px) 25px 90px; }
+.confession-flourish { display: block; width: 207px; height: 46px; margin: 0 auto 23px; color: #eac596; opacity: .8; }
+.confession-name { margin: 0 0 18px; font-size: 21px; letter-spacing: .24em; text-indent: .24em; color: #f0d9c1; }
+.confession-title {
+  margin: 0;
+  font: inherit;
+  font-size: clamp(38px, 10.8vw, 49px);
+  line-height: 1.55;
+  letter-spacing: .06em;
+  text-indent: .06em;
+  color: #ffe9bc;
+  background: linear-gradient(180deg, #fff9e9 18%, #f9dfad 54%, #e3b881 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 13px rgba(239, 185, 116, .14));
+  outline: none !important;
+}
+.confession-question { margin: 20px 0 0; font-size: 19px; letter-spacing: .09em; color: #f3e4d6; }
+.confession-memory { margin: 14px 0 0; font-size: 14px; line-height: 1.8; letter-spacing: .055em; color: #d8c6b8; }
+.confession-response { min-height: 144px; margin-top: 37px; }
+.confession-choices { display: flex; justify-content: center; align-items: center; gap: 21px; }
+.ride-confession button { font-family: inherit; font-weight: 400; font-synthesis: none; }
+.confession-yes, .confession-no { min-height: 50px; min-width: 102px; padding: 10px 18px; font-size: 18px; letter-spacing: .12em; cursor: pointer; }
+.confession-yes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid rgba(245, 217, 169, .65);
+  border-radius: 28px;
+  color: #ffedc9;
+  background: linear-gradient(135deg, rgba(245, 213, 160, .15), rgba(229, 181, 155, .05));
+  box-shadow: inset 0 0 18px rgba(243, 210, 166, .04), 0 2px 24px rgba(4, 8, 23, .15);
+}
+.confession-yes > svg { width: 20px; height: 20px; }
+.confession-no { color: #e0d8d5; background: transparent; border: 1px solid transparent; border-radius: 28px; }
+.confession-yes:active, .confession-no:active { background-color: rgba(247, 224, 191, .1); }
+.confession-reply { animation: confession-reply-in .6s ease both; }
+.confession-reply > p { margin: 0 0 20px; font-size: 23px; letter-spacing: .06em; color: #ffe8c6; }
+.confession-continue { min-height: 46px; padding: 8px 14px; border: 0; background: transparent; color: #e8d9ca; font-size: 16px; letter-spacing: .1em; cursor: pointer; }
+.confession-continue > span { display: inline-block; margin-left: 10px; font-family: serif; }
+.confession-bottom-rule { display: block; width: 107px; height: 16px; margin: 0 auto; color: rgba(241, 207, 164, .55); }
+.confession-celebration { position: absolute; z-index: 1; top: 37%; left: 50%; width: 1px; height: 1px; pointer-events: none; }
+.confession-celebration > i { position: absolute; width: 3px; height: 8px; border-radius: 50%; background: #ffe7ba; box-shadow: 0 0 10px rgba(255, 215, 155, .6); opacity: 0; animation: confession-spark 2.5s var(--confetti-delay) ease-out both; }
+.confession-celebration > i:nth-child(3n) { background: #f4cddd; }
+
+@keyframes confession-arrive { from { opacity: 0; } to { opacity: 1; } }
+@keyframes confession-reply-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes confession-spark { 0% { opacity: 0; transform: rotate(var(--confetti-angle)) translateY(5px) scale(.3); } 12% { opacity: .8; } 100% { opacity: 0; transform: rotate(var(--confetti-angle)) translateY(calc(-1 * var(--confetti-distance))) scale(.2); } }
+@media (min-width: 600px) { .ride-confession { width: 440px; max-height: 956px; } }
+@media (max-height: 720px) { .confession-words { padding-top: 76px; padding-bottom: 38px; } .confession-flourish { margin-bottom: 14px; height: 37px; } .confession-name { margin-bottom: 12px; font-size: 19px; } .confession-title { font-size: 38px; } .confession-question { margin-top: 12px; font-size: 18px; } .confession-response { margin-top: 26px; min-height: 122px; } }
+@media (prefers-reduced-motion: reduce) { .ride-confession, .ride-confession * { animation: none !important; transition: none !important; } .confession-celebration { display: none; } }

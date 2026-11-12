@@ -1,72 +1,68 @@
-# 🎄 Grand Luxury Interactive 3D Christmas Tree
+# 思仪的城堡奇旅 · 照片圣诞树
 
-> 一个基于 **React**, **Three.js (R3F)** 和 **AI 手势识别** 的高保真 3D 圣诞树 Web 应用。
+为谭陈思仪制作的手机网页：平时是城堡奇旅与告白，圣诞节切换为照片圣诞树。技术栈为 React、TypeScript、Vite、Three.js 和 HLS 视频。
 
-这个项目不仅仅是一棵树，它是一个承载记忆的交互式画廊。成百上千个粒子、璀璨的彩灯和悬浮的拍立得照片共同组成了一棵奢华的圣诞树。用户可以通过手势控制树的形态（聚合/散开）和视角旋转，体验电影级的视觉盛宴。
+**2026-11-12 交接状态：现有网站与制作资料交给 Claude Code 继续。新电影《今晚，改道》还没有生成片段，目标 5:22 尚未实现；GitHub 交接不代表重新发布网站。** 先读 [CLAUDE.md](CLAUDE.md) 与 [完整交接](docs/CLAUDE_HANDOFF.md)。远端确认后，使用交接分支克隆：
 
-![Project Preview](public/preview.png)
-*(注：建议在此处上传一张你的项目运行截图)*
+```bash
+git clone --branch handoff/claude-2026-11-12 https://github.com/yil384/christmas-tree.git
+cd christmas-tree
+```
 
-## ✨ 核心特性
+## 现有网站
 
-* **极致视觉体验**：由 45,000+ 个发光粒子组成的树身，配合动态光晕 (Bloom) 和辉光效果，营造梦幻氛围。
-* **记忆画廊**：照片以“拍立得”风格悬浮在树上，每一张都是一个独立的发光体，支持双面渲染。
-* **AI 手势控制**：无需鼠标，通过摄像头捕捉手势即可控制树的形态（聚合/散开）和视角旋转。
-* **丰富细节**：包含动态闪烁的彩灯、飘落的金银雪花、以及随机分布的圣诞礼物和糖果装饰。
-* **高度可定制**：**支持用户轻松替换为自己的照片，并自由调整照片数量。**
+| 地址 / 内容 | 当前状态 |
+| --- | --- |
+| [tanchensiyi.com](https://tanchensiyi.com/) | 当前打开城堡奇旅；2026-12-25 00:00（北京时间）起自动选择圣诞树 |
+| [/letter/](https://tanchensiyi.com/letter/) | 固定告白入口：现有影片 203 秒，加 90 秒交互尾声，共约 4:53；包含明确告白 |
+| [/christmas/](https://tanchensiyi.com/christmas/) | 固定圣诞入口：95 张照片、3D 树、八方向背景、骨骼小猫、高清相册、可选手势 |
+| [原礼物域名](https://jimeixiaomiao.wildmole.chatgpt.site/) | 首页继续打开圣诞树 |
+| 《今晚，改道》 | 新的 5:22 剧情方案；22 段剧情、29 个明确切镜镜头、4 组优先 Extend；**生成 / 验收 / 集成均为 0** |
 
-## 🛠️ 技术栈
+交接基线为 Sites **v26** 对应源码 `2abfef734dab07d8279e04ac35b981bcb8bb2287`。现有主页影片是旧片去除纸鸟段落后的 `birdfree-r1`，不是新的马来西亚剧情电影。圣诞配置当前仍引用 `videos/starlight-return.mp4`；旧 README 所写“`cat.video` 为 `null`”已过时。
 
-* **框架**: React 18, Vite
-* **3D 引擎**: React Three Fiber (Three.js)
-* **工具库**: @react-three/drei, Maath
-* **后期处理**: @react-three/postprocessing
-* **AI 视觉**: MediaPipe Tasks Vision (Google)
+## 本地运行
 
-## 🚀 快速开始
+需要 Node.js **20.19 或更新版本**；现有 CI 使用 Node.js 24。
 
-### 1. 环境准备
-确保你的电脑已安装 [Node.js](https://nodejs.org/) (建议 v18 或更高版本)。
-
-### 2. 安装依赖
-在项目根目录下打开终端，运行：```bash npm install
-### 3. 启动项目
+```bash
+npm ci
 npm run dev
-### 🖼️ 自定义照片
-### 1. 准备照片
-找到项目目录下的 public/photos/ 文件夹。
+```
 
-顶端大图/封面图：命名为 top.jpg（将显示在树顶的立体五角星上）。
+开发和构建前会自动准备照片、场景和手势资源。`public/generated/` 不入库，由保留的源照片和背景重新生成；首次准备手势模型需要访问 Google 模型下载地址。普通网页构建不需要运行视频剪辑脚本。
 
-树身照片：命名为 1.jpg, 2.jpg, 3.jpg ... 依次类推。
+```bash
+npm run lint
+npm test
+npm run build
+npm run preview
+```
 
-建议：使用正方形或 4:3 比例的图片，文件大小不宜过大（建议单张 500kb 以内以保证流畅度）
-### 2. 替换照片
-直接将你自己的照片复制到 public/photos/ 文件夹中，覆盖原有的图片即可。请保持文件名格式不变（1.jpg, 2.jpg 等）。
-### 3. 修改照片数量 (增加或减少)
-如果你放入了更多照片（例如从默认的 31 张增加到 100 张），需要修改代码以通知程序加载它们。
-打开文件：src/App.tsx
-找到大约 第 19 行 的代码：// --- 动态生成照片列表 (top.jpg + 1.jpg 到 31.jpg) ---
-const TOTAL_NUMBERED_PHOTOS = 31; // <--- 修改这个数字！
-### 🖐️ 手势控制说明
-* **本项目内置了 AI 手势识别系统，请站在摄像头前进行操作（屏幕右下角有 DEBUG 按钮可查看摄像头画面）**：
-🖐 张开手掌 (Open Palm)	Disperse (散开)	圣诞树炸裂成漫天飞舞的粒子和照片
-✊ 握紧拳头 (Closed Fist)	Assemble (聚合)	所有元素瞬间聚合成一棵完美的圣诞树
-👋 手掌左右移动	旋转视角	手向左移，树向左转；手向右移，树向右转
-👋 手掌上下移动	俯仰视角	手向上移，视角抬高；手向下移，视角降低
-### ⚙️ 进阶配置
-* **如果你熟悉代码，可以在 src/App.tsx 中的 CONFIG 对象里调整更多视觉参数**：
-  const CONFIG = {
-  colors: { ... }, // 修改树、灯光、边框的颜色
-  counts: {
-    foliage: 15000,   // 修改树叶粒子数量 (配置低可能会卡)
-    ornaments: 300,   // 修改悬挂的照片/拍立得数量
-    lights: 400       // 修改彩灯数量
-  },
-  tree: { height: 22, radius: 9 }, // 修改树的大小
-  // ...
-};
-### 📄 License
-MIT License. Feel free to use and modify for your own holiday celebrations!
-### Merry Christmas! 🎄✨
+`build` 包含 TypeScript 检查、Vite 打包和静态入口整理，输出 `dist/`，同时生成 `/letter/` 与 `/christmas/` 的实际入口文件。请分别检查两条路线。
 
+本次恢复后在 Node.js **24.22.1** 完成实际复验：**生产构建通过，244 项测试通过，lint 0 错误 / 4 个既有 Hook 警告**。没有新增 iPhone 微信实机或 GitHub CI 验收记录；详见交接文档。
+
+## 维护入口
+
+| 位置 | 用途 |
+| --- | --- |
+| [CLAUDE.md](CLAUDE.md) / [交接详情](docs/CLAUDE_HANDOFF.md) | 代码地图、当前事实、已知风险、下一步与验证范围 |
+| [电影制作交接](production/tonight-we-change-course/README.md) | Google Vids 工程、实际尝试、参考图、恢复制作顺序 |
+| [《今晚，改道》导演包](docs/malaysia-film/README.md) | 剧本、逐镜 prompt、生成队列、Extend 方案、连续性约束 |
+| [季节路由](docs/SEASONAL_SITE.md) | 主域名与圣诞切换机制 |
+| [现有影片 QA](docs/LONG_RIDE_QA.md) / [去鸟剪辑报告](docs/LONG_RIDE_BIRD_REMOVAL_REPORT.json) | 现有影片的历史验证与当前时长；不能当作新片验收 |
+| [圣诞树维护历史](docs/CHRISTMAS_TREE_GUIDE.md) | 原 README 的交互、场景、照片与手势说明；顶部列明过时状态 |
+| [贡献约定](CONTRIBUTING.md) / [媒体源码交付](docs/SITES_MEDIA_DELIVERY.md) | 开发检查与 Sites 大文件传输经验 |
+
+95 张原始照片保留在 `public/photos/`，顺序见 `manifest.json`。不要替换真人身份参考、重绘原照片中的脸，或把生成参考图当作已生成的视频。保护圣诞入口、固定照片顺序和来源记录。
+
+运行所需的旧片 HLS 与优化图片齐全；18 条旧 `clip-*.mp4` 原始镜头及部分原始旅程 PNG 不在恢复资料中，源级重剪需先从原 Google Vids 工程导出。这不阻碍当前网页构建。
+
+优先适配 iPhone 在微信内的竖屏使用：安全区域、触摸操作、首次加载、开声、后台恢复和真实设备流畅度都需要实测。自动检查、桌面视口模拟、Canvas 降级或离屏检查不能代替手机 WebGL 与猫动作观感验收。
+
+## 发布边界
+
+当前线上使用 **Sites**，项目配置在 `.openai/hosting.json`。GitHub 推送、GitHub Pages 预览和 Sites 生产部署是不同操作；本次只交接，不修改域名或重新部署。发布前确认源码提交与构建产物对应，并完整验证媒体清单、片段与时间轴。
+
+`npm run deploy` 是保留的 GitHub Pages 命令；`gift-preview.yml` 只更新历史分支的 `preview-2026/`。不要把这些结果当作 `tanchensiyi.com` 更新成功。仓库不保存登录凭据、验证码、Cookie 或会话链接。

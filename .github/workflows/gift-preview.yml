@@ -1,0 +1,81 @@
+name: Stage Christmas preview
+
+on:
+  push:
+    branches:
+      - codex/christmas-gift-redesign
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: christmas-tree-gift-preview
+  cancel-in-progress: false
+
+jobs:
+  stage-preview:
+    if: github.ref == 'refs/heads/codex/christmas-gift-redesign'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    outputs:
+      source_sha: ${{ steps.stage.outputs.source_sha }}
+      preview_sha: ${{ steps.stage.outputs.preview_sha }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: true
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Install dependencies
+        run: npm ci
+      - name: Test
+        run: npm test
+      - name: Build
+        run: npm run build
+      - name: Stage only preview-2026 on gh-pages
+        id: stage
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f "$GITHUB_WORKSPACE/dist/index.html"
+          source_sha=$(git rev-parse HEAD)
+          git fetch --no-tags --depth=1 origin gh-pages
+          preview_temp=$(mktemp -d "$RUNNER_TEMP/christmas-tree-preview.XXXXXX")
+          preview_worktree="$preview_temp/site"
+          git worktree add --detach "$preview_worktree" FETCH_HEAD
+          trap 'git worktree remove --force "$preview_worktree"; rmdir "$preview_temp"' EXIT
+
+          # Replace only this preview directory, preserving the live root site.
+          rm -rf -- "$preview_worktree/preview-2026"
+          mkdir -- "$preview_worktree/preview-2026"
+          cp -a "$GITHUB_WORKSPACE/dist/." "$preview_worktree/preview-2026/"
+          rm -f -- "$preview_worktree/preview-2026/CNAME"
+          git -C "$preview_worktree" add --all -- preview-2026
+          git -C "$preview_worktree" diff --cached --quiet -- . ':(exclude)preview-2026'
+
+          if ! git -C "$preview_worktree" diff --cached --quiet -- preview-2026; then
+            git -C "$preview_worktree" \
+              -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -m "Stage Christmas gift preview from $source_sha"
+            # A concurrent change to gh-pages fails safely: never force-push.
+            git -C "$preview_worktree" push origin HEAD:gh-pages
+          fi
+
+          preview_sha=$(git -C "$preview_worktree" rev-parse HEAD)
+          printf 'Source commit: %s\nStaged gh-pages commit: %s\n' "$source_sha" "$preview_sha"
+          printf 'source_sha=%s\npreview_sha=%s\n' "$source_sha" "$preview_sha" >> "$GITHUB_OUTPUT"
+          {
+            printf '## Christmas preview staged\n\n'
+            printf 'Source commit: `%s`\n\n' "$source_sha"
+            printf 'gh-pages commit: `%s`\n\n' "$preview_sha"
+            printf 'Only `preview-2026/` was updated; existing root files and root `CNAME` are unchanged.\n\n'
+            printf 'A GITHUB_TOKEN push does not trigger a GitHub Pages build. A separate authorized publication trigger is required before the preview is live.\n'
+          } >> "$GITHUB_STEP_SUMMARY"

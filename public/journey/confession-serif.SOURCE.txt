@@ -1,0 +1,31 @@
+Siyi Confession Serif — limited Simplified Chinese confession font
+
+Source font: /usr/share/fonts/opentype/noto/NotoSerifCJK-Regular.ttc
+TTC face index: 2 (zero-based)
+Original family: Noto Serif CJK SC
+Original version: Version 2.003;hotconv 1.1.1;makeotfexe 2.6.0
+Embedded source copyright: © 2017-2024 Adobe (http://www.adobe.com/).
+Source TTC SHA-256: 5d9c31a059600193c9d7968a998bde886ccdc77e934006ad243b41794c496a7d
+Upstream: https://github.com/notofonts/noto-cjk/tree/main/Serif
+License: SIL Open Font License 1.1; see confession-serif.LICENSE.txt.
+
+Modification: SC face extraction; glyph subset; removal of unused layout
+features, vertical metrics and hinting; renamed Siyi Confession Serif; WOFF2 encoding.
+No glyph outlines were redesigned. Copyright and OFL metadata are retained.
+CSS @font-face alias: SiyiConfessionSerif, weight 400, style normal.
+
+Rebuild: /usr/bin/python3 scripts/build-confession-font.py
+Uses the existing system fontTools and Brotli; adds no project dependency.
+The script reads both src/journey/RideConfession.tsx and CastleRide.tsx,
+adds the approved confession/button seed, includes all source non-ASCII
+characters and printable ASCII, and verifies every required glyph against
+the final WOFF2 cmap. Default builds require both source components.
+It is a text-specific subset, not a general-purpose CJK web font.
+
+src/journey/RideConfession.tsx SHA-256: b58a90df8023e16a4edff902be0e9470c7802c5bfbf3d8a8854c1322943201fc
+src/journey/CastleRide.tsx SHA-256: d329172ba0cb66247a457ec82bf25831a2c8f345e320fd9ca08b07895ba82296
+Missing source pages (provisional builds only): []
+Total mapped characters: 221
+WOFF2 size: 29740 bytes
+WOFF2 SHA-256: 822f7c39898c26407a4205c982e8eaba034f331736041200aaaca9214b7d6764
+Included characters:  !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~↗。一下不之了五亚从以仪会位你停先光入关划刚制前十去句可后听呀和唤喜回在城堡声夜大奇好始尝巡并幻应度开影心思我或才打按控播收放新旅时星显景暂更未束来松欢正游烟片画白的直看着示秒程空结给继续置能花表西要览触记试请谭起趟轻载过这进逛那重钮长闭陈面音风马，？
