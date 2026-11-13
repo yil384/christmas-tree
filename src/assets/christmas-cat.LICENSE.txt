@@ -17,7 +17,24 @@ Adaptation for 集美小喵的魔法圣诞:
 - Added one subdivision pass and smooth normals to soften the low-poly outline.
 - Shortened the body, softened the cheeks/paws and used a silver/cream coat.
 - Added small amber eyes attached to the existing head bone, plus a blink morph.
-- Bundled as a 345,976-byte GLB; no runtime third-party asset requests.
+
+2026-11-13 refinement:
+- Kept the artist's exact 24-bone skin bind data and Idle / Walking samples.
+- Shortened overall length by 10% and height by 8%, with width retained.
+- Rounded and widened the head/cheeks, softened the muzzle, filled the chest,
+  and broadened the lower legs/paws without changing relative limb lengths.
+- Rebuilt the small eyes with sage irises, soft dark pupils and restrained
+  catchlights; the existing Blink morph contract is retained.
+- Reshaped the original connected tail into a fuller, tapered curve. Its root
+  retains the original topology so no added junction can separate while walking.
+- Added a small red kerchief, and quieter matte silver/white vertex colors.
+- Bundled as a 329,568-byte GLB: one skinned mesh, one material, no textures
+  or runtime third-party asset requests. This is a stylized smooth coat,
+  not photoreal fur.
+- Reproducible shape refinement: scripts/refine-christmas-cat.py. Its input
+  SHA-256 guard selects the pre-refinement asset from repository history.
+- Visual QA used offline Blender renders (front, side, three-quarter, walking).
+  Those renders do not certify mobile-browser appearance or performance.
 
 The original model and its authored animation remain CC0. This is a Quaternius
 asset adaptation; it is not an official Disney asset or a Disney character.

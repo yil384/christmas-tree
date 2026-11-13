@@ -8,7 +8,7 @@ import GreetingGate from './components/GreetingGate';
 import StorybookFrame from './components/StorybookFrame';
 import { Icon } from './components/Icon';
 import { createHandSceneInput, type HandCommand } from './lib/hand-types';
-import { claimOpeningFilm, formatFilmDuration } from './lib/film-presentation';
+import { formatFilmDuration } from './lib/film-presentation';
 import './App.css';
 
 const TreeScene = lazy(() => import('./scene/TreeScene'));
@@ -49,9 +49,7 @@ export default function App() {
   const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const [visible, setVisible] = useState(() => !document.hidden);
   const [panel, setPanel] = useState<'photos' | 'share' | 'film' | null>(null);
-  const [openingFilm, setOpeningFilm] = useState(false);
   const [filmDuration, setFilmDuration] = useState<number | null>(null);
-  const hasInteracted = useRef(false);
   const [selectedPhoto, setSelectedPhoto] = useState(0);
   const [notice, setNotice] = useState('');
   const [handOpen, setHandOpen] = useState(false);
@@ -69,10 +67,9 @@ export default function App() {
     setHandOpen(false);
   }, []);
   const openHandMode = useCallback(() => { setPanel(null); setHandOpen(true); }, []);
-  const closePanel = useCallback(() => { setPanel(null); setOpeningFilm(false); }, []);
-  const onCatPress = useCallback(() => {
-    if (scene.cat.video) { closeHandMode(); setOpeningFilm(false); setPanel('film'); }
-    else setNotice('小喵收到了你的圣诞魔法。');
+  const closePanel = useCallback(() => { setPanel(null); }, []);
+  const openFilm = useCallback(() => {
+    if (scene.cat.video) { closeHandMode(); setPanel('film'); }
   }, [closeHandMode, scene.cat.video]);
   const onTap = useCallback(() => setPaused(value => !value), []);
   const onPhotoTap = useCallback((photo: number) => { setSelectedPhoto(photo); setPanel('photos'); }, []);
@@ -128,16 +125,6 @@ export default function App() {
   }, [closeHandMode, handOpen, openHandMode, panel]);
 
   useEffect(() => {
-    const markInteraction = () => { hasInteracted.current = true; };
-    // A slow settings response must not interrupt a visitor who has already
-    // started exploring by mouse, touch, scrolling, or keyboard.
-    for (const name of ['pointerdown', 'keydown', 'wheel']) document.addEventListener(name, markInteraction, { capture: true, passive: true, once: true });
-    return () => {
-      for (const name of ['pointerdown', 'keydown', 'wheel']) document.removeEventListener(name, markInteraction, true);
-    };
-  }, []);
-
-  useEffect(() => {
     const controller = new AbortController();
     let atlasPreload: HTMLLinkElement | null = null;
     fetch(assetUrl('generated/photo-manifest.json'), { signal: controller.signal, cache: 'no-cache' })
@@ -164,12 +151,9 @@ export default function App() {
       .then(response => { if (!response.ok) throw new Error('Scene settings unavailable'); return response.json(); })
       .then(data => {
         if (controller.signal.aborted) return;
-        const nextScene = readSceneConfig(data);
-        setScene(nextScene);
-        if (claimOpeningFilm(nextScene.cat.video, hasInteracted.current)) {
-          setOpeningFilm(true);
-          setPanel('film');
-        }
+        // Enter the restored tree directly. The story remains available from
+        // its visible play button, so neither arrival nor petting hides the cat.
+        setScene(readSceneConfig(data));
       })
       .catch(() => { /* The default greeting, dark sky and snow remain usable. */ });
     return () => { controller.abort(); atlasPreload?.remove(); };
@@ -206,13 +190,13 @@ export default function App() {
               motion selects demand rendering, rather than running hidden animation. */}
           <TreeScene photos={photos} state={state} paused={paused || panel !== null || (handOpen && !handRunning)} reducedMotion={reducedMotion || panel === 'film'}
             active={visible && (panel === null || panel === 'film') && (!handOpen || handRunning)} onPhotoPress={interaction.onPhotoPress}
-            background={scene.background} snow={scene.snow} cat={scene.cat} onCatPress={onCatPress} onCatInteract={interaction.cancel} handInput={handInput} handActive={handActive} onHandPhotoSelect={onHandPhotoSelect} />
+            background={scene.background} snow={scene.snow} cat={scene.cat} onCatInteract={interaction.cancel} handInput={handInput} handActive={handActive} onHandPhotoSelect={onHandPhotoSelect} />
         </Suspense>
       </SceneBoundary>
     </div>
     <StorybookFrame />
     <GreetingGate greeting={scene.greeting} onOpen={openHandMode} />
-    {scene.cat.video && <button type="button" className="film-entry" onClick={onCatPress}
+    {scene.cat.video && <button type="button" className="film-entry" onClick={openFilm}
       aria-label={`观看圣诞故事${filmDuration ? `，${formatFilmDuration(filmDuration)}` : ''}`} aria-haspopup="dialog" aria-expanded={panel === 'film'}>
       <span className="film-entry-thumbnail" aria-hidden="true">
         <img src={assetUrl('film/starlight-return-poster.webp')} alt="" width="96" height="54" decoding="async" />
@@ -226,10 +210,10 @@ export default function App() {
     </button>}
     {photoStatus === 'error' && <span className="visually-hidden" role="status">照片暂时加载失败，刷新页面可重试。</span>}
     {notice && <div className="toast" role="status">{notice}</div>}
-    {panel && <Dialog title={panel === 'photos' ? '相册' : panel === 'film' ? '星光归来' : '分享圣诞树'} onClose={closePanel} className={panel === 'photos' ? 'photo-dialog' : panel === 'film' ? `film-dialog${openingFilm ? ' opening-film-dialog' : ''}` : 'share-dialog'}>
+    {panel && <Dialog title={panel === 'photos' ? '相册' : panel === 'film' ? '星光归来' : '分享圣诞树'} onClose={closePanel} className={panel === 'photos' ? 'photo-dialog' : panel === 'film' ? 'film-dialog' : 'share-dialog'}>
       <Suspense fallback={<div className="panel-state" role="status">加载中…</div>}>
         {panel === 'photos' ? <PhotoGallery photos={photos} initialIndex={selectedPhoto} handNavigation={galleryNavigation} handMode={handRunning} onCloseHandMode={closeHandMode} />
-          : panel === 'film' && scene.cat.video ? <ChristmasFilm key={scene.cat.video} src={scene.cat.video} poster="film/starlight-return-poster.webp" opening={openingFilm} onEnter={closePanel} onDuration={setFilmDuration} />
+          : panel === 'film' && scene.cat.video ? <ChristmasFilm key={scene.cat.video} src={scene.cat.video} poster="film/starlight-return-poster.webp" onEnter={closePanel} onDuration={setFilmDuration} />
             : <ShareGift notify={setNotice} greeting={scene.greeting} catSrc={scene.cat.src} />}
       </Suspense>
     </Dialog>}

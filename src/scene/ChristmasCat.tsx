@@ -7,7 +7,7 @@ import type { HandSceneInput } from '../lib/hand-types';
 import { GROUND_Y } from './tree-profile';
 import { snowHeightAt } from './tree-base';
 import { CAT_X, CAT_Z, type CatGroundContact } from './cat-placement';
-import { advanceCatClock } from './cat-behavior';
+import { advanceCatTravel } from './cat-behavior';
 import type { AuthoredCat } from './cat-rig';
 
 const CAT_GROUND = GROUND_Y + snowHeightAt(CAT_X, CAT_Z);
@@ -46,8 +46,9 @@ export default function ChristmasCat({ reducedMotion, paused = false, active = t
     kitten: AuthoredCat; stars: ReturnType<typeof createCatStars>;
     sync: typeof import('./cat-rig').syncAuthoredCat;
   } | null>(null);
-  const elapsed = useRef(0), age = useRef(4), lastMagic = useRef(0), attention = useRef(0);
-  const scratch = useRef({ matrix: new THREE.Matrix4(), position: new THREE.Vector3(), scale: new THREE.Vector3() });
+  const travel = useRef({ elapsed: 0, pace: 1 });
+  const age = useRef(4), lastMagic = useRef(0), attention = useRef(0);
+  const scratch = useRef({ matrix: new THREE.Matrix4(), position: new THREE.Vector3(), scale: new THREE.Vector3(), viewer: new THREE.Vector3() });
 
   useEffect(() => {
     const parent = root.current;
@@ -81,14 +82,18 @@ export default function ChristmasCat({ reducedMotion, paused = false, active = t
     if (!bundle || paused || !active) return;
     const { kitten, stars, sync } = bundle;
     if (reducedMotion) {
-      elapsed.current = 0; sync(kitten, 0, 0, true, companionContact?.current);
+      travel.current = { elapsed: 0, pace: 1 }; sync(kitten, 0, 0, true, companionContact?.current);
       stars.visible = false; return;
     }
     const step = Number.isFinite(delta) ? THREE.MathUtils.clamp(delta, 0, 0.05) : 0;
     attention.current = Math.max(0, attention.current - step);
     const resting = attention.current > 0;
-    elapsed.current = advanceCatClock(elapsed.current, step, !resting);
-    sync(kitten, elapsed.current, step, false, companionContact?.current, resting);
+    travel.current = advanceCatTravel(travel.current.elapsed, travel.current.pace, step, resting);
+    // Transform the viewer into the kitten's own frame, so an orbiting camera
+    // receives the same small glance without turning a planted body in place.
+    kitten.group.worldToLocal(scratch.current.viewer.copy(camera.position));
+    const look = resting ? Math.atan2(scratch.current.viewer.x, scratch.current.viewer.z) : undefined;
+    sync(kitten, travel.current.elapsed, step, false, companionContact?.current, resting, look);
     age.current = Math.min(4, age.current + step);
     const input = handInput?.current;
     if (input && input.magic !== lastMagic.current) {

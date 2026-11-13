@@ -64,13 +64,14 @@ export async function finalizeBuild({ root = projectRoot } = {}) {
   const entry = await readFile(join(dist, 'index.html'), 'utf8');
   for (const route of ['letter', 'christmas']) {
     await mkdir(join(dist, route), { recursive: true });
-    const html = route === 'christmas' ? entry
-      .replaceAll('月光秘境 · 思仪', '集美小喵的圣诞魔法')
-      .replaceAll('给谭陈思仪的城堡巡游，和一句我喜欢你。', '送给集美小喵的圣诞魔法：城堡、星光与照片圣诞树。')
-      .replace('https://tanchensiyi.com/journey/cover.webp', 'https://tanchensiyi.com/film/starlight-return-poster.webp')
-      .replace('property="og:url" content="https://tanchensiyi.com/"', 'property="og:url" content="https://tanchensiyi.com/christmas/"')
-      .replace(/<noscript>[\s\S]*?<\/noscript>/, '<noscript><main style="padding:20vh 8vw;text-align:center"><h1>集美小喵的圣诞魔法</h1><p>请启用 JavaScript 来打开照片圣诞树。</p></main></noscript>')
-      : entry.replace('property="og:url" content="https://tanchensiyi.com/"', 'property="og:url" content="https://tanchensiyi.com/letter/"');
+    const html = (route === 'letter' ? entry
+      .replaceAll('送给集美小喵的圣诞魔法：童话城堡、雪中的小猫与一棵照片圣诞树。', '给谭陈思仪的城堡巡游，和一句我喜欢你。')
+      .replaceAll('集美小喵的圣诞魔法', '月光秘境 · 思仪')
+      .replace('https://tanchensiyi.com/film/starlight-return-poster.webp', 'https://tanchensiyi.com/journey/cover.webp')
+      .replace('name="theme-color" content="#15203b"', 'name="theme-color" content="#080e25"')
+      .replace('请启用 JavaScript 来打开照片圣诞树。', '请启用 JavaScript，进入城堡。')
+      : entry)
+      .replace('property="og:url" content="https://tanchensiyi.com/"', `property="og:url" content="https://tanchensiyi.com/${route}/"`);
     await writeFile(join(dist, route, 'index.html'), html);
   }
   return { removedPhotos, removedStarterIcon };

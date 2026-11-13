@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>小喵</title>
+  <rect width="64" height="64" rx="17" fill="#1c293d"/>
+  <path d="M13 31 12 14Q12 10 16 13L25 20Q32 18 39 20L48 13Q52 10 52 15L51 32Q55 38 52 44Q47 54 32 54Q17 54 12 44Q9 38 13 31Z" fill="#f4eee4"/>
+  <path d="M15 17 16 29 23 23Z" fill="#c8cbc9"/>
+  <path d="m49 17-1 12-7-6Z" fill="#c8cbc9"/>
+  <path d="M21 35q3-3 6 0m10 0q3-3 6 0" fill="none" stroke="#283446" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M29.5 40q2.5-1.5 5 0L32 43Z" fill="#ba7775"/>
+  <path d="M32 43q-2 3-4 1m4-1q2 3 4 1" fill="none" stroke="#283446" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="m15 39 6 1m-5 4 5-1m28-4-6 1m5 4-5-1" fill="none" stroke="#8c979b" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M20 52q12 5 24 0" fill="none" stroke="#a84f52" stroke-width="4" stroke-linecap="round"/>
+</svg>

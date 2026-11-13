@@ -2,6 +2,8 @@
 
 ## 先确认任务与状态
 
+**2026-11-13 用户新要求优先于以下历史交接：立即恢复圣诞首页、替换 favicon、改善小猫。首页现在固定为 Christmas；不再等待 12 月 25 日。`/letter/` 与 `/christmas/` 保留。本次任务包含正式发布，详情及实际验证范围见 [恢复记录](docs/RESTORATION_2026_11_13.md)。**
+
 用户要求把全部已有进展交到 GitHub，随后由 Claude Code 继续。视频制作暂停；本次交接没有要求重新部署、改 DNS 或合并到旧 GitHub 主分支。先读 [完整交接](docs/CLAUDE_HANDOFF.md) 和 [新电影制作交接](production/tonight-we-change-course/README.md)。
 
 - 基线：Sites v26，源码 `2abfef734dab07d8279e04ac35b981bcb8bb2287`，线上 `https://tanchensiyi.com/`。
@@ -16,7 +18,7 @@
 | 入口 / 文件 | 职责 |
 | --- | --- |
 | `src/main.tsx` → `src/SeasonalEntry.tsx` | 路由判定后懒加载告白或圣诞体验 |
-| `src/lib/experience-route.ts` | `/letter/`、`/christmas/`、旧域名和北京时间圣诞切换 |
+| `src/lib/experience-route.ts` | 首页为圣诞树；固定 `/letter/`、`/christmas/` |
 | `src/journey/CastleRide.tsx` / `.css` | 当前告白首页、视频舞台、交互与手机布局 |
 | `src/journey/useRidePlayback.ts` | 当前 HLS 地址、原生 HLS / hls.js、播放与恢复逻辑 |
 | `src/journey/rideTimeline.json`、`rideHotspots.ts`、`mapRideHotspots.ts` | 片段时间轴与热点映射 |
@@ -50,7 +52,7 @@ npm run preview
 
 ## 必须保留的设计和素材约束
 
-- 主域名在北京时间 **2026-12-25 00:00** 切圣诞；固定 `/letter/`、`/christmas/` 必须继续可用。既有季节自动任务已有记录，不重复建立。
+- 主域名从 **2026-11-13** 的恢复版本起直接打开圣诞树；固定 `/letter/`、`/christmas/` 必须继续可用。既有季节自动任务只需验证现状，不应恢复已撤销的日期门槛，不重复建立。
 - 保留 `public/photos/` 的 95 张原文件、清单顺序和 [来源](docs/PHOTO_SOURCES.md)。封面是 `Image_2026-11-07_040144_237.jpg`。生成优化图可以重建，原图不覆盖。
 - 真人身份参考为 `docs/film/HUMAN_ORIGINAL.jpg`。脸要接近本人，不能换成通用公主脸；不把生成参考脸当真人真值。
 - 她怕尖嘴动物：新片排除鸟、鸡、纸鸟、鸟形装饰、飞行动物及鸟叫，逐片实看实听。现有去鸟剪辑只证明删掉已知段落，没有全片逐帧无鸟保证。

@@ -78,3 +78,28 @@ test('a symlinked dist directory is rejected without touching its target', async
   await assert.rejects(finalizeBuild({ root }), /Expected a real dist directory/);
   assert.equal(await readFile(join(root, 'unrelated', 'photos', 'keep.jpg'), 'utf8'), 'keep');
 });
+
+test('home and fixed routes retain their own share metadata after homepage restoration', async t => {
+  const root = await temporaryProject(t);
+  await mkdir(join(root, 'dist'), { recursive: true });
+  const source = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  await writeFile(join(root, 'dist/index.html'), source);
+  await finalizeBuild({ root });
+  const home = await readFile(join(root, 'dist/index.html'), 'utf8');
+  const christmas = await readFile(join(root, 'dist/christmas/index.html'), 'utf8');
+  const letter = await readFile(join(root, 'dist/letter/index.html'), 'utf8');
+  for (const html of [home, christmas]) {
+    assert.match(html, /<title>集美小喵的圣诞魔法<\/title>/);
+    assert.match(html, /property="og:image" content="https:\/\/tanchensiyi\.com\/film\/starlight-return-poster\.webp"/);
+    assert.doesNotMatch(html, /给谭陈思仪的城堡巡游/);
+  }
+  assert.match(home, /property="og:url" content="https:\/\/tanchensiyi\.com\/"/);
+  assert.match(christmas, /property="og:url" content="https:\/\/tanchensiyi\.com\/christmas\/"/);
+  assert.match(letter, /<title>月光秘境 · 思仪<\/title>/);
+  assert.match(letter, /name="description" content="给谭陈思仪的城堡巡游，和一句我喜欢你。"/);
+  assert.match(letter, /property="og:description" content="给谭陈思仪的城堡巡游，和一句我喜欢你。"/);
+  assert.doesNotMatch(letter, /照片圣诞树/);
+  assert.match(letter, /property="og:image" content="https:\/\/tanchensiyi\.com\/journey\/cover\.webp"/);
+  assert.match(letter, /property="og:url" content="https:\/\/tanchensiyi\.com\/letter\/"/);
+  assert.match(letter, /请启用 JavaScript，进入城堡。/);
+});
