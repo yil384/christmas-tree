@@ -2,6 +2,8 @@
 
 ## 先确认任务与状态
 
+**2026-11-14 当前任务（优先于下方历史状态）：** 用户选择 A：Kanna-Nakajima 的 Chonky Cat Trio（黑猫、奶油猫、三花猫）。Sketchfab 新账号需要 Epic 认证，实际模型尚未下载；A 的替换与嬉戏动画仍待完成，不得把旧 Quaternius 猫当作 A。当前界面改动将圣诞首页右上角视频入口简化为播放图标，并缩短播放器文案。**本次发布已获用户授权。**
+
 **2026-11-13 用户新要求优先于以下历史交接：立即恢复圣诞首页、替换 favicon、改善小猫。首页现在固定为 Christmas；不再等待 12 月 25 日。`/letter/` 与 `/christmas/` 保留。本次任务包含正式发布，详情及实际验证范围见 [恢复记录](docs/RESTORATION_2026_11_13.md)。**
 
 用户要求把全部已有进展交到 GitHub，随后由 Claude Code 继续。视频制作暂停；本次交接没有要求重新部署、改 DNS 或合并到旧 GitHub 主分支。先读 [完整交接](docs/CLAUDE_HANDOFF.md) 和 [新电影制作交接](production/tonight-we-change-course/README.md)。

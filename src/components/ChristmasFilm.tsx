@@ -90,10 +90,10 @@ export default function ChristmasFilm({ src, poster, opening = false, onEnter, o
   };
 
   return <div className="christmas-film">
-    <header className="film-heading"><span>一段送给小喵的圣诞奇遇</span><h2>星光归来</h2></header>
+    <header className="film-heading"><h2>视频</h2></header>
     <div className={`film-screen${failed ? ' has-error' : ''}`} style={{ aspectRatio }}>
       <video ref={videoRef} key={`${src}:${attempt}`} poster={poster ? assetUrl(poster) : undefined}
-        aria-label={`星光归来${duration ? `，${formatFilmDuration(duration)}` : ''}`} aria-hidden={!started} tabIndex={hasMedia ? 0 : -1} controls={hasMedia} playsInline muted={muted} preload="metadata"
+        aria-label={`视频${duration ? `，${formatFilmDuration(duration)}` : ''}`} aria-hidden={!started} tabIndex={hasMedia ? 0 : -1} controls={hasMedia} playsInline muted={muted} preload="metadata"
         onLoadedMetadata={event => {
           const video = event.currentTarget;
           if (Number.isFinite(video.duration) && video.duration > 0) {
@@ -110,24 +110,22 @@ export default function ChristmasFilm({ src, poster, opening = false, onEnter, o
           if (event.currentTarget.getAttribute('src')) { setFailed(true); setLoading(false); }
         }} />
       {!started && <div className="film-invitation">
-        <Icon name="sparkle" /><p>故事，从一场雪开始</p>
-        <button type="button" className="primary-button" onClick={() => { setLoading(true); setStarted(true); }}><Icon name="play" />播放故事</button>
-        <span>也可以先去看看圣诞树，随时回来观看。</span>
+        <button type="button" className="primary-button" onClick={() => { setLoading(true); setStarted(true); }}><Icon name="play" />播放</button>
       </div>}
-      {started && !failed && loading && <div className="film-loading" role="status"><span className="film-loading-star" aria-hidden="true">✧</span>正在打开圣诞奇遇…</div>}
-      {!failed && needsPlay && <button type="button" className="film-start" onClick={play}><Icon name="play" /><span>播放故事</span></button>}
+      {started && !failed && loading && <div className="film-loading" role="status">加载中…</div>}
+      {!failed && needsPlay && <button type="button" className="film-start" onClick={play}><Icon name="play" /><span>播放</span></button>}
       {failed && <div className="film-error" role="alert">
-        <Icon name="sparkle" /><p>短片暂时没加载出来</p><span>重新试一次，或单独打开观看。</span>
-        <button type="button" className="primary-button" onClick={retry}>重新加载</button>
-        <a href={videoUrl} target="_blank" rel="noopener noreferrer">单独打开视频</a>
+        <p>视频加载失败</p>
+        <button type="button" className="primary-button" onClick={retry}>重试</button>
+        <a href={videoUrl} target="_blank" rel="noopener noreferrer">打开视频</a>
       </div>}
     </div>
     <footer className="film-footer">
-      <span>{duration ? `${formatFilmDuration(duration)} · ` : ''}城堡与烟花</span>
+      {duration && <span>{formatFilmDuration(duration)}</span>}
       <div className="film-actions">
         {hasMedia && <button type="button" className="small-button film-sound" onClick={toggleSound}><Icon name={muted ? 'muted' : 'sound'} />{muted ? '开启声音' : '关闭声音'}</button>}
-        {hasMedia && <a href={videoUrl} download="集美小喵-星光归来.mp4">保存视频</a>}
-        {onEnter && <button type="button" className="small-button film-enter" onClick={onEnter}>{opening ? '直接进入圣诞树' : '回到圣诞树'}<Icon name="arrow" /></button>}
+        {hasMedia && <a href={videoUrl} download="视频.mp4">保存视频</a>}
+        {onEnter && <button type="button" className="small-button film-enter" onClick={onEnter}>{opening ? '进入圣诞树' : '回到圣诞树'}<Icon name="arrow" /></button>}
       </div>
     </footer>
   </div>;

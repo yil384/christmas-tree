@@ -8,7 +8,6 @@ import GreetingGate from './components/GreetingGate';
 import StorybookFrame from './components/StorybookFrame';
 import { Icon } from './components/Icon';
 import { createHandSceneInput, type HandCommand } from './lib/hand-types';
-import { formatFilmDuration } from './lib/film-presentation';
 import './App.css';
 
 const TreeScene = lazy(() => import('./scene/TreeScene'));
@@ -49,7 +48,6 @@ export default function App() {
   const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const [visible, setVisible] = useState(() => !document.hidden);
   const [panel, setPanel] = useState<'photos' | 'share' | 'film' | null>(null);
-  const [filmDuration, setFilmDuration] = useState<number | null>(null);
   const [selectedPhoto, setSelectedPhoto] = useState(0);
   const [notice, setNotice] = useState('');
   const [handOpen, setHandOpen] = useState(false);
@@ -197,23 +195,15 @@ export default function App() {
     <StorybookFrame />
     <GreetingGate greeting={scene.greeting} onOpen={openHandMode} />
     {scene.cat.video && <button type="button" className="film-entry" onClick={openFilm}
-      aria-label={`观看圣诞故事${filmDuration ? `，${formatFilmDuration(filmDuration)}` : ''}`} aria-haspopup="dialog" aria-expanded={panel === 'film'}>
-      <span className="film-entry-thumbnail" aria-hidden="true">
-        <img src={assetUrl('film/starlight-return-poster.webp')} alt="" width="96" height="54" decoding="async" />
-        <span className="film-entry-play"><Icon name="play" /></span>
-      </span>
-      <span className="film-entry-copy">
-        <strong>星光归来</strong>
-        <span>城堡 · 烟花 · 小喵</span>
-        <span className="film-entry-duration">{formatFilmDuration(filmDuration) || '公主与小喵的奇遇'} <Icon name="arrow" /></span>
-      </span>
+      title="播放视频" aria-label="播放视频" aria-haspopup="dialog" aria-expanded={panel === 'film'}>
+      <Icon name="play" />
     </button>}
     {photoStatus === 'error' && <span className="visually-hidden" role="status">照片暂时加载失败，刷新页面可重试。</span>}
     {notice && <div className="toast" role="status">{notice}</div>}
-    {panel && <Dialog title={panel === 'photos' ? '相册' : panel === 'film' ? '星光归来' : '分享圣诞树'} onClose={closePanel} className={panel === 'photos' ? 'photo-dialog' : panel === 'film' ? 'film-dialog' : 'share-dialog'}>
+    {panel && <Dialog title={panel === 'photos' ? '相册' : panel === 'film' ? '视频' : '分享圣诞树'} onClose={closePanel} className={panel === 'photos' ? 'photo-dialog' : panel === 'film' ? 'film-dialog' : 'share-dialog'}>
       <Suspense fallback={<div className="panel-state" role="status">加载中…</div>}>
         {panel === 'photos' ? <PhotoGallery photos={photos} initialIndex={selectedPhoto} handNavigation={galleryNavigation} handMode={handRunning} onCloseHandMode={closeHandMode} />
-          : panel === 'film' && scene.cat.video ? <ChristmasFilm key={scene.cat.video} src={scene.cat.video} poster="film/starlight-return-poster.webp" onEnter={closePanel} onDuration={setFilmDuration} />
+          : panel === 'film' && scene.cat.video ? <ChristmasFilm key={scene.cat.video} src={scene.cat.video} poster="film/starlight-return-poster.webp" onEnter={closePanel} />
             : <ShareGift notify={setNotice} greeting={scene.greeting} catSrc={scene.cat.src} />}
       </Suspense>
     </Dialog>}

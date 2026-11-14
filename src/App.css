@@ -1,41 +1,26 @@
 .tree-app { position: relative; width: 100%; height: 100%; height: 100svh; overflow: hidden; background: var(--storybook-deep); }
 .tree-stage { position: absolute; inset: 0; touch-action: none; }
 .tree-stage canvas { display: block; outline: none; }
-.film-entry { position: absolute; z-index: 5; top: max(29px, env(safe-area-inset-top)); right: max(29px, env(safe-area-inset-right)); display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: center; gap: 14px; width: 300px; padding: 11px; border: 1px solid #ebca8e94; border-radius: 9px; background: linear-gradient(125deg, #132b40ef, #09192ee8); color: var(--storybook-cream); box-shadow: 0 7px 28px #0611254d, inset 0 0 0 3px #e6c5870a; backdrop-filter: blur(10px); text-align: left; touch-action: manipulation; transition: border-color .2s ease, background .2s ease, transform .2s ease; }
-.film-entry:hover { border-color: #ffe0a9; background: linear-gradient(125deg, #203b4df5, #15243af2); transform: translateY(-2px); }
-.film-entry:active { transform: translateY(0); }
-.film-entry-thumbnail { position: relative; display: block; width: 96px; height: 62px; overflow: hidden; border: 1px solid #e6c58755; border-radius: 4px; background: radial-gradient(ellipse at 50% 24%, #b8946780, transparent 65%), linear-gradient(150deg, #28314c, #09192c); }
-.film-entry-thumbnail img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.film-entry-play { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(transparent, #03102535); }
-.film-entry-play svg { width: 31px; height: 31px; padding: 6px; border: 1px solid #fff0d5bc; border-radius: 50%; background: #092237b5; fill: #fff0d5; stroke-width: 1; box-shadow: 0 1px 8px #06102160; }
-.film-entry-copy { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
-.film-entry-copy strong { font-family: var(--storybook-serif); font-size: 17px; font-weight: 500; letter-spacing: .055em; line-height: 1.35; }
-.film-entry-copy > span { color: #c9d2df; font-size: 11px; line-height: 1.5; letter-spacing: .05em; }
-.film-entry-copy .film-entry-duration { display: flex; align-items: center; gap: 6px; color: #efd29b; font-size: 10px; letter-spacing: .045em; }
-.film-entry-duration svg { width: 15px; height: 15px; }
+.film-entry { position: absolute; z-index: 5; top: max(29px, env(safe-area-inset-top)); right: max(29px, env(safe-area-inset-right)); display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid #fff0d58c; border-radius: 50%; background: #0b1c30b3; color: #fff3de; box-shadow: 0 2px 12px #0611252e; backdrop-filter: blur(10px); touch-action: manipulation; transition: border-color .2s ease, background .2s ease; }
+.film-entry:hover { border-color: #fff3de; background: #203348e8; }
+.film-entry:active { background: #2a4055ed; }
+.film-entry:focus-visible { outline: 2px solid #fff3de; outline-offset: 4px; }
+.film-entry svg { width: 21px; height: 21px; stroke-width: 1.5; }
 .gift-dialog.film-dialog { width: min(980px, calc(100% - 40px)); max-width: 980px; }
 .gift-dialog.opening-film-dialog { background: radial-gradient(ellipse at 15% 0, #25354b, #102137 70%); }
 .opening-film-dialog::backdrop { background: #030b17ed; }
 .film-heading { margin: 0 35px 18px 0; }
-.film-heading > span { display: block; margin-bottom: 6px; color: #d9c69e; font-size: 10px; letter-spacing: .1em; }
 .christmas-film h2 { font-family: var(--storybook-serif); font-size: 22px; font-weight: 400; letter-spacing: .06em; margin: 0; line-height: 1.4; }
 .film-screen { position: relative; width: 100%; aspect-ratio: 16 / 9; max-height: 62svh; margin-inline: auto; overflow: hidden; border: 1px solid #e6c5874d; border-radius: 5px; background: #071321; }
 .christmas-film video { display: block; width: 100%; height: 100%; object-fit: contain; background: #071321; }
 .film-screen:has(.film-invitation) { min-height: 250px; }
-.film-invitation { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 12px; padding: 24px; text-align: center; background: linear-gradient(180deg, #07132108 15%, #07132140 42%, #071321f0 100%); }
-.film-invitation > svg { width: 38px; height: 38px; color: #ebca8e; }
-.film-invitation p { margin: 0; font-family: var(--storybook-serif); font-size: clamp(19px, 3.2vw, 30px); letter-spacing: .08em; }
-.film-invitation > span { font-size: 11px; line-height: 1.8; color: #c9d2df; }
-.film-loading { position: absolute; inset: 0 0 42px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: #06132363; color: #fff0d5; font-size: 12px; text-shadow: 0 1px 7px #071321; pointer-events: none; }
-.film-loading-star { font-size: 36px; color: #ffe1a7; animation: film-shimmer 1.6s ease-in-out infinite; }
-@keyframes film-shimmer { 50% { opacity: .5; transform: scale(.88); } }
+.film-invitation { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 24px; background: #07132140; }
+.film-loading { position: absolute; inset: 0 0 42px; display: flex; align-items: center; justify-content: center; background: #06132363; color: #fff0d5; font-size: 12px; text-shadow: 0 1px 7px #071321; pointer-events: none; }
 .film-start { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 11px 17px; border: 1px solid #f0d297ba; border-radius: 24px; background: #10263eeb; color: #fff0d5; font-size: 13px; white-space: nowrap; box-shadow: 0 5px 22px #07132175; }
 .film-start svg { width: 17px; height: 17px; fill: currentColor; }
 .film-screen.has-error video { opacity: .15; }
 .film-error { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; padding: 20px; text-align: center; background: #071321bf; }
-.film-error > svg { width: 34px; height: 34px; color: #e6c587; }
 .film-error p { margin: 2px 0 0; font-family: var(--storybook-serif); font-size: 16px; line-height: 1.5; }
-.film-error > span { color: var(--storybook-muted); font-size: 12px; line-height: 1.8; }
 .film-error .primary-button { margin-top: 4px; }
 .film-error > a { color: #efd29b; font-size: 12px; text-underline-offset: 4px; }
 .film-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 16px; font-size: 11px; line-height: 1.6; color: var(--storybook-muted); }
@@ -106,10 +91,9 @@
 .share-copy-status { min-height: 17px; margin: 6px 0; font-size: 11px; color: #c5ced5; }
 .download-qr { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--storybook-gold); text-underline-offset: 4px; }.download-qr svg { width: 14px; }
 @media (max-width: 600px) {
-  .film-entry { top: max(19px, env(safe-area-inset-top)); right: max(19px, env(safe-area-inset-right)); width: min(240px, calc(100% - 38px)); grid-template-columns: 70px minmax(0, 1fr); gap: 11px; padding: 9px; }
-  .film-entry-thumbnail { width: 70px; height: 54px; }.film-entry-copy { gap: 3px; }.film-entry-copy strong { font-size: 16px; }.film-entry-copy > span { font-size: 10px; }.film-entry-copy .film-entry-duration { font-size: 9px; }
+  .film-entry { top: max(19px, env(safe-area-inset-top)); right: max(19px, env(safe-area-inset-right)); }
   .film-heading { margin-bottom: 14px; }.christmas-film h2 { font-size: 20px; }.film-footer { margin-top: 12px; font-size: 10px; }
-  .gift-dialog.film-dialog { width: calc(100% - 20px); }.film-actions { gap: 8px; }.film-actions .small-button { padding-inline: 10px; font-size: 11px; }.film-invitation { gap: 13px; padding: 20px; }
+  .gift-dialog.film-dialog { width: calc(100% - 20px); }.film-actions { gap: 8px; }.film-actions .small-button { padding-inline: 10px; font-size: 11px; }.film-invitation { padding: 20px; }
   .gift-dialog { width: calc(100% - 20px); max-height: 94svh; border-radius: 5px; }.dialog-inner { padding: 22px 14px; }.dialog-close { top: 12px; right: 12px; width: 36px; height: 36px; }
   .gallery-header { margin-bottom: 20px; padding-right: 44px; }.gallery-header h2 { font-size: 16px; }.gallery-photo { height: 52svh; }.thumbnail-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 5px; }.gallery-nav { width: 34px; height: 44px; }.gallery-nav.previous { left: 5px; }.gallery-nav.next { right: 5px; }
   .share-dialog { max-width: 360px; }.share-content { padding: 8px; }
