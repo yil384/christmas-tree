@@ -25,3 +25,6 @@ dist-ssr
 
 # Rebuilt from the selected originals before dev/build
 public/generated/
+
+# Purchased character source packages stay out of the public GitHub repository.
+private-assets/fluffy-kittens/
